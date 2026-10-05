@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv*/
+env/
+.env
+*.egg-info/
+
+# Data / outputs (large files, not for git)
+output/
+data/
+unsloth_compiled_cache/
+unsloth_env/
+venv311/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local config
+*.local
+*.local.json
+
+# Logs
+*.log
+enrich_log.txt
+check_he*.txt
+
+# Agent
+.agent/
