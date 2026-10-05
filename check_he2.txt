@@ -1,0 +1,9 @@
+﻿╨в╨╕╨┐ he: <class 'list'>
+╨Я╨╡╤А╨▓╤Л╨╣ ╤Н╨╗╨╡╨╝╨╡╨╜╤В he - ╤В╨╕╨┐: <class 'str'>
+╨Я╨╡╤А╨▓╤Л╨╡ 200 ╤Б╨╕╨╝╨▓╨╛╨╗╨╛╨▓ he[0]: '<big>╫С╓╝╓░</big>╫и╓╡╫Р╫й╫Б╓┤╓Ц╫Щ╫к ╫С╓╝╓╕╫и╓╕╓г╫Р ╫Р╓▒╫Ь╓╣╫Ф╓┤╓С╫Щ╫Э ╫Р╓╡╓е╫к ╫Ф╓╖╫й╫Б╓╝╓╕╫Ю╓╖╓Ц╫Щ╓┤╫Э ╫Х╓░╫Р╓╡╓е╫к ╫Ф╓╕╫Р╓╕╓╜╫и╓╢╫е╫Г'
+
+--- heRef: ╫С╫и╫Р╫й╫Щ╫к ╫Р╫│
+--- heTitle: ╫С╫и╫Р╫й╫Щ╫к
+
+Version: en - THE JPS TANAKH: Gender-Sensitive Edition
+Version: en - The Contemporary Torah, Jewish Publication Society

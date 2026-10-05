@@ -1,0 +1,1594 @@
+[
+  {
+    "book": "Genesis",
+    "chapter": 1,
+    "book_order": 0,
+    "avg_sentiment": 0.632,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 19
+  },
+  {
+    "book": "Genesis",
+    "chapter": 2,
+    "book_order": 0,
+    "avg_sentiment": 1.433,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 3
+  },
+  {
+    "book": "Genesis",
+    "chapter": 3,
+    "book_order": 0,
+    "avg_sentiment": -0.24,
+    "dominant_emotion": "neutral",
+    "n_situations": 5
+  },
+  {
+    "book": "Genesis",
+    "chapter": 4,
+    "book_order": 0,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 6,
+    "book_order": 0,
+    "avg_sentiment": -2.1,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 5
+  },
+  {
+    "book": "Genesis",
+    "chapter": 7,
+    "book_order": 0,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 8,
+    "book_order": 0,
+    "avg_sentiment": -0.05,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 9,
+    "book_order": 0,
+    "avg_sentiment": 0.775,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 4
+  },
+  {
+    "book": "Genesis",
+    "chapter": 11,
+    "book_order": 0,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 12,
+    "book_order": 0,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 15,
+    "book_order": 0,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 17,
+    "book_order": 0,
+    "avg_sentiment": -0.125,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Genesis",
+    "chapter": 18,
+    "book_order": 0,
+    "avg_sentiment": -0.15,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Genesis",
+    "chapter": 20,
+    "book_order": 0,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 21,
+    "book_order": 0,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 3
+  },
+  {
+    "book": "Genesis",
+    "chapter": 24,
+    "book_order": 0,
+    "avg_sentiment": 0.1,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 25,
+    "book_order": 0,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 29,
+    "book_order": 0,
+    "avg_sentiment": 1.5,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 30,
+    "book_order": 0,
+    "avg_sentiment": 1.8,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 31,
+    "book_order": 0,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 35,
+    "book_order": 0,
+    "avg_sentiment": 1.05,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "Genesis",
+    "chapter": 39,
+    "book_order": 0,
+    "avg_sentiment": 2.1,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "Genesis",
+    "chapter": 43,
+    "book_order": 0,
+    "avg_sentiment": 2.0,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "Exodus",
+    "chapter": 2,
+    "book_order": 1,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 3,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Exodus",
+    "chapter": 4,
+    "book_order": 1,
+    "avg_sentiment": -0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 6
+  },
+  {
+    "book": "Exodus",
+    "chapter": 5,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Exodus",
+    "chapter": 6,
+    "book_order": 1,
+    "avg_sentiment": -0.3,
+    "dominant_emotion": "neutral",
+    "n_situations": 5
+  },
+  {
+    "book": "Exodus",
+    "chapter": 7,
+    "book_order": 1,
+    "avg_sentiment": -0.6,
+    "dominant_emotion": "displeasure",
+    "n_situations": 5
+  },
+  {
+    "book": "Exodus",
+    "chapter": 8,
+    "book_order": 1,
+    "avg_sentiment": -1.083,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 6
+  },
+  {
+    "book": "Exodus",
+    "chapter": 9,
+    "book_order": 1,
+    "avg_sentiment": -1.4,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 5
+  },
+  {
+    "book": "Exodus",
+    "chapter": 10,
+    "book_order": 1,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Exodus",
+    "chapter": 11,
+    "book_order": 1,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 12,
+    "book_order": 1,
+    "avg_sentiment": -0.75,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 13,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Exodus",
+    "chapter": 14,
+    "book_order": 1,
+    "avg_sentiment": -0.833,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Exodus",
+    "chapter": 16,
+    "book_order": 1,
+    "avg_sentiment": 0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Exodus",
+    "chapter": 17,
+    "book_order": 1,
+    "avg_sentiment": -0.75,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 19,
+    "book_order": 1,
+    "avg_sentiment": -0.125,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Exodus",
+    "chapter": 20,
+    "book_order": 1,
+    "avg_sentiment": -0.75,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 24,
+    "book_order": 1,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Exodus",
+    "chapter": 25,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Exodus",
+    "chapter": 30,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Exodus",
+    "chapter": 31,
+    "book_order": 1,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 32,
+    "book_order": 1,
+    "avg_sentiment": -1.633,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 3
+  },
+  {
+    "book": "Exodus",
+    "chapter": 33,
+    "book_order": 1,
+    "avg_sentiment": -0.375,
+    "dominant_emotion": "displeasure",
+    "n_situations": 4
+  },
+  {
+    "book": "Exodus",
+    "chapter": 34,
+    "book_order": 1,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Exodus",
+    "chapter": 40,
+    "book_order": 1,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 1,
+    "book_order": 2,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 4,
+    "book_order": 2,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 5,
+    "book_order": 2,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 6,
+    "book_order": 2,
+    "avg_sentiment": 0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 7,
+    "book_order": 2,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 8,
+    "book_order": 2,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 10,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 11,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 12,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 13,
+    "book_order": 2,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 14,
+    "book_order": 2,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 15,
+    "book_order": 2,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 16,
+    "book_order": 2,
+    "avg_sentiment": -1.6,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 17,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 18,
+    "book_order": 2,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 19,
+    "book_order": 2,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 20,
+    "book_order": 2,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 21,
+    "book_order": 2,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 22,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 23,
+    "book_order": 2,
+    "avg_sentiment": 0.1,
+    "dominant_emotion": "neutral",
+    "n_situations": 5
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 24,
+    "book_order": 2,
+    "avg_sentiment": 0.75,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 2
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 25,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Leviticus",
+    "chapter": 27,
+    "book_order": 2,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 1,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 2,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 3,
+    "book_order": 3,
+    "avg_sentiment": 0.2,
+    "dominant_emotion": "neutral",
+    "n_situations": 5
+  },
+  {
+    "book": "Numbers",
+    "chapter": 4,
+    "book_order": 3,
+    "avg_sentiment": 0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 5,
+    "book_order": 3,
+    "avg_sentiment": 0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 6,
+    "book_order": 3,
+    "avg_sentiment": -0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 7,
+    "book_order": 3,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 8,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 9,
+    "book_order": 3,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 10,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 11,
+    "book_order": 3,
+    "avg_sentiment": -0.875,
+    "dominant_emotion": "displeasure",
+    "n_situations": 4
+  },
+  {
+    "book": "Numbers",
+    "chapter": 12,
+    "book_order": 3,
+    "avg_sentiment": -0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 13,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 14,
+    "book_order": 3,
+    "avg_sentiment": 0.033,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 15,
+    "book_order": 3,
+    "avg_sentiment": -0.525,
+    "dominant_emotion": "displeasure",
+    "n_situations": 4
+  },
+  {
+    "book": "Numbers",
+    "chapter": 16,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 17,
+    "book_order": 3,
+    "avg_sentiment": -0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Numbers",
+    "chapter": 18,
+    "book_order": 3,
+    "avg_sentiment": 0.75,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 4
+  },
+  {
+    "book": "Numbers",
+    "chapter": 19,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 20,
+    "book_order": 3,
+    "avg_sentiment": -1.667,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 21,
+    "book_order": 3,
+    "avg_sentiment": 0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 22,
+    "book_order": 3,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 25,
+    "book_order": 3,
+    "avg_sentiment": -0.867,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 26,
+    "book_order": 3,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 27,
+    "book_order": 3,
+    "avg_sentiment": -0.667,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Numbers",
+    "chapter": 28,
+    "book_order": 3,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 31,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 33,
+    "book_order": 3,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Numbers",
+    "chapter": 34,
+    "book_order": 3,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Numbers",
+    "chapter": 35,
+    "book_order": 3,
+    "avg_sentiment": 0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 1,
+    "book_order": 4,
+    "avg_sentiment": -1.75,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 2
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 2,
+    "book_order": 4,
+    "avg_sentiment": -0.125,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 3,
+    "book_order": 4,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 4,
+    "book_order": 4,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 5,
+    "book_order": 4,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 9,
+    "book_order": 4,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 10,
+    "book_order": 4,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 18,
+    "book_order": 4,
+    "avg_sentiment": 2.5,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 26,
+    "book_order": 4,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 31,
+    "book_order": 4,
+    "avg_sentiment": -0.533,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 32,
+    "book_order": 4,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 33,
+    "book_order": 4,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Deuteronomy",
+    "chapter": 34,
+    "book_order": 4,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 1,
+    "book_order": 5,
+    "avg_sentiment": -1.6,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 3,
+    "book_order": 5,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 4,
+    "book_order": 5,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 5,
+    "book_order": 5,
+    "avg_sentiment": 2.0,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 6,
+    "book_order": 5,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 7,
+    "book_order": 5,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 8,
+    "book_order": 5,
+    "avg_sentiment": -0.75,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Joshua",
+    "chapter": 10,
+    "book_order": 5,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 11,
+    "book_order": 5,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 13,
+    "book_order": 5,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Joshua",
+    "chapter": 20,
+    "book_order": 5,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Judges",
+    "chapter": 1,
+    "book_order": 6,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Judges",
+    "chapter": 6,
+    "book_order": 6,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Judges",
+    "chapter": 7,
+    "book_order": 6,
+    "avg_sentiment": -0.125,
+    "dominant_emotion": "neutral",
+    "n_situations": 4
+  },
+  {
+    "book": "Judges",
+    "chapter": 10,
+    "book_order": 6,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Judges",
+    "chapter": 16,
+    "book_order": 6,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Judges",
+    "chapter": 20,
+    "book_order": 6,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 2,
+    "book_order": 8,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 3,
+    "book_order": 8,
+    "avg_sentiment": 0.267,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 5,
+    "book_order": 8,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 6,
+    "book_order": 8,
+    "avg_sentiment": 2.1,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 8,
+    "book_order": 8,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 16,
+    "book_order": 8,
+    "avg_sentiment": -0.333,
+    "dominant_emotion": "displeasure",
+    "n_situations": 3
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 19,
+    "book_order": 8,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 19,
+    "book_order": 8,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 22,
+    "book_order": 8,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "II Samuel",
+    "chapter": 23,
+    "book_order": 8,
+    "avg_sentiment": 1.25,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 23,
+    "book_order": 8,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "I Samuel",
+    "chapter": 28,
+    "book_order": 8,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 3,
+    "book_order": 10,
+    "avg_sentiment": 0.35,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 2
+  },
+  {
+    "book": "II Kings",
+    "chapter": 6,
+    "book_order": 10,
+    "avg_sentiment": 0.45,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 8,
+    "book_order": 10,
+    "avg_sentiment": 1.3,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "I Kings",
+    "chapter": 9,
+    "book_order": 10,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 2
+  },
+  {
+    "book": "II Kings",
+    "chapter": 10,
+    "book_order": 10,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 11,
+    "book_order": 10,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 17,
+    "book_order": 10,
+    "avg_sentiment": 0.333,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 3
+  },
+  {
+    "book": "I Kings",
+    "chapter": 18,
+    "book_order": 10,
+    "avg_sentiment": 0.1,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 19,
+    "book_order": 10,
+    "avg_sentiment": -1.4,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 1
+  },
+  {
+    "book": "II Kings",
+    "chapter": 19,
+    "book_order": 10,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "II Kings",
+    "chapter": 21,
+    "book_order": 10,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "I Kings",
+    "chapter": 22,
+    "book_order": 10,
+    "avg_sentiment": 0.7,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 3
+  },
+  {
+    "book": "II Kings",
+    "chapter": 23,
+    "book_order": 10,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 3,
+    "book_order": 12,
+    "avg_sentiment": -2.5,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 7,
+    "book_order": 12,
+    "avg_sentiment": 0.45,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 8,
+    "book_order": 12,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 20,
+    "book_order": 12,
+    "avg_sentiment": 0.95,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 22,
+    "book_order": 12,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 29,
+    "book_order": 12,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Isaiah",
+    "chapter": 59,
+    "book_order": 12,
+    "avg_sentiment": -0.3,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 1,
+    "book_order": 13,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 4
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 3,
+    "book_order": 13,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 9,
+    "book_order": 13,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 11,
+    "book_order": 13,
+    "avg_sentiment": -0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 13,
+    "book_order": 13,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 14,
+    "book_order": 13,
+    "avg_sentiment": -0.4,
+    "dominant_emotion": "displeasure",
+    "n_situations": 2
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 15,
+    "book_order": 13,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 24,
+    "book_order": 13,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Jeremiah",
+    "chapter": 40,
+    "book_order": 13,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Ezekiel",
+    "chapter": 4,
+    "book_order": 14,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Ezekiel",
+    "chapter": 9,
+    "book_order": 14,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Ezekiel",
+    "chapter": 23,
+    "book_order": 14,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Hosea",
+    "chapter": 1,
+    "book_order": 15,
+    "avg_sentiment": -1.5,
+    "dominant_emotion": "anger/wrath",
+    "n_situations": 1
+  },
+  {
+    "book": "Hosea",
+    "chapter": 3,
+    "book_order": 15,
+    "avg_sentiment": 0.1,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "Amos",
+    "chapter": 1,
+    "book_order": 17,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Amos",
+    "chapter": 7,
+    "book_order": 17,
+    "avg_sentiment": 1.0,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "Amos",
+    "chapter": 8,
+    "book_order": 17,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Jonah",
+    "chapter": 2,
+    "book_order": 19,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "Jonah",
+    "chapter": 4,
+    "book_order": 19,
+    "avg_sentiment": 0.3,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 3
+  },
+  {
+    "book": "Zechariah",
+    "chapter": 1,
+    "book_order": 25,
+    "avg_sentiment": 0.95,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "Zechariah",
+    "chapter": 3,
+    "book_order": 25,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Zechariah",
+    "chapter": 11,
+    "book_order": 25,
+    "avg_sentiment": -0.25,
+    "dominant_emotion": "neutral",
+    "n_situations": 2
+  },
+  {
+    "book": "Job",
+    "chapter": 1,
+    "book_order": 29,
+    "avg_sentiment": 0.375,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 4
+  },
+  {
+    "book": "Job",
+    "chapter": 2,
+    "book_order": 29,
+    "avg_sentiment": -0.167,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "Job",
+    "chapter": 42,
+    "book_order": 29,
+    "avg_sentiment": -3.0,
+    "dominant_emotion": "fury/destruction",
+    "n_situations": 1
+  },
+  {
+    "book": "Lamentations",
+    "chapter": 3,
+    "book_order": 32,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 6,
+    "book_order": 37,
+    "avg_sentiment": 2.0,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 7,
+    "book_order": 37,
+    "avg_sentiment": 0.5,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 1
+  },
+  {
+    "book": "I Chronicles",
+    "chapter": 11,
+    "book_order": 37,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "I Chronicles",
+    "chapter": 13,
+    "book_order": 37,
+    "avg_sentiment": 2.6,
+    "dominant_emotion": "joy/blessing",
+    "n_situations": 1
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 14,
+    "book_order": 37,
+    "avg_sentiment": -0.5,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 18,
+    "book_order": 37,
+    "avg_sentiment": 0.333,
+    "dominant_emotion": "neutral-positive",
+    "n_situations": 3
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 20,
+    "book_order": 37,
+    "avg_sentiment": 0.0,
+    "dominant_emotion": "neutral",
+    "n_situations": 1
+  },
+  {
+    "book": "I Chronicles",
+    "chapter": 21,
+    "book_order": 37,
+    "avg_sentiment": -0.233,
+    "dominant_emotion": "neutral",
+    "n_situations": 3
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 30,
+    "book_order": 37,
+    "avg_sentiment": 1.5,
+    "dominant_emotion": "loving-kindness",
+    "n_situations": 1
+  },
+  {
+    "book": "II Chronicles",
+    "chapter": 33,
+    "book_order": 37,
+    "avg_sentiment": -1.0,
+    "dominant_emotion": "displeasure",
+    "n_situations": 1
+  }
+]

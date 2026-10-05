@@ -1,0 +1,11 @@
+{
+    "python.defaultInterpreterPath": "C:\\GOD2\\unsloth_env\\Scripts\\python.exe",
+    "python.analysis.typeCheckingMode": "off",
+    "python.analysis.diagnosticMode": "workspace",
+    "python.analysis.ignore": [
+        "scripts/finetune.py"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    }
+}

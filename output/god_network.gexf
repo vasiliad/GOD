@@ -1,0 +1,373 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2026-03-21">
+    <creator>NetworkX 3.6.1</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="edge">
+      <attribute id="1" title="behavior_type" type="string" />
+      <attribute id="2" title="count" type="long" />
+      <attribute id="3" title="books" type="string" />
+    </attributes>
+    <attributes mode="static" class="node">
+      <attribute id="0" title="node_type" type="string" />
+    </attributes>
+    <nodes>
+      <node id="GOD" label="God">
+        <attvalues>
+          <attvalue for="0" value="deity" />
+        </attvalues>
+      </node>
+      <node id="Adam" label="Adam">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Noah" label="Noah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Cain" label="Cain">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Abram" label="Abram">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Abraham" label="Abraham">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Isaac" label="Isaac">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Jacob" label="Jacob">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Joseph" label="Joseph">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Israel_person" label="Israel_person">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Moses" label="Moses">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Egypt" label="Egypt">
+        <attvalues>
+          <attvalue for="0" value="nation" />
+        </attvalues>
+      </node>
+      <node id="Aaron" label="Aaron">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Hannah" label="Hannah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Balaam" label="Balaam">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Lot" label="Lot">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Israel" label="Israel">
+        <attvalues>
+          <attvalue for="0" value="nation" />
+        </attvalues>
+      </node>
+      <node id="Elijah" label="Elijah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Joshua" label="Joshua">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Gideon" label="Gideon">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Samuel" label="Samuel">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="David" label="David">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Philistia" label="Philistia">
+        <attvalues>
+          <attvalue for="0" value="nation" />
+        </attvalues>
+      </node>
+      <node id="Solomon" label="Solomon">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Aram" label="Aram">
+        <attvalues>
+          <attvalue for="0" value="nation" />
+        </attvalues>
+      </node>
+      <node id="Ruth" label="Ruth">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Isaiah" label="Isaiah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Jeremiah" label="Jeremiah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Jonah" label="Jonah">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+      <node id="Job" label="Job">
+        <attvalues>
+          <attvalue for="0" value="character" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="GOD" target="Adam" id="0" weight="6">
+        <attvalues>
+          <attvalue for="1" value="revelation" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="Exodus,Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Noah" id="1" weight="3">
+        <attvalues>
+          <attvalue for="1" value="promise" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="I Chronicles" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Cain" id="2" weight="4">
+        <attvalues>
+          <attvalue for="1" value="dialogue" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Abram" id="3" weight="2">
+        <attvalues>
+          <attvalue for="1" value="dialogue" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Abraham" id="4" weight="4">
+        <attvalues>
+          <attvalue for="1" value="revelation" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="I Kings" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Isaac" id="5" weight="4">
+        <attvalues>
+          <attvalue for="1" value="promise" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Jacob" id="6" weight="5">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Joseph" id="7" weight="5">
+        <attvalues>
+          <attvalue for="1" value="blessing" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="Genesis" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Israel_person" id="8" weight="1">
+        <attvalues>
+          <attvalue for="1" value="dialogue" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="II Kings" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Moses" id="9" weight="4">
+        <attvalues>
+          <attvalue for="1" value="rescue" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Deuteronomy" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Egypt" id="10" weight="4">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Deuteronomy" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Aaron" id="11" weight="5">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="Leviticus,Numbers" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Hannah" id="12" weight="4">
+        <attvalues>
+          <attvalue for="1" value="punishment" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Numbers" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Balaam" id="13" weight="3">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Numbers" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Lot" id="14" weight="1">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Deuteronomy" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Israel" id="15" weight="4">
+        <attvalues>
+          <attvalue for="1" value="revelation" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Deuteronomy" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Elijah" id="16" weight="10">
+        <attvalues>
+          <attvalue for="1" value="dialogue" />
+          <attvalue for="2" value="3" />
+          <attvalue for="3" value="I Kings,II Chronicles,Judges" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Joshua" id="17" weight="4">
+        <attvalues>
+          <attvalue for="1" value="punishment" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Zechariah" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Gideon" id="18" weight="4">
+        <attvalues>
+          <attvalue for="1" value="promise" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Judges" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Samuel" id="19" weight="14">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="5" />
+          <attvalue for="3" value="I Samuel" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="David" id="20" weight="4">
+        <attvalues>
+          <attvalue for="1" value="blessing" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="I Kings,II Chronicles" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Philistia" id="21" weight="7">
+        <attvalues>
+          <attvalue for="1" value="rescue" />
+          <attvalue for="2" value="2" />
+          <attvalue for="3" value="II Samuel" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Solomon" id="22" weight="4">
+        <attvalues>
+          <attvalue for="1" value="promise" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="II Chronicles" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Aram" id="23" weight="3">
+        <attvalues>
+          <attvalue for="1" value="command" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="I Kings" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Ruth" id="24" weight="3">
+        <attvalues>
+          <attvalue for="1" value="punishment" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Isaiah" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Isaiah" id="25" weight="2">
+        <attvalues>
+          <attvalue for="1" value="revelation" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Isaiah" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Jeremiah" id="26" weight="1">
+        <attvalues>
+          <attvalue for="1" value="blessing" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Jeremiah" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Jonah" id="27" weight="2">
+        <attvalues>
+          <attvalue for="1" value="revelation" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Jonah" />
+        </attvalues>
+      </edge>
+      <edge source="GOD" target="Job" id="28" weight="4">
+        <attvalues>
+          <attvalue for="1" value="punishment" />
+          <attvalue for="2" value="1" />
+          <attvalue for="3" value="Job" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

@@ -1,0 +1,235 @@
+{
+  "total_nodes": 30,
+  "total_edges": 340,
+  "god_neighbors": [
+    "Aaron",
+    "Abraham",
+    "Abram",
+    "Adam",
+    "Aram",
+    "Balaam",
+    "Cain",
+    "David",
+    "Egypt",
+    "Elijah",
+    "Gideon",
+    "Hannah",
+    "Isaac",
+    "Isaiah",
+    "Israel",
+    "Israel_person",
+    "Jacob",
+    "Jeremiah",
+    "Job",
+    "Jonah",
+    "Joseph",
+    "Joshua",
+    "Lot",
+    "Moses",
+    "Noah",
+    "Philistia",
+    "Ruth",
+    "Samuel",
+    "Solomon"
+  ],
+  "most_connected": [
+    {
+      "target": "Moses",
+      "count": 186
+    },
+    {
+      "target": "Israel_person",
+      "count": 22
+    },
+    {
+      "target": "Elijah",
+      "count": 16
+    },
+    {
+      "target": "Adam",
+      "count": 14
+    },
+    {
+      "target": "Noah",
+      "count": 14
+    },
+    {
+      "target": "Abraham",
+      "count": 11
+    },
+    {
+      "target": "Jeremiah",
+      "count": 10
+    },
+    {
+      "target": "David",
+      "count": 9
+    },
+    {
+      "target": "Samuel",
+      "count": 8
+    },
+    {
+      "target": "Solomon",
+      "count": 6
+    },
+    {
+      "target": "Jacob",
+      "count": 5
+    },
+    {
+      "target": "Abram",
+      "count": 4
+    },
+    {
+      "target": "Gideon",
+      "count": 4
+    },
+    {
+      "target": "Jonah",
+      "count": 4
+    },
+    {
+      "target": "Job",
+      "count": 4
+    }
+  ],
+  "degree_centrality": {
+    "GOD": 1.0,
+    "Adam": 0.0345,
+    "Noah": 0.0345,
+    "Cain": 0.0345,
+    "Abram": 0.0345,
+    "Abraham": 0.0345,
+    "Isaac": 0.0345,
+    "Jacob": 0.0345,
+    "Joseph": 0.0345,
+    "Israel_person": 0.0345,
+    "Moses": 0.0345,
+    "Egypt": 0.0345,
+    "Aaron": 0.0345,
+    "Hannah": 0.0345,
+    "Balaam": 0.0345,
+    "Lot": 0.0345,
+    "Israel": 0.0345,
+    "Elijah": 0.0345,
+    "Joshua": 0.0345,
+    "Gideon": 0.0345
+  },
+  "betweenness_centrality": {
+    "GOD": 0.0,
+    "Adam": 0.0,
+    "Noah": 0.0,
+    "Cain": 0.0,
+    "Abram": 0.0,
+    "Abraham": 0.0,
+    "Isaac": 0.0,
+    "Jacob": 0.0,
+    "Joseph": 0.0,
+    "Israel_person": 0.0,
+    "Moses": 0.0,
+    "Egypt": 0.0,
+    "Aaron": 0.0,
+    "Hannah": 0.0,
+    "Balaam": 0.0,
+    "Lot": 0.0,
+    "Israel": 0.0,
+    "Elijah": 0.0,
+    "Joshua": 0.0,
+    "Gideon": 0.0
+  },
+  "avg_severity_by_target": {
+    "Isaac": 4.0,
+    "Hannah": 4.0,
+    "Israel": 4.0,
+    "Egypt": 3.67,
+    "Philistia": 3.5,
+    "Israel_person": 3.36,
+    "Noah": 3.29,
+    "Gideon": 3.25,
+    "Elijah": 3.19,
+    "Solomon": 3.17,
+    "Adam": 3.0,
+    "Balaam": 3.0,
+    "Aram": 3.0,
+    "Ruth": 3.0,
+    "Jacob": 2.8,
+    "Abram": 2.75,
+    "Samuel": 2.75,
+    "Abraham": 2.73,
+    "Jeremiah": 2.7,
+    "David": 2.67
+  },
+  "edge_type_distribution": {
+    "command": 202,
+    "revelation": 44,
+    "dialogue": 25,
+    "blessing": 23,
+    "promise": 20,
+    "punishment": 16,
+    "rescue": 7,
+    "covenant": 3
+  },
+  "trigger_distribution": {
+    "unprompted": 190,
+    "disobedience": 68,
+    "faithfulness": 26,
+    "distress": 21,
+    "prayer": 21,
+    "intercession": 7,
+    "divine_test": 4,
+    "idolatry": 3
+  },
+  "outcome_distribution": {
+    "revelation": 104,
+    "compliance": 69,
+    "blessing": 60,
+    "punishment": 42,
+    "dialogue": 23,
+    "rescue": 23,
+    "covenant": 11,
+    "unclear": 6,
+    "silence": 2
+  },
+  "interactions_by_book": {
+    "Exodus": 72,
+    "Numbers": 72,
+    "Genesis": 41,
+    "Leviticus": 37,
+    "Deuteronomy": 21,
+    "I Kings": 13,
+    "Jeremiah": 13,
+    "Joshua": 12,
+    "I Samuel": 11,
+    "Judges": 9,
+    "II Samuel": 7,
+    "II Chronicles": 5,
+    "I Chronicles": 4,
+    "Isaiah": 4,
+    "Jonah": 4,
+    "Job": 4,
+    "Ezekiel": 3,
+    "II Kings": 3,
+    "Hosea": 2,
+    "Amos": 2,
+    "Zechariah": 1
+  },
+  "proximity_over_time": {
+    "Genesis": {
+      "direct": 35,
+      "total": 41,
+      "direct_pct": 85.4
+    },
+    "Prophets": {
+      "direct": 50,
+      "total": 50,
+      "direct_pct": 100.0
+    },
+    "Torah/Writings": {
+      "direct": 234,
+      "total": 249,
+      "direct_pct": 94.0
+    }
+  },
+  "heavy_interactions": []
+}

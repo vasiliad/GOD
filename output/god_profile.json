@@ -1,0 +1,157 @@
+{
+  "metadata": {
+    "version": "v3 — behavioral coding",
+    "total_situations": 396,
+    "real_actions_coded": 396
+  },
+  "jung_archetypes": {
+    "scores_raw": {
+      "Отец (Власть и закон)": 240,
+      "Мудрец (Откровение)": 64,
+      "Герой/Защитник": 7,
+      "Трикстер (Испытание)": 0,
+      "Разрушитель (Теневой)": 20
+    },
+    "scores_pct": {
+      "Отец (Власть и закон)": 72.5,
+      "Мудрец (Откровение)": 19.3,
+      "Герой/Защитник": 2.1,
+      "Трикстер (Испытание)": 0.0,
+      "Разрушитель (Теневой)": 6.0
+    },
+    "dominant": "Отец (Власть и закон)"
+  },
+  "berne_transactional": {
+    "ego_states_raw": {
+      "Родитель Контролирующий": 240,
+      "Родитель Питающий": 28,
+      "Взрослый": 64,
+      "Ребёнок (реактивный)": 0
+    },
+    "ego_states_pct": {
+      "Родитель Контролирующий": 72.3,
+      "Родитель Питающий": 8.4,
+      "Взрослый": 19.3,
+      "Ребёнок (реактивный)": 0.0
+    },
+    "dominant": "Родитель Контролирующий"
+  },
+  "big_five_ocean": {
+    "Openness": 10.0,
+    "Conscientiousness": 10.0,
+    "Extraversion": 10.0,
+    "Agreeableness": 6.4,
+    "Neuroticism": 7.3
+  },
+  "bowlby_attachment": {
+    "style": "Anxious-Ambivalent (high expectations, reactive punishment)"
+  },
+  "adler_individual_psychology": {
+    "striving_for_superiority": {
+      "score": 10
+    },
+    "teleology": {
+      "dominant_goal": "Создание народа-носителя Завета (covenant_count=3)"
+    },
+    "inferiority_compensation": {
+      "god_response": "Ужесточение при нарушении (disobedience→punishment: 9.3%)"
+    },
+    "social_interest": {
+      "score": 7.07
+    }
+  },
+  "fbi_behavioral_profile": {
+    "trigger_outcome_matrix_top10": [
+      {
+        "trigger": "unprompted",
+        "outcome": "revelation",
+        "count": 86,
+        "pct": 21.7
+      },
+      {
+        "trigger": "unprompted",
+        "outcome": "compliance",
+        "count": 51,
+        "pct": 12.9
+      },
+      {
+        "trigger": "unprompted",
+        "outcome": "blessing",
+        "count": 40,
+        "pct": 10.1
+      },
+      {
+        "trigger": "disobedience",
+        "outcome": "punishment",
+        "count": 36,
+        "pct": 9.1
+      },
+      {
+        "trigger": "unprompted",
+        "outcome": "dialogue",
+        "count": 18,
+        "pct": 4.5
+      },
+      {
+        "trigger": "disobedience",
+        "outcome": "revelation",
+        "count": 16,
+        "pct": 4.0
+      },
+      {
+        "trigger": "faithfulness",
+        "outcome": "blessing",
+        "count": 16,
+        "pct": 4.0
+      },
+      {
+        "trigger": "disobedience",
+        "outcome": "compliance",
+        "count": 14,
+        "pct": 3.5
+      },
+      {
+        "trigger": "prayer",
+        "outcome": "blessing",
+        "count": 10,
+        "pct": 2.5
+      },
+      {
+        "trigger": "unprompted",
+        "outcome": "punishment",
+        "count": 9,
+        "pct": 2.3
+      }
+    ],
+    "trigger_distribution": {
+      "unprompted": 224,
+      "disobedience": 80,
+      "faithfulness": 26,
+      "prayer": 25,
+      "distress": 23,
+      "intercession": 8,
+      "divine_test": 6,
+      "idolatry": 4
+    },
+    "outcome_distribution": {
+      "revelation": 120,
+      "blessing": 76,
+      "compliance": 75,
+      "punishment": 49,
+      "dialogue": 29,
+      "rescue": 26,
+      "covenant": 12,
+      "unclear": 6,
+      "silence": 3
+    },
+    "escalation_evidence": {
+      "severe_punishments": 20,
+      "severe_pct": 5.1
+    },
+    "modus_operandi": {
+      "command_pct": 55.3,
+      "punishment_pct": 5.3,
+      "rescue_pct": 1.77
+    }
+  }
+}

@@ -1,0 +1,507 @@
+{
+  "metadata": {
+    "total_situations": 396,
+    "normalization": "Unicode NFD + strip combining marks (Mn,Me)",
+    "concepts_analyzed": [
+      "חסד",
+      "אמת",
+      "שלום",
+      "ברכה",
+      "אהב",
+      "אף",
+      "חמה",
+      "קנא",
+      "שנא",
+      "שפט",
+      "גאל",
+      "נחם",
+      "זכר",
+      "ברית"
+    ]
+  },
+  "anger_mercy_ratio": {
+    "mercy": 19,
+    "anger": 13,
+    "mercy_pct": 59.4,
+    "anger_pct": 40.6,
+    "verdict": "Преобладает милость"
+  },
+  "concept_frequencies": {
+    "חסד": {
+      "label": "Милость/Верная любовь (hesed)",
+      "polarity": 2,
+      "count": 2,
+      "pct": 0.51,
+      "top_books": [
+        {
+          "book": "Genesis",
+          "count": 1
+        },
+        {
+          "book": "I Kings",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "command": 1,
+        "revelation": 1
+      }
+    },
+    "אמת": {
+      "label": "Истина/Верность (emet)",
+      "polarity": 2,
+      "count": 3,
+      "pct": 0.76,
+      "top_books": [
+        {
+          "book": "Genesis",
+          "count": 1
+        },
+        {
+          "book": "Exodus",
+          "count": 1
+        },
+        {
+          "book": "Isaiah",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "command": 1,
+        "punishment": 1,
+        "revelation": 1
+      }
+    },
+    "שלום": {
+      "label": "Мир/Благополучие (shalom)",
+      "polarity": 2,
+      "count": 2,
+      "pct": 0.51,
+      "top_books": [
+        {
+          "book": "I Kings",
+          "count": 1
+        },
+        {
+          "book": "II Chronicles",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "promise": 2
+      }
+    },
+    "ברכה": {
+      "label": "Благословение (berakha)",
+      "polarity": 2,
+      "count": 11,
+      "pct": 2.78,
+      "top_books": [
+        {
+          "book": "Genesis",
+          "count": 6
+        },
+        {
+          "book": "Numbers",
+          "count": 1
+        },
+        {
+          "book": "II Samuel",
+          "count": 1
+        },
+        {
+          "book": "I Kings",
+          "count": 1
+        },
+        {
+          "book": "Isaiah",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "blessing": 9,
+        "revelation": 1,
+        "command": 1
+      }
+    },
+    "אהב": {
+      "label": "Любовь (ahav)",
+      "polarity": 2,
+      "count": 1,
+      "pct": 0.25,
+      "top_books": [
+        {
+          "book": "Hosea",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "command": 1
+      }
+    },
+    "אף": {
+      "label": "Гнев/Ноздри (af)",
+      "polarity": -2,
+      "count": 5,
+      "pct": 1.26,
+      "top_books": [
+        {
+          "book": "Numbers",
+          "count": 2
+        },
+        {
+          "book": "Genesis",
+          "count": 1
+        },
+        {
+          "book": "Deuteronomy",
+          "count": 1
+        },
+        {
+          "book": "Job",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "dialogue": 1,
+        "punishment": 2,
+        "command": 1,
+        "rescue": 1
+      }
+    },
+    "חמה": {
+      "label": "Ярость (hema)",
+      "polarity": -2,
+      "count": 8,
+      "pct": 2.02,
+      "top_books": [
+        {
+          "book": "Judges",
+          "count": 3
+        },
+        {
+          "book": "Genesis",
+          "count": 2
+        },
+        {
+          "book": "Deuteronomy",
+          "count": 2
+        },
+        {
+          "book": "Joshua",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "punishment": 1,
+        "blessing": 1,
+        "command": 5,
+        "rescue": 1
+      }
+    },
+    "קנא": {
+      "label": "Ревность/Зависть (kina)",
+      "polarity": -1.5,
+      "count": 0,
+      "pct": 0.0,
+      "top_books": [],
+      "by_behavior_type": {}
+    },
+    "שנא": {
+      "label": "Ненависть (sane)",
+      "polarity": -2,
+      "count": 0,
+      "pct": 0.0,
+      "top_books": [],
+      "by_behavior_type": {}
+    },
+    "שפט": {
+      "label": "Суд/Справедливость (shafat)",
+      "polarity": 0,
+      "count": 2,
+      "pct": 0.51,
+      "top_books": [
+        {
+          "book": "I Kings",
+          "count": 1
+        },
+        {
+          "book": "Isaiah",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "blessing": 1,
+        "revelation": 1
+      }
+    },
+    "גאל": {
+      "label": "Избавление/Искупление (gaal)",
+      "polarity": 2,
+      "count": 0,
+      "pct": 0.0,
+      "top_books": [],
+      "by_behavior_type": {}
+    },
+    "נחם": {
+      "label": "Сожаление/Утешение (naham)",
+      "polarity": 0,
+      "count": 1,
+      "pct": 0.25,
+      "top_books": [
+        {
+          "book": "Genesis",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "punishment": 1
+      }
+    },
+    "זכר": {
+      "label": "Память/Помнить (zakhar)",
+      "polarity": 1,
+      "count": 4,
+      "pct": 1.01,
+      "top_books": [
+        {
+          "book": "Exodus",
+          "count": 2
+        },
+        {
+          "book": "Numbers",
+          "count": 1
+        },
+        {
+          "book": "Judges",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "covenant": 1,
+        "command": 2,
+        "dialogue": 1
+      }
+    },
+    "ברית": {
+      "label": "Завет (brit)",
+      "polarity": 1.5,
+      "count": 10,
+      "pct": 2.53,
+      "top_books": [
+        {
+          "book": "Genesis",
+          "count": 4
+        },
+        {
+          "book": "Exodus",
+          "count": 2
+        },
+        {
+          "book": "I Kings",
+          "count": 2
+        },
+        {
+          "book": "Deuteronomy",
+          "count": 1
+        },
+        {
+          "book": "Jeremiah",
+          "count": 1
+        }
+      ],
+      "by_behavior_type": {
+        "covenant": 3,
+        "command": 3,
+        "promise": 1,
+        "revelation": 2,
+        "punishment": 1
+      }
+    }
+  },
+  "top_concepts_by_book": {
+    "Deuteronomy": [
+      {
+        "concept": "חמה",
+        "label": "Ярость (hema)",
+        "count": 2
+      },
+      {
+        "concept": "אף",
+        "label": "Гнев/Ноздри (af)",
+        "count": 1
+      },
+      {
+        "concept": "ברית",
+        "label": "Завет (brit)",
+        "count": 1
+      }
+    ],
+    "Exodus": [
+      {
+        "concept": "זכר",
+        "label": "Память/Помнить (zakhar)",
+        "count": 2
+      },
+      {
+        "concept": "ברית",
+        "label": "Завет (brit)",
+        "count": 2
+      },
+      {
+        "concept": "אמת",
+        "label": "Истина/Верность (emet)",
+        "count": 1
+      }
+    ],
+    "Genesis": [
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 6
+      },
+      {
+        "concept": "ברית",
+        "label": "Завет (brit)",
+        "count": 4
+      },
+      {
+        "concept": "חמה",
+        "label": "Ярость (hema)",
+        "count": 2
+      },
+      {
+        "concept": "נחם",
+        "label": "Сожаление/Утешение (naham)",
+        "count": 1
+      },
+      {
+        "concept": "אף",
+        "label": "Гнев/Ноздри (af)",
+        "count": 1
+      }
+    ],
+    "Hosea": [
+      {
+        "concept": "אהב",
+        "label": "Любовь (ahav)",
+        "count": 1
+      }
+    ],
+    "I Chronicles": [
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 1
+      }
+    ],
+    "I Kings": [
+      {
+        "concept": "ברית",
+        "label": "Завет (brit)",
+        "count": 2
+      },
+      {
+        "concept": "שפט",
+        "label": "Суд/Справедливость (shafat)",
+        "count": 1
+      },
+      {
+        "concept": "חסד",
+        "label": "Милость/Верная любовь (hesed)",
+        "count": 1
+      },
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 1
+      },
+      {
+        "concept": "שלום",
+        "label": "Мир/Благополучие (shalom)",
+        "count": 1
+      }
+    ],
+    "II Chronicles": [
+      {
+        "concept": "שלום",
+        "label": "Мир/Благополучие (shalom)",
+        "count": 1
+      }
+    ],
+    "II Samuel": [
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 1
+      }
+    ],
+    "Isaiah": [
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 1
+      },
+      {
+        "concept": "אמת",
+        "label": "Истина/Верность (emet)",
+        "count": 1
+      },
+      {
+        "concept": "שפט",
+        "label": "Суд/Справедливость (shafat)",
+        "count": 1
+      }
+    ],
+    "Jeremiah": [
+      {
+        "concept": "ברית",
+        "label": "Завет (brit)",
+        "count": 1
+      }
+    ],
+    "Job": [
+      {
+        "concept": "אף",
+        "label": "Гнев/Ноздри (af)",
+        "count": 1
+      }
+    ],
+    "Joshua": [
+      {
+        "concept": "חמה",
+        "label": "Ярость (hema)",
+        "count": 1
+      }
+    ],
+    "Judges": [
+      {
+        "concept": "חמה",
+        "label": "Ярость (hema)",
+        "count": 3
+      },
+      {
+        "concept": "זכר",
+        "label": "Память/Помнить (zakhar)",
+        "count": 1
+      }
+    ],
+    "Numbers": [
+      {
+        "concept": "אף",
+        "label": "Гнев/Ноздри (af)",
+        "count": 2
+      },
+      {
+        "concept": "זכר",
+        "label": "Память/Помнить (zakhar)",
+        "count": 1
+      },
+      {
+        "concept": "ברכה",
+        "label": "Благословение (berakha)",
+        "count": 1
+      }
+    ]
+  }
+}

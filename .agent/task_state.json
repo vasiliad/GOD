@@ -1,0 +1,285 @@
+﻿{
+    "project":  "GOD2",
+    "version":  "3.1-strict",
+    "updated":  "2026-03-17",
+    "tasks":  [
+                  {
+                      "id":  "data-001",
+                      "name":  "Р В Р Р‹Р В РЎвЂќР В Р’В°Р РЋРІР‚РЋР В Р’В°Р РЋРІР‚С™Р РЋР Р‰ Р РЋРІР‚С™Р В Р’ВµР В РЎвЂќР РЋР С“Р РЋРІР‚С™Р РЋРІР‚в„– Р В РЎС›Р В Р’В°Р В Р вЂ¦Р В Р’В°Р РЋРІР‚В¦Р В Р’В° (Sefaria API)",
+                      "status":  "done",
+                      "deps":  [
+
+                               ],
+                      "workflow":  "/agent-data",
+                      "files":  [
+                                    "data/tanakh/Genesis.json",
+                                    "data/tanakh/Exodus.json",
+                                    "data/tanakh/Leviticus.json",
+                                    "data/tanakh/Numbers.json",
+                                    "data/tanakh/Deuteronomy.json",
+                                    "data/tanakh/_index.json"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/download_tanakh.py"
+                  },
+                  {
+                      "id":  "data-002",
+                      "name":  "Р В Р Р‹Р В РЎвЂќР В Р’В°Р РЋРІР‚РЋР В Р’В°Р РЋРІР‚С™Р РЋР Р‰ Р В РЎв„ўР РЋРЎвЂњР В РЎВР РЋР вЂљР В Р’В°Р В Р вЂ¦Р РЋР С“Р В РЎвЂќР В РЎвЂР В Р’Вµ Р РЋР С“Р В Р вЂ Р В РЎвЂР РЋРІР‚С™Р В РЎвЂќР В РЎвЂ (DSS)",
+                      "status":  "ready",
+                      "deps":  [
+
+                               ],
+                      "workflow":  "/agent-data",
+                      "files":  [
+                                    "data/dss/_index.json"
+                                ],
+                      "done":  false,
+                      "notes":  "Р В РЎвЂєР РЋРІР‚С™Р В РЎвЂќР РЋР вЂљР РЋРІР‚в„–Р РЋРІР‚С™Р РЋРІР‚в„–Р В РІвЂћвЂ“ Р В РЎвЂќР В РЎвЂўР РЋР вЂљР В РЎвЂ”Р РЋРЎвЂњР РЋР С“ DSS"
+                  },
+                  {
+                      "id":  "data-003",
+                      "name":  "Р В Р Р‹Р В РЎвЂўР В Р’В·Р В РўвЂР В Р’В°Р РЋРІР‚С™Р РЋР Р‰ Р РЋР С“Р В РЎвЂ”Р В РЎвЂР РЋР С“Р В РЎвЂўР В РЎвЂќ 59 Р В РЎвЂР В РЎВР РЋРІР‚ВР В Р вЂ¦ Р В РІР‚ВР В РЎвЂўР В РЎвЂ“Р В Р’В°",
+                      "status":  "done",
+                      "deps":  [
+
+                               ],
+                      "workflow":  "/agent-data",
+                      "files":  [
+                                    "data/god_names.json"
+                                ],
+                      "done":  true,
+                      "notes":  "JSON Р РЋР С“ Р В РЎвЂР В РЎВР В Р’ВµР В Р вЂ¦Р В Р’В°Р В РЎВР В РЎвЂ, Р РЋРІР‚С™Р РЋР вЂљР В Р’В°Р В Р вЂ¦Р РЋР С“Р В Р’В»Р В РЎвЂР РЋРІР‚С™Р В Р’ВµР РЋР вЂљР В Р’В°Р РЋРІР‚В Р В РЎвЂР В Р’ВµР В РІвЂћвЂ“, Р В РЎвЂР В Р вЂ Р РЋР вЂљР В РЎвЂР РЋРІР‚С™Р В РЎвЂўР В РЎВ"
+                  },
+                  {
+                      "id":  "contacts-001",
+                      "name":  "Р В Р’ВР В Р’В·Р В Р вЂ Р В Р’В»Р В Р’ВµР РЋРІР‚РЋР РЋР Р‰ Р В Р вЂ Р РЋР С“Р В Р’Вµ Р В РЎвЂќР В РЎвЂўР В Р вЂ¦Р РЋРІР‚С™Р В Р’В°Р В РЎвЂќР РЋРІР‚С™Р РЋРІР‚в„– Р В РІР‚ВР В РЎвЂўР В РЎвЂ“Р В Р’В° Р В РЎвЂ Р РЋРІР‚РЋР В Р’ВµР В Р’В»Р В РЎвЂўР В Р вЂ Р В Р’ВµР В РЎвЂќР В Р’В°",
+                      "status":  "done",
+                      "deps":  [
+                                   "data-001",
+                                   "data-003"
+                               ],
+                      "workflow":  "/agent-contacts",
+                      "files":  [
+                                    "output/contacts_registry.json"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/extract_contacts.py"
+                  },
+                  {
+                      "id":  "registry-001",
+                      "name":  "Р В РЎСџР В РЎвЂўР РЋР С“Р РЋРІР‚С™Р РЋР вЂљР В РЎвЂўР В РЎвЂР РЋРІР‚С™Р РЋР Р‰ Р РЋР вЂљР В Р’ВµР В Р’ВµР РЋР С“Р РЋРІР‚С™Р РЋР вЂљ Р РЋР С“Р В РЎвЂР РЋРІР‚С™Р РЋРЎвЂњР В Р’В°Р РЋРІР‚В Р В РЎвЂР В РІвЂћвЂ“",
+                      "status":  "done",
+                      "deps":  [
+                                   "contacts-001"
+                               ],
+                      "workflow":  "/agent-registry",
+                      "files":  [
+                                    "output/situations_registry.json",
+                                    "output/situations.csv"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/build_registry.py"
+                  },
+                  {
+                      "id":  "psych-001",
+                      "name":  "Р В РЎСџР РЋР С“Р В РЎвЂР РЋРІР‚В¦Р В РЎвЂўР В Р’В»Р В РЎвЂўР В РЎвЂ“Р В РЎвЂР РЋРІР‚РЋР В Р’ВµР РЋР С“Р В РЎвЂќР В РЎвЂР В РІвЂћвЂ“ Р В Р’В°Р В Р вЂ¦Р В Р’В°Р В Р’В»Р В РЎвЂР В Р’В· v3 (6 Р В РЎВР В Р’ВµР РЋРІР‚С™Р В РЎвЂўР В РўвЂР В РЎвЂР В РЎвЂќ + FBI)",
+                      "status":  "done",
+                      "deps":  [
+                                   "registry-001"
+                               ],
+                      "workflow":  "/agent-psych",
+                      "files":  [
+                                    "output/god_profile.json",
+                                    "output/behavior_patterns.json",
+                                    "output/situations_coded.json"
+                                ],
+                      "done":  true,
+                      "notes":  "v3: behavioral coding. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: code_behaviors.py + psych_analysis.py"
+                  },
+                  {
+                      "id":  "linguistics-001",
+                      "name":  "Р В РІР‚С”Р В РЎвЂР В Р вЂ¦Р В РЎвЂ“Р В Р вЂ Р В РЎвЂР РЋР С“Р РЋРІР‚С™Р В РЎвЂР РЋРІР‚РЋР В Р’ВµР РЋР С“Р В РЎвЂќР В РЎвЂР В РІвЂћвЂ“ Р В Р’В°Р В Р вЂ¦Р В Р’В°Р В Р’В»Р В РЎвЂР В Р’В· Р РЋР вЂљР В Р’ВµР РЋРІР‚РЋР В РЎвЂ Р В РІР‚ВР В РЎвЂўР В РЎвЂ“Р В Р’В°",
+                      "status":  "done",
+                      "deps":  [
+                                   "registry-001"
+                               ],
+                      "workflow":  "/agent-linguistics",
+                      "files":  [
+                                    "output/god_vocabulary.json",
+                                    "output/speech_patterns.json"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/linguistic_analysis.py"
+                  },
+                  {
+                      "id":  "psych-002",
+                      "name":  "Р В РІР‚СњР В РЎвЂўР РЋР вЂљР В Р’В°Р В Р’В±Р В РЎвЂўР РЋРІР‚С™Р В РЎвЂќР В Р’В°: trigger propagation + god_speech",
+                      "status":  "ready",
+                      "deps":  [
+                                   "psych-001"
+                               ],
+                      "workflow":  "/agent-psych",
+                      "files":  [
+                                    ".agent/signals/psych-002.done"
+                                ],
+                      "done":  false,
+                      "notes":  "Р В РЎСџР В РЎвЂўР В РЎвЂќР РЋР вЂљР РЋРІР‚в„–Р РЋРІР‚С™Р В РЎвЂР В Р’Вµ Р РЋРІР‚С™Р РЋР вЂљР В РЎвЂР В РЎвЂ“Р В РЎвЂ“Р В Р’ВµР РЋР вЂљР В РЎвЂўР В Р вЂ : 36.9% Р Р†РІР‚В РІР‚в„ў 58.3%. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: code_behaviors.py"
+                  },
+                  {
+                      "id":  "sentiment-001",
+                      "name":  "Sentiment Analysis: Р РЋР РЉР В РЎВР В РЎвЂўР РЋРІР‚В Р В РЎвЂР В РЎвЂўР В Р вЂ¦Р В Р’В°Р В Р’В»Р РЋР Р‰Р В Р вЂ¦Р В Р’В°Р РЋР РЏ Р В РЎвЂќР РЋР вЂљР В РЎвЂР В Р вЂ Р В Р’В°Р РЋР РЏ Р В РІР‚ВР В РЎвЂўР В РЎвЂ“Р В Р’В°",
+                      "status":  "done",
+                      "deps":  [
+                                   "psych-001"
+                               ],
+                      "workflow":  "/agent-sentiment",
+                      "files":  [
+                                    "output/sentiment_timeline.json",
+                                    "output/sentiment_by_book.json"
+                                ],
+                      "done":  true,
+                      "notes":  "VADER + Р В РЎвЂР В Р вЂ Р РЋР вЂљР В РЎвЂР РЋРІР‚С™-Р В РЎвЂ”Р В РЎвЂўР В Р’В»Р РЋР РЏР РЋР вЂљР В Р вЂ¦Р В РЎвЂўР РЋР С“Р РЋРІР‚С™Р РЋР Р‰. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/sentiment_analysis.py"
+                  },
+                  {
+                      "id":  "sources-001",
+                      "name":  "Р В Р’ВР РЋР С“Р РЋРІР‚С™Р В РЎвЂўР РЋРІР‚РЋР В Р вЂ¦Р В РЎвЂР В РЎвЂќР В РЎвЂўР В Р вЂ Р В Р’В°Р РЋР РЏ Р В РЎвЂ“Р В РЎвЂР В РЎвЂ”Р В РЎвЂўР РЋРІР‚С™Р В Р’ВµР В Р’В·Р В Р’В° J/E/D/P + Р РЋР С“Р РЋРІР‚С™Р В РЎвЂР В Р’В»Р В РЎвЂР В РЎВР В Р’ВµР РЋРІР‚С™Р РЋР вЂљР В РЎвЂР РЋР РЏ",
+                      "status":  "done",
+                      "deps":  [
+                                   "registry-001"
+                               ],
+                      "workflow":  "/agent-sources",
+                      "files":  [
+                                    "output/source_hypothesis.json",
+                                    "output/god_profile_by_source.json"
+                                ],
+                      "done":  true,
+                      "notes":  "YHWH=J, Elohim=E, Deu=D, Lev=P. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/source_analysis.py"
+                  },
+                  {
+                      "id":  "network-001",
+                      "name":  "Р В Р Р‹Р В Р’ВµР РЋРІР‚С™Р В Р’ВµР В Р вЂ Р В РЎвЂўР В РІвЂћвЂ“ Р В Р’В°Р В Р вЂ¦Р В Р’В°Р В Р’В»Р В РЎвЂР В Р’В·: Р В РЎвЂ“Р РЋР вЂљР В Р’В°Р РЋРІР‚С› Р В РІР‚ВР В РЎвЂўР В РЎвЂ“-Р РЋРІР‚РЋР В Р’ВµР В Р’В»Р В РЎвЂўР В Р вЂ Р В Р’ВµР В РЎвЂќ",
+                      "status":  "done",
+                      "deps":  [
+                                   "psych-001"
+                               ],
+                      "workflow":  "/agent-network",
+                      "files":  [
+                                    "output/god_network.json",
+                                    "output/god_network.gexf",
+                                    "output/network_stats.json"
+                                ],
+                      "done":  true,
+                      "notes":  "NetworkX. Р В Р в‚¬Р В Р’В·Р В Р’В»Р РЋРІР‚в„–: Р В РЎвЂ”Р В Р’ВµР РЋР вЂљР РЋР С“Р В РЎвЂўР В Р вЂ¦Р В Р’В°Р В Р’В¶Р В РЎвЂ. Р В Р’В Р РЋРІР‚ВР В Р’В±Р РЋР вЂљР В Р’В°: behavior_type. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/network_analysis.py"
+                  },
+                  {
+                      "id":  "events-001",
+                      "name":  "Event-Driven: Р РЋРІР‚В Р В РЎвЂР В РЎвЂќР В Р’В»Р РЋРІР‚в„– Stimulus-Response",
+                      "status":  "done",
+                      "deps":  [
+                                   "psych-001"
+                               ],
+                      "workflow":  "/agent-events",
+                      "files":  [
+                                    "output/behavioral_loops.json",
+                                    "output/stimulus_response_matrix.json"
+                                ],
+                      "done":  true,
+                      "notes":  "Sliding window Р В РЎвЂ”Р В РЎвЂў Р В РЎвЂ“Р В Р’В»Р В Р’В°Р В Р вЂ Р В Р’В°Р В РЎВ. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/event_analysis.py"
+                  },
+                  {
+                      "id":  "topics-001",
+                      "name":  "Topic Modeling: Р В РІР‚С”Р В Р’ВµР В Р вЂ Р В РЎвЂР РЋРІР‚С™, Р В РІР‚в„ўР РЋРІР‚С™Р В РЎвЂўР РЋР вЂљР В РЎвЂўР В Р’В·Р В Р’В°Р В РЎвЂќР В РЎвЂўР В Р вЂ¦Р В РЎвЂР В Р’Вµ, Р В Р’ВР В РЎвЂўР В Р вЂ ",
+                      "status":  "done",
+                      "deps":  [
+                                   "data-001"
+                               ],
+                      "workflow":  "/agent-topics",
+                      "files":  [
+                                    "output/topics_leviticus.json",
+                                    "output/topics_deuteronomy.json",
+                                    "output/topics_profile.json"
+                                ],
+                      "done":  true,
+                      "notes":  "LDA (gensim). Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: scripts/topic_modeling.py"
+                  },
+                  {
+                      "id":  "linguistics-002",
+                      "name":  "Р В РЎв„ўР В РЎвЂўР В Р вЂ¦Р РЋРІР‚В Р В Р’ВµР В РЎвЂ”Р РЋРІР‚С™-Р В Р’В°Р В Р вЂ¦Р В Р’В°Р В Р’В»Р В РЎвЂР В Р’В· 14 Р В РЎвЂќР В Р’В»Р РЋР вЂ№Р РЋРІР‚РЋР В Р’ВµР В Р вЂ Р РЋРІР‚в„–Р РЋРІР‚В¦ Р В РЎвЂќР В РЎвЂўР В Р вЂ¦Р РЋРІР‚В Р В Р’ВµР В РЎвЂ”Р РЋРІР‚С™Р В РЎвЂўР В Р вЂ  Р РЋР вЂљР В Р’ВµР РЋРІР‚РЋР В РЎвЂ Р В РІР‚ВР В РЎвЂўР В РЎвЂ“Р В Р’В°",
+                      "status":  "done",
+                      "deps":  [
+                                   "linguistics-001"
+                               ],
+                      "workflow":  "/agent-linguistics",
+                      "files":  [
+                                    "output/concept_analysis.json"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В§РІР‚вЂќР В§Р Р‹Р В§РІР‚Сљ vs Р В§РЎвЂ™Р В§Р в‚¬: Р В РЎВР В РЎвЂР В Р’В»Р В РЎвЂўР РЋР С“Р РЋРІР‚С™Р РЋР Р‰ 60.7%, Р РЋР С“Р РЋРЎвЂњР В РўвЂ 39.3%. Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: concept_analysis.py"
+                  },
+                  {
+                      "id":  "llm-001",
+                      "name":  "Р В Р’В­Р РЋРІР‚С™Р В Р’В°Р В РЎвЂ” 1: Р В РІР‚вЂќР В Р’В°Р В РЎвЂ”Р РЋРЎвЂњР РЋР С“Р РЋРІР‚С™Р В РЎвЂР РЋРІР‚С™Р РЋР Р‰ LM Studio Р РЋР С“Р В Р’ВµР РЋР вЂљР В Р вЂ Р В Р’ВµР РЋР вЂљ Р РЋР С“ DictaLM 3.0 24B Thinking",
+                      "status":  "ready",
+                      "deps":  [
+                                   "data-001"
+                               ],
+                      "workflow":  "/agent-llm",
+                      "files":  [
+                                    ".agent/signals/lmstudio-ready.done"
+                                ],
+                      "done":  false,
+                      "notes":  "LM Studio Р Р†РІР‚В РІР‚в„ў Р В Р’В·Р В Р’В°Р В РЎвЂ“Р РЋР вЂљР РЋРЎвЂњР В Р’В·Р В РЎвЂР РЋРІР‚С™Р РЋР Р‰ DictaLM-3.0-24b-thinking (Q6_K) Р Р†РІР‚В РІР‚в„ў Start Server Р В РЎвЂ”Р В РЎвЂўР РЋР вЂљР РЋРІР‚С™ 1234"
+                  },
+                  {
+                      "id":  "llm-002",
+                      "name":  "Р В Р’В­Р РЋРІР‚С™Р В Р’В°Р В РЎвЂ” 2: Р В Р в‚¬Р РЋРІР‚РЋР В РЎвЂР РЋРІР‚С™Р В Р’ВµР В Р’В»Р РЋР Р‰ (DictaLM 3.0 24B) Р В РЎвЂ“Р В Р’ВµР В Р вЂ¦Р В Р’ВµР РЋР вЂљР В РЎвЂР РЋР вЂљР РЋРЎвЂњР В Р’ВµР РЋРІР‚С™ reasoning_dataset.jsonl",
+                      "status":  "done",
+                      "deps":  [
+                                   "psych-002",
+                                   "sentiment-001",
+                                   "sources-001",
+                                   "network-001",
+                                   "events-001",
+                                   "topics-001",
+                                   "linguistics-002",
+                                   "llm-001"
+                               ],
+                      "workflow":  "/agent-llm",
+                      "files":  [
+                                    "output/reasoning_dataset.jsonl"
+                                ],
+                      "done":  true,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: generate_reasoning_dataset.py. ~10000 Р В РЎвЂ”Р РЋР вЂљР В РЎвЂР В РЎВР В Р’ВµР РЋР вЂљР В РЎвЂўР В Р вЂ . think+response Р В Р вЂ¦Р В Р’В° Р В РЎвЂР В Р вЂ Р РЋР вЂљР В РЎвЂР РЋРІР‚С™Р В Р’Вµ Р В РЎС›Р В Р’В°Р В Р вЂ¦Р В Р’В°Р РЋРІР‚В¦Р В Р’В°"
+                  },
+                  {
+                      "id":  "llm-003",
+                      "name":  "Р В Р’В­Р РЋРІР‚С™Р В Р’В°Р В РЎвЂ” 3: Unsloth LoRA fine-tuning DictaLM 2.0 Instruct 7B (Р В Р в‚¬Р РЋРІР‚РЋР В Р’ВµР В Р вЂ¦Р В РЎвЂР В РЎвЂќ)",
+                      "status":  "waiting",
+                      "deps":  [
+                                   "llm-001",
+                                   "llm-002"
+                               ],
+                      "workflow":  "/agent-llm",
+                      "files":  [
+                                    "models/god2-lora/adapter_config.json",
+                                    "models/god2-lora/adapter_model.safetensors"
+                                ],
+                      "done":  false,
+                      "notes":  "Р В Р Р‹Р В РЎвЂќР РЋР вЂљР В РЎвЂР В РЎвЂ”Р РЋРІР‚С™: finetune.py. Unsloth + LoRA r=16. Р В Р в‚¬Р РЋРІР‚РЋР В Р’ВµР В Р вЂ¦Р В РЎвЂР В РЎвЂќ=DictaLM 2.0 7B. ~2-4Р РЋРІР‚РЋ Р В Р вЂ¦Р В Р’В° RTX 5090"
+                  },
+                  {
+                      "id":  "llm-004",
+                      "name":  "Р В Р’В­Р РЋРІР‚С™Р В Р’В°Р В РЎвЂ” 4: Р В Р’В­Р В РЎвЂќР РЋР С“Р В РЎвЂ”Р В РЎвЂўР РЋР вЂљР РЋРІР‚С™ god2.gguf Р Р†РІР‚В РІР‚в„ў Р В Р’В·Р В Р’В°Р В РЎвЂ“Р РЋР вЂљР РЋРЎвЂњР В Р’В·Р В РЎвЂР РЋРІР‚С™Р РЋР Р‰ Р В Р вЂ  LM Studio",
+                      "status":  "waiting",
+                      "deps":  [
+                                   "llm-003"
+                               ],
+                      "workflow":  "/agent-llm",
+                      "files":  [
+                                    "models/god2.gguf"
+                                ],
+                      "done":  false,
+                      "notes":  "Р В РЎвЂ™Р В Р вЂ Р РЋРІР‚С™Р В РЎвЂў-Р РЋР РЉР В РЎвЂќР РЋР С“Р В РЎвЂ”Р В РЎвЂўР РЋР вЂљР РЋРІР‚С™ Р РЋРІР‚РЋР В Р’ВµР РЋР вЂљР В Р’ВµР В Р’В· Unsloth save_pretrained_gguf (Q5_K_M). Р В РІР‚вЂќР В Р’В°Р В РЎвЂ“Р РЋР вЂљР РЋРЎвЂњР В Р’В·Р В РЎвЂР РЋРІР‚С™Р РЋР Р‰ Р В Р вЂ  LM Studio Р В РўвЂР В Р’В»Р РЋР РЏ Р РЋРІР‚С™Р В Р’ВµР РЋР С“Р РЋРІР‚С™Р В Р’В°"
+                  }
+              ]
+}

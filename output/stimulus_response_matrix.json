@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "task": "events-001",
+    "description": "Stimulus → Response transition matrix (trigger→outcome→next_trigger)"
+  },
+  "transition_matrix": {
+    "unprompted": {
+      "blessing": {
+        "next_triggers": {
+          "unprompted": 18,
+          "disobedience": 2,
+          "prayer": 2,
+          "faithfulness": 1
+        },
+        "total": 23
+      },
+      "compliance": {
+        "next_triggers": {
+          "unprompted": 22,
+          "disobedience": 3,
+          "prayer": 1,
+          "distress": 1
+        },
+        "total": 27
+      },
+      "revelation": {
+        "next_triggers": {
+          "unprompted": 32,
+          "disobedience": 4,
+          "divine_test": 3,
+          "distress": 2,
+          "prayer": 1,
+          "faithfulness": 1
+        },
+        "total": 43
+      },
+      "punishment": {
+        "next_triggers": {
+          "disobedience": 3,
+          "unprompted": 1
+        },
+        "total": 4
+      },
+      "covenant": {
+        "next_triggers": {
+          "unprompted": 4,
+          "faithfulness": 1
+        },
+        "total": 5
+      },
+      "silence": {
+        "next_triggers": {
+          "disobedience": 1
+        },
+        "total": 1
+      },
+      "unclear": {
+        "next_triggers": {
+          "unprompted": 1
+        },
+        "total": 1
+      },
+      "rescue": {
+        "next_triggers": {
+          "unprompted": 4
+        },
+        "total": 4
+      },
+      "dialogue": {
+        "next_triggers": {
+          "unprompted": 5,
+          "disobedience": 2,
+          "divine_test": 1
+        },
+        "total": 8
+      }
+    },
+    "disobedience": {
+      "dialogue": {
+        "next_triggers": {
+          "disobedience": 4,
+          "unprompted": 1
+        },
+        "total": 5
+      },
+      "punishment": {
+        "next_triggers": {
+          "disobedience": 8,
+          "unprompted": 6,
+          "faithfulness": 2,
+          "intercession": 1,
+          "prayer": 1,
+          "distress": 1
+        },
+        "total": 19
+      },
+      "blessing": {
+        "next_triggers": {
+          "disobedience": 1
+        },
+        "total": 1
+      },
+      "revelation": {
+        "next_triggers": {
+          "disobedience": 4,
+          "intercession": 3,
+          "unprompted": 2,
+          "prayer": 1
+        },
+        "total": 10
+      },
+      "compliance": {
+        "next_triggers": {
+          "disobedience": 7,
+          "faithfulness": 1
+        },
+        "total": 8
+      },
+      "covenant": {
+        "next_triggers": {
+          "unprompted": 1
+        },
+        "total": 1
+      },
+      "silence": {
+        "next_triggers": {
+          "unprompted": 1
+        },
+        "total": 1
+      },
+      "rescue": {
+        "next_triggers": {
+          "faithfulness": 1
+        },
+        "total": 1
+      }
+    },
+    "faithfulness": {
+      "blessing": {
+        "next_triggers": {
+          "disobedience": 2,
+          "unprompted": 2,
+          "faithfulness": 1,
+          "idolatry": 1
+        },
+        "total": 6
+      },
+      "covenant": {
+        "next_triggers": {
+          "faithfulness": 1,
+          "unprompted": 1
+        },
+        "total": 2
+      },
+      "revelation": {
+        "next_triggers": {
+          "distress": 1,
+          "unprompted": 1
+        },
+        "total": 2
+      },
+      "rescue": {
+        "next_triggers": {
+          "unprompted": 1
+        },
+        "total": 1
+      }
+    },
+    "prayer": {
+      "blessing": {
+        "next_triggers": {
+          "faithfulness": 1,
+          "disobedience": 1,
+          "distress": 1
+        },
+        "total": 3
+      },
+      "compliance": {
+        "next_triggers": {
+          "distress": 1,
+          "prayer": 1,
+          "intercession": 1
+        },
+        "total": 3
+      },
+      "unclear": {
+        "next_triggers": {
+          "prayer": 1
+        },
+        "total": 1
+      }
+    },
+    "distress": {
+      "covenant": {
+        "next_triggers": {
+          "distress": 1
+        },
+        "total": 1
+      },
+      "revelation": {
+        "next_triggers": {
+          "unprompted": 2
+        },
+        "total": 2
+      },
+      "blessing": {
+        "next_triggers": {
+          "distress": 1,
+          "disobedience": 1
+        },
+        "total": 2
+      },
+      "compliance": {
+        "next_triggers": {
+          "disobedience": 2,
+          "unprompted": 1
+        },
+        "total": 3
+      },
+      "rescue": {
+        "next_triggers": {
+          "unprompted": 2,
+          "intercession": 1
+        },
+        "total": 3
+      },
+      "dialogue": {
+        "next_triggers": {
+          "unprompted": 1
+        },
+        "total": 1
+      }
+    },
+    "divine_test": {
+      "revelation": {
+        "next_triggers": {
+          "distress": 1
+        },
+        "total": 1
+      },
+      "compliance": {
+        "next_triggers": {
+          "divine_test": 1,
+          "unprompted": 1
+        },
+        "total": 2
+      }
+    },
+    "intercession": {
+      "rescue": {
+        "next_triggers": {
+          "unprompted": 1,
+          "prayer": 1
+        },
+        "total": 2
+      }
+    }
+  }
+}

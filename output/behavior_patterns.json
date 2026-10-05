@@ -1,0 +1,73 @@
+{
+  "trigger_response_patterns": [
+    {
+      "trigger": "unprompted",
+      "outcome": "revelation",
+      "count": 86,
+      "pct": 21.7
+    },
+    {
+      "trigger": "unprompted",
+      "outcome": "compliance",
+      "count": 51,
+      "pct": 12.9
+    },
+    {
+      "trigger": "unprompted",
+      "outcome": "blessing",
+      "count": 40,
+      "pct": 10.1
+    },
+    {
+      "trigger": "disobedience",
+      "outcome": "punishment",
+      "count": 36,
+      "pct": 9.1
+    },
+    {
+      "trigger": "unprompted",
+      "outcome": "dialogue",
+      "count": 18,
+      "pct": 4.5
+    },
+    {
+      "trigger": "disobedience",
+      "outcome": "revelation",
+      "count": 16,
+      "pct": 4.0
+    },
+    {
+      "trigger": "faithfulness",
+      "outcome": "blessing",
+      "count": 16,
+      "pct": 4.0
+    },
+    {
+      "trigger": "disobedience",
+      "outcome": "compliance",
+      "count": 14,
+      "pct": 3.5
+    },
+    {
+      "trigger": "prayer",
+      "outcome": "blessing",
+      "count": 10,
+      "pct": 2.5
+    },
+    {
+      "trigger": "unprompted",
+      "outcome": "punishment",
+      "count": 9,
+      "pct": 2.3
+    }
+  ],
+  "severity_profile": {
+    "catastrophic_5": 22,
+    "mild_1": 56
+  },
+  "target_profile": {
+    "individual": 237,
+    "prophet": 108,
+    "nation": 51
+  }
+}

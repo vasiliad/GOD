@@ -1,0 +1,3251 @@
+[
+  {
+    "span": {
+      "start": "1:1",
+      "end": "1:5"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:3"
+    ],
+    "god_speech_plain": "יהי אור",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сотворил небо и землю, словом вызвал свет, отделил свет от тьмы, нарёк день и ночь",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [
+      "удовлетворение (וירא כי טוב)"
+    ],
+    "summary_ru": "Первый день творения: Бог творит небо и землю, словом вызывает свет, отделяет его от тьмы и нарекает день и ночь.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_001",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:6",
+      "end": "1:8"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:6"
+    ],
+    "god_speech_plain": "יהי רקיע בתוך המים",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "создал свод, разделил воды под сводом и над сводом, назвал свод небом",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Второй день творения: Бог словом создаёт свод (ракиа), разделяет воды и называет свод небом.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_002",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:9",
+      "end": "1:13"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:9",
+      "1:11"
+    ],
+    "god_speech_plain": "יקוו המים מתחת השמים אל מקום אחד | תדשא הארץ דשא עשב מזריע זרע",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "собрал воды, явил сушу, нарёк землю и моря, повелел земле произрастить растительность",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [
+      "удовлетворение (дважды כי טוב)"
+    ],
+    "summary_ru": "Третий день творения: Бог собирает воды, являет сушу, нарекает землю и моря и повелевает земле произрастить зелень — земля исполняет.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_003",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:14",
+      "end": "1:19"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:14-15"
+    ],
+    "god_speech_plain": "יהי מארת ברקיע השמים להבדיל בין היום ובין הלילה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "создал два великих светила и звёзды, поместил их на своде для управления днём и ночью",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [
+      "удовлетворение (כי טוב)"
+    ],
+    "summary_ru": "Четвёртый день творения: Бог словом творит светила и звёзды и помещает их на своде небесном для знамений и управления днём и ночью.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_004",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:20",
+      "end": "1:23"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "живые существа моря и неба",
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:20",
+      "1:22"
+    ],
+    "god_speech_plain": "ישרצו המים שרץ נפש חיה | פרו ורבו ומלאו את המים בימים",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сотворил великих морских существ, рыб и птиц и благословил их плодиться и размножаться",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "удовлетворение (כי טוב)"
+    ],
+    "summary_ru": "Пятый день творения: Бог творит морских существ и птиц и впервые благословляет живые существа: «плодитесь и размножайтесь».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_005",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:24",
+      "end": "1:31"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "человечество",
+      "животные",
+      "мир"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:24",
+      "1:26",
+      "1:28",
+      "1:29-30"
+    ],
+    "god_speech_plain": "תוצא הארץ נפש חיה למינה | נעשה אדם בצלמנו כדמותנו | פרו ורבו ומלאו את הארץ וכבשה | הנה נתתי לכם את כל עשב",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сотворил животных и человека по образу Своему, мужчину и женщину, благословил людей, дал владычество и пищу",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "удовлетворение (טוב מאד)"
+    ],
+    "summary_ru": "Шестой день творения: Бог творит животных и человека по Своему образу, благословляет людей, даёт им владычество над землёй и пищу; всё «весьма хорошо». Включает самосовещание «сотворим человека» (1:26).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_006",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:1",
+      "end": "2:3"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "мир"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "завершил творение, почил в седьмой день, благословил и освятил седьмой день",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Седьмой день: Бог завершает дело творения, покоится от всех дел, благословляет и освящает седьмой день.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_007",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:7",
+      "end": "2:9"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Адам"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "образовал человека из праха земного, вдохнул в него дыхание жизни, насадил сад в Эдене, поместил туда человека, произрастил деревья",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Бог образует человека из праха, вдыхает в него дыхание жизни, насаждает сад в Эдене и помещает туда человека; среди деревьев — древо жизни и древо познания.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_008",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:15",
+      "end": "2:17"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Адам"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "2:16-17"
+    ],
+    "god_speech_plain": "מכל עץ הגן אכל תאכל ומעץ הדעת טוב ורע לא תאכל ממנו",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "взял человека и поселил в саду Эдемском возделывать и хранить его",
+    "outcome": "revelation",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Бог поселяет человека в саду возделывать и хранить его и даёт первую заповедь: есть от всякого древа, кроме древа познания добра и зла, под угрозой смерти («смертью умрёшь»).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_009",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:18",
+      "end": "2:22"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Адам",
+      "Ева"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "2:18"
+    ],
+    "god_speech_plain": "לא טוב היות האדם לבדו אעשה לו עזר כנגדו",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "создал животных и привёл к Адаму для наречения имён, навёл крепкий сон, создал женщину из ребра и привёл её к Адаму",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "забота (לא טוב היות האדם לבדו)"
+    ],
+    "summary_ru": "Бог решает «не хорошо человеку быть одному», приводит к Адаму животных для наречения имён (совместный акт), затем творит женщину из ребра и приводит её к Адаму. Восклицание Адама 2:23 обращено о женщине, не к Богу.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_010",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "3:8",
+      "end": "3:19"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Адам",
+      "Ева",
+      "змей"
+    ],
+    "addressee_type": "family",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "3:9",
+      "3:11",
+      "3:13",
+      "3:14-19"
+    ],
+    "god_speech_plain": "איכה | מי הגיד לך כי עירם אתה | מה זאת עשית | ארור אתה מכל הבהמה | הרבה ארבה עצבונך | ארורה האדמה בעבורך",
+    "human_speech_refs": [
+      "3:10",
+      "3:12",
+      "3:13"
+    ],
+    "human_speech_plain": "את קלך שמעתי בגן ואירא כי עירם אנכי | האשה אשר נתתה עמדי | הנחש השיאני ואכל",
+    "god_action": "явился (голос ходящего в саду), допросил Адама и Еву, проклял змея, приговорил женщину к мукам рождения, проклял землю за человека, объявил смертность",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "После грехопадения Бог является в саду, призывает скрывшихся Адама и Еву («где ты?»), ведёт допрос-диалог и выносит приговор: проклятие змею (с протоевангелием 3:15), муки женщине, проклятие земли и возвращение в прах человеку.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_011",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "3:21",
+      "end": "3:21"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Адам",
+      "Ева"
+    ],
+    "addressee_type": "family",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сделал Адаму и его жене кожаные одежды и одел их",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "забота"
+    ],
+    "summary_ru": "Сразу после приговора Бог делает Адаму и Еве кожаные одежды и Сам одевает их — жест милости и покрытия наготы перед изгнанием.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_012",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "3:22",
+      "end": "3:24"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Адам",
+      "Ева"
+    ],
+    "addressee_type": "family",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "3:22"
+    ],
+    "god_speech_plain": "הן האדם היה כאחד ממנו לדעת טוב ורע",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "изгнал человека из сада Эдемского возделывать землю, поставил херувимов и пламенный меч охранять путь к древу жизни",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [
+      "опасение (פן ישלח ידו)"
+    ],
+    "summary_ru": "Бог, рассудив во внутренней речи, что человек стал «как один из Нас» и может вкусить от древа жизни, изгоняет его из Эдема и ставит херувимов с пламенным мечом охранять путь к древу жизни.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_013",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:3",
+      "end": "4:7"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Каин",
+      "Авель"
+    ],
+    "addressee_type": "individual",
+    "trigger": "gratitude",
+    "god_speech_refs": [
+      "4:6-7"
+    ],
+    "god_speech_plain": "למה חרה לך ולמה נפלו פניך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "призрел на Авеля и его дар, на Каина и его дар не призрел, предупредил огорчённого Каина о грехе, лежащем у дверей",
+    "outcome": "refusal",
+    "severity": 3,
+    "emotions": [
+      "благоволение (к Авелю, וישע)"
+    ],
+    "summary_ru": "Каин и Авель приносят YHWH приношения (минха) — обращение людей к Богу; Бог принимает дар Авеля и отвергает дар Каина, а огорчённого Каина предупреждает: «грех лежит у дверей, но ты властвуй над ним». Каин не отвечает Богу.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_014",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:9",
+      "end": "4:12"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Каин"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "4:9",
+      "4:10-12"
+    ],
+    "god_speech_plain": "אי הבל אחיך | מה עשית קול דמי אחיך צעקים אלי מן האדמה | ועתה ארור אתה מן האדמה",
+    "human_speech_refs": [
+      "4:9"
+    ],
+    "human_speech_plain": "לא ידעתי השמר אחי אנכי",
+    "god_action": "допросил Каина после братоубийства, объявил, что кровь Авеля вопиет к Нему от земли, проклял Каина от земли и обрёк на скитание",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "После убийства Авеля Бог допрашивает Каина («где Авель, брат твой?»), Каин лжёт («разве я сторож брату моему?»); Бог объявляет, что кровь брата вопиет к Нему от земли, и проклинает Каина на скитание.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_015",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:13",
+      "end": "4:15"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Каин"
+    ],
+    "addressee_type": "individual",
+    "trigger": "complaint",
+    "god_speech_refs": [
+      "4:15"
+    ],
+    "god_speech_plain": "לכן כל הרג קין שבעתים יקם",
+    "human_speech_refs": [
+      "4:13-14"
+    ],
+    "human_speech_plain": "גדול עוני מנשא הן גרשת אתי היום מעל פני האדמה ומפניך אסתר",
+    "god_action": "ответил на жалобу обещанием семикратного отмщения всякому убийце Каина и положил Каину защитный знак",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Каин жалуется Богу, что наказание его невыносимо и всякий встречный убьёт его; Бог отвечает обещанием семикратного отмщения и кладёт Каину защитный знак. Жалоба и смягчение — продолжение диалога 4:9-12, выделено как обращение человека к Богу.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_016",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:26",
+      "end": "4:26"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "люди поколения Эноша",
+      "Энош"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Во дни Эноша, сына Шета, «начали призывать имя YHWH» (אז הוחל לקרא בשם יהוה) — начало общественного призывания/поклонения; слова молитвы и ответ Бога в тексте не приведены.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_017",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "5:1",
+      "end": "5:2"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Адам",
+      "Ева",
+      "человечество"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сотворил человека по подобию Божию, мужчину и женщину, благословил их и нарёк им имя «адам»",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Ретроспектива в заголовке родословия Адама: Бог сотворил людей по Своему подобию, благословил их и нарёк им имя «адам». Повторяет события 1:27-28, не новое взаимодействие.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_018",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "5:22",
+      "end": "5:24"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Энох"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "взял Эноха к Себе («и не стало его, ибо взял его Бог» — כי לקח אתו אלהים)",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Энох триста лет «ходил с Богом» (ויתהלך חנוך את האלהים) после рождения Метушелаха — постоянное общение с Богом, завершившееся уникальным исходом: «и не стало его, ибо взял его Бог».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_019",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:1",
+      "end": "6:4"
+    },
+    "direction": "god_initiated",
+    "via": "internal",
+    "participants": [
+      "человечество",
+      "сыны Божьи"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "6:3"
+    ],
+    "god_speech_plain": "לא ידון רוחי באדם לעלם בשגם הוא בשר",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "ограничил срок человеческой жизни ста двадцатью годами (декрет)",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Видя умножение людей и союзы сынов Божьих с дочерьми человеческими, YHWH изрекает декрет (без названного адресата): дух Его не будет вечно пребывать в человеке, ибо он плоть; дни его — сто двадцать лет.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_020",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:5",
+      "end": "6:8"
+    },
+    "direction": "god_initiated",
+    "via": "internal",
+    "participants": [
+      "человечество",
+      "Ной"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "6:7"
+    ],
+    "god_speech_plain": "אמחה את האדם אשר בראתי מעל פני האדמה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "увидел великое зло человека, раскаялся, что создал человека, восскорбел в сердце Своём, решил истребить человека и животных; Ной обрёл благодать в Его очах",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      "сожаление/раскаяние (וינחם)",
+      "скорбь (ויתעצב אל לבו)"
+    ],
+    "summary_ru": "YHWH видит, что зло человека на земле велико и все помыслы сердца его злы во всякое время; Он раскаивается, что создал человека, скорбит в сердце Своём и решает истребить человека и животных — но Ной обретает благодать в очах YHWH. Редчайшее явное описание эмоций Бога.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_021",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:9",
+      "end": "6:9"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Ной"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "delayed",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Характеристика Ноя в заголовке его толедот: праведный, непорочный в роде своём, Ной «ходил с Богом» (את האלהים התהלך נח) — как Энох; ответ Бога приходит позже, в призвании 6:13.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_022",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:11",
+      "end": "6:22"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "человечество"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "6:13-21"
+    ],
+    "god_speech_plain": "קץ כל בשר בא לפני כי מלאה הארץ חמס מפניהם",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "увидел растление земли, объявил Ною истребление всякой плоти потопом, повелел строить ковчег и собрать животных, обещал поставить завет (והקמתי את בריתי — первое упоминание завета)",
+    "outcome": "compliance",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Бог видит растление земли, наполненной насилием, и объявляет Ною конец всякой плоти; повелевает строить ковчег, обещает навести потоп, впервые обещает поставить завет и сохранить семью Ноя и животных; Ной исполняет всё, как повелел Бог. Взаимодействие продолжается в главах 7-9 (вход в ковчег, потоп, завет).",
+    "confidence": "high",
+    "boundary": true,
+    "episode_id": "GenV2_023",
+    "book": "Genesis",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "7:1",
+      "end": "7:5"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "семья Ноя"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "faithfulness",
+    "god_speech_refs": [
+      "7:1-7:4"
+    ],
+    "god_speech_plain": "בא אתה וכל ביתך אל התבה כי אתך ראיתי צדיק לפני בדור הזה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "YHWH повелевает Ною войти в ковчег со всем домом, ибо его Он увидел праведным, взять чистых животных по семи пар и объявляет: через семь дней — дождь сорок дней и ночей. Ной исполняет всё, что заповедал YHWH.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_024",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "7:7",
+      "end": "7:16"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "семья Ноя",
+      "животные"
+    ],
+    "addressee_type": "family",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "привёл животных парами к Ною, как заповедал, и Сам затворил ковчег за Ноем (ויסגר יהוה בעדו)",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [
+      "забота"
+    ],
+    "summary_ru": "Ной с семьёй и животные входят в ковчег, как повелел Бог; кульминация — защитный акт: YHWH Сам затворяет ковчег за Ноем.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_025",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "7:17",
+      "end": "7:24"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "человечество",
+      "всё живое",
+      "мир",
+      "Ной"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "навёл сорокадневный потоп: воды покрыли все горы; истребил (וימח) всё сущее с лица земли — от человека до скота, гадов и птиц; остался лишь Ной и бывшие с ним в ковчеге",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Сам потоп как божественная кара: воды усиливаются сорок дней, покрывают горы, умирает всякая плоть, и Бог стирает всё живое с лица земли; уцелел только ковчег Ноя.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_026",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:1",
+      "end": "8:5"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "животные",
+      "мир"
+    ],
+    "addressee_type": "family",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "вспомнил (ויזכר אלהים) Ноя и всех животных в ковчеге, провёл ветер над землёй, затворил источники бездны и окна небесные, остановил дождь — воды пошли на убыль",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [
+      "забота"
+    ],
+    "summary_ru": "Поворот потопа: Бог вспоминает Ноя и животных в ковчеге и действует к спасению — ветер, закрытие источников бездны, прекращение дождя; воды убывают, ковчег останавливается на горах Арарат.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_027",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:15",
+      "end": "8:19"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "семья Ноя",
+      "животные"
+    ],
+    "addressee_type": "family",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "8:16-8:17"
+    ],
+    "god_speech_plain": "צא מן התבה אתה ואשתך ובניך ונשי בניך אתך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Бог велит Ною выйти из ковчега со всей семьёй и вывести всех животных, чтобы они расплодились и размножились на земле; Ной с домом и животными выходит.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_028",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:20",
+      "end": "8:22"
+    },
+    "direction": "human_initiated",
+    "via": "internal",
+    "participants": [
+      "Ной"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [
+      "8:21-8:22"
+    ],
+    "god_speech_plain": "לא אסף לקלל עוד את האדמה בעבור האדם כי יצר לב האדם רע מנעריו ולא אסף עוד להכות את כל חי כאשר עשיתי",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "обонял благоухание умилостивления (וירח את ריח הניחח) и постановил в сердце Своём впредь не проклинать землю за человека и не поражать всё живое",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "умиротворение"
+    ],
+    "summary_ru": "Ной строит жертвенник YHWH и возносит всесожжения из чистых животных и птиц — бессловесное обращение к Богу; YHWH обоняет благоухание и во внутренней речи (ויאמר יהוה אל לבו) обязуется никогда более не проклинать землю и не истреблять всё живое, пока стоит земля.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_029",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "9:1",
+      "end": "9:17"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Ной",
+      "сыновья Ноя",
+      "потомство Ноя",
+      "всё живое"
+    ],
+    "addressee_type": "family",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "9:1-9:7",
+      "9:8-9:11",
+      "9:12-9:16",
+      "9:17"
+    ],
+    "god_speech_plain": "פרו ורבו ומלאו את הארץ | ואני הנני מקים את בריתי אתכם ואת זרעכם אחריכם | זאת אות הברית אשר אני נתן ביני וביניכם | זאת אות הברית אשר הקמתי ביני ובין כל בשר",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "благословил (ויברך אלהים) Ноя и сыновей, дал законы о пище и крови, заключил вечный завет со всякой плотью и поставил радугу знамением завета",
+    "outcome": "covenant",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "Бог благословляет Ноя с сыновьями (плодитесь и наполняйте землю), даёт постановления о пище, крови и человеческой жизни и заключает вечный завет со всякой плотью: потопа больше не будет; знамение завета — радуга в облаке.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_030",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "9:25",
+      "end": "9:27"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Ной",
+      "Сим",
+      "Иафет",
+      "Ханаан"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "9:26-9:27"
+    ],
+    "human_speech_plain": "ברוך יהוה אלהי שם ויהי כנען עבד למו | יפת אלהים ליפת וישכן באהלי שם",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Ной проклинает Ханаана и произносит благословение с призыванием имени YHWH, Бога Сима, и пожеланием, чтобы Бог распространил Иафета; Сам Бог в сцене не действует и не отвечает — речь человека с призыванием имени Бога, без участия Самого Бога.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_031",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "11:1",
+      "end": "11:9"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "человечество",
+      "строители Вавилона"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "11:6-11:7"
+    ],
+    "god_speech_plain": "הן עם אחד ושפה אחת לכלם וזה החלם לעשות | הבה נרדה ונבלה שם שפתם אשר לא ישמעו איש שפת רעהו",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "сошёл (וירד יהוה) посмотреть город и башню, после внутреннего совещания смешал язык всей земли и рассеял людей по лицу всей земли; строительство прекратилось",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [
+      "озабоченность"
+    ],
+    "summary_ru": "Люди строят город и башню до небес, чтобы сделать себе имя и не рассеяться; YHWH сходит посмотреть, держит внутреннее совещание (הבה נרדה) и в наказание смешивает язык и рассеивает их по всей земле — потому город назван Вавилон.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_032",
+    "book": "Genesis",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "12:1",
+      "end": "12:3"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "12:1-12:3"
+    ],
+    "god_speech_plain": "לך לך מארצך וממולדתך ומבית אביך אל הארץ אשר אראך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "Бог призывает Аврама оставить землю, родню и дом отца и идти в землю, которую укажет, обещая великий народ, великое имя и благословение всех племён земли в нём. Аврам повинуется без единого слова (12:4).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_033",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "12:7",
+      "end": "12:7"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "12:7"
+    ],
+    "god_speech_plain": "לזרעך אתן את הארץ הזאת",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Явился Авраму (וירא יהוה) — первая зафиксированная теофания Авраму",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "YHWH является Авраму в Сихеме и обещает отдать эту землю его потомству — конкретизация обещания 12:1 «земля, которую укажу». Аврам отвечает постройкой жертвенника явившемуся ему YHWH.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_034",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "12:8",
+      "end": "12:8"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "12:8"
+    ],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Аврам строит жертвенник между Бет-Элем и Аем и призывает имя YHWH (ויקרא בשם יהוה) — культовое обращение к Богу без процитированных слов. Ответ Бога в тексте не зафиксирован.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_035",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "12:17",
+      "end": "12:17"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "фараон"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Поразил фараона и его дом великими язвами из-за Сары, жены Аврама",
+    "outcome": "rescue",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Бог поражает фараона и его дом великими язвами за взятую во дворец Сару. Без единого слова Бога фараон понимает причину, возвращает жену Авраму и отпускает их со всем имуществом.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_036",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:4",
+      "end": "13:4"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "13:4"
+    ],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Вернувшись из Египта на место первого жертвенника у Бет-Эля, Аврам вновь призывает имя YHWH (ויקרא שם אברם בשם יהוה). Ответа Бога в тексте нет.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_037",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:14",
+      "end": "13:17"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "13:14-13:17"
+    ],
+    "god_speech_plain": "שא נא עיניך וראה מן המקום אשר אתה שם צפנה ונגבה וקדמה וימה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "После отделения Лота Бог велит Авраму осмотреть землю на четыре стороны света и обещает отдать её ему и потомству навек, умножив потомство как пыль земную; велит пройти землю вдоль и поперёк. Аврам поселяется в Хевроне и строит жертвенник.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_038",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:19",
+      "end": "14:20"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Мелхиседек",
+      "Аврам"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "14:19-14:20"
+    ],
+    "human_speech_plain": "ברוך אברם לאל עליון קנה שמים וארץ | וברוך אל עליון אשר מגן צריך בידך",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Мелхиседек, царь Шалема и священник Эль-Эльона, благословляет Аврама именем Бога и произносит хвалу Эль-Эльону, предавшему врагов в руку Аврама. Сам Бог в сцене не говорит и не действует — благословение именем Бога без Его прямого участия.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_039",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:22",
+      "end": "14:24"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "vow",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "14:22-14:23"
+    ],
+    "human_speech_plain": "הרמתי ידי אל יהוה אל עליון קנה שמים וארץ אם מחוט ועד שרוך נעל",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Аврам клянётся перед царём Содома, подняв руку к YHWH Эль-Эльону, что не возьмёт ничего из добычи Содома. Клятвенный жест направлен к Богу, но речь адресована человеку; Бог не отвечает.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_040",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:1",
+      "end": "15:21"
+    },
+    "direction": "god_initiated",
+    "via": "vision",
+    "participants": [
+      "Аврам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "faithfulness",
+    "god_speech_refs": [
+      "15:1",
+      "15:4-15:5",
+      "15:7",
+      "15:9",
+      "15:13-15:16",
+      "15:18-15:21"
+    ],
+    "god_speech_plain": "אל תירא אברם אנכי מגן לך | לא יירשך זה כי אם אשר יצא ממעיך | הבט נא השמימה וספר הכוכבים | אני יהוה אשר הוצאתיך מאור כשדים | קחה לי עגלה משלשת | ידע תדע כי גר יהיה זרעך | לזרעך נתתי את הארץ הזאת",
+    "human_speech_refs": [
+      "15:2-15:3",
+      "15:8"
+    ],
+    "human_speech_plain": "אדני יהוה מה תתן לי ואנכי הולך ערירי | הן לי לא נתתה זרע | אדני יהוה במה אדע כי אירשנה",
+    "god_action": "Вывел Аврама наружу к звёздам; вменил веру в праведность; навёл глубокий сон (תרדמה) и ужас; прошёл дымящейся печью и огненным факелом между рассечёнными частями; заключил завет",
+    "outcome": "covenant",
+    "severity": 1,
+    "emotions": [
+      "ободрение",
+      "благоволение"
+    ],
+    "summary_ru": "Бог в видении ободряет Аврама («не бойся, Я щит тебе»); Аврам жалуется на бездетность («что Ты дашь мне?») и спрашивает «במה אדע» о наследовании земли. Бог обещает потомство как звёзды, предрекает 400 лет порабощения потомков и заключает завет рассечённых частей, даруя землю от реки Египетской до Евфрата.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_041",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "16:5",
+      "end": "16:5"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Сара"
+    ],
+    "addressee_type": "individual",
+    "trigger": "complaint",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "16:5"
+    ],
+    "human_speech_plain": "ישפט יהוה ביני וביניך",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Сара в конфликте из-за возгордившейся Агари призывает YHWH рассудить между ней и Аврамом («ישפט יהוה ביני וביניך»). Призыв Бога в судьи внутри речи к человеку; прямого ответа Бога нет.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_042",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "16:7",
+      "end": "16:14"
+    },
+    "direction": "god_initiated",
+    "via": "angel",
+    "participants": [
+      "Агарь"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "16:8",
+      "16:9",
+      "16:10",
+      "16:11-16:12"
+    ],
+    "god_speech_plain": "הגר שפחת שרי אי מזה באת ואנה תלכי | שובי אל גברתך והתעני תחת ידיה | הרבה ארבה את זרעך ולא יספר מרב | הנך הרה וילדת בן וקראת שמו ישמעאל",
+    "human_speech_refs": [
+      "16:8",
+      "16:13"
+    ],
+    "human_speech_plain": "מפני שרי גברתי אנכי ברחת | אתה אל ראי | הגם הלם ראיתי אחרי ראי",
+    "god_action": "Ангел YHWH нашёл беглянку Агарь у источника в пустыне; YHWH услышал её страдание (שמע יהוה אל עניך)",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "сострадание",
+      "внимание к страданию"
+    ],
+    "summary_ru": "Ангел YHWH находит беглянку Агарь у источника, расспрашивает, велит вернуться и смириться под рукой Сары, обещает неисчислимое потомство и возвещает рождение Измаила, ибо YHWH услышал её страдание. Агарь даёт Богу имя Эль-Рои («Бог видящий меня») — единственный в Танахе случай, когда человек нарекает имя Богу.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_043",
+    "book": "Genesis",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "17:1",
+      "end": "17:22"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Авраам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "17:1-2",
+      "17:4-8",
+      "17:9-14",
+      "17:15-16",
+      "17:19-21"
+    ],
+    "god_speech_plain": "אני אל שדי התהלך לפני והיה תמים | אני הנה בריתי אתך | ואתה את בריתי תשמר | שרי אשתך לא תקרא את שמה שרי | אבל שרה אשתך ילדת לך בן",
+    "human_speech_refs": [
+      "17:18"
+    ],
+    "human_speech_plain": "לו ישמעאל יחיה לפניך",
+    "god_action": "явился Аврааму, заключил вечный завет, переименовал Аврама в Авраама и Сару в Сарру, установил знак обрезания, обещал рождение Исаака, благословил Измаила; окончив говорить, вознёсся (ויעל אלהים)",
+    "outcome": "covenant",
+    "severity": 3,
+    "emotions": [
+      "благоволение",
+      "отзывчивость на просьбу (שמעתיך)"
+    ],
+    "summary_ru": "Бог является 99-летнему Авраму: вечный завет, новые имена, заповедь обрезания под угрозой отсечения от народа (ונכרתה), обещание сына от Сарры. Авраам падает ниц, смеётся в сердце и просит за Измаила; Бог отвечает: завет — с Исааком, но и Измаил благословлён.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_044",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:1",
+      "end": "18:15"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Авраам",
+      "Сарра"
+    ],
+    "addressee_type": "family",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "18:5",
+      "18:9",
+      "18:10",
+      "18:13-14",
+      "18:15"
+    ],
+    "god_speech_plain": "כן תעשה כאשר דברת | איה שרה אשתך | שוב אשוב אליך כעת חיה והנה בן לשרה אשתך | למה זה צחקה שרה לאמר האף אמנם אלד | לא כי צחקת",
+    "human_speech_refs": [
+      "18:3-5",
+      "18:9",
+      "18:15"
+    ],
+    "human_speech_plain": "אדני אם נא מצאתי חן בעיניך אל נא תעבר מעל עבדך | הנה באהל | לא צחקתי",
+    "god_action": "YHWH явился у дубравы Мамре в образе трёх мужей, принял гостеприимство и трапезу Авраама, возвестил рождение сына у Сарры через год",
+    "outcome": "blessing",
+    "severity": 2,
+    "emotions": [
+      "благоволение",
+      "мягкий упрёк за смех"
+    ],
+    "summary_ru": "Теофания в Мамре: YHWH с двумя спутниками принимает трапезу Авраама и возвещает, что через год у Сарры родится сын. Сарра смеётся про себя; YHWH обличает смех ('היפלא מיהוה דבר'), она отпирается от страха — 'нет, ты смеялась'.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_045",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:17",
+      "end": "18:21"
+    },
+    "direction": "god_initiated",
+    "via": "internal",
+    "participants": [
+      "Бог",
+      "Авраам"
+    ],
+    "addressee_type": "self",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "18:17-19",
+      "18:20-21"
+    ],
+    "god_speech_plain": "המכסה אני מאברהם אשר אני עשה | זעקת סדם ועמרה כי רבה וחטאתם כי כבדה מאד ארדה נא ואראה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "решил не скрывать от Авраама замысел о Содоме и объявил, что сойдёт проверить вопль города (ארדה נא ואראה)",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [
+      "доверительная близость к Аврааму (כי ידעתיו)",
+      "озабоченность тяжестью греха"
+    ],
+    "summary_ru": "Внутреннее размышление Бога: скрывать ли от Авраама судьбу Содома. Бог решает открыть замысел избраннику, через которого благословятся народы, и объявляет о намерении сойти и удостовериться в вопле Содома и Гоморры — это открывает Аврааму путь к ходатайству.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_046",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:23",
+      "end": "18:33"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Авраам",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "intercession",
+    "god_speech_refs": [
+      "18:26",
+      "18:28",
+      "18:29",
+      "18:30",
+      "18:31",
+      "18:32"
+    ],
+    "god_speech_plain": "אם אמצא בסדם חמשים צדיקם בתוך העיר ונשאתי לכל המקום בעבורם | לא אשחית אם אמצא שם ארבעים וחמשה | לא אעשה בעבור הארבעים | לא אשחית בעבור העשרה",
+    "human_speech_refs": [
+      "18:23-25",
+      "18:27-28",
+      "18:29",
+      "18:30",
+      "18:31",
+      "18:32"
+    ],
+    "human_speech_plain": "האף תספה צדיק עם רשע | הנה נא הואלתי לדבר אל אדני ואנכי עפר ואפר | אולי ימצאון שם ארבעים | אל נא יחר לאדני ואדברה | אולי ימצאון שם עשרה",
+    "god_action": "выслушал ходатая и шесть раз уступил, обещая пощадить весь город ради 50, 45, 40, 30, 20 и 10 праведников",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "терпение",
+      "уступчивая милость"
+    ],
+    "summary_ru": "Авраам дерзновенно торгуется с YHWH о судьбе Содома: 'Судья всей земли не сотворит ли правосудия?'. Бог соглашается на каждую ступень — от пятидесяти праведников до десяти, — после чего завершает разговор и уходит.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_047",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "19:1",
+      "end": "19:29"
+    },
+    "direction": "god_initiated",
+    "via": "angel",
+    "participants": [
+      "Бог",
+      "Лот",
+      "жена Лота",
+      "дочери Лота",
+      "жители Содома",
+      "Авраам"
+    ],
+    "addressee_type": "family",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "19:12-13",
+      "19:15",
+      "19:17"
+    ],
+    "god_speech_plain": "עד מי לך פה חתן ובניך ובנתיך הוצא מן המקום | קום קח את אשתך ואת שתי בנתיך הנמצאת | המלט על נפשך אל תביט אחריך ואל תעמד בכל הככר",
+    "human_speech_refs": [
+      "19:2"
+    ],
+    "human_speech_plain": "הנה נא אדני סורו נא אל בית עבדכם",
+    "god_action": "ангелы поразили содомлян слепотой, силой вывели медлившего Лота с семьёй (בחמלת יהוה עליו); YHWH пролил серу и огонь с неба и ниспроверг города долины; жена Лота, оглянувшись, стала соляным столпом; Бог вспомнил Авраама и спас Лота (ויזכר אלהים את אברהם)",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      "жалость к Лоту (חמלה)",
+      "суровость суда над Содомом",
+      "верность Аврааму"
+    ],
+    "summary_ru": "Два ангела, посланные YHWH, приходят в Содом, спасают Лота от толпы, ослепляют нападающих и на рассвете выводят его семью; YHWH дождём серы и огня уничтожает Содом и Гоморру со всеми жителями. Ради Авраама Бог выводит Лота из катастрофы; жена Лота гибнет, нарушив запрет оглядываться.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_048",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "19:18",
+      "end": "19:22"
+    },
+    "direction": "human_initiated",
+    "via": "angel",
+    "participants": [
+      "Лот",
+      "Бог"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "19:21-22"
+    ],
+    "god_speech_plain": "הנה נשאתי פניך גם לדבר הזה לבלתי הפכי את העיר אשר דברת | מהר המלט שמה כי לא אוכל לעשות דבר עד באך שמה",
+    "human_speech_refs": [
+      "19:18-20"
+    ],
+    "human_speech_plain": "אל נא אדני הנה נא מצא עבדך חן בעיניך | אמלטה נא שמה הלא מצער הוא ותחי נפשי",
+    "god_action": "пощадил Цоар ради Лота и задержал кару, пока Лот не вошёл в город (לא אוכל לעשות דבר עד באך שמה)",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "снисходительность (נשאתי פניך)"
+    ],
+    "summary_ru": "Лот, боясь не добежать до гор, просит позволить укрыться в маленьком городке. Просьба услышана: Бог обещает не ниспровергать Цоар и откладывает кару до прихода Лота. Вложенный эпизод внутри сцены гибели Содома.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_049",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "20:3",
+      "end": "20:7"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "Авимелех"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "20:3",
+      "20:6-7"
+    ],
+    "god_speech_plain": "הנך מת על האשה אשר לקחת והוא בעלת בעל | גם אנכי ידעתי כי בתם לבבך עשית זאת | ועתה השב אשת האיש כי נביא הוא ויתפלל בעדך וחיה",
+    "human_speech_refs": [
+      "20:4-5"
+    ],
+    "human_speech_plain": "אדני הגוי גם צדיק תהרג | הלא הוא אמר לי אחתי הוא | בתם לבבי ובנקין כפי עשיתי זאת",
+    "god_action": "пришёл к Авимелеху в ночном сне со смертным приговором; Сам удержал его от греха (ואחשך גם אנכי אותך מחטו לי), не дав коснуться Сарры; потребовал вернуть жену под угрозой смерти ему и всему его дому",
+    "outcome": "compliance",
+    "severity": 4,
+    "emotions": [
+      "грозность",
+      "справедливость: признание невиновности сердца"
+    ],
+    "summary_ru": "Бог во сне объявляет Авимелеху смерть за взятую Сарру. Языческий царь спорит с Богом: 'неужели Ты убьёшь и невинный народ?'. Бог признаёт непорочность его сердца, открывает, что Сам удержал его от греха, и велит вернуть жену пророку Аврааму, который помолится за него. Наутро Авимелех повинуется.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_050",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "20:17",
+      "end": "20:18"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Авраам",
+      "Бог",
+      "Авимелех"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "intercession",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "20:17"
+    ],
+    "human_speech_plain": "",
+    "god_action": "исцелил Авимелеха, его жену и рабынь — дом снова стал рождать; перед этим YHWH затворил всякое чрево в доме Авимелеха из-за Сарры (עצר עצר יהוה)",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "милость"
+    ],
+    "summary_ru": "Авраам молится Богу за Авимелеха (ויתפלל), и Бог исцеляет его дом, открыв затворённые чрева. Слова молитвы не процитированы; ответ — немедленное действие исцеления.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_051",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "21:1",
+      "end": "21:2"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Сарра",
+      "Авраам"
+    ],
+    "addressee_type": "family",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "посетил (פקד) Сарру, как обещал: она зачала и родила Аврааму сына в назначенный Богом срок",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "верность слову (כאשר אמר)"
+    ],
+    "summary_ru": "YHWH 'вспомнил' Сарру и исполнил обещанное: рождение Исаака точно к сроку, названному при завете. Чистое божественное действие без речи; далее Сарра говорит об этом ('צחק עשה לי אלהים'), но уже людям.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_052",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "21:12",
+      "end": "21:14"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Авраам",
+      "Сарра",
+      "Агарь",
+      "Ишмаэль"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "21:12-21:13"
+    ],
+    "god_speech_plain": "אל ירע בעיניך על הנער ועל אמתך כל אשר תאמר אליך שרה שמע בקלה כי ביצחק יקרא לך זרע",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 3,
+    "emotions": [
+      "утешение",
+      "забота"
+    ],
+    "summary_ru": "Авраам огорчён требованием Сарры изгнать Агарь с Ишмаэлем; Бог велит послушаться её, обещая произвести народ и от сына рабыни (в Ицхаке наречётся семя). Наутро Авраам повинуется.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_053",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "21:17",
+      "end": "21:19"
+    },
+    "direction": "god_initiated",
+    "via": "angel",
+    "participants": [
+      "Бог",
+      "Агарь",
+      "Измаил"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "21:17-18"
+    ],
+    "god_speech_plain": "מה לך הגר אל תיראי כי שמע אלהים אל קול הנער באשר הוא שם | קומי שאי את הנער והחזיקי את ידך בו כי לגוי גדול אשימנו",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "услышал голос умирающего отрока, воззвал с неба через ангела, открыл глаза Агари — она увидела колодец с водой; и был с отроком, когда тот вырос (21:20)",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [
+      "сострадание",
+      "ободрение (אל תיראי)"
+    ],
+    "summary_ru": "В пустыне Беэр-Шевы вода кончилась, Агарь плачет поодаль от умирающего сына. Бог слышит голос отрока; ангел Божий с неба ободряет Агарь, повторяет обетование о великом народе, и Бог открывает ей глаза на колодец.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_054",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "21:33",
+      "end": "21:33"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Авраам",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "21:33"
+    ],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "После союза с Авимелехом и закрепления прав на колодец Авраам сажает тамариск в Беэр-Шеве и призывает имя YHWH, Бога Вечного (אל עולם). Культовый акт поклонения; ответа Бога текст не сообщает.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_055",
+    "book": "Genesis",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "22:1",
+      "end": "22:19"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Авраам",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "divine_test",
+    "god_speech_refs": [
+      "22:1-22:2",
+      "22:11-22:12",
+      "22:16-22:18"
+    ],
+    "god_speech_plain": "אברהם | קח נא את בנך את יחידך אשר אהבת את יצחק | אברהם אברהם | אל תשלח ידך אל הנער | בי נשבעתי נאם יהוה כי ברך אברכך",
+    "human_speech_refs": [
+      "22:1",
+      "22:11"
+    ],
+    "human_speech_plain": "הנני",
+    "god_action": "Испытал Авраама повелением принести сына во всесожжение; через ангела остановил занесённую руку; усмотрел овна вместо Ицхака; клятвой скрепил благословение",
+    "outcome": "blessing",
+    "severity": 3,
+    "emotions": [
+      "испытующая строгость",
+      "одобрение",
+      "щедрость"
+    ],
+    "summary_ru": "Акеда: Бог испытывает Авраама повелением вознести Ицхака; ангел YHWH дважды взывает с неба — останавливает жертвоприношение («теперь Я знаю, что ты боишься Бога») и клятвой подтверждает благословение и умножение потомства за послушание. Авраам нарекает место «YHWH усмотрит».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_056",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:1",
+      "end": "24:1"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Авраам"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Благословил состарившегося Авраама во всём (ברך את אברהם בכל)",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "Итоговая констатация: YHWH благословил состарившегося Авраама во всём — суммарное исполнение обетований завета.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_057",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:12",
+      "end": "24:21"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "раб Авраама",
+      "Бог",
+      "Ривка"
+    ],
+    "addressee_type": "individual",
+    "trigger": "prayer",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "24:12-24:14"
+    ],
+    "human_speech_plain": "יהוה אלהי אדני אברהם הקרה נא לפני היום ועשה חסד עם אדני אברהם",
+    "god_action": "Ответил до окончания молитвы (טרם כלה לדבר): вывел Ривку к колодцу, и она в точности исполнила прошенный знак — напоила и раба, и верблюдов",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "благосклонность",
+      "верность (хесед)"
+    ],
+    "summary_ru": "Раб Авраама молится у колодца о знаке для избрания невесты Ицхаку; ещё прежде, чем он кончил говорить, выходит Ривка и в точности исполняет знак — немедленный ответ на молитву.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_058",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:26",
+      "end": "24:27"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "раб Авраама",
+      "Бог"
+    ],
+    "addressee_type": "individual",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "24:27",
+      "24:48",
+      "24:52"
+    ],
+    "human_speech_plain": "ברוך יהוה אלהי אדני אברהם אשר לא עזב חסדו ואמתו מעם אדני",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Раб Авраама кланяется и благословляет YHWH (ויקד וישתחו ליהוה) за хесед и верный путь к родне господина; благодарение повторено в пересказе (24:48) и поклоном до земли после согласия семьи (24:52).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_059",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "25:11",
+      "end": "25:11"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Благословил Ицхака после смерти Авраама",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "После смерти Авраама Бог благословил Ицхака, поселившегося у Беэр-лахай-рои, — преемственность благословения завета.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_060",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "25:21",
+      "end": "25:21"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Ицхак",
+      "Бог",
+      "Ривка"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "prayer",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "25:21"
+    ],
+    "human_speech_plain": "",
+    "god_action": "Внял молитве (ויעתר לו יהוה): бесплодная Ривка зачала",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "отзывчивость"
+    ],
+    "summary_ru": "Ицхак молится YHWH о бесплодной жене (ויעתר יצחק ליהוה); YHWH внял ему, и Ривка зачала.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_061",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "25:22",
+      "end": "25:23"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Ривка",
+      "Бог"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "25:23"
+    ],
+    "god_speech_plain": "שני גוים בבטנך ושני לאמים ממעיך יפרדו ולאם מלאם יאמץ ורב יעבד צעיר",
+    "human_speech_refs": [
+      "25:22"
+    ],
+    "human_speech_plain": "אם כן למה זה אנכי",
+    "god_action": "",
+    "outcome": "answer_granted",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Страдая от толкания близнецов в утробе, Ривка идёт вопрошать YHWH (לדרש את יהוה); Бог отвечает оракулом: два народа в её чреве, и старший будет служить младшему.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_062",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "26:2",
+      "end": "26:5"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "26:2-26:5"
+    ],
+    "god_speech_plain": "אל תרד מצרימה שכן בארץ אשר אמר אליך גור בארץ הזאת ואהיה עמך ואברכך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Явился Ицхаку в Гераре (וירא אליו יהוה)",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [
+      "верность клятве",
+      "благоволение"
+    ],
+    "summary_ru": "Во время голода YHWH является Ицхаку в Гераре: запрещает сходить в Египет, обещает присутствие, благословение и исполнение клятвы Аврааму — за то, что Авраам слушался гласа Его. Ицхак остаётся в Гераре.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_063",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "26:12",
+      "end": "26:13"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Благословил посев Ицхака стократным урожаем (ויברכהו יהוה); Ицхак возвеличился весьма",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "щедрость"
+    ],
+    "summary_ru": "Ицхак сеет в Гераре и в тот же год получает стократный урожай — YHWH благословил его (исполнение обещания 26:3), и он стал очень велик.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_064",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "26:22",
+      "end": "26:22"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Дал простор (по слову Ицхака: כי עתה הרחיב יהוה לנו) — прекратилась вражда из-за колодцев",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Назвав третий колодец Реховот, Ицхак признаёт: «теперь YHWH дал нам простор, и мы размножимся на земле» — прекращение распрей осмыслено как действие Бога. Однако это речь О Боге при наречении, прямого контакта нет.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_065",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "26:24",
+      "end": "26:24"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Ицхак"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "26:24"
+    ],
+    "god_speech_plain": "אנכי אלהי אברהם אביך אל תירא כי אתך אנכי וברכתיך והרביתי את זרעך בעבור אברהם עבדי",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Явился Ицхаку ночью в Беэр-Шеве (וירא אליו יהוה בלילה ההוא)",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "ободрение",
+      "верность"
+    ],
+    "summary_ru": "YHWH является Ицхаку ночью в Беэр-Шеве после распрей о колодцах: «Я Бог Авраама, отца твоего; не бойся, ибо Я с тобой» — обещание благословения и умножения потомства ради Авраама.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_066",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "26:25",
+      "end": "26:25"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Ицхак",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "26:25"
+    ],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "В ответ на ночное явление Ицхак строит жертвенник в Беэр-Шеве и призывает имя YHWH (ויקרא בשם יהוה) — поклонение; словесного ответа в тексте нет.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_067",
+    "book": "Genesis",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "28:10",
+      "end": "28:17"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "28:13-28:15"
+    ],
+    "god_speech_plain": "אני יהוה אלהי אברהם אביך ואלהי יצחק הארץ אשר אתה שכב עליה לך אתננה ולזרעך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "явился во сне: лестница до неба, ангелы Божии восходят и нисходят, Господь стоит над Иаковом",
+    "outcome": "revelation",
+    "severity": 1,
+    "emotions": [
+      "верность",
+      "забота"
+    ],
+    "summary_ru": "По пути в Харан Иаков видит во сне лестницу до неба с ангелами; Господь обещает ему землю, потомство как прах земной, охрану на всех путях и возвращение («не оставлю тебя»). Проснувшись, Иаков в трепете признаёт место домом Божиим и вратами неба (Бейт-Эль).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_068",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "28:20",
+      "end": "28:22"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "vow",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "28:20-28:22"
+    ],
+    "human_speech_plain": "אם יהיה אלהים עמדי ושמרני בדרך הזה אשר אנכי הולך ונתן לי לחם לאכל ובגד ללבש",
+    "god_action": "",
+    "outcome": "delayed",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Иаков даёт обет (וידר יעקב נדר): если Бог будет с ним, сохранит в пути и вернёт в дом отца, то Господь будет его Богом, камень-памятник станет домом Божиим, и он отдаст десятину («дам Тебе»). Прямого ответа здесь нет — Бог отзовётся позже (31:3; 35:1).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_069",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "29:31",
+      "end": "29:31"
+    },
+    "direction": "divine_action",
+    "via": "internal",
+    "participants": [
+      "Бог",
+      "Лия",
+      "Рахиль"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "увидел, что Лия нелюбима (וירא יהוה כי שנואה לאה), и отверз её утробу; Рахиль же осталась бесплодной",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "сострадание"
+    ],
+    "summary_ru": "Господь видит, что Лия нелюбима, и отверзает её утробу, тогда как Рахиль бесплодна; так начинается череда рождений сыновей Иакова.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_070",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "29:32",
+      "end": "29:35"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Лия"
+    ],
+    "addressee_type": "individual",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "29:35"
+    ],
+    "human_speech_plain": "הפעם אודה את יהוה",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Лия в именованиях сыновей исповедует, что Господь увидел её горе и услышал, что она нелюбима (Реувен, Шимон), а при рождении Иуды произносит хвалу Господу: «на сей раз восхвалю Господа». Микроэпизод благодарности; ответной реакции Бога в тексте нет, речь в основном о Боге в 3-м лице.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_071",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "30:17",
+      "end": "30:18"
+    },
+    "direction": "human_initiated",
+    "via": "internal",
+    "participants": [
+      "Бог",
+      "Лия"
+    ],
+    "addressee_type": "individual",
+    "trigger": "prayer",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "услышал Лию (וישמע אלהים אל לאה) и дал ей зачать и родить пятого сына",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "отзывчивость"
+    ],
+    "summary_ru": "«И услышал Бог Лию» — слышание подразумевает её мольбу (поэтому направление выбрано human_initiated, сама молитва не записана): Бог отвечает рождением пятого сына, Лия видит в этом данную Богом награду и называет его Иссахар.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_072",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "30:22",
+      "end": "30:24"
+    },
+    "direction": "human_initiated",
+    "via": "internal",
+    "participants": [
+      "Бог",
+      "Рахиль"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "30:23",
+      "30:24"
+    ],
+    "human_speech_plain": "אסף אלהים את חרפתי / יסף יהוה לי בן אחר",
+    "god_action": "вспомнил Рахиль (ויזכר אלהים), услышал её (וישמע אליה אלהים) и отверз её утробу",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "милосердие",
+      "внимание"
+    ],
+    "summary_ru": "Бог вспомнил Рахиль и «услышал её» — слышание подразумевает её долгую мольбу в бесплодии, поэтому направление выбрано human_initiated (альтернатива divine_action отклонена из-за וישמע אליה): рождается Иосиф. Рахиль благодарит («снял Бог позор мой», 30:23 — gratitude-микро внутри эпизода) и тут же молит о ещё одном сыне (יסף יהוה).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_073",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "31:3",
+      "end": "31:3"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "31:3"
+    ],
+    "god_speech_plain": "שוב אל ארץ אבותיך ולמולדתך ואהיה עמך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [
+      "верность"
+    ],
+    "summary_ru": "На фоне враждебности Лавана и его сыновей Господь велит Иакову вернуться в землю отцов и обещает «Я буду с тобою» — отклик на обет в Бейт-Эле (28:20-22) и обещание 28:15. Иаков собирает семью и уходит.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_074",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "31:10",
+      "end": "31:13"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "31:11",
+      "31:12-31:13"
+    ],
+    "god_speech_plain": "יעקב | שא נא עיניך וראה כל העתדים העלים על הצאן | כי ראיתי את כל אשר לבן עשה לך | אנכי האל בית אל אשר משחת שם מצבה | עתה קום צא מן הארץ הזאת ושוב אל ארץ מולדתך",
+    "human_speech_refs": [
+      "31:11"
+    ],
+    "human_speech_plain": "הנני",
+    "god_action": "Во сне показал пёстрых самцов над скотом — Сам перевёл стада Лавана к Иакову (ср. 31:9); видел всё, что Лаван делал Иакову",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [
+      "забота",
+      "заступничество за обиженного"
+    ],
+    "summary_ru": "Иаков пересказывает жёнам сон времён службы у Лавана: ангел Божий показывает пёстрый скот, называет себя Богом Бет-Эля, напоминает об обете (28:20-22) и велит вернуться на родину. Событие сна хронологически относится к гл. 30 и отсылает к гл. 28 — за пределы батча.",
+    "confidence": "high",
+    "boundary": true,
+    "episode_id": "GenV2_075",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "31:24",
+      "end": "31:24"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "Лаван"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "31:24"
+    ],
+    "god_speech_plain": "השמר לך פן תדבר עם יעקב מטוב עד רע",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "пришёл к Лавану-арамеянину в ночном сне во время погони за Иаковом",
+    "outcome": "compliance",
+    "severity": 3,
+    "emotions": [
+      "строгость"
+    ],
+    "summary_ru": "Бог приходит ночью во сне к Лавану, догнавшему беглеца Иакова, и строго предостерегает: «берегись, не говори Иакову ни доброго, ни худого» — защита носителя обетования (28:15). Лаван подчиняется и сам признаёт это предостережение перед Иаковом (31:29).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_076",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "31:49",
+      "end": "31:54"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков",
+      "Лаван"
+    ],
+    "addressee_type": "family",
+    "trigger": "vow",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "31:49",
+      "31:50",
+      "31:53"
+    ],
+    "human_speech_plain": "יצף יהוה ביני ובינך / אלהים עד ביני ובינך / אלהי אברהם ואלהי נחור ישפטו בינינו",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Договор Иакова и Лавана в Гилеаде/Мицпе: Бог призывается надзирателем, свидетелем и судьёй между сторонами, Иаков клянётся Страхом отца своего Ицхака и приносит жертву (זבח) на горе. Включено с низкой уверенностью: формулы юссивные, обращены к собеседнику (о Боге в 3-м лице), прямого участия Бога в сцене нет; жертва может быть лишь заколением для договорной трапезы.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_077",
+    "book": "Genesis",
+    "source_batch": 6
+  },
+  {
+    "span": {
+      "start": "32:2",
+      "end": "32:3"
+    },
+    "direction": "god_initiated",
+    "via": "angel",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Послал ангелов Божьих (מלאכי אלהים) навстречу Иакову на пути",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Сразу после расставания с Лаваном Иакова на пути встречают ангелы Божьи; он восклицает «это стан Божий» и называет место Маханаим. Бессловесный микроэпизод-ободрение на границе опасного пути к Эсаву.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_078",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "32:10",
+      "end": "32:13"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Иаков",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "32:10-32:13"
+    ],
+    "human_speech_plain": "אלהי אבי אברהם ואלהי אבי יצחק יהוה האמר אלי שוב לארצך ולמולדתך ואיטיבה עמך | קטנתי מכל החסדים ומכל האמת | הצילני נא מיד אחי מיד עשו | ואתה אמרת היטב איטיב עמך",
+    "god_action": "",
+    "outcome": "delayed",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Развёрнутая молитва Иакова перед встречей с Эсавом: исповедание собственной малости перед всеми милостями, напоминание Богу Его же обещаний и мольба «избавь меня». Словесного ответа нет; избавление реализуется позже (ночное благословение 32:25-30, мирная встреча 33:4) — выбран outcome=delayed, а не silence; сам эпизод несомненен, low помечает именно спорность outcome.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_079",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "32:25",
+      "end": "32:33"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "divine_test",
+    "god_speech_refs": [
+      "32:27",
+      "32:28",
+      "32:29",
+      "32:30"
+    ],
+    "god_speech_plain": "שלחני כי עלה השחר | מה שמך | לא יעקב יאמר עוד שמך כי אם ישראל כי שרית עם אלהים ועם אנשים ותוכל | למה זה תשאל לשמי",
+    "human_speech_refs": [
+      "32:27",
+      "32:28",
+      "32:30"
+    ],
+    "human_speech_plain": "לא אשלחך כי אם ברכתני | יעקב | הגידה נא שמך",
+    "god_action": "Боролся с Иаковом в образе мужа до зари, коснулся и повредил сустав бедра, благословил его и дал новое имя Израиль; своего имени не открыл",
+    "outcome": "blessing",
+    "severity": 3,
+    "emotions": [
+      "таинственность",
+      "признание победы Иакова"
+    ],
+    "summary_ru": "Ночная борьба в Пенуэле: Некто борется с Иаковом до зари; Иаков, несмотря на вывихнутое бедро, требует: «не отпущу, пока не благословишь» — и получает благословение и имя Израиль («боролся с Богом и людьми и одолел»). Иаков: «я видел Бога лицом к лицу» (32:31); этиология запрета гид ха-наше (32:33). Схватку начинает Бог (поэтому god_initiated), но уникальность кейса — человек «одолел» и вынудил благословение; направление выбрано по инициатору контакта.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_080",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "33:20",
+      "end": "33:20"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Иаков",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "33:20"
+    ],
+    "human_speech_plain": "אל אלהי ישראל",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Благополучно (שלם) придя в Шхем, Иаков ставит жертвенник и нарекает его «Эль — Бог Израиля»: культовое призывание, впервые соединяющее новое имя Иакова с именем Бога. Ответа Бога в тексте нет — микроэпизод поклонения.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_081",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "35:1",
+      "end": "35:1"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "35:1"
+    ],
+    "god_speech_plain": "קום עלה בית אל ושב שם ועשה שם מזבח לאל הנראה אליך בברחך מפני עשו אחיך",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [
+      "верность"
+    ],
+    "summary_ru": "После резни в Шхеме Бог велит Иакову подняться в Бет-Эль, поселиться там и построить жертвенник Богу, явившемуся ему при бегстве от Эсава — напоминание о неисполненном обете (28:20-22). Иаков повинуется: очищает дом от чужих богов (35:2-4) и идёт.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_082",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "35:5",
+      "end": "35:5"
+    },
+    "direction": "divine_action",
+    "via": "internal",
+    "participants": [
+      "Бог",
+      "жители окрестных городов",
+      "сыновья Иакова"
+    ],
+    "addressee_type": "nation",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Навёл «ужас Божий» (חתת אלהים) на окрестные города, так что никто не преследовал сыновей Иакова",
+    "outcome": "rescue",
+    "severity": 3,
+    "emotions": [
+      "защита"
+    ],
+    "summary_ru": "Во время перехода семьи Иакова к Бет-Элю ужас Божий падает на окрестные города, и после резни в Шхеме никто не решается преследовать сыновей Иакова. Чистое божественное действие без речи.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_083",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "35:7",
+      "end": "35:7"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Иаков",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "35:7"
+    ],
+    "human_speech_plain": "אל בית אל",
+    "god_action": "",
+    "outcome": "compliance",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Иаков строит жертвенник в Лузе и называет место «Эль-Бет-Эль», «ибо там открылся ему Бог» при бегстве от брата — исполнение обета 28:20-22 и веления 35:1. Ответ Бога следует далее отдельным явлением (35:9-15).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_084",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "35:9",
+      "end": "35:15"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "35:10",
+      "35:11-35:12"
+    ],
+    "god_speech_plain": "שמך יעקב לא יקרא שמך עוד יעקב כי אם ישראל יהיה שמך | אני אל שדי פרה ורבה גוי וקהל גוים יהיה ממך | ואת הארץ אשר נתתי לאברהם וליצחק לך אתננה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Явился Иакову вновь в Бет-Эле, благословил его, закрепил имя Израиль, открылся как Эль-Шаддай, передал завет (потомство, цари, земля Авраама и Исаака) и поднялся от него",
+    "outcome": "covenant",
+    "severity": 1,
+    "emotions": [
+      "благоволение",
+      "щедрость"
+    ],
+    "summary_ru": "Бог вновь является Иакову в Бет-Эле по возвращении из Паддан-Арама: благословляет, подтверждает имя Израиль, открывается как Эль-Шаддай и передаёт завет Авраама и Исаака — плодовитость, царей и землю. Иаков отвечает ритуалом: ставит каменный столб, совершает возлияние и помазание елеем, закрепляет имя Бет-Эль.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_085",
+    "book": "Genesis",
+    "source_batch": 7
+  },
+  {
+    "span": {
+      "start": "37:5",
+      "end": "37:11"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "Иосиф"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Послал Иосифу два вещих сна о будущем владычестве (источник снов в тексте не назван)",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Иосифу дважды снятся вещие сны: снопы братьев и небесные светила кланяются ему. Бог в тексте не назван источником снов — божественное происхождение лишь имплицитно (сны сбываются в Египте), поэтому уверенность низкая.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_086",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "38:7",
+      "end": "38:7"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Эр"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Умертвил Эра, первенца Иуды (וימתהו יהוה)",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      "неудовольствие",
+      "осуждение зла"
+    ],
+    "summary_ru": "Эр, первенец Иуды, был злом в глазах YHWH (רע בעיני יהוה), и YHWH умертвил его. Конкретная вина в тексте не названа.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_087",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "38:9",
+      "end": "38:10"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Бог",
+      "Онан"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Умертвил Онана (וימת גם אתו)",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      "неудовольствие"
+    ],
+    "summary_ru": "Онан уклонялся от левиратного долга, губя семя, чтобы не дать потомства брату; содеянное было злом в глазах YHWH (וירע בעיני יהוה), и Он умертвил и его.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_088",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "39:2",
+      "end": "39:5"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иосиф",
+      "Потифар"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Был с Иосифом в доме Потифара, давал успех всякому делу его рук; ради Иосифа благословил дом египтянина — в доме и в поле",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "YHWH был с Иосифом-рабом, и тот преуспевал; господин видел, что YHWH с ним и даёт успех. С момента, как Иосиф поставлен над домом, YHWH благословил дом египтянина ради Иосифа (ויברך יהוה את בית המצרי בגלל יוסף).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_089",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "39:21",
+      "end": "39:23"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иосиф",
+      "начальник темницы"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Был с Иосифом в темнице, склонил к нему милость (ויט אליו חסד), дал ему благоволение в глазах начальника темницы, давал успех всему, что он делал",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      "милость (хесед)",
+      "благоволение"
+    ],
+    "summary_ru": "После несправедливого заключения YHWH был с Иосифом в темнице, явил ему хесед и дал благоволение начальника тюрьмы; тот доверил Иосифу всех узников, ибо YHWH делал успешным всё в его руке.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_090",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "40:5",
+      "end": "40:22"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "виночерпий фараона",
+      "пекарь фараона",
+      "Иосиф"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Имплицитно: послал двум царедворцам вещие сны в одну ночь и дал Иосифу их истолкование (по слову Иосифа); всё сбылось в точности",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Виночерпию и пекарю фараона в одну ночь снятся вещие сны; Иосиф приписывает толкования Богу («הלוא לאלהים פתרנים», 40:8 — речь О Боге) и толкует; на третий день всё сбывается точно. Бог как отправитель снов прямо не назван — уверенность низкая.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_091",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "41:1",
+      "end": "41:32"
+    },
+    "direction": "god_initiated",
+    "via": "dream",
+    "participants": [
+      "Бог",
+      "фараон",
+      "Иосиф"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Дважды показал фараону во сне, что Он сделает: семь лет изобилия и семь лет голода; удвоением сна удостоверил непреложность и скорое исполнение (נכון הדבר מעם האלהים וממהר האלהים לעשתו); дал Иосифу истолкование (41:16, 41:39)",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Бог через повторённый символический сон (коровы и колосья) открывает фараону-иноземцу грядущее: «что Бог делает, Он возвестил фараону» (41:25, 41:28). Иосиф подчёркивает, что ответ даст Бог, а не он («בלעדי אלהים יענה את שלום פרעה», 41:16); фараон затем признаёт в Иосифе духа Божия (41:38-39).",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_092",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "41:51",
+      "end": "41:52"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Иосиф",
+      "Бог"
+    ],
+    "addressee_type": "individual",
+    "trigger": "gratitude",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "По исповеданию Иосифа: дал ему забыть всё страдание и дом отца (נשני אלהים), сделал плодовитым в земле бедствия (הפרני אלהים)",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Иосиф нарекает сыновей Менашше («ибо дал мне Бог забыть всё моё страдание и весь дом отца») и Эфраим («ибо расплодил меня Бог в земле бедствия моего») — благодарное признание действий Бога при наречении имён; прямого обращения к Богу в тексте нет, поэтому уверенность низкая.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_093",
+    "book": "Genesis",
+    "source_batch": 8
+  },
+  {
+    "span": {
+      "start": "43:14",
+      "end": "43:14"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иаков",
+      "сыновья Иакова"
+    ],
+    "addressee_type": "family",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "43:14"
+    ],
+    "human_speech_plain": "ואל שדי יתן לכם רחמים לפני האיש ושלח לכם את אחיכם אחר ואת בנימין",
+    "god_action": "",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Отпуская сыновей с Вениамином в Египет, Иаков призывает Эль Шаддая в третьем лице дать им милость перед владыкой Египта и вернуть Симеона и Вениамина. Призыв-пожелание, а не прямая молитва; по ходу рассказа просьба фактически исполняется (43:23; 44-45), поэтому outcome=answer_granted, но участие Бога не наррировано.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_094",
+    "book": "Genesis",
+    "source_batch": 9
+  },
+  {
+    "span": {
+      "start": "43:29",
+      "end": "43:29"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иосиф",
+      "Вениамин"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "43:29"
+    ],
+    "human_speech_plain": "אלהים יחנך בני",
+    "god_action": "",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Иосиф, увидев Вениамина, произносит благословение-пожелание: «Бог да помилует тебя, сын мой». Формула благословения в третьем лице; ответ или действие Бога не описаны — пограничный случай.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_095",
+    "book": "Genesis",
+    "source_batch": 9
+  },
+  {
+    "span": {
+      "start": "45:5",
+      "end": "45:9"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иосиф"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "По истолкованию Иосифа: Бог послал его в Египет впереди братьев для сохранения жизни семьи, поставил отцом фараону, господином его дома и владыкой всего Египта",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Открывшись братьям, Иосиф трактует свою продажу в Египет как закадровый промысел: «не вы послали меня сюда, но Бог… для сохранения жизни» (45:5, 7, 8). Бог в сцене не участвует — это речь О Боге; включено как ретроспективное божественное действие с низкой уверенностью.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_096",
+    "book": "Genesis",
+    "source_batch": 9
+  },
+  {
+    "span": {
+      "start": "46:1",
+      "end": "46:4"
+    },
+    "direction": "human_initiated",
+    "via": "vision",
+    "participants": [
+      "Бог",
+      "Иаков"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "prayer",
+    "god_speech_refs": [
+      "46:2",
+      "46:3-46:4"
+    ],
+    "god_speech_plain": "יעקב יעקב | אנכי האל אלהי אביך אל תירא מרדה מצרימה כי לגוי גדול אשימך שם",
+    "human_speech_refs": [
+      "46:2"
+    ],
+    "human_speech_plain": "הנני",
+    "god_action": "Явился Иакову в ночном видении в Беэр-Шеве после принесённых им жертв Богу отца его Исаака; обещал произвести от него великий народ в Египте, сойти с ним туда и вывести обратно; Иосиф закроет ему глаза",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [
+      "ободрение",
+      "забота"
+    ],
+    "summary_ru": "По пути в Египет Иаков приносит в Беэр-Шеве жертвы Богу отца своего Исаака (обращение), и той же ночью Бог отвечает видением-диалогом: «Иаков, Иаков… не бойся сойти в Египет, там Я произведу от тебя великий народ; Я сойду с тобою и Я же выведу тебя». Пограничный кейс направления: жертва прочитана как инициатива человека (human_initiated, outcome=answer_granted), допустима и трактовка god_initiated — словесный диалог открывает Бог.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_097",
+    "book": "Genesis",
+    "source_batch": 9
+  },
+  {
+    "span": {
+      "start": "48:15",
+      "end": "48:16"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Иаков",
+      "Бог",
+      "Иосиф",
+      "Эфраим",
+      "Менаше"
+    ],
+    "addressee_type": "family",
+    "trigger": "intercession",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "48:15-48:16"
+    ],
+    "human_speech_plain": "האלהים אשר התהלכו אבתי לפניו אברהם ויצחק האלהים הרעה אתי מעודי עד היום הזה המלאך הגאל אתי מכל רע יברך את הנערים",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Благословляя Эфраима и Менаше, Иаков призывает Бога, перед которым ходили Авраам и Исаак, Бога-Пастыря всей его жизни и Ангела-Избавителя — да благословит отроков и да наречётся на них его имя. Обращение-призыв к Богу внутри благословения; ответ Бога в тексте не описан.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_098",
+    "book": "Genesis",
+    "source_batch": 10
+  },
+  {
+    "span": {
+      "start": "48:21",
+      "end": "48:21"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Иаков",
+      "Иосиф",
+      "Бог"
+    ],
+    "addressee_type": "family",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Умирающий Иаков говорит Иосифу: «вот, я умираю, и Бог будет с вами (אלהים יהיה עמכם) и возвратит вас в землю отцов ваших». Пожелание-уверение о Боге, адресованное человеку, а не Богу; прямого контакта нет.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_099",
+    "book": "Genesis",
+    "source_batch": 10
+  },
+  {
+    "span": {
+      "start": "49:18",
+      "end": "49:18"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Иаков",
+      "Бог"
+    ],
+    "addressee_type": "patriarch",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "49:18"
+    ],
+    "human_speech_plain": "לישועתך קויתי יהוה",
+    "god_action": "",
+    "outcome": "silence",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Посреди пророческих благословений сыновьям (сразу после слов о Дане) Иаков внезапно обращается к YHWH с воздыханием: «На спасение Твоё уповаю, Господи». Микроэпизод прямого обращения; Бог не отвечает.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "GenV2_100",
+    "book": "Genesis",
+    "source_batch": 10
+  },
+  {
+    "span": {
+      "start": "50:19",
+      "end": "50:21"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Бог",
+      "Иосиф",
+      "братья Иосифа"
+    ],
+    "addressee_type": "family",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Провиденциально обратил злой умысел братьев во благо, чтобы сохранить жизнь многочисленному народу (по истолкованию Иосифа)",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [
+      "благоволение"
+    ],
+    "summary_ru": "Успокаивая братьев после смерти отца, Иосиф истолковывает события как действие Бога: «вы замышляли против меня зло, но Бог обратил это во благо (אלהים חשבה לטבה), чтобы сохранить жизнь многим». Ретроспективно признанное провиденциальное действие; прямого контакта с Богом в сцене нет.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_101",
+    "book": "Genesis",
+    "source_batch": 10
+  },
+  {
+    "span": {
+      "start": "50:24",
+      "end": "50:25"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Иосиф",
+      "братья Иосифа",
+      "Бог"
+    ],
+    "addressee_type": "family",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Умирающий Иосиф уверяет братьев: «Бог посетит вас (אלהים פקד יפקד אתכם) и выведет из земли этой в землю, о которой клялся Аврааму, Исааку и Иакову», и берёт с сынов Израилевых клятву вынести его кости. Речь о будущем действии Бога и клятва между людьми; прямого контакта с Богом нет.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "GenV2_102",
+    "book": "Genesis",
+    "source_batch": 10
+  }
+]

@@ -1,0 +1,226 @@
+{
+  "metadata": {
+    "task": "events-001",
+    "description": "Behavioral loops / Stimulus-Response patterns in Tanakh narrative",
+    "total_situations": 396,
+    "min_frequency_filter": 3
+  },
+  "summary_stats": {
+    "total_situations": 396,
+    "chapters_indexed": 199,
+    "patterns_found": 310,
+    "top_loops_count": 3,
+    "unique_triggers": [
+      "disobedience",
+      "distress",
+      "divine_test",
+      "faithfulness",
+      "idolatry",
+      "intercession",
+      "prayer",
+      "unprompted"
+    ],
+    "unique_behaviors": [
+      "blessing",
+      "command",
+      "covenant",
+      "dialogue",
+      "promise",
+      "punishment",
+      "rescue",
+      "revelation"
+    ],
+    "trigger_frequency": {
+      "unprompted": 224,
+      "disobedience": 80,
+      "faithfulness": 26,
+      "prayer": 25,
+      "intercession": 8,
+      "distress": 23,
+      "divine_test": 6,
+      "idolatry": 4
+    },
+    "behavior_frequency": {
+      "command": 219,
+      "blessing": 33,
+      "revelation": 61,
+      "promise": 21,
+      "dialogue": 31,
+      "punishment": 21,
+      "covenant": 3,
+      "rescue": 7
+    },
+    "behavior_outcome_matrix": {
+      "command": {
+        "blessing": 27,
+        "compliance": 74,
+        "punishment": 27,
+        "rescue": 11,
+        "covenant": 8,
+        "revelation": 59,
+        "unclear": 4,
+        "dialogue": 7,
+        "silence": 2
+      },
+      "blessing": {
+        "blessing": 33
+      },
+      "revelation": {
+        "revelation": 57,
+        "blessing": 1,
+        "punishment": 2,
+        "rescue": 1
+      },
+      "promise": {
+        "blessing": 12,
+        "covenant": 1,
+        "rescue": 5,
+        "revelation": 1,
+        "unclear": 2
+      },
+      "dialogue": {
+        "dialogue": 22,
+        "revelation": 3,
+        "silence": 1,
+        "blessing": 3,
+        "rescue": 1,
+        "compliance": 1
+      },
+      "punishment": {
+        "punishment": 20,
+        "rescue": 1
+      },
+      "covenant": {
+        "covenant": 3
+      },
+      "rescue": {
+        "rescue": 7
+      }
+    },
+    "trigger_behavior_matrix": {
+      "unprompted": {
+        "command": 147,
+        "blessing": 16,
+        "revelation": 32,
+        "promise": 10,
+        "covenant": 1,
+        "dialogue": 15,
+        "rescue": 1,
+        "punishment": 2
+      },
+      "disobedience": {
+        "dialogue": 8,
+        "punishment": 19,
+        "blessing": 1,
+        "command": 37,
+        "revelation": 15
+      },
+      "faithfulness": {
+        "command": 6,
+        "blessing": 9,
+        "covenant": 1,
+        "promise": 5,
+        "revelation": 3,
+        "rescue": 2
+      },
+      "prayer": {
+        "dialogue": 4,
+        "command": 8,
+        "blessing": 6,
+        "promise": 2,
+        "rescue": 2,
+        "revelation": 3
+      },
+      "intercession": {
+        "promise": 2,
+        "blessing": 1,
+        "command": 2,
+        "rescue": 2,
+        "revelation": 1
+      },
+      "distress": {
+        "revelation": 6,
+        "covenant": 1,
+        "dialogue": 4,
+        "command": 10,
+        "promise": 2
+      },
+      "divine_test": {
+        "command": 5,
+        "revelation": 1
+      },
+      "idolatry": {
+        "command": 4
+      }
+    }
+  },
+  "top_loops": [
+    {
+      "label": "unprompted/command->revelation -> unprompted/command->revelation",
+      "frequency": 12,
+      "length": 2,
+      "books": [
+        "Leviticus",
+        "Numbers"
+      ],
+      "pattern": [
+        [
+          "unprompted",
+          "command",
+          "revelation"
+        ],
+        [
+          "unprompted",
+          "command",
+          "revelation"
+        ]
+      ],
+      "avg_severity": 1.79
+    },
+    {
+      "label": "unprompted/command->revelation -> unprompted/command->compliance",
+      "frequency": 9,
+      "length": 2,
+      "books": [
+        "Deuteronomy",
+        "Exodus",
+        "Leviticus",
+        "Numbers"
+      ],
+      "pattern": [
+        [
+          "unprompted",
+          "command",
+          "revelation"
+        ],
+        [
+          "unprompted",
+          "command",
+          "compliance"
+        ]
+      ],
+      "avg_severity": 2.11
+    },
+    {
+      "label": "unprompted/command->compliance -> unprompted/blessing->blessing",
+      "frequency": 4,
+      "length": 2,
+      "books": [
+        "Genesis"
+      ],
+      "pattern": [
+        [
+          "unprompted",
+          "command",
+          "compliance"
+        ],
+        [
+          "unprompted",
+          "blessing",
+          "blessing"
+        ]
+      ],
+      "avg_severity": 2.62
+    }
+  ]
+}
