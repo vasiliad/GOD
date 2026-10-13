@@ -6,6 +6,9 @@ merge_audit_v2.py
 Выход: output/episodes_<book>_v2.json + отчёт в консоль.
 Exit 1, если структурные ошибки или покрытие контрольного списка < 85%.
 
+Аудит покрытия: формулы 'Бог говорит', обращения к Богу,
+молчание в ответ на зов (категория B), действие Бога без речи (категория C).
+
 Usage:
     python merge_audit_v2.py --book Exodus
     python merge_audit_v2.py --book Genesis
@@ -42,6 +45,8 @@ CHECKPOINTS = {
         ("32:10", True), ("32:26", True), ("35:1", False), ("35:10", False), ("38:7", False),
         ("38:10", False), ("39:2", False), ("39:21", False), ("41:25", False), ("46:2", True),
         ("49:18", True),
+        # категория C: действие без речи (поражение фараона, посещение Сарры)
+        ("12:17", False), ("21:1", False),
     ],
     "Exodus": [
         # Горящий куст: 3:1-4:17 — многораундовый спор Моисея с Богом
@@ -56,11 +61,15 @@ CHECKPOINTS = {
         # Золотой телёнок
         ("32:1", False), ("32:7", False), ("32:11", True), ("32:14", False), ("33:12", True),
         ("33:13", True), ("33:18", True), ("34:6", False), ("34:10", False),
+        # категория C: Бог нападает на Моисея ночью без слов
+        ("4:24", False),
     ],
     "Jonah": [
         ("1:1", False), ("1:2", False), ("1:14", True), ("2:1", False), ("2:2", True),
         ("2:10", False), ("3:1", False), ("3:2", False), ("3:10", False), ("4:1", True),
         ("4:2", True), ("4:4", False), ("4:10", False), ("4:11", False),
+        # категория C: буря послана без слов
+        ("1:4", False),
     ],
     "Habakkuk": [
         ("1:2", True), ("1:5", False), ("1:13", True), ("2:1", True), ("2:2", False),
@@ -71,11 +80,15 @@ CHECKPOINTS = {
         ("8:6", True), ("8:7", False), ("9:15", False), ("9:17", False), ("10:1", False),
         ("15:10", False), ("15:11", False), ("15:16", True), ("15:22", False), ("16:1", False),
         ("16:7", False), ("16:12", False), ("16:13", False),
+        # категория B: вопрошения без ответа (14:37, 28:6); категория C: злой дух (16:14), гибель Навала (25:38)
+        ("14:37", True), ("28:6", True), ("16:14", False), ("25:38", False),
     ],
     "Isaiah": [
         ("6:1", False), ("6:5", True), ("6:8", True), ("7:14", False), ("38:1", False),
         ("38:5", False), ("40:1", False), ("40:3", False), ("42:1", False), ("53:1", True),
         ("55:6", True), ("65:24", False),
+        # категория C: ангел поражает ассирийцев
+        ("37:36", False),
     ],
     "Jeremiah": [
         ("1:4", False), ("1:6", True), ("1:9", False), ("7:1", False), ("7:13", False),
@@ -95,6 +108,8 @@ CHECKPOINTS = {
         ("1:1", False), ("6:22", False), ("11:1", True), ("12:1", True), ("14:1", True),
         ("14:11", False), ("16:1", True), ("20:1", True), ("21:4", True), ("22:2", False),
         ("27:15", True),
+        # категория C: земля поглощает Корея, огненные змеи
+        ("16:31", False), ("21:6", False),
     ],
     "Deuteronomy": [
         ("1:6", False), ("4:1", False), ("5:1", False), ("6:4", False), ("18:15", False),
@@ -102,9 +117,40 @@ CHECKPOINTS = {
     ],
     "Joshua": [
         ("1:1", False), ("3:7", False), ("5:13", False), ("10:12", True), ("24:1", False),
+        # категория C: камни с небес
+        ("10:11", False),
     ],
     "Judges": [
         ("2:1", False), ("6:11", False), ("6:22", False), ("13:3", False),
+    ],
+    # --- книги, ожидающие экстракции: контрольные точки заданы заранее ---
+    "II_Samuel": [
+        # категория C: гибель Уззы (6:7), мор за перепись (24:15)
+        ("6:7", False), ("24:15", False),
+    ],
+    "I_Kings": [
+        # категория C: иссохшая рука (13:4)
+        ("13:4", False),
+    ],
+    "II_Kings": [
+        # категория C: медведицы (2:24), ангел поражает ассирийцев (19:35)
+        ("2:24", False), ("19:35", False),
+    ],
+    "Ruth": [
+        # категория C: Бог посетил народ (1:6)
+        ("1:6", False),
+    ],
+    "Job": [
+        # категория B: вопль без ответа (30:20); категория A: ответ из бури (38:1)
+        ("30:20", True), ("38:1", False),
+    ],
+    "Lamentations": [
+        # категория B: затворённая молитва (3:8)
+        ("3:8", True),
+    ],
+    "Micah": [
+        # категория B: воззовут — и не ответит (3:4)
+        ("3:4", True),
     ],
 }
 
@@ -118,6 +164,22 @@ APPEALS = re.compile(
     r"|דרש\w*\s+(?:את\s+)?" + GOD +
     r"|ויעתר\w*\s+ל" + GOD
 )
+
+# Категория B: человек взывает, а Бог не отвечает (формулы молчания при имени Бога в стихе)
+SILENCE_CORE = re.compile(
+    r"(?:לא|בלי|בל)\s+[יע]?ענ\w*"      # לא ענהו / לא יענה / בלי ענות
+    r"|(?:לא|בלי|בל)\s+א?שמע"          # לא שמע / לא אשמע / לא תשמע
+    r"|אל\s+תחרש"                       # אל תחרש ממני (Пс 28:1)
+)
+# Категория C: действие Бога без речи (глагол действия при имени Бога в стихе)
+DIVINE_ACT_CORE = re.compile(
+    r"ויגע|ויגף|הכות|מכה|הכה|ויכה|ויך"  # поразил
+    r"|וישלח|ויפקד|פקד"                # послал / посетил
+)
+# יד/מאת — только непосредственно перед именем Бога (иначе ציד и מאת שקל дают ложные срабатывания)
+DIVINE_ACT_ATTACHED = re.compile(r"יד\s+" + GOD + r"|מאת\s+" + GOD)
+# строгие имена для гейта глаголов: без אדני (в повествовании это часто "господин мой" о человеке)
+STRICT_GOD = r"(?:יהוה|אלהים|האלהים|שדי)"
 
 
 def normalize_he(text: str) -> str:
@@ -278,8 +340,10 @@ def main():
         return any(e["_a"] <= x <= e["_b"] for e in merged)
 
     gs_total = gs_cov = ap_total = ap_cov = 0
-    gs_miss, ap_miss = [], []
+    sil_total = sil_cov = da_total = da_cov = 0
+    gs_miss, ap_miss, sil_miss, da_miss = [], [], [], []
     for (ch, v), t in verse_text.items():
+        has_god = re.search(GOD, t) is not None
         if GOD_SPEAKS.search(t):
             gs_total += 1
             if covered(ch, v):
@@ -292,9 +356,23 @@ def main():
                 ap_cov += 1
             else:
                 ap_miss.append(f"{ch}:{v}")
+        if has_god and SILENCE_CORE.search(t):
+            sil_total += 1
+            if covered(ch, v):
+                sil_cov += 1
+            else:
+                sil_miss.append(f"{ch}:{v}")
+        if (re.search(STRICT_GOD, t) and DIVINE_ACT_CORE.search(t)) or DIVINE_ACT_ATTACHED.search(t):
+            da_total += 1
+            if covered(ch, v):
+                da_cov += 1
+            else:
+                da_miss.append(f"{ch}:{v}")
     print("\n=== АУДИТ ПОКРЫТИЯ ===")
     print(f"Формулы 'Бог говорит': {gs_cov}/{gs_total} покрыто ({100*gs_cov/max(1,gs_total):.0f}%), пропущено: {gs_miss}")
     print(f"Формулы обращений к Богу: {ap_cov}/{ap_total} покрыто ({100*ap_cov/max(1,ap_total):.0f}%), пропущено: {ap_miss}")
+    print(f"Формулы 'Бог молчит' (не отвечает на зов + имя Бога): {sil_cov}/{sil_total} покрыто ({100*sil_cov/max(1,sil_total):.0f}%), пропущено: {sil_miss}")
+    print(f"Формулы 'действие Бога без речи' (поразил/послал/посетил + имя Бога): {da_cov}/{da_total} покрыто ({100*da_cov/max(1,da_total):.0f}%), пропущено: {da_miss}")
 
     # --- аудит 2: покрытие старых записей (если есть для этой книги) ---
     if OLD_CODED.exists():
