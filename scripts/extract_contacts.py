@@ -24,17 +24,37 @@ OUTPUT_FILE = Path("C:/GOD2/output/contacts_registry.json")
 # 1. ОЧИСТКА ОТ ОГЛАСОВОК
 # ============================================================
 def strip_niqqud(text: str) -> str:
+    # маκеф U+05BE лежит внутри диапазона 0591-05C7 — на пробел ДО стирания,
+    # иначе את־יהוה склеивается в אתיהוה и контакт теряется
+    text = text.replace('\u05be', ' ')
+    text = re.sub(r'<[^>]+>', ' ', text)
+    text = re.sub(r'&[a-z]+;', ' ', text)
     return re.sub(r'[\u0591-\u05C7]', '', text)
 
 # ============================================================
-# 2. СПИСОК ИМЁН БОГА
+# 2. СПИСОК ИМЁН БОГА (расширен по аудиту god_names_audit.json)
 # ============================================================
 GOD_NAMES = [
     "יהוה צבאות",  # YHWH Tzvaot
     "יהוה אלהים",  # YHWH Elohim
     "אל שדי",      # El Shaddai
-    "יהוה",        # YHWH
+    "אדני יהוה",   # Adonai YHWH
+    "מלאך יהוה",   # angel of YHWH
+    "מלאך אלהים",  # angel of Elohim
+    "שר צבא יהוה", # commander of YHWH's host
+    "קדוש ישראל",  # Holy One of Israel (Isaiah/II Kings)
+    "אביר יעקב",   # Mighty One of Jacob
+    "אל עליון",    # God Most High
+    "אל עולם",     # Everlasting God
+    "אל ראי",      # God of Seeing (Beer-lahai-roi)
+    "יהוה ירה",    # YHWH will provide
+    "יהוה נסי",    # YHWH my banner
+    "יהוה שלום",   # YHWH is peace
+    "יהוה צדקנו",  # YHWH our righteousness
+    "יהוה",        # YHWH (без префиксов)
+    "אלוה",        # Eloah (Иов и др.)
     "אלהים",       # Elohim
+    "אלהי",        # Elohai + суффиксы (אלהיך/אלהיכם/אלהינו/אלהיו ловятся префиксом)
     "אדני",        # Adonai
     "יה",          # Yah
 ]

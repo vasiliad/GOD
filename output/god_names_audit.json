@@ -1,0 +1,1178 @@
+{
+ "total_verses": 23206,
+ "pipeline_lexicon": [
+  "אדני",
+  "אל שדי",
+  "אלהים",
+  "יה",
+  "יהוה",
+  "יהוה אלהים",
+  "יהוה צבאות"
+ ],
+ "coded_names_counts": {
+  "יהוה": 331,
+  "אלהים": 48,
+  "אדני": 10,
+  "יהוה אלהים": 6,
+  "יהוה צבאות": 1
+ },
+ "names": [
+  {
+   "name": "יהוה צבאות",
+   "count": 247,
+   "books": [
+    "Habakkuk",
+    "Haggai",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "I_Samuel",
+    "Isaiah",
+    "Jeremiah",
+    "Malachi",
+    "Micah",
+    "Nahum"
+   ],
+   "first_refs": [
+    "Habakkuk 2:13",
+    "Haggai 1:2",
+    "Haggai 1:5",
+    "Haggai 1:7",
+    "Haggai 1:9"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה אלהים",
+   "count": 39,
+   "books": [
+    "Exodus",
+    "Genesis",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "Jeremiah",
+    "Jonah",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Exodus 9:30",
+    "Genesis 2:4",
+    "Genesis 2:5",
+    "Genesis 2:7",
+    "Genesis 2:8"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה ירה",
+   "count": 0,
+   "books": [],
+   "first_refs": [],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה נסי",
+   "count": 0,
+   "books": [],
+   "first_refs": [],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה שלום",
+   "count": 3,
+   "books": [
+    "Jeremiah",
+    "Judges"
+   ],
+   "first_refs": [
+    "Jeremiah 23:17",
+    "Judges 6:23",
+    "Judges 6:24"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה צדקנו",
+   "count": 0,
+   "books": [],
+   "first_refs": [],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אדני יהוה",
+   "count": 290,
+   "books": [
+    "Amos",
+    "Deuteronomy",
+    "Ezekiel",
+    "Genesis",
+    "II_Samuel",
+    "I_Kings",
+    "Isaiah",
+    "Jeremiah",
+    "Joshua",
+    "Judges",
+    "Micah",
+    "Obadiah"
+   ],
+   "first_refs": [
+    "Amos 1:8",
+    "Amos 3:7",
+    "Amos 3:8",
+    "Amos 3:11",
+    "Amos 3:13"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "מלאך יהוה",
+   "count": 54,
+   "books": [
+    "Exodus",
+    "Genesis",
+    "Haggai",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "Isaiah",
+    "Judges",
+    "Malachi",
+    "Numbers",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Exodus 3:2",
+    "Genesis 16:7",
+    "Genesis 16:9",
+    "Genesis 16:10",
+    "Genesis 16:11"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "מלאך אלהים",
+   "count": 10,
+   "books": [
+    "Exodus",
+    "Genesis",
+    "II_Samuel",
+    "I_Samuel",
+    "Judges"
+   ],
+   "first_refs": [
+    "Exodus 14:19",
+    "Genesis 21:17",
+    "Genesis 31:11",
+    "I_Samuel 29:9",
+    "II_Samuel 14:17"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "שר צבא יהוה",
+   "count": 2,
+   "books": [
+    "Joshua"
+   ],
+   "first_refs": [
+    "Joshua 5:14",
+    "Joshua 5:15"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אל שדי",
+   "count": 10,
+   "books": [
+    "Exodus",
+    "Ezekiel",
+    "Genesis",
+    "Job"
+   ],
+   "first_refs": [
+    "Exodus 6:3",
+    "Ezekiel 10:5",
+    "Genesis 17:1",
+    "Genesis 28:3",
+    "Genesis 35:11"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "שדי",
+   "count": 201,
+   "books": [
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Genesis",
+    "Habakkuk",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Kings",
+    "Isaiah"
+   ],
+   "first_refs": [
+    "Daniel 1:4",
+    "Daniel 2:2",
+    "Daniel 2:4",
+    "Daniel 2:5",
+    "Daniel 2:10"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אל עליון",
+   "count": 5,
+   "books": [
+    "Genesis",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Genesis 14:18",
+    "Genesis 14:19",
+    "Genesis 14:20",
+    "Genesis 14:22",
+    "Psalms 78:35"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "עליון",
+   "count": 32,
+   "books": [
+    "Deuteronomy",
+    "Genesis",
+    "II_Chronicles",
+    "I_Kings",
+    "Joshua",
+    "Lamentations",
+    "Numbers",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Deuteronomy 26:19",
+    "Deuteronomy 28:1",
+    "Deuteronomy 32:8",
+    "Genesis 14:18",
+    "Genesis 14:19"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אל עולם",
+   "count": 1,
+   "books": [
+    "Genesis"
+   ],
+   "first_refs": [
+    "Genesis 21:33"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אל ראי",
+   "count": 4,
+   "books": [
+    "Genesis",
+    "Hosea",
+    "II_Chronicles",
+    "I_Samuel"
+   ],
+   "first_refs": [
+    "Genesis 16:13",
+    "Hosea 6:10",
+    "I_Samuel 19:5",
+    "II_Chronicles 7:3"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אהיה",
+   "count": 40,
+   "books": [
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Hosea",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Samuel",
+    "Isaiah",
+    "Jeremiah",
+    "Job",
+    "Joshua",
+    "Judges"
+   ],
+   "first_refs": [
+    "Deuteronomy 31:23",
+    "Exodus 3:12",
+    "Exodus 3:14",
+    "Exodus 4:12",
+    "Exodus 4:15"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה",
+   "count": 5194,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Habakkuk",
+    "Haggai",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings"
+   ],
+   "first_refs": [
+    "Amos 1:2",
+    "Amos 1:3",
+    "Amos 1:5",
+    "Amos 1:6",
+    "Amos 1:8"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "יהוה (с предлогом ב/ל/כ)",
+   "count": 647,
+   "books": [
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Habakkuk",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles"
+   ],
+   "first_refs": [
+    "Daniel 9:4",
+    "Deuteronomy 1:32",
+    "Deuteronomy 1:41",
+    "Deuteronomy 4:4",
+    "Deuteronomy 4:7"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "יה",
+   "count": 43,
+   "books": [
+    "Exodus",
+    "Isaiah",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Exodus 15:2",
+    "Exodus 17:16",
+    "Isaiah 12:2",
+    "Isaiah 38:11",
+    "Psalms 68:19"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "אלהים",
+   "count": 634,
+   "books": [
+    "Amos",
+    "Deuteronomy",
+    "Ecclesiastes",
+    "Exodus",
+    "Ezekiel",
+    "Genesis",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings"
+   ],
+   "first_refs": [
+    "Amos 4:11",
+    "Deuteronomy 4:7",
+    "Deuteronomy 4:28",
+    "Deuteronomy 4:32",
+    "Deuteronomy 4:33"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "אלוה",
+   "count": 49,
+   "books": [
+    "Daniel",
+    "Deuteronomy",
+    "Habakkuk",
+    "II_Chronicles",
+    "Isaiah",
+    "Job",
+    "Nehemiah",
+    "Proverbs",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Daniel 11:37",
+    "Daniel 11:39",
+    "Deuteronomy 32:15",
+    "Habakkuk 3:3",
+    "II_Chronicles 32:15"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אלהי*",
+   "count": 1413,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Deuteronomy",
+    "Ecclesiastes",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Habakkuk",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings"
+   ],
+   "first_refs": [
+    "Amos 3:13",
+    "Amos 4:11",
+    "Amos 4:12",
+    "Amos 4:13",
+    "Amos 5:14"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אדני",
+   "count": 568,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Habakkuk",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles"
+   ],
+   "first_refs": [
+    "Amos 1:8",
+    "Amos 3:7",
+    "Amos 3:8",
+    "Amos 3:11",
+    "Amos 3:13"
+   ],
+   "in_pipeline_lexicon": true,
+   "ambiguous": false
+  },
+  {
+   "name": "קדוש ישראל",
+   "count": 30,
+   "books": [
+    "II_Kings",
+    "Isaiah",
+    "Jeremiah",
+    "Psalms"
+   ],
+   "first_refs": [
+    "II_Kings 19:22",
+    "Isaiah 1:4",
+    "Isaiah 5:19",
+    "Isaiah 5:24",
+    "Isaiah 10:20"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אביר יעקב",
+   "count": 5,
+   "books": [
+    "Genesis",
+    "Isaiah",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Genesis 49:24",
+    "Isaiah 49:26",
+    "Isaiah 60:16",
+    "Psalms 132:2",
+    "Psalms 132:5"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אביר ישראל",
+   "count": 1,
+   "books": [
+    "Isaiah"
+   ],
+   "first_refs": [
+    "Isaiah 1:24"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "צור ישראל",
+   "count": 2,
+   "books": [
+    "II_Samuel",
+    "Isaiah"
+   ],
+   "first_refs": [
+    "II_Samuel 23:3",
+    "Isaiah 30:29"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "צור*",
+   "count": 51,
+   "books": [
+    "Deuteronomy",
+    "Ezekiel",
+    "II_Chronicles",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "I_Samuel",
+    "Isaiah",
+    "Jeremiah",
+    "Job",
+    "Joshua",
+    "Nehemiah"
+   ],
+   "first_refs": [
+    "Deuteronomy 32:13",
+    "Deuteronomy 32:15",
+    "Deuteronomy 32:18",
+    "Deuteronomy 32:30",
+    "Deuteronomy 32:31"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": true
+  },
+  {
+   "name": "רוח אלהים",
+   "count": 16,
+   "books": [
+    "Exodus",
+    "Ezekiel",
+    "Genesis",
+    "II_Chronicles",
+    "I_Samuel",
+    "Numbers"
+   ],
+   "first_refs": [
+    "Exodus 31:3",
+    "Exodus 35:31",
+    "Ezekiel 11:24",
+    "Genesis 1:2",
+    "Genesis 41:38"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "רוח יהוה",
+   "count": 28,
+   "books": [
+    "Ezekiel",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Kings",
+    "I_Samuel",
+    "Isaiah",
+    "Judges",
+    "Micah"
+   ],
+   "first_refs": [
+    "Ezekiel 11:5",
+    "Ezekiel 37:1",
+    "Hosea 13:15",
+    "I_Kings 18:12",
+    "I_Kings 19:11"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "רוח קדש*",
+   "count": 3,
+   "books": [
+    "Isaiah",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Isaiah 63:10",
+    "Isaiah 63:11",
+    "Psalms 51:13"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "כבוד יהוה",
+   "count": 36,
+   "books": [
+    "Exodus",
+    "Ezekiel",
+    "Habakkuk",
+    "II_Chronicles",
+    "I_Kings",
+    "Isaiah",
+    "Leviticus",
+    "Numbers",
+    "Psalms"
+   ],
+   "first_refs": [
+    "Exodus 16:7",
+    "Exodus 16:10",
+    "Exodus 24:16",
+    "Exodus 24:17",
+    "Exodus 40:34"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "כבוד אלהים",
+   "count": 0,
+   "books": [],
+   "first_refs": [],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "המקום",
+   "count": 114,
+   "books": [
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "I_Samuel",
+    "Isaiah"
+   ],
+   "first_refs": [
+    "Deuteronomy 1:31",
+    "Deuteronomy 9:7",
+    "Deuteronomy 11:5",
+    "Deuteronomy 11:24",
+    "Deuteronomy 12:3"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": true
+  },
+  {
+   "name": "גואל*",
+   "count": 1,
+   "books": [
+    "Isaiah"
+   ],
+   "first_refs": [
+    "Isaiah 59:20"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": true
+  },
+  {
+   "name": "יד יהוה",
+   "count": 42,
+   "books": [
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "I_Samuel",
+    "Isaiah",
+    "Jeremiah"
+   ],
+   "first_refs": [
+    "Deuteronomy 2:15",
+    "Deuteronomy 33:12",
+    "Exodus 9:3",
+    "Exodus 16:3",
+    "Ezekiel 1:3"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "פני יהוה",
+   "count": 254,
+   "books": [
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Genesis",
+    "Haggai",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel",
+    "I_Chronicles",
+    "I_Kings",
+    "I_Samuel"
+   ],
+   "first_refs": [
+    "Daniel 9:20",
+    "Deuteronomy 1:45",
+    "Deuteronomy 4:10",
+    "Deuteronomy 6:25",
+    "Deuteronomy 9:18"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "נאם יהוה",
+   "count": 252,
+   "books": [
+    "Amos",
+    "Ezekiel",
+    "Genesis",
+    "Haggai",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "I_Samuel",
+    "Isaiah",
+    "Jeremiah",
+    "Joel",
+    "Malachi"
+   ],
+   "first_refs": [
+    "Amos 2:11",
+    "Amos 2:16",
+    "Amos 3:10",
+    "Amos 3:15",
+    "Amos 4:3"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "דבר יהוה",
+   "count": 417,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Deuteronomy",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Haggai",
+    "Hosea",
+    "II_Chronicles",
+    "II_Kings",
+    "II_Samuel"
+   ],
+   "first_refs": [
+    "Amos 3:1",
+    "Amos 7:16",
+    "Amos 8:12",
+    "Daniel 9:2",
+    "Deuteronomy 1:21"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": false
+  },
+  {
+   "name": "אל (голая форма)",
+   "count": 3622,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Deuteronomy",
+    "Ecclesiastes",
+    "Esther",
+    "Exodus",
+    "Ezekiel",
+    "Ezra",
+    "Genesis",
+    "Habakkuk",
+    "Haggai",
+    "Hosea"
+   ],
+   "first_refs": [
+    "Amos 2:7",
+    "Amos 3:7",
+    "Amos 3:14",
+    "Amos 4:4",
+    "Amos 4:8"
+   ],
+   "in_pipeline_lexicon": false,
+   "ambiguous": true
+  }
+ ],
+ "by_book_top": {
+  "Amos": {
+   "יהוה": 71,
+   "אדני": 23,
+   "אדני יהוה": 20,
+   "נאם יהוה": 16,
+   "אל (голая форма)": 14,
+   "אלהי*": 12
+  },
+  "Daniel": {
+   "אל (голая форма)": 19,
+   "אדני": 13,
+   "אלהי*": 10,
+   "שדי": 9,
+   "יהוה": 6,
+   "אלוה": 2
+  },
+  "Deuteronomy": {
+   "יהוה": 413,
+   "אלהי*": 241,
+   "אל (голая форма)": 128,
+   "יהוה (с предлогом ב/ל/כ)": 35,
+   "אלהים": 29,
+   "פני יהוה": 22
+  },
+  "Ecclesiastes": {
+   "אל (голая форма)": 28,
+   "אלהים": 7,
+   "אלהי*": 7
+  },
+  "Esther": {
+   "אל (голая форма)": 34
+  },
+  "Exodus": {
+   "יהוה": 299,
+   "אל (голая форма)": 256,
+   "אלהי*": 63,
+   "יהוה (с предлогом ב/ל/כ)": 49,
+   "אלהים": 31,
+   "דבר יהוה": 30
+  },
+  "Ezekiel": {
+   "יהוה": 387,
+   "אל (голая форма)": 236,
+   "אדני": 215,
+   "אדני יהוה": 210,
+   "דבר יהוה": 57,
+   "אלהי*": 18
+  },
+  "Ezra": {
+   "יהוה": 21,
+   "אלהי*": 18,
+   "אל (голая форма)": 13,
+   "יהוה (с предлогом ב/ל/כ)": 10,
+   "יד יהוה": 2,
+   "דבר יהוה": 1
+  },
+  "Genesis": {
+   "אל (голая форма)": 296,
+   "אלהי*": 159,
+   "אלהים": 140,
+   "יהוה": 128,
+   "אדני": 44,
+   "המקום": 22
+  },
+  "Habakkuk": {
+   "יהוה": 9,
+   "שדי": 1,
+   "אלהי*": 1,
+   "אל (голая форма)": 1,
+   "יהוה צבאות": 1,
+   "כבוד יהוה": 1
+  },
+  "Haggai": {
+   "יהוה": 24,
+   "יהוה צבאות": 12,
+   "אל (голая форма)": 11,
+   "נאם יהוה": 8,
+   "דבר יהוה": 5,
+   "פני יהוה": 1
+  },
+  "Hosea": {
+   "יהוה": 36,
+   "אל (голая форма)": 23,
+   "אלהי*": 16,
+   "יהוה (с предлогом ב/ל/כ)": 5,
+   "אלהים": 5,
+   "שדי": 4
+  },
+  "II_Chronicles": {
+   "יהוה": 270,
+   "אל (голая форма)": 101,
+   "אלהי*": 95,
+   "יהוה (с предлогом ב/ל/כ)": 53,
+   "אלהים": 25,
+   "דבר יהוה": 14
+  },
+  "II_Kings": {
+   "יהוה": 217,
+   "אל (голая форма)": 164,
+   "אלהי*": 40,
+   "דבר יהוה": 20,
+   "אדני": 18,
+   "אלהים": 16
+  },
+  "II_Samuel": {
+   "אל (голая форма)": 204,
+   "יהוה": 115,
+   "אדני": 34,
+   "אלהי*": 26,
+   "יהוה (с предлогом ב/ל/כ)": 15,
+   "אלהים": 13
+  },
+  "I_Chronicles": {
+   "יהוה": 118,
+   "אל (голая форма)": 47,
+   "אלהי*": 40,
+   "יהוה (с предлогом ב/ל/כ)": 32,
+   "אלהים": 14,
+   "פני יהוה": 7
+  },
+  "I_Kings": {
+   "יהוה": 196,
+   "אל (голая форма)": 168,
+   "אלהי*": 63,
+   "דבר יהוה": 38,
+   "אדני": 22,
+   "אלהים": 21
+  },
+  "I_Samuel": {
+   "אל (голая форма)": 247,
+   "יהוה": 204,
+   "אלהי*": 56,
+   "יהוה (с предлогом ב/ל/כ)": 41,
+   "אלהים": 34,
+   "פני יהוה": 19
+  },
+  "Isaiah": {
+   "יהוה": 366,
+   "אל (голая форма)": 127,
+   "יהוה צבאות": 60,
+   "אלהי*": 58,
+   "אדני": 47,
+   "יהוה (с предлогом ב/ל/כ)": 28
+  },
+  "Jeremiah": {
+   "יהוה": 604,
+   "אל (голая форма)": 292,
+   "נאם יהוה": 162,
+   "אלהי*": 81,
+   "יהוה צבאות": 76,
+   "דבר יהוה": 62
+  },
+  "Job": {
+   "אל (голая форма)": 79,
+   "אלוה": 37,
+   "שדי": 34,
+   "יהוה": 22,
+   "אלהים": 11,
+   "אלהי*": 11
+  },
+  "Joel": {
+   "יהוה": 22,
+   "אל (голая форма)": 9,
+   "שדי": 3,
+   "יהוה (с предлогом ב/ל/כ)": 2,
+   "דבר יהוה": 1,
+   "אלהי*": 1
+  },
+  "Jonah": {
+   "אל (голая форма)": 24,
+   "יהוה": 19,
+   "אלהי*": 9,
+   "אלהים": 4,
+   "דבר יהוה": 3,
+   "פני יהוה": 2
+  },
+  "Joshua": {
+   "יהוה": 160,
+   "אל (голая форма)": 144,
+   "אלהי*": 32,
+   "יהוה (с предлогом ב/ל/כ)": 18,
+   "דבר יהוה": 12,
+   "אלהים": 10
+  },
+  "Judges": {
+   "אל (голая форма)": 142,
+   "יהוה": 122,
+   "אלהי*": 37,
+   "אלהים": 24,
+   "יהוה (с предлогом ב/ל/כ)": 16,
+   "מלאך יהוה": 15
+  },
+  "Lamentations": {
+   "יהוה": 30,
+   "אדני": 13,
+   "אל (голая форма)": 9,
+   "עליון": 2,
+   "שדי": 1,
+   "פני יהוה": 1
+  },
+  "Leviticus": {
+   "יהוה": 199,
+   "אל (голая форма)": 162,
+   "יהוה (с предлогом ב/ל/כ)": 92,
+   "פני יהוה": 59,
+   "דבר יהוה": 37,
+   "אלהי*": 10
+  },
+  "Malachi": {
+   "יהוה": 36,
+   "יהוה צבאות": 24,
+   "אל (голая форма)": 9,
+   "אלהי*": 7,
+   "אלהים": 5,
+   "יהוה (с предлогом ב/ל/כ)": 3
+  },
+  "Micah": {
+   "יהוה": 33,
+   "אל (голая форма)": 10,
+   "אלהי*": 7,
+   "יהוה (с предлогом ב/ל/כ)": 3,
+   "דבר יהוה": 2,
+   "רוח יהוה": 2
+  },
+  "Nahum": {
+   "יהוה": 10,
+   "אל (голая форма)": 2,
+   "יהוה צבאות": 2,
+   "נאם יהוה": 2,
+   "אלהי*": 1
+  },
+  "Nehemiah": {
+   "אל (голая форма)": 40,
+   "אלהי*": 18,
+   "יהוה": 14,
+   "אלהים": 3,
+   "יהוה (с предлогом ב/ל/כ)": 3,
+   "אדני": 2
+  },
+  "Numbers": {
+   "יהוה": 287,
+   "אל (голая форма)": 254,
+   "יהוה (с предлогом ב/ל/כ)": 66,
+   "דבר יהוה": 56,
+   "פני יהוה": 38,
+   "שדי": 17
+  },
+  "Obadiah": {
+   "יהוה": 5,
+   "נאם יהוה": 2,
+   "אדני יהוה": 1,
+   "אדני": 1,
+   "אל (голая форма)": 1,
+   "יהוה (с предлогом ב/ל/כ)": 1
+  },
+  "Proverbs": {
+   "אל (голая форма)": 78,
+   "יהוה": 70,
+   "יהוה (с предлогом ב/ל/כ)": 6,
+   "אלהי*": 4,
+   "אלהים": 3,
+   "יד יהוה": 1
+  },
+  "Psalms": {
+   "יהוה": 546,
+   "אלהי*": 250,
+   "אלהים": 190,
+   "אל (голая форма)": 187,
+   "יהוה (с предлогом ב/ל/כ)": 78,
+   "אדני": 51
+  },
+  "Ruth": {
+   "אל (голая форма)": 17,
+   "יהוה": 13,
+   "שדי": 7,
+   "המקום": 2,
+   "אלהי*": 2,
+   "יהוה (с предлогом ב/ל/כ)": 2
+  },
+  "Song_of_Songs": {
+   "שדי": 8,
+   "אל (голая форма)": 7,
+   "אהיה": 1,
+   "אדני": 1
+  },
+  "Zechariah": {
+   "יהוה": 98,
+   "יהוה צבאות": 46,
+   "אל (голая форма)": 35,
+   "נאם יהוה": 18,
+   "דבר יהוה": 13,
+   "יהוה (с предлогом ב/ל/כ)": 8
+  },
+  "Zephaniah": {
+   "יהוה": 24,
+   "נאם יהוה": 5,
+   "אל (голая форма)": 4,
+   "יהוה (с предлогом ב/ל/כ)": 3,
+   "אלהי*": 3,
+   "דבר יהוה": 2
+  }
+ }
+}
