@@ -228,6 +228,7 @@ def main():
     ap.add_argument("--message", help="реплика человека (иначе интерактивный режим)")
     ap.add_argument("--test", action="store_true", help="без LLM: детерминированная композиция из реестра")
     ap.add_argument("--free", action="store_true", help="свободный режим (импровизация в стиле корпуса)")
+    ap.add_argument("--behavior", action="store_true", help="перед речью показать карточку поведения (god_behavior)")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
@@ -238,6 +239,10 @@ def main():
         sys.exit(0 if selftest(docs, verses) else 1)
 
     if args.message:
+        if args.behavior:
+            import god_behavior
+            profile = json.load(open(Path("C:/GOD2/output/god_behavior_profile.json"), encoding="utf-8"))
+            print(god_behavior.render(god_behavior.respond(args.message, profile)) + "\n")
         a = answer(args.message, docs, verses, free=args.free, use_llm=not args.test)
         print(f"\n=== עברית ===\n{a['he']}\n\n=== огласовка ===\n{a['nik']}\n\n=== русский подстрочник ===\n{a['ru']}\n\n=== источники ===\n" +
               "\n".join(a["src"]) if isinstance(a["src"], list) else a["src"])
