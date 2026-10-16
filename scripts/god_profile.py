@@ -72,7 +72,7 @@ def build_profile(eps):
             "n": m,
             "outcome_p": dist(Counter(e["outcome"] for e in es), m),
             "severity_mean": round(sum(e["severity"] for e in es) / m, 2),
-            "top_emotions": [emo["emotion"] if isinstance(emo, dict) else emo
+            "top_emotions": [emo.get("emotion", str(emo)) if isinstance(emo, dict) else str(emo)
                          for emo in sum((e["emotions"] for e in es), [])][:5],
             "typical_quote": next((e["god_speech_plain"][:80] for e in es if e["god_speech_plain"]), ""),
         }
