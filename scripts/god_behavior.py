@@ -140,10 +140,14 @@ CARRIERS = {
 def precedents(outcome, trigger, limit=3):
     hits = []
     for fp in sorted(BASE.glob(EPISODES_GLOB)):
+        if fp.name == "episodes_TANAKH_v2.json":
+            continue  # мастер-файл — словарь, а не список; читаем только книги
         book = fp.stem.replace("episodes_", "").replace("_v2", "")
         for ep in json.load(open(fp, encoding="utf-8")):
+            if not isinstance(ep, dict):
+                continue
             if ep["outcome"] == outcome:
-                score = 2 if ep["trigger"] == trigger else 0
+                score = 2 if ep.get("trigger") == trigger else 0
                 hits.append((score, ep, book))
     hits.sort(key=lambda x: -x[0])
     return [{"book": b, "span": e["span"], "trigger": e["trigger"],
