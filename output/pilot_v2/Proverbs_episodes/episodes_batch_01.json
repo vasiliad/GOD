@@ -1,0 +1,697 @@
+[
+  {
+    "span": {
+      "start": "1:1",
+      "end": "1:7"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Соломон, сын Давида, царь Израиля (автор)"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; программный девиз книги: страх Яхве — начало знания (1:7)",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Заголовок сборника Притчей Соломона и программный девиз: страх Яхве — начало знания, а глупцы презирают мудрость и наставление. Тематический блок без прямого обращения к Богу.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "1:8",
+      "end": "1:19"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "грабители"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "1:11",
+      "1:13",
+      "1:14"
+    ],
+    "human_speech_plain": "אם יאמרו לכה אתנו נארבה לדם נצפנה לנקי חנם כל הון יקר נמצא נמלא בתינו שלל גורלך תפיל בתוכנו כיס אחד יהיה לכלנו",
+    "god_action": "Действий Бога нет; пути наживы поглощают самого владеющего ими (1:19)",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "отцовское предостережение",
+        "evidence": "1:10 בני אם יפתוך חטאים אל תבא"
+      },
+      {
+        "emotion": "коварная жадность грабителей",
+        "evidence": "1:13 נמלא בתינו שלל"
+      }
+    ],
+    "summary_ru": "Отец увещевает сына не поддаваться, когда грабители заманивают его в засаду за кровью и добычей, обещая общий кошель: пути наживы поглощают самого владеющего ими.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "1:20",
+      "end": "1:33"
+    },
+    "direction": "god_initiated",
+    "via": "unclear",
+    "participants": [
+      "Хокма — персонифицированная Мудрость",
+      "простаки (פתים)",
+      "заразы (לצים)",
+      "глупцы (כסילים)"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "1:22",
+      "1:23",
+      "1:24",
+      "1:25",
+      "1:26",
+      "1:27",
+      "1:28",
+      "1:29",
+      "1:30",
+      "1:31",
+      "1:32",
+      "1:33"
+    ],
+    "god_speech_plain": "עד מתי פתים תאהבו פתי תשובו לתוכחתי הנה אביעה לכם רוחי גם אני באידכם אשחק אלעג בבא פחדכם אז יקראנני ולא אענה ישחרנני ולא ימצאנני ושמע לי ישכן בטח ושאנן מפחד רעה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Мудрость взывает на площадях и у ворот города; отказавшимся обещано, что на их зов не ответят (1:28), послушающим — безопасное жительство (1:33). Речь персонифицированной Мудрости — квази-божественная; прямая речь Яхве в Притчах отсутствует",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "обличение и настойчивый призыв",
+        "evidence": "1:23 תשובו לתוכחתי הנה אביעה לכם רוחי"
+      },
+      {
+        "emotion": "насмешка над грядущим бедствием",
+        "evidence": "1:26 גם אני באידכם אשחק אלעג בבא פחדכם"
+      },
+      {
+        "emotion": "отвергнутый зов (инверсия мотива зова без ответа)",
+        "evidence": "1:28 אז יקראנני ולא אענה ישחרנני ולא ימצאנני"
+      }
+    ],
+    "summary_ru": "Персонифицированная Мудрость взывает в городе: отвергшие её совет будут наказаны — на их зов не ответят, они вкусят от плодов путей своих; слушающие её будут жить безопасно. Речь Мудрости — квази-божественное обращение, крупнейшая речь подобного рода в главах 1-9.",
+    "confidence": "high",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "2:1",
+      "end": "2:4"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; призыв возвысить голос за разумением, как за сокровищем (2:3-4)",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Отец призывает сына принять слова его и заповеди, склонить ухо к мудрости и искать её как серебро и скрытые сокровища.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "2:5",
+      "end": "2:9"
+    },
+    "direction": "god_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "Яхве (дающий мудрость)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "2:6"
+    ],
+    "god_speech_plain": "כי יהוה יתן חכמה מפיו דעת ותבונה",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Яхве даёт мудрость из уст Своих (2:6 — упоминание речи Бога), хранит для прямых спасительную мудрость, блюдет пути правосудия и путь благочестивых Своих (2:7-8)",
+    "outcome": "revelation",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Упоминание речи Бога: мудрость и знание даются Яхве «из уст Его» (מפיו, 2:6), и Он хранит пути праведных. Максима-упоминание, а не прямая речь Яхве к человеку.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "2:10",
+      "end": "2:22"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "чужая женщина (אשה זרה)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; праведным обещано жить в земле (2:21), нечестивые и коварные будут исторгнуты (2:22)",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Когда мудрость войдёт в сердце, она спасёт от пути зла и от чужой женщины, которая оставила наставника юности своей и забыла союз Бога своего (2:17); праведные поселатся в земле, нечестивые будут исторгнуты.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "3:1",
+      "end": "3:10"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "Яхве (объект доверия)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога нет; увещевания: полагайся на Яхве всем сердцем — и Он выпрямит стези твои (3:5-6), почитай Его от имения — и житницы наполнятся (3:9-10)",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Отец учит сына не забывать Тору его, полагаться на Яхве всем сердцем и во всех путях познавать Его, бояться Яхве и почитать от имения: тогда — долгие дни, мир, здравие и изобилие.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "3:11",
+      "end": "3:12"
+    },
+    "direction": "divine_action",
+    "via": "internal",
+    "participants": [
+      "Яхве",
+      "сын (объект наставления)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Яхве наставляет и обличает: кого любит Яхве, того обличает, как отец — сына (3:12). Атрибуция дисциплинирующего действия Богу без прямой речи",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "отеческая любовь в обличении",
+        "evidence": "3:12 כי את אשר יאהב יהוה יוכיח וכאב את בן ירצה"
+      }
+    ],
+    "summary_ru": "Наставление Яхве не должно быть в тягость: кого любит Яхве, того обличает, как отец — сына. Действие Бога (дисциплина) без прямой речи к человеку.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "3:13",
+      "end": "3:18"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "наставник (мудрец)",
+      "человек, нашедший мудрость"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; мудрость — древо жизни для держащихся её (3:18)",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [
+      {
+        "emotion": "блаженство нашедшего",
+        "evidence": "3:13 אשרי אדם מצא חכמה"
+      }
+    ],
+    "summary_ru": "Блажен человек, нашедший мудрость: она дороже серебра и жемчуга, в правой руке её — долгие дни, все стези её — мир, и она — древо жизни для держащихся её.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "3:19",
+      "end": "3:20"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Яхве"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Сотворение мира: Яхве основал землю мудростью, утвердил небеса разумением (3:19); Его знанием разверзлись бездны и небеса роняют росу (3:20)",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Максима о сотворении мира: земля, небеса и бездны устроены мудростью, разумением и знанием Яхве. Атрибуция творческого действия Богу без речи к человеку.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "3:21",
+      "end": "3:35"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "ближний",
+      "Яхве (упоминается)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "3:28"
+    ],
+    "human_speech_plain": "אל תאמר לרעך לך ושוב ומחר אתן ויש אתך",
+    "god_action": "Максимы: Яхве будет упованием твоим и сохранит ногу твою от улавливания (3:26); мерзость Яхве — лукавый, с праведными — Его совет (3:32); проклятие Яхве на доме нечестивых, жилище праведных Он благословляет (3:33); над глумливыми Он посмеивается, а смиренным даёт благодать (3:34)",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "уверенная безопасность",
+        "evidence": "3:23 אז תלך לבטח דרכך"
+      },
+      {
+        "emotion": "предостережение от внезапного страха",
+        "evidence": "3:25 אל תירא מפחד פתאם"
+      }
+    ],
+    "summary_ru": "Храни мудрость и разум — пойдёшь безопасно и не убоишься внезапного страха; не удерживай добро от ближнего, не замышляй зла, не ссорься без причины и не завидуй хищнику: Яхве проклинает дом нечестивых и благословляет жилище праведных.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "4:1",
+      "end": "4:9"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сыновья",
+      "дед (цитируется)"
+    ],
+    "addressee_type": "family",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "4:4"
+    ],
+    "human_speech_plain": "וירני ויאמר לי יתמך דברי לבך שמר מצותי וחיה",
+    "god_action": "Действий Бога нет",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Отец передаёт сыновьям наставление, которое сам получил от отца своего в детстве: держи слова мои — и живи; приобретай мудрость и разумение — она сохранит тебя и увенчает славою. Дедовская речь процитирована в 4:4.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "4:10",
+      "end": "4:19"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "нечестивые",
+      "праведные"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; путь праведных — как свет восходящего (4:18), путь нечестивых — тьма (4:19)",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "наставление держаться пути",
+        "evidence": "4:13 החזק במוסר אל תרף"
+      }
+    ],
+    "summary_ru": "Отец указывает сыну путь мудрости: не входи на путь нечестивых — они не спят, пока не сделают зла; путь праведных — как рассветный свет, а нечестивые не знают, обо что споткнутся.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "4:20",
+      "end": "4:27"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет",
+    "outcome": "unclear",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Слушай слова отца и храни их в сердце: они жизнь и здравие всему телу; паче всего храни сердце, отврати уста от кривды, гляди прямо вперёд, выверяй колею ног и не уклоняйся ни вправо ни влево.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "5:1",
+      "end": "5:6"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "чужая женщина"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; ноги чужой ведут к смерти, шаги её держат преисподнюю (5:5)",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Внемли мудрости, сын: чужая женщина источает мёд, но в конце горька как полынь и остра как меч обоюдоострый; ноги её — к смерти, и она не взвешивает стези жизни.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "5:7",
+      "end": "5:14"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сыновья",
+      "чужая женщина"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "5:12",
+      "5:13"
+    ],
+    "human_speech_plain": "ואמרת איך שנאתי מוסר ותוכחת נאץ לבי ולא שמעתי בקול מורי ולמלמדי לא הטיתי אזני",
+    "god_action": "Действий Бога нет",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "сожаление и раскаяние (в воображаемом будущем)",
+        "evidence": "5:12 איך שנאתי מוסר ותוכחת נאץ לבי"
+      },
+      {
+        "emotion": "горечь о почти погибшем",
+        "evidence": "5:14 כמעט הייתי בכל רע בתוך קהל ועדה"
+      }
+    ],
+    "summary_ru": "Итак, сыны, слушайте: держись далеко от двери чужой, чтобы не отдать чужим честь твою и не стенать в конце: «как я возненавидел наставление и не слушал голоса учителя моего — чуть было не впал во всякое зло».",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "5:15",
+      "end": "5:23"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "жена юности",
+      "Яхве (упоминается)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Пути человека — пред очами Яхве, и все колеи его Он взвешивает (5:21); нечестивый умрёт без наставления (5:23)",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "упоение любовью к жене юности",
+        "evidence": "5:19 באהבתה תשגה תמיד"
+      }
+    ],
+    "summary_ru": "Пей воду из своей цистерны и радуйся женой юности: зачем упиваться чужою? Пути человека пред очами Яхве — Он взвешивает все колеи его; захваченный грехами умрёт без наставления.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:1",
+      "end": "6:5"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "ближний (кредитор)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Если ты поручился за ближнего и пойман словами уст своих, освободись: не давай сна глазам твоим, пока не вырвешься, как газель из руки и птица из руки ловца.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:6",
+      "end": "6:11"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "наставник (мудрец)",
+      "ленивец",
+      "муравей (образ)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "сатира над ленью",
+        "evidence": "6:9 עד מתי עצל תשכב מתי תקום משנתך"
+      }
+    ],
+    "summary_ru": "Пойди к муравью, ленивец: без начальника она готовит хлеб летом; а у тебя — «немного сна, немного дремоты», и нищета придёт как разбойник.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:12",
+      "end": "6:15"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "наставник (мудрец)",
+      "человек-погибель (אדם בליעל)"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; его погибель придёт внезапно, без врачевства (6:15)",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Человек-погибель ходит кривыми устами, подмигивает, скребёт ногами, сеет раздоры — потому внезапно придёт его погибель, он разломится без врачевства.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:16",
+      "end": "6:19"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "наставник (мудрец)",
+      "Яхве (ненавидящий семь мерзостей)"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Атрибуция отношения: Яхве ненавидит шесть и мерзость душе Его — семь (6:16): надменные очи, лживый язык, руки, проливающие кровь невинного, сердце кующее злые замыслы, ноги, спешащие ко злу, лжесвидетель, сеющий раздор между братьями",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "ненависть Бога ко лжи и кровопролитию",
+        "evidence": "6:16 שש הנה שנא יהוה ושבע תועבת נפשו"
+      }
+    ],
+    "summary_ru": "Перечисление семи мерзостей душе Яхве — от надменных очей и лживого языка до лжесвидетельства и сеющего раздор между братьями.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:20",
+      "end": "6:26"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "отец (наставник)",
+      "сын",
+      "мать",
+      "злая женщина"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; заповедь — светильник, и Тора — свет, и наставления — путь жизни (6:23)",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Храни заповедь отца и Тору матери: они будут наставлять тебя и сохранят от злой женщины с льстивым языком и от красоты чужой — из-за блудницы до куска хлеба, а жена мужа — ценную душу улавливает.",
+    "confidence": "low",
+    "boundary": false
+  },
+  {
+    "span": {
+      "start": "6:27",
+      "end": "6:35"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "наставник (мудрец)",
+      "муж-ревнитель",
+      "прелюбодей",
+      "вор"
+    ],
+    "addressee_type": "humanity",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Действий Бога нет; возмездие описано через ревность мужа (6:34)",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "ревность и гнев мужа",
+        "evidence": "6:34 כי קנאה חמת גבר ולא יחמול ביום נקם"
+      }
+    ],
+    "summary_ru": "Можно ли ходить по углям и не обжечься? Кто касается жены ближнего — не останется чист; хотя вор от голода не презираем, прелюбодей — душегуб: ревность мужа не пощадит в день отмщения. Блок на границе батча: тема прелюбодеяния продолжается в главе 7.",
+    "confidence": "low",
+    "boundary": true
+  }
+]
