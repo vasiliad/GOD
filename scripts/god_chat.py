@@ -42,23 +42,42 @@ def strip_nikud(text: str) -> str:
 
 
 def load_corpus():
-    """Эпизоды реестра -> документы для поиска + словарь огласованных стихов."""
+    """Эпизоды реестра -> документы для поиска + словарь огласованных стихов.
+    Предпочитает дедуплицированный мастер-корпус episodes_TANAKH_v2.json."""
     docs = []
-    for fp in sorted(BASE.glob(EPISODES_GLOB)):
-        book = fp.stem.replace("episodes_", "").replace("_v2", "")
-        for ep in json.load(open(fp, encoding="utf-8")):
-            docs.append({
-                "book": book,
-                "span": ep["span"],
-                "quotes": ep["god_speech_plain"],
-                "refs": ep["god_speech_refs"],
-                "summary": ep["summary_ru"],
-                "action": ep["god_action"],
-                "trigger": ep["trigger"],
-                "severity": ep["severity"],
-                "emotions": ep.get("emotions", []),
-                "direction": ep["direction"],
-            })
+    master = BASE / "output/episodes_TANAKH_v2.json"
+    if master.exists():
+        books = json.load(open(master, encoding="utf-8"))  # {book: [episodes]}
+        for book, eps in books.items():
+            for ep in eps:
+                docs.append({
+                    "book": book,
+                    "span": ep["span"],
+                    "quotes": ep["god_speech_plain"],
+                    "refs": ep["god_speech_refs"],
+                    "summary": ep["summary_ru"],
+                    "action": ep["god_action"],
+                    "trigger": ep["trigger"],
+                    "severity": ep["severity"],
+                    "emotions": ep.get("emotions", []),
+                    "direction": ep["direction"],
+                })
+    else:
+        for fp in sorted(BASE.glob(EPISODES_GLOB)):
+            book = fp.stem.replace("episodes_", "").replace("_v2", "")
+            for ep in json.load(open(fp, encoding="utf-8")):
+                docs.append({
+                    "book": book,
+                    "span": ep["span"],
+                    "quotes": ep["god_speech_plain"],
+                    "refs": ep["god_speech_refs"],
+                    "summary": ep["summary_ru"],
+                    "action": ep["god_action"],
+                    "trigger": ep["trigger"],
+                    "severity": ep["severity"],
+                    "emotions": ep.get("emotions", []),
+                    "direction": ep["direction"],
+                })
     verses = {}
     for fp in TANAKH_DIR.glob("*.json"):
         if fp.stem == "_index":
