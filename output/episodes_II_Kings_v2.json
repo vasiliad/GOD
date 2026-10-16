@@ -1,0 +1,3034 @@
+[
+  {
+    "span": {
+      "start": "1:1",
+      "end": "1:8"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "אחזיה מלך ישראל",
+      "אליה התשבי",
+      "מלאכי אחזיה",
+      "מלאך יהוה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "1:4",
+      "1:6"
+    ],
+    "god_speech_plain": "כה אמר יהוה המטה אשר עלית שם לא תרד ממנה כי מות תמות",
+    "human_speech_refs": [
+      "1:2",
+      "1:5"
+    ],
+    "human_speech_plain": "לכו דרשו בבעל זבוב אלהי עקרון אם אחיה מחלי זה",
+    "god_action": "Ангел Яхве посылает Илию перехватить послов Ахазии, искавших пророчество у Веельзевува, и через Илию объявляет царю смертный приговор: с постели, на которую он взошёл, он не сойдёт живым.",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [
+      {
+        "who": "אחזיה",
+        "emotion": "тревога за свою жизнь",
+        "quote": "לכו דרשו בבעל זבוב אלהי עקרון אם אחיה מחלי זה"
+      },
+      {
+        "who": "אחזיה",
+        "emotion": "недоумение и раздражение",
+        "quote": "מה זה שבתם"
+      }
+    ],
+    "summary_ru": "Больной Ахазия посылает послов спросить у Веельзевува Аккарона о выздоровлении; ангел Яхве посылает Илию перехватить их и объявить приговор: царь умрёт.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_001",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:9",
+      "end": "1:12"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "אליה",
+      "שרי החמשים וחמשיהם",
+      "אחזיה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "1:9",
+      "1:10",
+      "1:11",
+      "1:12"
+    ],
+    "human_speech_plain": "איש האלהים המלך דבר רדה",
+    "god_action": "По слову Илии ниспосылает огонь с неба, который пожирает двух пятидесятников и их отряды, пришедших силой схватить пророка.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "who": "שרי החמשים",
+        "emotion": "высокомерный приказ от имени царя",
+        "quote": "איש האלהים המלך דבר רדה"
+      },
+      {
+        "who": "אליה",
+        "emotion": "непреклонность",
+        "quote": "אם איש אלהים אני תרד אש מן השמים ותאכל אתך ואת חמשיך"
+      }
+    ],
+    "summary_ru": "Два капитана с отрядами требуют, чтобы Илия спустился по приказу царя; по слову пророка огонь с неба пожирает обоих с их людьми.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_002",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:13",
+      "end": "1:15"
+    },
+    "direction": "god_initiated",
+    "via": "angel",
+    "participants": [
+      "אליה",
+      "שר החמשים השלישי וחמשיו",
+      "מלאך יהוה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "intercession",
+    "god_speech_refs": [
+      "1:15"
+    ],
+    "god_speech_plain": "רד אותו אל תירא מפניו",
+    "human_speech_refs": [
+      "1:13",
+      "1:14"
+    ],
+    "human_speech_plain": "תיקר נא נפשי ונפש עבדיך אלה חמשים בעיניך",
+    "god_action": "Ангел Яхве велит Илии спуститься к умоляющему капитану и не бояться его; в отличие от двух первых отрядов, этот помилован.",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "שר החמשים השלישי",
+        "emotion": "смирение и мольба о пощаде",
+        "quote": "ויכרע על ברכיו לנגד אליהו ויתחנן אליו"
+      }
+    ],
+    "summary_ru": "Третий пятидесятник падает на колени и умоляет сохранить ему жизнь и жизнь его людей; ангел Яхве велит Илии идти вниз без страха.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_003",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "1:16",
+      "end": "1:18"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "אליה",
+      "אחזיה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "1:16"
+    ],
+    "god_speech_plain": "כה אמר יהוה יען אשר שלחת מלאכים לדרש בבעל זבוב אלהי עקרון המבלי אין אלהים בישראל לדרש בדברו לכן המטה אשר עלית שם לא תרד ממנה כי מות תמות",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Смерть Ахазии наступает точно по слову Яхве, переданному Илией; ему наследует Иорам.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Илия лично повторяет Ахазии приговор Яхве за обращение к Веельзевуву, и царь умирает по слову Яхве.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_004",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:1",
+      "end": "2:11"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "אליה",
+      "אלישע",
+      "בני הנביאים"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "2:2",
+      "2:4",
+      "2:6",
+      "2:9"
+    ],
+    "human_speech_plain": "ויהי נא פי שנים ברוחך אלי",
+    "god_action": "Яхве забирает Илию живым на небо в вихре с огненной колесницей и конями огненными; Иордан расступается перед ударом плащом Илии, когда оба переходят реку.",
+    "outcome": "blessing",
+    "severity": 3,
+    "emotions": [
+      {
+        "who": "אלישע",
+        "emotion": "преданность и клятва не покидать учителя",
+        "quote": "חי יהוה וחי נפשך אם אעזבך"
+      }
+    ],
+    "summary_ru": "Яхве возносит Илию на небо в вихре; Елисей, чья верность проверена по пути в Вефиль, Иерихон и Иордан, просит двойную долю духа Илии.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_005",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:12",
+      "end": "2:18"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "אלישע",
+      "בני הנביאים"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "2:12",
+      "2:14"
+    ],
+    "human_speech_plain": "איה יהוה אלהי אליהו אף הוא",
+    "god_action": "Расступает воды Иордана перед плащом Илии, взятого Елисеем, подтверждая, что дух Илии почил на нём.",
+    "outcome": "answer_granted",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "אלישע",
+        "emotion": "горе и разрывание одежд",
+        "quote": "אבי אבי רכב ישראל ופרשיו"
+      },
+      {
+        "who": "בני הנביאים",
+        "emotion": "настойчивое беспокойство",
+        "quote": "ויפצרו בו עד בש"
+      }
+    ],
+    "summary_ru": "Елисей оплакивает вознесённого учителя, затем призывает Яхве, Бога Илию, ударяет Иордан его плащом, и воды расступаются; посланные пятьдесят человек напрасно ищут Илию три дня.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_006",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:19",
+      "end": "2:22"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "אנשי יריחו",
+      "אלישע"
+    ],
+    "addressee_type": "nation",
+    "trigger": "complaint",
+    "god_speech_refs": [
+      "2:21"
+    ],
+    "god_speech_plain": "כה אמר יהוה רפאתי למים האלה לא יהיה משם עוד מות ומשכלת",
+    "human_speech_refs": [
+      "2:19"
+    ],
+    "human_speech_plain": "הנה נא מושב העיר טוב כאשר אדני ראה והמים רעים והארץ משכלת",
+    "god_action": "Через брошенную в источник соль исцеляет воды Иерихона; вода остаётся целой до сего дня.",
+    "outcome": "blessing",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "אנשי העיר",
+        "emotion": "жалоба на порченую воду и бесплодие",
+        "quote": "המים רעים והארץ משכלת"
+      }
+    ],
+    "summary_ru": "Жители Иерихона жалуются Елисею на порченую воду; по слову Яхве, произнесённому Елисеем с солью в руке, источник исцеляется.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_007",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "2:23",
+      "end": "2:25"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "אלישע",
+      "נערים קטנים מבית אל",
+      "שתי דבים"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "2:23"
+    ],
+    "human_speech_plain": "עלה קרח עלה קרח",
+    "god_action": "В ответ на проклятие Елисея именем Яхве выпускает из леса двух медведиц, раздирающих сорок два мальчика.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "who": "הנערים",
+        "emotion": "издевательская насмешка",
+        "quote": "עלה קרח עלה קרח"
+      }
+    ],
+    "summary_ru": "Мальчики из Вефиля насмехаются над Елисеем; по его проклятию именем Яхве две медведицы раздирают сорок два из них.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_008",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "3:1",
+      "end": "3:19"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "יהורם מלך ישראל",
+      "יהושפט מלך יהודה",
+      "מלך אדום",
+      "אלישע",
+      "מישע מלך מואב"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "3:16",
+      "3:17",
+      "3:18",
+      "3:19"
+    ],
+    "god_speech_plain": "כה אמר יהוה עשה הנחל הזה גבים גבים לא תראו רוח ולא תראו גשם והנחל ההוא ימלא מים",
+    "human_speech_refs": [
+      "3:7",
+      "3:10",
+      "3:11"
+    ],
+    "human_speech_plain": "האין פה נביא ליהוה ונדרשה את יהוה מאותו",
+    "god_action": "Рука Яхве сходит на Елисея при игре музыканта, и через него обещает воду без ветра и дождя, а также предание Моава в руки Израиля.",
+    "outcome": "revelation",
+    "severity": 3,
+    "emotions": [
+      {
+        "who": "מלך ישראל",
+        "emotion": "отчаяние при нехватке воды",
+        "quote": "אהה כי קרא יהוה לשלשת המלכים האלה לתת אותם ביד מואב"
+      }
+    ],
+    "summary_ru": "Иорам с Иосафатом и царём Эдома идёт на отпавшего Моава; в семидневном походе нет воды, и цари ищут Елисея, который возвещает слово Яхве о воде и победе.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_009",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "3:20",
+      "end": "3:27"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "שלושת המלכים וישראל",
+      "מואב",
+      "מלך מואב"
+    ],
+    "addressee_type": "nation",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "3:23"
+    ],
+    "human_speech_plain": "דם זה החרב נחרבו המלכים",
+    "god_action": "Присылает воду из пути Эдома и отдаёт Моав в руки Израиля; человеческое жертвоприношение первенца моавитянского царя вызывает великий гнев, и войско уходит домой.",
+    "outcome": "answer_granted",
+    "severity": 4,
+    "emotions": [
+      {
+        "who": "מואב",
+        "emotion": "ужас при виде красных вод",
+        "quote": "ויראו מואב מנגד את המים אדמים כדם"
+      },
+      {
+        "who": "מלך מואב",
+        "emotion": "отчаяние, толкающее на жертвоприношение сына",
+        "quote": "ויקח את בנו הבכור אשר ימלך תחתיו ויעלהו עלה על החמה"
+      },
+      {
+        "who": "ישראל",
+        "emotion": "великий гнев и отступление",
+        "quote": "ויהי קצף גדול על ישראל ויסעו מעליו"
+      }
+    ],
+    "summary_ru": "Вода чудесно приходит, и Израиль разбивает Моав, опустошая страну; осаждённый царь Моава сжигает сына во всесожжение на стене, и великий гнев заставляет Израиль отступить.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_010",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:1",
+      "end": "4:7"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "אשת בן הנביאים",
+      "אלישע",
+      "בניה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "4:1",
+      "4:2",
+      "4:6"
+    ],
+    "human_speech_plain": "עבדך אישי מת ואתה ידעת כי עבדך היה ירא את יהוה והנשה בא לקחת את שני ילדי לו לעבדים",
+    "god_action": "Чудесно умножает масло вдовы по слову Елисея: масло наполняет все заимствованные сосуды, пока не остановится.",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "האלמנה",
+        "emotion": "крик отчаяния перед угрозой рабства детей",
+        "quote": "הנשה בא לקחת את שני ילדי לו לעבדים"
+      }
+    ],
+    "summary_ru": "Вдова сына пророка, которой кредитор грозит забрать детей в рабство, взывает к Елисею; по его наставлению её масло наполняет все сосуды, покрывая долг.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_011",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:8",
+      "end": "4:17"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "השונמית",
+      "אלישע",
+      "גיחזי",
+      "בעלה"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "4:9",
+      "4:13",
+      "4:16"
+    ],
+    "human_speech_plain": "למועד הזה כעת חיה את חבקת בן",
+    "god_action": "Даёт бездетной сунамитянке сына «в этот самый срок» по слову Елисея; она зачинает и рождает сына.",
+    "outcome": "blessing",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "השונמית",
+        "emotion": "благоговение перед святым человеком Божьим",
+        "quote": "הנה נא ידעתי כי איש אלהים קדוש הוא עבר עלינו תמיד"
+      },
+      {
+        "who": "השונמית",
+        "emotion": "недоверчивый страх",
+        "quote": "אל תכזב בשפחתך"
+      }
+    ],
+    "summary_ru": "Сунамитянка устраивает Елисею комнату на стене; пророк возвещает ей о рождении сына в будущем году, и слово сбывается.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_012",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:18",
+      "end": "4:37"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "השונמית",
+      "אלישע",
+      "גיחזי",
+      "הילד"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "4:19",
+      "4:22",
+      "4:28"
+    ],
+    "human_speech_plain": "השאלתי בן מאת אדני הלא אמרתי לא תשלה אתי",
+    "god_action": "Отвечает молитве Елисея: пророк ложится на мёртвого мальчика, тело его теплеет, дитя чихает семь раз и открывает глаза — ребёнок воскрешён.",
+    "outcome": "rescue",
+    "severity": 3,
+    "emotions": [
+      {
+        "who": "השונמית",
+        "emotion": "горе и горькая настойчивость",
+        "quote": "נפשה מרה לה"
+      },
+      {
+        "who": "אלישע",
+        "emotion": "недоумение о сокрытом от него",
+        "quote": "ויהוה העלים ממני ולא הגיד לי"
+      }
+    ],
+    "summary_ru": "Сын сунамитянки умирает; мать спешит к Елисею на Кармил и цепляется за него, и после неудачи Гиезия с посохом пророк молится Яхве и воскрешает мальчика.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_013",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:38",
+      "end": "4:41"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "אלישע",
+      "בני הנביאים"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "4:40"
+    ],
+    "human_speech_plain": "מות בסיר איש האלהים",
+    "god_action": "По брошенной в котёл муке обезвреживает ядовитую дикую тыкву — «и не стало ничего вредного в котле».",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "בני הנביאים",
+        "emotion": "крик ужаса от отравленной похлёбки",
+        "quote": "מות בסיר איש האלהים"
+      }
+    ],
+    "summary_ru": "Во время голода в Гилгале в варево сынов пророков попадает ядовитый плод; Елисей бросает муку, и котёл становится безвредным.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_014",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "4:42",
+      "end": "4:44"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "אלישע",
+      "משרתו",
+      "איש מבעל שלשה",
+      "העם"
+    ],
+    "addressee_type": "nation",
+    "trigger": "gratitude",
+    "god_speech_refs": [
+      "4:43"
+    ],
+    "god_speech_plain": "כה אמר יהוה אכל והותר",
+    "human_speech_refs": [
+      "4:42",
+      "4:43"
+    ],
+    "human_speech_plain": "מה אתן זה לפני מאה איש",
+    "god_action": "Умножает двадцать ячменных хлебов первых плодов: сотня человек ест и остаётся с избытком, по слову Яхве.",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      {
+        "who": "משרתו",
+        "emotion": "сомнение",
+        "quote": "מה אתן זה לפני מאה איש"
+      }
+    ],
+    "summary_ru": "Человек из Ваал-Шалиши приносит Елисею хлебы первых плодов; по слову Яхве «есть и останется» еды хватает на сто человек с остатком.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_015",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "5:1",
+      "end": "5:8"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "נעמן",
+      "מלך ארם",
+      "הנערה מארץ ישראל",
+      "מלך ישראל",
+      "אלישע"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "5:3",
+      "5:6",
+      "5:7",
+      "5:8"
+    ],
+    "human_speech_plain": "אחלי אדני לפני הנביא אשר בשמרון אז יאסף אתו מצרעתו",
+    "god_action": "Непосредственного действия нет; Елисей, услышав о разодранных одеждах царя Израиля, посылает к нему, чтобы Нееман пришёл и узнал, что в Израиле есть пророк.",
+    "outcome": "delayed",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "מלך ישראל",
+        "emotion": "паника и разрывание одежд",
+        "quote": "ויקרע בגדיו ויאמר האלהים אני להמית ולהחיות"
+      }
+    ],
+    "summary_ru": "Нееман, военачальник царя Арама, больной проказой, по совету пленной израильтянки получает письмо к царю Израиля; царь в отчаянии рвёт одежды, но Елисей вызывает Неемана к себе.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_016",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "5:9",
+      "end": "5:19"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "נעמן",
+      "אלישע",
+      "עבדי נעמן"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "5:11",
+      "5:13",
+      "5:15",
+      "5:17",
+      "5:18"
+    ],
+    "human_speech_plain": "הנה נא ידעתי כי אין אלהים בכל הארץ כי אם בישראל",
+    "god_action": "Исцеляет проказу Неемана после семикратного омовения в Иордане: плоть его становится как у малого дитя, и он очищается.",
+    "outcome": "blessing",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "נעמן",
+        "emotion": "гнев на «оскорбительно простой» способ",
+        "quote": "ויקצף נעמן וילך ויאמר הנה אמרתי אלי יצא יצוא"
+      },
+      {
+        "who": "נעמן",
+        "emotion": "благодарность и исповедание веры",
+        "quote": "הנה נא ידעתי כי אין אלהים בכל הארץ כי אם בישראל"
+      }
+    ],
+    "summary_ru": "Нееман, превозмогая гнев, омывается семь раз в Иордане и очищается; он исповедует единого Бога Израиля и просит прощения на будущее при поклонении в доме Риммона.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_017",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "5:20",
+      "end": "5:27"
+    },
+    "direction": "divine_action",
+    "via": "prophet",
+    "participants": [
+      "גיחזי",
+      "נעמן",
+      "אלישע"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "5:20",
+      "5:22",
+      "5:25",
+      "5:27"
+    ],
+    "human_speech_plain": "צרעת נעמן תדבק בך ובזרעך לעולם",
+    "god_action": "Поражает Гиезия проказой Неемана навсегда по проклятию Елисея — Гиезий выходит от него белый как снег.",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [
+      {
+        "who": "גיחזי",
+        "emotion": "жадность",
+        "quote": "חשך אדני את נעמן הארמי הזה מקחת מידו את אשר הביא"
+      },
+      {
+        "who": "גיחזי",
+        "emotion": "ложь перед пророком",
+        "quote": "לא הלך עבדך אנה ואנה"
+      }
+    ],
+    "summary_ru": "Гиезий из жадности догоняет Неемана и берёт дары, затем лжёт Елисею и получает проказу Неемана навсегда — на себя и на потомство.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_018",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:1",
+      "end": "6:7"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "בני הנביאים",
+      "אלישע"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "6:1",
+      "6:5",
+      "6:6"
+    ],
+    "human_speech_plain": "אהה אדני והוא שאול",
+    "god_action": "Заставляет упавшее в Иордан заимствованное железо топора всплыть после брошенного Елисеем обрубка дерева.",
+    "outcome": "rescue",
+    "severity": 1,
+    "emotions": [
+      {
+        "who": "בן הנביאים",
+        "emotion": "крик ужаса из-за чужого топора",
+        "quote": "אהה אדני והוא שאול"
+      }
+    ],
+    "summary_ru": "При строительстве дома для сынов пророков у Иордана падает в воду железо взятого в долг топора; Елисей бросает обрубок, и железо всплывает.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_019",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:8",
+      "end": "6:17"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "אלישע",
+      "מלך ארם",
+      "מלך ישראל",
+      "משרת אלישע"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "6:15",
+      "6:16",
+      "6:17"
+    ],
+    "human_speech_plain": "יהוה פקח נא את עיניו ויראה",
+    "god_action": "Неоднократно раскрывает Елисею засады арамлян, спасая царя Израиля; в окружённом Дофане открывает по молитве Елисея глаза слуге, и тот видит гору, полную коней и колесниц огненных вокруг Елисея.",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "משרת אלישע",
+        "emotion": "страх при виде окружившего войска",
+        "quote": "אהה אדני איכה נעשה"
+      },
+      {
+        "who": "אלישע",
+        "emotion": "спокойная уверенность",
+        "quote": "אל תירא כי רבים אשר אתנו מאשר אותם"
+      }
+    ],
+    "summary_ru": "Елисей по откровению от Бога каждый раз предупреждает царя Израиля о засадах Арама; когда Дофан окружён войском, он молится, и слуга видит огненную небесную рать на горе.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_020",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:18",
+      "end": "6:23"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "אלישע",
+      "הארמים",
+      "מלך ישראל"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "prayer",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "6:18",
+      "6:20",
+      "6:21",
+      "6:22"
+    ],
+    "human_speech_plain": "לא תכה האשר שבית בחרבך ובקשתך אתה מכה שים לחם ומים לפניהם",
+    "god_action": "Поражает арамлян слепотой по молитве Елисея и приводит их в Самарию; после пиршества они отпущены к господину, и набеги Арама на землю Израиля прекращаются.",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "who": "מלך ישראל",
+        "emotion": "воинственный пыл",
+        "quote": "כראתו אותם האכה אכה אבי"
+      },
+      {
+        "who": "אלישע",
+        "emotion": "милосердие к врагам",
+        "quote": "שים לחם ומים לפניהם"
+      }
+    ],
+    "summary_ru": "По молитве Елисея арамляне поражаются слепотой, уводятся в Самарию и после угощения отпущены; набеги Арама прекращаются.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_021",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "6:24",
+      "end": "6:33"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "בן הדד מלך ארם",
+      "מלך ישראל",
+      "האשה הצועקת",
+      "אלישע",
+      "הזקנים"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "6:26",
+      "6:27",
+      "6:31",
+      "6:33"
+    ],
+    "human_speech_plain": "הנה זאת הרעה מאת יהוה מה אוחיל ליהוה עוד",
+    "god_action": "Допускает осаду Самарии Бен-Ададом и великий голод — сама беда названа «от Яхве»; гневный царь клянётся убить Елисея, который заранее знает о посланном убийце.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "who": "מלך ישראל",
+        "emotion": "отчаяние и гнев на Бога",
+        "quote": "הנה זאת הרעה מאת יהוה מה אוחיל ליהוה עוד"
+      },
+      {
+        "who": "האשה",
+        "emotion": "отчаянный вопль о помощи",
+        "quote": "הושיעה אדני המלך"
+      }
+    ],
+    "summary_ru": "Бен-Адад осаждает Самарию, и голод от Яхве доходит до людоедства; царь винит Яхве и клянётся в этот же день отрубить Елисею голову, но пророк заранее знает о посланном убийце.",
+    "confidence": "high",
+    "boundary": true,
+    "episode_id": "Ii_V2_022",
+    "book": "II_Kings",
+    "source_batch": 1
+  },
+  {
+    "span": {
+      "start": "7:1",
+      "end": "7:2"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Елисей",
+      "царь Израиля",
+      "царедворец (третий по сану)",
+      "народ Самарии"
+    ],
+    "addressee_type": "nation",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "7:1",
+      "7:2"
+    ],
+    "god_speech_plain": "כה אמר יהוה כעת מחר סאה סלת בשקל וסאתים שערים בשקל בשער שמרון הנך ראה בעיניך ומשם לא תאכל",
+    "human_speech_refs": [
+      "7:2"
+    ],
+    "human_speech_plain": "הנה יהוה עשה ארבות בשמים היהיה הדבר הזה",
+    "god_action": "Бог через Елисея возвещает: завтра в Самарии будет изобилие — сата муки за сикль (7:1); сомневающемуся царедворцу: увидишь глазами, но не вкусишь (7:2).",
+    "outcome": "revelation",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "неверие царедворца",
+        "quote": "7:2 «הנה יהוה עשה ארבות בשמים היהיה הדבר הזה» — «если бы Господь делал окна на небе — будет ли это?»"
+      }
+    ],
+    "summary_ru": "Елисей от лица Господа обещает завтрашнее изобилие в осаждённой Самарии и предсказывает сомневающемуся царедворцу гибель.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_023",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "7:3",
+      "end": "7:16"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "четверо прокажённых",
+      "арамейское войско",
+      "царь Израиля",
+      "народ Самарии"
+    ],
+    "addressee_type": "nation",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "7:9"
+    ],
+    "human_speech_plain": "עתה לכו ונבאה ונגידה בית המלך",
+    "god_action": "Бог приводит арамейский лагерь в панику: арамеяне слышат звук коней и колесниц и бегут ночью, бросив лагерь (7:6-7); прокажённые находят пустой лагерь и возвещают городу, и народ расхищает добычу — «по слову Господа» (7:16).",
+    "outcome": "rescue",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "ужас арамеян",
+        "quote": "7:6 «הנה שכר עלינו מלך ישראל» — «наверно, нанял против нас царь Израильский»"
+      },
+      {
+        "emotion": "угрызения совести прокажённых",
+        "quote": "7:9 «ומצאנו עוון» — «найдём на себе вину»"
+      }
+    ],
+    "summary_ru": "Бог наводит ужас на лагерь арамеян — они бегут, бросив всё; Самария внезапно избавлена от голода, слово Господа исполняется.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_024",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "7:17",
+      "end": "7:20"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "царедворец (третий по сану)",
+      "царь Израиля",
+      "народ Самарии",
+      "Елисей"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Исполняется слово, сказанное человеком Божиим: царедворец поставлен у ворот, и народ затаптывает его там, и он умирает (7:17-20).",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Царедворец, усомнившийся в слове Господа, затоптан народом у ворот Самарии и умирает — как сказал человек Божий.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_025",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:1",
+      "end": "8:6"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Елисей",
+      "самарянка (её сын воскрешён Елисеем)",
+      "царь Израиля",
+      "Гехази"
+    ],
+    "addressee_type": "family",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "8:1"
+    ],
+    "god_speech_plain": "קומי ולכי אתי וביתך וגורי באשר תגורי כי קרא יהוה לרעב וגם בא אל הארץ שבע שנים",
+    "human_speech_refs": [
+      "8:5"
+    ],
+    "human_speech_plain": "אדני המלך זאת האשה וזה בנה אשר החיה אלישע",
+    "god_action": "Год призвал голод на землю (8:1); по слову Елисея женщина уходит в землю Филистимскую на семь лет (8:2), а по возвращении Господь устраивает так, что царь как раз расспрашивает Гехази о чудесах Елисея, и возвращает ей дом и поле (8:5-6).",
+    "outcome": "blessing",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "мольба женщины",
+        "quote": "8:3 «תצא לצעק אל המלך אל ביתה ואל שדה» — «вышла кричать царю о доме своём и о поле»"
+      }
+    ],
+    "summary_ru": "По слову Елисея самарянка уходит от назначенного Господом голода на семь лет; по возвращении царь возвращает ей дом и поле.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_026",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:7",
+      "end": "8:15"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Елисей",
+      "Хазаэл",
+      "Бен-Хадад царь Арамейский"
+    ],
+    "addressee_type": "foreign_individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "8:10",
+      "8:12",
+      "8:13"
+    ],
+    "god_speech_plain": "לך אמר לו חיה תחיה והראני יהוה כי מות ימות כי ידעתי את אשר תעשה לבני ישראל רעה מבצריהם תשלח באש ובחריהם בחרב תהרג ועלליהם תרטש והרתיהם תבקע הראני יהוה אתך מלך על ארם",
+    "human_speech_refs": [
+      "8:9",
+      "8:12",
+      "8:13"
+    ],
+    "human_speech_plain": "בנך בן הדד מלך ארם שלחני אליך לאמר האחיה מחלי זה",
+    "god_action": "Бог открывает Елисею: болезнь Бен-Хадада смертельна, Хазаэл воцарится над Арамом и жестоко поразит Израиль; Хазаэл удушает царя мокрой тканью и воцаряется (8:15).",
+    "outcome": "revelation",
+    "severity": 4,
+    "emotions": [
+      {
+        "emotion": "скорбь Елисея",
+        "quote": "8:11 «ויבך איש האלהים» — «и заплакал человек Божий»"
+      },
+      {
+        "emotion": "смятение Хазаэла",
+        "quote": "8:13 «כי מה עבדך הכלב» — «что за пёс твой раб, чтобы сделать это?»"
+      }
+    ],
+    "summary_ru": "Хазаэл вопрошает Елисея о болезни Бен-Хадада; Бог открывает смерть царя, воцарение Хазаэла и его будущие злодеяния против Израиля.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_027",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "8:16",
+      "end": "8:24"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Иорам царь Иудейский",
+      "дом Давидов",
+      "народ Иудеи"
+    ],
+    "addressee_type": "nation",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Год не изволил погубить Иуду ради Давида, раба Своего, обещав дать светильник его потомкам во все дни (8:19), несмотря на нечестие Иорама, ходившего путями дома Ахавова (8:18).",
+    "outcome": "covenant",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Несмотря на нечестие Иорама Иудейского, Господь щадит Иуду ради Давида, обещав его роду светильник.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_028",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "9:1",
+      "end": "9:13"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Елисей",
+      "ученик из сынов пророческих",
+      "Ииуй сын Иосафата",
+      "начальники войска"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "9:3",
+      "9:6",
+      "9:7",
+      "9:10",
+      "9:12"
+    ],
+    "god_speech_plain": "כה אמר יהוה משחתיך למלך אל ישראל והכיתה את בית אחאב אדניך ונקמתי דמי עבדי הנביאים ודמי כל עבדי יהוה מיד איזבל ואת איזבל יאכלו הכלבים בחלק יזרעאל ואין קבר",
+    "human_speech_refs": [
+      "9:11",
+      "9:13"
+    ],
+    "human_speech_plain": "מלך יהוא",
+    "god_action": "Бог посылает Елисея, а его — с учеником к Ииую: помазать его на царство Израиля и возвестить суд над домом Ахава — отмщение за кровь пророков и всех слуг Господа от руки Иезавели (9:6-10).",
+    "outcome": "compliance",
+    "severity": 4,
+    "emotions": [
+      {
+        "emotion": "воодушевление войска",
+        "quote": "9:13 «וימהרו... ויתקעו בשופר ויאמרו מלך יהוא» — «поспешили... затрубили в трубу и возгласили: царь Ииуй!»"
+      }
+    ],
+    "summary_ru": "Ученик пророка по поручению Елисея помазывает Ииуя на царство и передаёт слово Господа о суде над домом Ахава; войско провозглашает Ииуя царём.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_029",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "9:14",
+      "end": "9:28"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Ииуй",
+      "Иорам царь Израильский",
+      "Ахазия царь Иудейский",
+      "Видкар"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "9:25",
+      "9:26"
+    ],
+    "god_speech_plain": "את דמי נבות ואת דמי בניו ראיתי אמש נאם יהוה ושלמתי לך בחלקה הזאת נאם יהוה",
+    "human_speech_refs": [
+      "9:22",
+      "9:23",
+      "9:25",
+      "9:26"
+    ],
+    "human_speech_plain": "מה השלום עד זנוני איזבל אמך וכשפיה הרבים",
+    "god_action": "Бог исполняет приговор дому Ахава: Ииу поражает Иорама стрелой в участке Навофея — Господь возместил кровь Навофея и его сыновей (9:25-26); Ахазия смертельно ранен у возвышенности Гура и умирает в Мегиддоне.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "паника и бегство",
+        "quote": "9:23 «ויהפך יהורם ידיו וינס... מרמה אחזיה» — «Иорам повернул руки свои и побежал»"
+      }
+    ],
+    "summary_ru": "Ииу убивает Иорама на поле Навофея во исполнение слова Господа о крови Навофея и смертельно ранит Ахазию Иудейского.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_030",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "9:30",
+      "end": "9:37"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Ииуй",
+      "Иезавель",
+      "евнухи",
+      "Илия Фесвитянин (упомянут)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "9:36",
+      "9:37"
+    ],
+    "god_speech_plain": "בחלק יזרעאל יאכלו הכלבים את בשר איזבל והיתה נבלת איזבל כדמן על פני השדה בחלק יזרעאל אשר לא יאמרו זאת איזבל",
+    "human_speech_refs": [
+      "9:31",
+      "9:34"
+    ],
+    "human_speech_plain": "השלום זמרי הרג אדניו",
+    "god_action": "Исполняется слово Господа, сказанное рукою Илии Фесвитянина: Иезавель сброшена из окна, затоптана конями, и собаки пожирают её тело — остались только череп, ступни и ладони (9:35-37).",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "надменность Иезавели",
+        "quote": "9:31 «השלום זמרי הרג אדניו» — «в мире ли Зимрий, убивший господина своего?»"
+      },
+      {
+        "emotion": "презрение Ииуя",
+        "quote": "9:34 «פקדו נא את הארורה הזאת» — «призрите эту проклятую»"
+      }
+    ],
+    "summary_ru": "Иезавель сброшена из окна и растерзана псами — исполнилось слово, сказанное Господом рукою Илии.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_031",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "10:1",
+      "end": "10:11"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Ииуй",
+      "старейшины и опекуны Самарии/Изрееля",
+      "семьдесят сыновей Ахава",
+      "Илия (упомянут)"
+    ],
+    "addressee_type": "family",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "10:10"
+    ],
+    "god_speech_plain": "לא יפל מדבר יהוה ארצה אשר דבר יהוה על בית אחאב ויהוה עשה את אשר דבר ביד עבדו אליהו",
+    "human_speech_refs": [
+      "10:2",
+      "10:9"
+    ],
+    "human_speech_plain": "צדקים אתם הנה אני קשרתי על אדני ואהרגהו ומי הכה את כל אלה",
+    "god_action": "Год исполняет слово против дома Ахава: семьдесят его сыновей казнены, головы их сложены в две кучи у ворот (10:7-8); истреблены все оставшиеся дома Ахава, его знатные, приближённые и жрецы — «не упадёт слово Господа на землю» (10:10).",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "страх старейшин",
+        "quote": "10:4 «ויראו מאד מאד» — «они убоялись весьма и весьма»"
+      }
+    ],
+    "summary_ru": "Ииуй вынуждает старейшин Самарии казнить семьдесят сыновей Ахава; Господь исполняет всё, сказанное через Илию против дома Ахава.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_032",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "10:15",
+      "end": "10:17"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Ииуй",
+      "Иехонадав сын Рехава",
+      "оставшиеся дома Ахава в Самарии"
+    ],
+    "addressee_type": "family",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "10:17"
+    ],
+    "god_speech_plain": "כדבר יהוה אשר דבר אל אליהו",
+    "human_speech_refs": [
+      "10:15"
+    ],
+    "human_speech_plain": "היש את לבבך ישר כאשר לבבי עם לבבך",
+    "god_action": "Бог исполняет слово, сказанное Илии: Ииу истребляет в Самарии всех оставшихся из дома Ахава до полного уничтожения (10:17).",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Ииуй берёт в союзники Иехонадава Рехавита и истребляет в Самарии всех оставшихся из дома Ахава — по слову Господа, сказанного Илии.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_033",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "10:18",
+      "end": "10:31"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "Ииуй",
+      "Иехонадав сын Рехава",
+      "жрецы и служители Ваала",
+      "весь народ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [
+      "10:30"
+    ],
+    "god_speech_plain": "יען אשר הטיבת לעשות הישר בעיני ככל אשר בלבבי עשית לבית אחאב בני רביעים ישבו לך על כסא ישראל",
+    "human_speech_refs": [
+      "10:18",
+      "10:19"
+    ],
+    "human_speech_plain": "אחאב עבד את הבעל מעט יהוא יעבדנו הרבה",
+    "god_action": "Бог одобряет рвение Ииуя: после хитроумного сбора и истребления всех служителей Ваала и разрушения дома Ваала (10:25-27) Господь обещает Ииую четырёх поколений потомков на престоле Израиля (10:30), хотя он и не отступил от грехов Иеровоама (10:31).",
+    "outcome": "blessing",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "рвение Ииуя",
+        "quote": "10:16 «ראה בקנאתי ליהוה» — «смотри на моё рвение ради Господа»"
+      }
+    ],
+    "summary_ru": "Ииуй хитростью собирает и истребляет всех слуг Ваала и разрушает его храм; Господь обещает его дому четыре поколения, но он не отступает от грехов Иеровоама.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_034",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "10:32",
+      "end": "10:33"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Хазаэл царь Арамейский",
+      "Израиль (заиорданские колена)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Год начинает урезывать Израиль: Хазаэл поражает израильтян по всему рубежу — Галаад и заиорданские земли Гада, Рувима и Манассии от Ароера на потоке Арнон до Галаада и Васана (10:32-33).",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Господь начинает урезывать пределы Израиля, отдавая заиорданские земли Хазаэлу Арамейскому.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_035",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "11:1",
+      "end": "11:20"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "Иодай (Иегояда) жрец",
+      "Иоас сын Ахазии",
+      "Гофолия (Аталия)",
+      "Иосава дочь царя",
+      "сотники и телохранители",
+      "весь народ земли"
+    ],
+    "addressee_type": "nation",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "11:12",
+      "11:17"
+    ],
+    "human_speech_plain": "יחי המלך",
+    "god_action": "Бог сохраняет Давидов род: младенец Иоас скрыт в храме от Гофолии шесть лет (11:2-3); Иодай заключает завет между Господом, царём и народом (11:17), Иоас помазан и провозглашён царём, Гофолия казнена вне храма, дом Ваала разрушен (11:18).",
+    "outcome": "covenant",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "радость народа",
+        "quote": "11:14 «וכל עם הארץ שמח» — «и весь народ земли радовался»"
+      },
+      {
+        "emotion": "ужас Гофолии",
+        "quote": "11:14 «ויתקע בחצצרות ותקרע עתליה את בגדיה ותקרא קשר קשר» — «разодрала одежды свои и закричала: заговор, заговор!»"
+      }
+    ],
+    "summary_ru": "Жрец Иодай возобновляет завет между Господом, царём и народом, помазывает скрытого Иоаса царём, казнит Гофолию и сокрушает культ Ваала.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_036",
+    "book": "II_Kings",
+    "source_batch": 2
+  },
+  {
+    "span": {
+      "start": "12:1",
+      "end": "12:17"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Иоас (царь Иудеи)",
+      "Иегояда (первосвященник)",
+      "жрецы",
+      "стражи порога",
+      "мастера (плотники и строители)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "12:5",
+      "12:8"
+    ],
+    "human_speech_plain": "כל כסף הקדשים אשר יובא בית יהוה ... מדוע אינכם מחזקים את בדק הבית",
+    "god_action": "Бог не действует напрямую; серебро святынь поступает в дом YHWH на обновление Его храма (сундук у жертвенника, 12:10).",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "укор/настойчивость царя к жрецам",
+        "ref": "12:8",
+        "quote": "מדוע אינכם מחזקים את בדק הבית"
+      }
+    ],
+    "summary_ru": "Иоас делает угодное в глазах YHWH все дни наставления Иегояды, но высоты не устранены; он повелевает жрецам употреблять священное серебро на ремонт храма, а после 23 лет бездействия жрецов вводит сундук с отверстием: деньги передаются мастерам, трудящимся с полной верностью.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_037",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "12:18",
+      "end": "12:22"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Хазаэль (царь Арама)",
+      "Иоас (царь Иудеи)",
+      "Иехозавад и Иозахар (слуги, убийцы)",
+      "Амасия (сын)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Бог не упоминается; святыни дома YHWH отданы Хазаэлю в качестве дани (12:19).",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Хазаэль берёт Геф и направляется на Иерусалим; Иоас откупается, опустошив сокровищницы храма и дворца. Позднее слуги убивают его в Беф-Милло, он погребён в Городе Давида, и воцаряется Амасия, сын его.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_038",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:1",
+      "end": "13:3"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Иоахаз (царь Израиля)",
+      "Хазаэль (царь Арама)",
+      "Бен-Хадад (сын Хазаэля)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH разгневался на Израиля и отдал его в руки Хазаэля и Бен-Хадада постоянно, все дни.",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Иоахаз царствует 17 лет в Самарии и ходит по грехам Иеровоама, совратившим Израиля; гнев YHWH воспламеняется на Израиля, и народ отдан под власть арамейских царей.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_039",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:4",
+      "end": "13:5"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Иоахаз",
+      "Израиль",
+      "избавитель (мошиа)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "prayer",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH услышал Иоахаза, увидев угнетение Израиля от царя Арама, и дал Израилю избавителя, чтобы народ вышел из-под власти Арама.",
+    "outcome": "answer_granted",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "угнетение/притеснение",
+        "ref": "13:4",
+        "quote": "ראה את לחץ ישראל כי לחץ אתם מלך ארם"
+      }
+    ],
+    "summary_ru": "Иоахаз умоляет лицо YHWH, и YHWH слушает его, увидев притеснение Израиля царём Арама; Бог даёт избавителя, и сыны Израиля снова живут в шатрах своих как прежде.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_040",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:6",
+      "end": "13:9"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Иоахаз",
+      "Израиль",
+      "царь Арама"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "По слову 13:3 кара продолжается: арамеяне истребляют армию Иоахаза, оставляя лишь 50 всадников, 10 колесниц и 10000 пехотинцев, и превращают их в прах, топтаемый при молотьбе.",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Народ не отступает от грехов дома Иеровоама, и Ашера остаётся стоять в Самарии; военная сила Израиля уничтожена. После смерти Иоахаза воцаряется Иоаш, сын его.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_041",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:10",
+      "end": "13:13"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Иоаш (царь Израиля)",
+      "Иеровоам (сын)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога нет; оценка царствования: «делал неугодное в глазах YHWH» (13:11).",
+    "outcome": "unclear",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Иоаш, сын Иоахаза, царствует в Самарии 16 лет, не отступая от всех грехов Иеровоама; упомянута его война с Амасией, царём Иудеи, после его смерти Иеровоам садится на его престол.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_042",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:14",
+      "end": "13:19"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "YHWH",
+      "Елисей (пророк, человек Божий)",
+      "Иоаш (царь Израиля)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "13:17",
+      "13:19"
+    ],
+    "god_speech_plain": "חץ תשועה ליהוה וחץ תשועה בארם והכית את ארם באפק עד כלה ... להכות חמש או שש פעמים אז הכית את ארם עד כלה ועתה שלש פעמים תכה את ארם",
+    "human_speech_refs": [
+      "13:14"
+    ],
+    "human_speech_plain": "אבי אבי רכב ישראל ופרשיו",
+    "god_action": "Через умирающего Елисея Бог определяет масштаб избавления: стрела в восток — победа над Арамом в Афеке до совершенного истребления; три удара стрелами по земле — лишь три победы вместо пяти или шести.",
+    "outcome": "revelation",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "плач царя",
+        "ref": "13:14",
+        "quote": "ויבך על פניו"
+      },
+      {
+        "emotion": "скорбь по учителю",
+        "ref": "13:14",
+        "quote": "אבי אבי רכב ישראל ופרשיו"
+      },
+      {
+        "emotion": "гнев человека Божия",
+        "ref": "13:19",
+        "quote": "ויקצף עליו איש האלהים"
+      }
+    ],
+    "summary_ru": "Иоаш спускается к умирающему Елисею и плачет: «Отец мой, колесница Израиля!»; Елисей велит стрелять из лука и бить стрелами в землю. За три удара царь получает лишь три победы над Арамом, и человек Божий гневается, что он не бил пять или шесть раз.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_043",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:20",
+      "end": "13:21"
+    },
+    "direction": "divine_action",
+    "via": "prophet",
+    "participants": [
+      "YHWH",
+      "Елисей (умерший пророк)",
+      "погребаемый человек",
+      "отряд моавитян"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Бог воскрешает мёртвого: при касании костей Елисея человек ожил и встал на ноги свои.",
+    "outcome": "rescue",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Елисей умирает и погребён; когда в пришествие года отряд моавитян входит в землю, погребающие бросают тело в гроб Елисея — при соприкосновении с его костями мёртвый оживает и встаёт на ноги.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_044",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "13:22",
+      "end": "13:25"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Израиль",
+      "Хазаэль (царь Арама)",
+      "Бен-Хадад (сын Хазаэля)",
+      "Иоаш (царь Израиля)",
+      "Авраам, Исаак и Иаков (завет)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH благоволил к Израилю, сжалился и обратил к ним лице ради завета с Авраамом, Исааком и Иаковом, не пожелал погубить их и не отверг от лица Своего; Иоаш трижды бьёт Бен-Хадада и возвращает города Израиля.",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "милость/сострадание Бога",
+        "ref": "13:23",
+        "quote": "ויחן יהוה אתם וירחמם ויפן אליהם"
+      }
+    ],
+    "summary_ru": "Хазаэль угнетал Израиль все дни Иоахаза, но YHWH сжалился ради завета с патриархами и не погубил народ; после смерти Хазаэля Иоаш трижды разбивает Бен-Хадада и отбирает города, взятые у его отца.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_045",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:1",
+      "end": "14:7"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "YHWH",
+      "Амасия (царь Иудеи)",
+      "Моше (посредник Торы)",
+      "убийцы царя Иоаса",
+      "Эдом"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [
+      "14:6"
+    ],
+    "god_speech_plain": "לא יומתו אבות על בנים ובנים לא יומתו על אבות כי אם איש בחטאו יומת",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Бог заповедал через Моше (свиток Торы) не умервщлять детей за родителей — Амасия исполняет это; победа над Эдомом в долине Соляной (10000) дана царю, Села переименована в Иоктеил.",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Амасия царствует 29 лет, делает угодное в глазах YHWH, но не как Давид, и высоты не устранены; казнив убийц отца, он щадит их детей по заповеди Торы Моше и разбивает Эдом в долине Соляной.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_046",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:8",
+      "end": "14:16"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Амасия (царь Иудеи)",
+      "Иоаш (царь Израиля)",
+      "Иудея",
+      "Израиль"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "14:8",
+      "14:9",
+      "14:10"
+    ],
+    "human_speech_plain": "לכה נתראה פנים ... החוח אשר בלבנון שלח אל הארז אשר בלבנון לאמר תנה את בתך לבני לאשה ותעבר חית השדה אשר בלבנון ותרמס את החוח",
+    "god_action": "Бог не упоминается; Иудея разбита перед Израилем, стена Иерусалима пробита от ворот Ефремовых до угловых ворот, сокровищницы храма и дворца взяты.",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [
+      {
+        "emotion": "гордыня Амасии",
+        "ref": "14:10",
+        "quote": "הכה הכית את אדום ונשאך לבך הכבד"
+      }
+    ],
+    "summary_ru": "Амасия вызывает Иоаша на бой («встретимся лицом к лицу»); в ответ притча о терне и кедре и предостережение, но царь не слушает. В Беф-Шемеше Иудея обращена в бегство, Амасия взят в плен, Иерусалимская стена разрушена, казна храма и дворца разграблена, заложники уведены в Самарию.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_047",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:17",
+      "end": "14:22"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Амасия (царь Иудеи)",
+      "заговорщики Иерусалима",
+      "Озия (Азария, сын Амасии)",
+      "народ Иудеи"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Бог не упоминается; политическая смена власти в Иудее.",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Амасия живёт 15 лет после смерти Иоаша, но заговорщики в Иерусалиме убивают его в Лахише; тело везут на конях и погребают в Городе Давида. Народ Иудеи воцаряет 16-летнего Озию, который отстраивает Эйлат и возвращает его Иудее.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_048",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "14:23",
+      "end": "14:29"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "YHWH",
+      "Иона (сын Амафая, пророк из Гаф-Хефера)",
+      "Иеровоам II (сын Иоаша)",
+      "Израиль"
+    ],
+    "addressee_type": "nation",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "14:25"
+    ],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH увидел горькое угнетение Израиля, когда не было ни заключённого, ни оставленного, ни помощника; не пожелал изгладить имя Израиля из-под небес и спас их рукою Иеровоама II, вернувшего границы от входа в Хамат до моря Аравы — по слову YHWH, произнесённому рукою пророка Ионы.",
+    "outcome": "rescue",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "сострадание Бога к угнетённым",
+        "ref": "14:26",
+        "quote": "ראה יהוה את עני ישראל מרה מאד"
+      }
+    ],
+    "summary_ru": "Иеровоам II царствует 41 год, делая зло в глазах YHWH, но восстанавливает границы Израиля по слову YHWH, произнесённому через пророка Иону; Бог спасает народ вопреки его грехам, видя его бедствие. Содержание самого слова в тексте не цитировано.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_049",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:1",
+      "end": "15:7"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Озия (Азария, царь Иудеи)",
+      "Иофам (сын царя)",
+      "народ земли"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH поразил царя проказой до дня смерти его; Озия жил в отдельном доме (доме свободы), а Иофам, сын царя, управлял домом и судил народ земли.",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Озия царствует 52 года, делает угодное в глазах YHWH, как Амасия, но высоты не устранены; YHWH поражает его проказой, и он до самой смерти живёт в отдельном доме, пока Иофам управляет государством.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_050",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:8",
+      "end": "15:12"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Ииуй (основатель династии)",
+      "Захария (царь Израиля)",
+      "Саллум (сын Иавеша)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [
+      "15:12"
+    ],
+    "god_speech_plain": "בני רביעים ישבו לך על כסא ישראל ויהי כן",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Исполняется слово YHWH, сказанное Ииую: сыны его до четвёртого поколения сидят на престоле Израиля — Захария становится последним из них и погибает от Саллума.",
+    "outcome": "covenant",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Захария, сын Иеровоама, царствует шесть месяцев, делая зло в глазах YHWH; Саллум убивает его при народе и воцаряется вместо него — так сбылось слово YHWH Ииую: «сыны твои до четвёртого поколения будут сидеть на престоле Израиля, и так и было».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_051",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:13",
+      "end": "15:16"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Саллум (царь Израиля)",
+      "Менахем (сын Гади из Тирцы)",
+      "Типсаḥ и её окрестности"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Бог не упоминается; кровавая борьба за престол и жестокость Менахема в Типсаḥе.",
+    "outcome": "unclear",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Саллум царствует лишь полный месяц: Менахем идёт из Тирцы и убивает его в Самарии. Менахем истребляет Тифсаḥ за отказ открыть ворота и рассекает всех в ней беременных женщин.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_052",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:17",
+      "end": "15:22"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Менахем (царь Израиля)",
+      "Фул (царь Ассирии)",
+      "могучие мужи Израиля"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога нет; оценка: «делал неугодное в глазах YHWH» (15:18).",
+    "outcome": "unclear",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Менахем царствует 10 лет, делая зло в глазах YHWH; когда Фул, царь Ассирии, вторгается в землю, Менахем даёт ему 1000 талантов серебра, обложив по 50 сиклей с каждого могучего мужа, чтобы удержать царство, и царь Ассирии отступает.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_053",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:23",
+      "end": "15:26"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Факия (царь Израиля)",
+      "Факей (сын Ремалии, его шалиш-телохранитель)",
+      "Аргоб и Ария",
+      "пятьдесят галаадитян"
+    ],
+    "addressee_type": "individual",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога нет; оценка: «делал неугодное в глазах YHWH» (15:24).",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Факия царствует два года, делая зло в глазах YHWH; его телохранитель (третья часть), Факей, сын Ремалии, убивает его в Самарии в царском дворце вместе с Аргобом и Арией, с пятьюдесятью галаадитянами, и воцаряется вместо него.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_054",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:27",
+      "end": "15:31"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Факей (царь Израиля)",
+      "Тиглат-Пилесер (царь Ассирии)",
+      "Осия (сын Элы)",
+      "Галаад, Галилея, Неффалим"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога в тексте нет; ассирийское пленение Галаада, Галилеи и всей земли Неффалимовой не атрибутировано YHWH, но предвещает суд.",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Факей царствует 20 лет, делая зло в глазах YHWH; Тиглат-Пилесер берёт Ион, Авел-Беф-Мааху, Ианох, Кедес, Асор, Галаад и Галилею, всю землю Неффалимову, и выселяет её в Ассирию. Осия, сын Элы, убивает Факея и воцаряется вместо него.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_055",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "15:32",
+      "end": "15:38"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "YHWH",
+      "Иофам (царь Иудеи)",
+      "Рецин (царь Арама)",
+      "Факей (сын Ремалии, царь Израиля)"
+    ],
+    "addressee_type": "nation",
+    "trigger": "unprompted",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "YHWH начал посылать на Иудею Рецина, царя Арамского, и Факея, сына Ремалии (15:37).",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [],
+    "summary_ru": "Иофам царствует 16 лет, делает угодное в глазах YHWH, строит верхние врата храма, но высоты не устранены; в те дни YHWH начинает посылать Рецина и Факея против Иудеи. Иофам умирает, и воцаряется Ахаз, сын его.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_056",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "16:1",
+      "end": "16:4"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "YHWH",
+      "Ахаз (царь Иудеи)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямых действий Бога нет; отступничество Ахаза от YHWH, Бога своего.",
+    "outcome": "unclear",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Ахаз царствует 16 лет и не делает угодного в глазах YHWH: ходит путями царей Израильских, даже сына своего проводит чрез огонь по мерзостям народов, и приносит жертвы и курения на высотах, на холмах и под всяким зелёным деревом.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_057",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "16:5",
+      "end": "16:9"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Ахаз (царь Иудеи)",
+      "Рецин (царь Арама)",
+      "Факей (царь Израиля)",
+      "Тиглат-Пилесер (царь Ассирии)",
+      "Адомляне"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "16:7"
+    ],
+    "human_speech_plain": "עבדך ובנך אני עלה והושעני מכף מלך ארם ומכף מלך ישראל הקומים עלי",
+    "god_action": "Прямых действий Бога нет; осада Иерусалима, начатая по слову 15:37 рукой YHWH, снята не Богом, а вмешательством Ассирии: Дамаск взят, Рецин убит.",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [
+      {
+        "emotion": "страх и униженная мольба",
+        "ref": "16:7",
+        "quote": "הושעני מכף מלך ארם ומכף מלך ישראל הקומים עלי"
+      }
+    ],
+    "summary_ru": "Рецин и Факей осаждают Иерусалим, но не могут одолеть Ахаза; арамеяне отбивают Эйлат у Иудеи. Вместо обращения к YHWH Ахаз шлёт серебро и золото храма и дворца Тиглат-Пилесеру с унизительной просьбой «раб твой и сын твой я; приди и избавь меня», и Ассирия берёт Дамаск и убивает Рецина.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_058",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "16:10",
+      "end": "16:20"
+    },
+    "direction": "human_initiated",
+    "via": "unclear",
+    "participants": [
+      "Ахаз (царь Иудеи)",
+      "Урия (первосвященник)",
+      "Тиглат-Пилесер (царь Ассирии)",
+      "Езекия (сын)"
+    ],
+    "addressee_type": "individual",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "16:15"
+    ],
+    "human_speech_plain": "על המזבח הגדול הקטר את עלת הבקר ואת מנחת הערב ... ומזבח הנחשת יהיה לי לבקר",
+    "god_action": "Бог не упоминается; медный жертвенник пред лицом YHWH отодвинут к северу, утварь храма урезана, притвор субботний и вход царский закрыты «из-за царя Ассирийского» (16:18).",
+    "outcome": "unclear",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Ахаз в Дамаске видит жертвенник и посылает Урии его образец; тот строит его к возвращению царя, и Ахаз приносит на нём всесожжения и жертвы. Жертвенник YHWH отодвинут, чаши, киоры и море урезаны; после смерти Ахаза воцаряется Езекия, сын его.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_059",
+    "book": "II_Kings",
+    "source_batch": 3
+  },
+  {
+    "span": {
+      "start": "17:7",
+      "end": "17:23"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "ЯХВЕ",
+      "пророки (все провидцы, рабы Его)",
+      "Израиль (северное царство)",
+      "Иуда"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "17:13"
+    ],
+    "god_speech_plain": "שבו מדרכיכם הרעים ושמרו מצותי חקותי ככל התורה אשר צויתי את אבתיכם ואשר שלחתי אליכם ביד עבדי הנביאים",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "ЯХВЕ предостерегал Израиль и Иуду через всех пророков; когда те ожесточились, Он прогневался весьма, отверг весь род Израиля, смирял его и предал в руки грабителей, пока не изгнал от лица Своего (17:18-20, 23).",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "гнев ЯХВЕ",
+        "evidence": "ויתאנף יהוה מאד בישראל ויסרם מעל פניו (17:18)"
+      },
+      {
+        "emotion": "ожесточение Израиля",
+        "evidence": "ויקשו את ערפם כערף אבותם (17:14)"
+      },
+      {
+        "emotion": "отвержение уставов и завета",
+        "evidence": "וימאסו את חקיו ואת בריתו אשר כרת את אבותם (17:15)"
+      }
+    ],
+    "summary_ru": "Богословское объяснение падения Самарии: Израиль согрешил против ЯХВЕ, не послушал предостережений через всех пророков («возвратитесь с дурных путей ваших»), и ЯХВЕ прогневался, отверг Израиль и изгнал его от лица Своего в Ассирию.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_060",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "17:24",
+      "end": "17:28"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "ЯХВЕ",
+      "переселенцы в Самарии (из Вавилона, Куты, Аввы, Хамата и Сефарваима)",
+      "царь Ассирийский",
+      "священник, переселённый из Самарии"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "17:26"
+    ],
+    "human_speech_plain": "הגוים אשר הגלית ותושב בערי שמרון לא ידעו את משפט אלהי הארץ וישלח בם את האריות והנם ממיתים אותם כאשר אינם ידעים את משפט אלהי הארץ",
+    "god_action": "ЯХВЕ послал на переселенцев Самарии львов, которые убивали их, потому что те не знали страха перед Богом этой земли (17:25); в ответ на жалобу царь Ассирии послал к ним священника учить «страху ЯХВЕ» (17:27-28).",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "неведение и отсутствие страха Божия",
+        "evidence": "לא יראו את יהוה (17:25)"
+      }
+    ],
+    "summary_ru": "После выселения Израиля ЯХВЕ поразил новых жителей Самарии львами за незнание «суда Бога земли»; переселенцы пожаловались царю Ассирийскому, и тот отправил к ним священника из ссыльных.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_061",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "17:29",
+      "end": "17:41"
+    },
+    "direction": "god_initiated",
+    "via": "direct",
+    "participants": [
+      "ЯХВЕ",
+      "переселенцы в Самарии (вавилоняне, кутейцы, хаматяне, аввийцы, сефарвийцы)",
+      "священники высот"
+    ],
+    "addressee_type": "nation",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [
+      "17:35",
+      "17:36",
+      "17:37",
+      "17:38",
+      "17:39"
+    ],
+    "god_speech_plain": "לא תיראו אלהים אחרים ולא תשתחוו להם ולא תעבדום ולא תזבחו להם כי אם את יהוה אשר העלה אתכם מארץ מצרים בכח גדול ובזרוע נטויה אתו תיראו ולו תשתחוו ולו תזבחו",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Повествование приводит заповедь завета ЯХВЕ: иных богов не бояться, не кланяться, не служить и не жертвовать им; обещание — «ЯХВЕ, Бог ваш... Он спасёт вас от руки всех врагов ваших» (17:39).",
+    "outcome": "refusal",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "двоеверный страх",
+        "evidence": "את יהוה היו יראים ואת אלהיהם היו עבדים (17:33)"
+      },
+      {
+        "emotion": "упорство в старых обычаях",
+        "evidence": "ולא שמעו כי אם כמשפטם הראשון הם עשים (17:40)"
+      }
+    ],
+    "summary_ru": "Переселенцы сделали себе каждого своих богов, но и ЯХВЕ стали чтить; приводится запрет завета «не бойтесь иных богов», однако народ «не слушал, а поступал по прежнему своему обычаю» — двойная вера до дня сего.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_062",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:1",
+      "end": "18:8"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Езекия",
+      "ЯХВЕ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "«И был ЯХВЕ с ним»: Бог дал Езекии успех во всём, куда бы он ни выходил, — он отпал от царя Ассирийского и не служил ему, и поразил филистимлян до Газы (18:7-8).",
+    "outcome": "blessing",
+    "severity": 1,
+    "emotions": [
+      {
+        "emotion": "упование",
+        "evidence": "ביהוה אלהי ישראל בטח (18:5)"
+      },
+      {
+        "emotion": "верность и привязанность",
+        "evidence": "וידבק ביהוה לא סר מאחריו (18:6)"
+      }
+    ],
+    "summary_ru": "Езекия делал угодное в очах ЯХВЕ: упразднил высоты, разбил медного змея; он уповал на ЯХВЕ и держался за Него, и ЯХВЕ был с ним — успех в отпадении от Ассирии и победе над филистимлянами.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_063",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:9",
+      "end": "18:12"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "Израиль (северное царство)",
+      "ЯХВЕ",
+      "Салманассар, царь Ассирии"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "ЯХВЕ отдал Израиль в руки ассирийского царя: Самария взята на девятый год Осии, народ переселён в Халах, Хавор, Гозан и города Мидийские — «за то, что не слушали голоса ЯХВЕ, Бога их, и преступили завет Его» (18:12).",
+    "outcome": "punishment",
+    "severity": 4,
+    "emotions": [],
+    "summary_ru": "Повторный рассказ о взятии Самарии и переселении Израиля, истолкованный как кара за непослушание голосу ЯХВЕ и нарушение завета, заповеданного через Моисея.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_064",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "18:13",
+      "end": "19:7"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "Езекия",
+      "Исаия",
+      "Елиаким",
+      "Севна",
+      "Иоах",
+      "Рабсак",
+      "Сеннахирим",
+      "ЯХВЕ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "19:6",
+      "19:7"
+    ],
+    "god_speech_plain": "אל תירא מפני הדברים אשר שמעת אשר גדפו נערי מלך אשור אתי הנני נתן בו רוח ושמע שמועה ושב לארצו והפלתיו בחרב בארצו",
+    "human_speech_refs": [
+      "19:3",
+      "19:4"
+    ],
+    "human_speech_plain": "יום צרה ותוכחה ונאצה היום הזה כי באו בנים עד משבר וכח אין ללדה ... אולי ישמע יהוה אלהיך את כל דברי רבשקה אשר שלחו מלך אשור אדניו לחרף אלהים חי והוכיח בדברים אשר שמע יהוה אלהיך ונשאת תפלה בעד השארית הנמצאה",
+    "god_action": "Через Исаию обещает: «Вот, Я вложу в него дух, и он услышит весть, и возвратится в землю свою; и поражу его мечом в земле его» (19:7).",
+    "outcome": "answer_granted",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "бедствие и поношение",
+        "evidence": "יום צרה ותוכחה ונאצה היום הזה (19:3)"
+      },
+      {
+        "emotion": "скорбь, разрывание одежд",
+        "evidence": "ויקרע את בגדיו ויתכס בשק ויבא בית יהוה (19:1)"
+      },
+      {
+        "emotion": "страх, снимаемый обетованием",
+        "evidence": "אל תירא (19:6)"
+      }
+    ],
+    "summary_ru": "Сеннахирим взял города Иудеи (Езекия заплатил дань), и Рабсак перед всем народом хулил упование на ЯХВЕ; Езекия в разодранных одеждах послал слуг к Исаии, и ЯХВЕ через пророка ответил: «не бойся... Я вложу в него дух, и он возвратится в землю свою».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_065",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "19:8",
+      "end": "19:34"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "Езекия",
+      "Исаия",
+      "ЯХВЕ",
+      "Сеннахирим",
+      "Рабсак"
+    ],
+    "addressee_type": "individual",
+    "trigger": "prayer",
+    "god_speech_refs": [
+      "19:20",
+      "19:21",
+      "19:22",
+      "19:23",
+      "19:24",
+      "19:25",
+      "19:26",
+      "19:27",
+      "19:28",
+      "19:29",
+      "19:30",
+      "19:31",
+      "19:32",
+      "19:33",
+      "19:34"
+    ],
+    "god_speech_plain": "אשר התפללת אלי אל סנחרב מלך אשור שמעתי ... לכן כה אמר יהוה אל מלך אשור לא יבא אל העיר הזאת ולא יורה שם חץ ולא יקדמנה מגן ולא ישפך עליה סללה ... וגנותי אל העיר הזאת להושיעה למעני ולמען דוד עבדי",
+    "human_speech_refs": [
+      "19:15",
+      "19:16",
+      "19:17",
+      "19:18",
+      "19:19"
+    ],
+    "human_speech_plain": "יהוה אלהי ישראל ישב הכרבים אתה הוא האלהים לבדך לכל ממלכות הארץ אתה עשית את השמים ואת הארץ ... הטה יהוה אזנך ושמע ... ועתה יהוה אלהינו הושיענו נא מידו וידעו כל ממלכות הארץ כי אתה יהוה אלהים לבדך",
+    "god_action": "Через Исаию отвечает насмешкой над Сеннахиримом («над Кем ты порицал и злословил? — над Святым Израилевым»), обещает остатку Иуды укорениться и принести плод, клянётся, что царь Ассирийский «не придёт в этот город и не бросит сюда стрелы», ибо «Я буду защищать город этот, чтобы спасти его ради Моего и ради Давида, раба Моего».",
+    "outcome": "answer_granted",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "смиренная мольба",
+        "evidence": "ויפרשהו חזקיהו לפני יהוה (19:14)"
+      },
+      {
+        "emotion": "ревность ЯХВЕ",
+        "evidence": "קנאת יהוה [צבאות] תעשה זאת (19:31)"
+      }
+    ],
+    "summary_ru": "На второе угрозное письмо Сеннахирима Езекия распростёр его перед ЯХВЕ в храме и молился о спасении; Бог через Исаию ответил насмешкой над надменным царём и твёрдым обещанием: он не войдёт в город, а вернётся путём, которым пришёл.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_066",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "19:35",
+      "end": "19:37"
+    },
+    "direction": "divine_action",
+    "via": "angel",
+    "participants": [
+      "ЯХВЕ",
+      "Ангел ЯХВЕ",
+      "ассирийское войско",
+      "Сеннахирим",
+      "Адрамелех и Сарецер (сыновья Сеннахирима)",
+      "Есар-Аддон"
+    ],
+    "addressee_type": "nation",
+    "trigger": "intercession",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Ангел ЯХВЕ поразил ассирийский лагерь: к утру 185 000 мёртвых тел; Сеннахирим ушёл, возвратился в Ниневию и был убит мечом своими сыновьями — исполнение обещанного в 19:7.",
+    "outcome": "rescue",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "В ту ночь Ангел ЯХВЕ поразил ассирийский лагерь — 185 000 погибших; Сеннахирим вернулся в Ниневию и был убит своими сыновьями, к престолу пришёл Есар-Аддон.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_067",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "20:1",
+      "end": "20:7"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Езекия",
+      "Исаия",
+      "ЯХВЕ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "distress",
+    "god_speech_refs": [
+      "20:1",
+      "20:4",
+      "20:5",
+      "20:6"
+    ],
+    "god_speech_plain": "צו לביתך כי מת אתה ולא תחיה ... שמעתי את תפלתך ראיתי את דמעתך הנני רפא לך ביום השלישי תעלה בית יהוה ... והספתי על ימיך חמש עשרה שנה ומכף מלך אשור אצילך ואת העיר הזאת וגנותי על העיר הזאת למעני ולמען דוד עבדי",
+    "human_speech_refs": [
+      "20:2",
+      "20:3"
+    ],
+    "human_speech_plain": "אנה יהוה זכר נא את אשר התהלכתי לפניך באמת ובלבב שלם והטוב בעיניך עשיתי",
+    "god_action": "Сначала объявляет через Исаию смерть («заповедай дому твоему, ибо ты умрёшь»), но, услышав молитву и увидев слёзы, меняет приговор: исцеляет на третий день (пласт из смокв), прибавляет 15 лет жизни и обещает избавление от царя Ассирийского.",
+    "outcome": "answer_granted",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "горький плач",
+        "evidence": "ויבך חזקיהו בכי גדול (20:3)"
+      },
+      {
+        "emotion": "милосердие и внимание Бога",
+        "evidence": "שמעתי את תפלתך ראיתי את דמעתך (20:5)"
+      }
+    ],
+    "summary_ru": "Смертельно больному Езекии Исаия передал приговор ЯХВЕ — «ты умрёшь»; царь повернулся лицом к стене и молился, и Бог ответил: «Я услышал молитву твою... вот, Я исцелю тебя... и прибавлю к дням твоим пятнадцать лет».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_068",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "20:8",
+      "end": "20:11"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "Езекия",
+      "Исаия",
+      "ЯХВЕ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "20:9"
+    ],
+    "god_speech_plain": "זה לך האות מאת יהוה כי יעשה יהוה את הדבר אשר דבר הלך הצל עשר מעלות אם ישוב עשר מעלות",
+    "human_speech_refs": [
+      "20:8",
+      "20:10"
+    ],
+    "human_speech_plain": "מה אות כי ירפא יהוה לי ועליתי ביום השלישי בית יהוה ... נקל לצל לנטות עשר מעלות לא כי ישוב הצל אחרנית עשר מעלות",
+    "god_action": "По зову Исаии возвращает тень на ступенях Аха́зовых назад на десять ступеней (20:11).",
+    "outcome": "answer_granted",
+    "severity": 1,
+    "emotions": [],
+    "summary_ru": "Езекия просит знамение исцеления; Исаия предлагает выбор знамения, и по слову царя тень отступает назад на десять ступеней Аха́зовых.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_069",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "20:12",
+      "end": "20:19"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "Езекия",
+      "Исаия",
+      "послы Меродах-Баладана, сына Баладана, царя Вавилонского",
+      "ЯХВЕ"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "20:16",
+      "20:17",
+      "20:18"
+    ],
+    "god_speech_plain": "הנה ימים באים ונשא כל אשר בביתך ואשר אצרו אבתיך עד היום הזה בבלה לא יותר דבר אמר יהוה ... ומבניך אשר יצאו ממך אשר תוליד יקחו והיו סריסים בהיכל מלך בבל",
+    "human_speech_refs": [
+      "20:14",
+      "20:15",
+      "20:19"
+    ],
+    "human_speech_plain": "מארץ רחוקה באו מבבל ... את כל אשר בביתי ראו לא היה דבר אשר לא הראיתם באצרתי ... טוב דבר יהוה אשר דברת ויאמר הלוא אם שלום ואמת יהיה בימי",
+    "god_action": "Через Исаию возвещает приговор: придут дни, когда всё сокровище дома будет унесено в Вавилон и «ничего не оставит», а сыновья, вышедшие из него, будут евнухами во дворце царя Вавилонского.",
+    "outcome": "punishment",
+    "severity": 3,
+    "emotions": [
+      {
+        "emotion": "спокойное принятие приговора (забота лишь о своих днях)",
+        "evidence": "טוב דבר יהוה אשר דברת הלוא אם שלום ואמת יהיה בימי (20:19)"
+      }
+    ],
+    "summary_ru": "Вавилонские послы поздравили выздоровевшего Езекию, и он показал им все сокровища; Исаия возвестил слово ЯХВЕ: всё будет унесено в Вавилон, потомки станут евнухами; царь принял приговор, радуясь миру «в свои дни».",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_070",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "21:1",
+      "end": "21:16"
+    },
+    "direction": "god_initiated",
+    "via": "prophet",
+    "participants": [
+      "ЯХВЕ",
+      "пророки, рабы Его",
+      "Манассия",
+      "Иуда",
+      "Иерусалим"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "21:7",
+      "21:8",
+      "21:10",
+      "21:11",
+      "21:12",
+      "21:13",
+      "21:14",
+      "21:15"
+    ],
+    "god_speech_plain": "הנני מביא רעה על ירושלם ויהודה אשר כל שמעה תצלנה שתי אזניו ונטיתי על ירושלם את קו שמרון ואת משקלת בית אחאב ומחיתי את ירושלם כאשר ימחה את הצלחת מחה והפך על פניה ונטשתי את שארית נחלתי ונתתים ביד איביהם והיו לבז ולמשסה לכל איביהם",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Напоминает слово, сказанное Давиду и Соломону («в доме сем... Я положу имя Моё навек»), и говорит через пророков: наведу зло на Иерусалим и Иуду, вымету Иерусалим, как выметают блюдо, оставлю остаток наследия Моего врагам на расхищение.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "провокация гнева Божия",
+        "evidence": "ויהיו מכעסים אתי מן היום אשר יצאו אבותם ממצרים ועד היום הזה (21:15)"
+      },
+      {
+        "emotion": "пролитая невинная кровь",
+        "evidence": "ודם נקי שפך מנשה הרבה מאד עד אשר מלא את ירושלם פה לפה (21:16)"
+      }
+    ],
+    "summary_ru": "Манассия восстановил высоты, поставил жертвенники Ваалу и ашеру в храме, проводил сына через огонь и пролил много невинной крови; ЯХВЕ через пророков объявляет приговор: бедствие на Иерусалим и Иуду, город будет выметен, как блюдо, а остаток наследия отдан врагам.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_071",
+    "book": "II_Kings",
+    "source_batch": 4
+  },
+  {
+    "span": {
+      "start": "22:3",
+      "end": "22:20"
+    },
+    "direction": "human_initiated",
+    "via": "prophet",
+    "participants": [
+      "Йошия, царь Иудеи",
+      "Хелкия, первосвященник",
+      "Шафан, писец",
+      "Ахикам, Ахбор и Асаия — посланники царя",
+      "Хулда, пророчица, жена Шаллума, хранителя одежд"
+    ],
+    "addressee_type": "individual",
+    "trigger": "inquiry",
+    "god_speech_refs": [
+      "22:15",
+      "22:16",
+      "22:17",
+      "22:18",
+      "22:19",
+      "22:20"
+    ],
+    "god_speech_plain": "כה אמר יהוה הנני מביא רעה אל המקום הזה ועל ישביו את כל דברי הספר אשר קרא מלך יהודה לכן הנני אספך על אבתיך ונאספת אל קברתיך בשלום ולא תראינה עיניך בכל הרעה אשר אני מביא על המקום הזה",
+    "human_speech_refs": [
+      "22:13"
+    ],
+    "human_speech_plain": "לכו דרשו את יהוה בעדי ובעד העם ובעד כל יהודה על דברי הספר הנמצא הזה כי גדולה חמת יהוה אשר היא נצתה בנו על אשר לא שמעו אבתינו על דברי הספר הזה לעשות ככל הכתוב עלינו",
+    "god_action": "ЙХВХ отвечает через пророчицу Хулду: бедствие по всем словам найденной книги неминуемо придёт на место и на его жителей за то, что оставили ЙХВХ и кадили другим богам; но смирившемуся, разодравшему одежды и плакавшему пред Ним царю обещано, что он будет собран к гробам отцов в мире и не увидит посылаемого зла.",
+    "outcome": "delayed",
+    "severity": 4,
+    "emotions": [
+      {
+        "emotion": "страх и сокрушение царя",
+        "quote": "ויהי כשמע המלך את דברי ספר התורה ויקרע את בגדיו (22:11)"
+      },
+      {
+        "emotion": "смирение и плач перед Богом",
+        "quote": "יען רך לבבך ותכנע מפני יהוה בשמעך אשר דברתי על המקום הזה ועל ישביו להיות לשמה ולקללה ותקרע את בגדיך ותבכה לפני וגם אנכי שמעתי נאם יהוה (22:19)"
+      }
+    ],
+    "summary_ru": "При ремонте Храма Хелкия находит книгу Торы; Йошия, разодрав одежды, посылает спросить ЙХВХ о судьбе народа, и пророчица Хулда передаёт слово: бедствие по книге придёт на Иудею, но смирившийся царь умрёт в мире и не увидит зла.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_072",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "23:1",
+      "end": "23:3"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Йошия, царь Иудеи",
+      "старейшины Иудеи и Иерусалима",
+      "жители Иерусалима, священники, пророки и весь народ от малого до великого"
+    ],
+    "addressee_type": "nation",
+    "trigger": "covenant_follow_up",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Прямого действия Бога не описано: царь зачитывает народу в Храме все слова книги завета, стоит на возвышении и заключает завет пред ЙХВХ (לפני יהוה) — идти за ЙХВХ, хранить заповеди и исполнить слова завета всем сердцем и душой; весь народ встаёт в завет.",
+    "outcome": "covenant",
+    "severity": 2,
+    "emotions": [
+      {
+        "emotion": "решимость всецелой верности",
+        "quote": "ללכת אחר יהוה ולשמר מצותיו ואת עדותיו ואת חקתיו בכל לב ובכל נפש (23:3)"
+      }
+    ],
+    "summary_ru": "Йошия созывает старейшин и весь народ, зачитывает слова книги завета и заключает пред ЙХВХ завет следовать Богу всем сердцем и душой; народ подтверждает завет.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_073",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "23:4",
+      "end": "23:23"
+    },
+    "direction": "human_initiated",
+    "via": "direct",
+    "participants": [
+      "Йошия, царь Иудеи",
+      "Хелкия, первосвященник, и священники второго порядка",
+      "стражи порога",
+      "весь народ"
+    ],
+    "addressee_type": "nation",
+    "trigger": "faithfulness",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [
+      "23:21"
+    ],
+    "human_speech_plain": "עשו פסח ליהוה אלהיכם ככתוב על ספר הברית הזה",
+    "god_action": "Прямого действия Бога не описано: реформы совершаются людьми по книге завета; разрушение вефильского жертвенника Иеровоама и сожжение костей на нём прямо названы исполнением прежнего слова человека Божьего (23:16 כדבר יהוה אשר קרא איש האלהים), а кости пророка из Самарии сохранены.",
+    "outcome": "compliance",
+    "severity": 2,
+    "emotions": [],
+    "summary_ru": "Йошия изгоняет из Храма и из всей страны культ Баала, Ашеры и воинства небесного, оскверняет высоты и Тофет, разрушает жертвенник Иеровоама в Вефиле и восстанавливает великий Песах по книге завета — такого не было со времён Судей.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_074",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "23:24",
+      "end": "23:27"
+    },
+    "direction": "god_initiated",
+    "via": "unclear",
+    "participants": [
+      "ЙХВХ",
+      "Йошия, царь Иудеи",
+      "народ Иудеи"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [
+      "23:27"
+    ],
+    "god_speech_plain": "גם את יהודה אסיר מעל פני כאשר הסרתי את ישראל ומאסתי את העיר הזאת אשר בחרתי את ירושל͏ם ואת הבית אשר אמרתי יהיה שמי שם",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Несмотря на невиданную верность Йошии, ЙХВХ не отворачивается от великого гнева, возгоревшегося на Иудею из-за грехов Манассии, и объявляет решение: отниму и Иудею от лица Моего, как отнял Израиль, и отвергну Иерусалим, город, который избрал, и Храм, где обещал пребывать имени Своему.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "великий гнев ЙХВХ, который не отвращается",
+        "quote": "לא שב יהוה מחרון אפו הגדול אשר חרה אפו ביהודה על כל הכעסים אשר הכעיסו מנשה (23:26)"
+      },
+      {
+        "emotion": "всецелая преданность Йошии",
+        "quote": "אשר שב אל יהוה בכל לבבו ובכל נפשו ובכל מאדו ככל תורת משה (23:25)"
+      }
+    ],
+    "summary_ru": "Йошия истребляет некромантов, терафимов и всех идолов, но гнев ЙХВХ за грехи Манассии не отвращается: Бог объявляет, что отвергнет Иудею, Иерусалим и Храм, как отверг Израиль.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_075",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:1",
+      "end": "24:4"
+    },
+    "direction": "divine_action",
+    "via": "direct",
+    "participants": [
+      "ЙХВХ",
+      "Йехояким, царь Иудеи",
+      "Навуходоносор, царь Вавилона",
+      "отряды халдеев, арамеев, моавитян и аммонитян"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "ЙХВХ посылает на Иудею разбойничьи отряды халдеев, арамеев, моавитян и аммонитян, чтобы погубить её, — по слову, сказанному прежде через рабов-пророков; суд совершается из-за грехов Манассии, наполнившего Иерусалим невинной кровью, и ЙХВХ не пожелал простить.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "отказ от прощения",
+        "quote": "ולא אבה יהוה לסלח (24:4)"
+      }
+    ],
+    "summary_ru": "Йехояким служит Вавилону три года и восстаёт, и ЙХВХ посылает на Иудею разноплемённые отряды — исполнение пророческого суда за грехи Манассии, который Бог отказался простить.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_076",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:8",
+      "end": "24:17"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Йехоякин, царь Иудеи",
+      "Навуходоносор, царь Вавилона",
+      "жители Иерусалима — изгнанники",
+      "Маттания (Цидкияу), дядя царя"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Вавилонская осада и плен как исполнение слова ЙХВХ: Йехоякин сдаётся царю Вавилона, из Храма и дворца вывозятся все сокровища, а золотые сосуды Соломона перерезаются «как говорил ЙХВХ» (24:13); вся знать, десять тысяч воинов, тысяча ремесленников уводятся в изгнание, остаётся лишь бедный народ; царём поставлен Цидкияу.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "При Йехоякине вавилоняне берут Иерусалим: сокровища Храма вывозятся «как говорил ЙХВХ», царь и десятки тысяч жителей уходят в вавилонский плен, вместо него поставлен Цидкияу.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_077",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "24:18",
+      "end": "25:7"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Цидкияу, царь Иудеи",
+      "ЙХВХ",
+      "Навуходоносор и халдейское войско",
+      "сыновья Цидкияу",
+      "осаждённые жители Иерусалима"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "«Из-за гнева ЙХВХ» (24:20) Иудея доходит до извержения от лица Его: Цидкияу восстал против Вавилона; после осады и жестокого голода стены пробиты, воины бегут через царский сад к Араве, царь схвачен у Иерихона, его сыновья заколоты перед его глазами, ему ослепляют глаза, и в медных оковах уводят в Вавилон.",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [
+      {
+        "emotion": "гнев ЙХВХ, доведший до извержения народа",
+        "quote": "כי על אף יהוה היתה בירושל͏ם וביהודה עד השלכו אתם מעל פניו (24:20)"
+      }
+    ],
+    "summary_ru": "Цидкияу делает зло и вопреки гневу ЙХВХ восстаёт против Вавилона; осада, голод, падение города, казнь сыновей на глазах отца и ослепление царя завершают изгнание Иудеи от лица Бога.",
+    "confidence": "high",
+    "boundary": false,
+    "episode_id": "Ii_V2_078",
+    "book": "II_Kings",
+    "source_batch": 5
+  },
+  {
+    "span": {
+      "start": "25:8",
+      "end": "25:21"
+    },
+    "direction": "divine_action",
+    "via": "unclear",
+    "participants": [
+      "Навузардан, начальник поваров (רב טבחים), слуга царя Вавилона",
+      "Навуходоносор, царь Вавилона",
+      "Сероя, первосвященник, и Цфания, второй священник",
+      "остаток народа Иудеи"
+    ],
+    "addressee_type": "nation",
+    "trigger": "disobedience",
+    "god_speech_refs": [],
+    "god_speech_plain": "",
+    "human_speech_refs": [],
+    "human_speech_plain": "",
+    "god_action": "Финал объявленного Богом суда без прямой речи: сожжены дом ЙХВХ, царский дом и все дома Иерусалима, разрушены стены, остаток народа и масса людей уведены в изгнание, медные и золотые сосуды Храма выломаны и унесены в Вавилон, священники, начальники и шестьдесят человек из народа казнены в Ривле — «и Иудея изгнана со своей земли» (25:21).",
+    "outcome": "punishment",
+    "severity": 5,
+    "emotions": [],
+    "summary_ru": "Навузардан сжигает Храм и город, рушит стены, уводит остаток народа в изгнание и казнит священников и знать в Ривле: Иудея изгнана со своей земли — суд, объявленный Богом через пророков, исполнен до конца.",
+    "confidence": "low",
+    "boundary": false,
+    "episode_id": "Ii_V2_079",
+    "book": "II_Kings",
+    "source_batch": 5
+  }
+]
