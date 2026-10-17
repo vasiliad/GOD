@@ -108,26 +108,93 @@ def _stems(tokens):
     return out
 
 
-def retrieve(query, docs, k=TOP_K):
-    """IDF-взвешенный поиск: редкие токены запроса (имена, топонимы) доминируют."""
-    ru_q = rus_tokens(query)
-    he_q = he_tokens(strip_nikud(query))
-    doc_tokens = [rus_tokens(d["summary"] + " " + d["action"]) for d in docs]
-    doc_stems = [_stems(t) for t in doc_tokens]
-    q_stems = _stems(ru_q)
-    n = len(docs)
+# Русские синонимические пучки для реколла (умер~смерть~умирает и т.п.)
+RU_SYN = [
+    {"умер", "умереть", "смерть", "смерт", "умирает", "погиб", "погибель", "похорон"},
+    {"гнев", "разгневал", "гнева", "разгневаться", "гневен"},
+    {"милосерд", "милост", "простил", "прощение", "простить", "пощадил"},
+    {"люб", "любов", "любовь", "любим"},
+    {"страх", "боюсь", "боится", "страшно", "устраш"},
+    {"наказа", "кара", "карает", "наказание"},
+    {"спас", "спасение", "спасает", "избав"},
+    {"молитв", "молитва", "молится", "молю", "моли"},
+    {"завет", "завета", "завету"},
+    {"грех", "греха", "грехов", "согрешил", "преступ"},
+]
 
-    def idf(stem):
-        df = sum(1 for s in doc_stems if stem in s)
-        return 1.0 / (df + 1)  # реже встречается — выше вес
+
+def _syn_roots(tokens):
+    """Каждый токен -> множество корней его синонимического пучка (для реколла)."""
+    out = set(tokens)
+    for group in RU_SYN:
+        if tokens & group:
+            out |= group
+    return out
+
+
+def clean_he_display(text: str) -> str:
+    """Чистка огласованного текста от HTML-артефактов источника ({ס}, &nbsp;, теги)."""
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"&[a-z]+;", " ", text)
+    text = re.sub(r"[{לּ}]", "", text)
+    text = re.sub(r"[{][^}]*[}]", "", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _he_roots(tokens):
+    """Нормализация ивритских токенов запроса: снять префиксы ב/ל/כ/ה/ו/ש и суффиксы."""
+    out = set()
+    for t in tokens:
+        out.add(t)
+        for p in ("ב", "ל", "כ", "ה", "ו", "ש", "מ"):
+            if t.startswith(p) and len(t) >= 5:
+                out.add(t[1:])
+        for s in ("ים", "ות", "ך", "ו", "י", "ה"):
+            if t.endswith(s) and len(t) >= 5:
+                out.add(t[:-len(s)])
+    return out
+
+
+def retrieve(query, docs, k=TOP_K):
+    """BM25-подобный поиск: IDF по корпусу, нормализация длины документа,
+    синонимические пучки для русского, префиксно-суффиксная нормализация иврита."""
+    from collections import Counter
+    ru_q = rus_tokens(query)
+    he_q = _he_roots(he_tokens(strip_nikud(query)))
+    if not ru_q and not he_q:
+        return []
+
+    # предвычисляем токены документов один раз на вызов
+    doc_ru = [ _syn_roots(rus_tokens(d["summary"] + " " + d["action"])) for d in docs ]
+    doc_he = [ _he_roots(he_tokens(strip_nikud(d["quotes"]))) for d in docs ]
+    n = len(docs)
+    avg_len = sum(len(r) + len(h) for r, h in zip(doc_ru, doc_he)) / max(n, 1)
+    df_ru = Counter()
+    for s in doc_ru:
+        for t in s:
+            df_ru[t] += 1
+    df_he = Counter()
+    for s in doc_he:
+        for t in s:
+            df_he[t] += 1
+
+    def bm25(qterms, doc_terms, df, k1=1.5, b=0.75, weight=1.0):
+        dl = len(doc_terms)
+        score = 0.0
+        for t in qterms:
+            if t not in doc_terms:
+                continue
+            idf = 1.0 + (n - df[t] + 0.5) / (df[t] + 0.5)
+            tf = 1  # множества: tf=1
+            score += weight * idf * tf * (k1 + 1) / (1 + k1 * (1 - b + b * dl / avg_len))
+        return score
 
     scored = []
     for i, d in enumerate(docs):
-        matched = q_stems & doc_stems[i]
-        score = 3 * sum(idf(s) for s in matched)
-        score += sum(idf(t) for t in he_q & he_tokens(d["quotes"]))
-        score += 0.2 * d["severity"] / n  # severity только тай-брейк
-        scored.append((score, i))
+        s = bm25(_syn_roots(ru_q), doc_ru[i], df_ru, weight=3.0)
+        s += bm25(he_q, doc_he[i], df_he, weight=1.5)
+        s += 0.2 * d["severity"] / n  # severity только тай-брейк
+        scored.append((s, i))
     scored.sort(reverse=True)
     return [docs[i] for s, i in scored[:k] if s > 0]
 
@@ -141,7 +208,7 @@ def vowelled_quote(doc, verses):
             continue
         key = (doc["book"], int(m.group(1)), int(m.group(2)))
         if key in verses:
-            out.append((ref, verses[key]))
+            out.append((ref, clean_he_display(verses[key])))
     return out
 
 
@@ -242,27 +309,80 @@ def selftest(docs, verses):
     return ok
 
 
+def load_session(path=BASE / "output/god_chat_session.json"):
+    """Б4: сессионное состояние диалога (память о проступках/благодати)."""
+    if Path(path).exists():
+        return json.load(open(path, encoding="utf-8"))
+    return {"offenses": 0, "grace": 0, "history": []}
+
+
+def save_session(sess, path=BASE / "output/god_chat_session.json"):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(sess, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def update_session(sess, query):
+    """Классифицирует реплику и обновляет счётчики: непослушание/идолы копят
+    проступки, покаяние/верность — гасят; возвращает карточку поведения."""
+    import god_behavior
+    profile = json.load(open(BASE / "output/god_behavior_profile.json", encoding="utf-8"))
+    cls = god_behavior.classify(query)
+    if cls["trigger"] == "disobedience" or cls["heavy"]:
+        sess["offenses"] += 1
+    if cls["confession"] or cls["trigger"] in ("faithfulness", "gratitude"):
+        sess["offenses"] = max(0, sess["offenses"] - 1)
+        sess["grace"] += 1
+    sess["history"].append({"q": query, "trigger": cls["trigger"], "confession": cls["confession"]})
+    save_session(sess)
+    card = god_behavior.respond(query, profile, offenses=sess["offenses"])
+    return cls, card
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--message", help="реплика человека (иначе интерактивный режим)")
     ap.add_argument("--test", action="store_true", help="без LLM: детерминированная композиция из реестра")
     ap.add_argument("--free", action="store_true", help="свободный режим (импровизация в стиле корпуса)")
     ap.add_argument("--behavior", action="store_true", help="перед речью показать карточку поведения (god_behavior)")
+    ap.add_argument("--memory", action="store_true", help="Б4: диалоговая память (накопление проступков/благодати, файл output/god_chat_session.json)")
+    ap.add_argument("--reset", action="store_true", help="сбросить диалоговую память")
     ap.add_argument("--selftest", action="store_true")
     args = ap.parse_args()
 
     docs, verses = load_corpus()
     print(f"[god_chat] корпус: {len(docs)} эпизодов, огласовки: {len(verses)} стихов")
 
+    if args.reset:
+        p = BASE / "output/god_chat_session.json"
+        if p.exists():
+            p.unlink()
+        print("[память диалога сброшена]")
+
     if args.selftest:
         sys.exit(0 if selftest(docs, verses) else 1)
 
+    sess = load_session() if args.memory else None
+
+    def with_memory(q):
+        """Одна реплика с памятью: карточка поведения + ответ."""
+        cls, card = update_session(sess, q)
+        print(f"[память: проступки={sess['offenses']} благодать={sess['grace']}]")
+        print(god_behavior_render(card) + "\n")
+        return answer(q, docs, verses, free=args.free, use_llm=not args.test)
+
+    import god_behavior
+    god_behavior_render = god_behavior.render
+
     if args.message:
-        if args.behavior:
-            import god_behavior
-            profile = json.load(open(Path("C:/GOD2/output/god_behavior_profile.json"), encoding="utf-8"))
-            print(god_behavior.render(god_behavior.respond(args.message, profile)) + "\n")
-        a = answer(args.message, docs, verses, free=args.free, use_llm=not args.test)
+        if args.behavior or args.memory:
+            if args.memory:
+                a = with_memory(args.message)
+            else:
+                profile = json.load(open(BASE / "output/god_behavior_profile.json", encoding="utf-8"))
+                print(god_behavior_render(god_behavior.respond(args.message, profile)) + "\n")
+                a = answer(args.message, docs, verses, free=args.free, use_llm=not args.test)
+        else:
+            a = answer(args.message, docs, verses, free=args.free, use_llm=not args.test)
         print(f"\n=== עברית ===\n{a['he']}\n\n=== огласовка ===\n{a['nik']}\n\n=== русский подстрочник ===\n{a['ru']}\n\n=== источники ===\n" +
               "\n".join(a["src"]) if isinstance(a["src"], list) else a["src"])
         return
@@ -275,7 +395,10 @@ def main():
             break
         if not q:
             break
-        a = answer(q, docs, verses, free=args.free, use_llm=not args.test)
+        if args.memory:
+            a = with_memory(q)
+        else:
+            a = answer(q, docs, verses, free=args.free, use_llm=not args.test)
         print(f"\n[эпизоды: {', '.join(a['episodes'])}]")
         print(f"עברית: {a['he']}")
         print(f"огласовка: {a['nik']}")
