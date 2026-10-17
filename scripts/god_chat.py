@@ -123,6 +123,52 @@ RU_SYN = [
 ]
 
 
+# EN intake -> русские концепты для retrieval (вопросы принимаются на любом языке;
+# полноценный машинный перевод в ЛЮБЫЙ бэкенд отдаётся LLM-пути, здесь — частотный
+# мост для частых вопрошаний)
+EN_MAP = {
+    "fear": "страх", "afraid": "страх", "scared": "страх",
+    "anger": "гнев", "angry": "гнев", "wrath": "гнев",
+    "destroy": "разруш", "destruction": "разруш",
+    "punish": "наказ", "punishment": "наказ",
+    "mercy": "милос", "forgive": "простил", "forgiveness": "прощение",
+    "silence": "молчание", "quiet": "молчание",
+    "pray": "молитва", "prayer": "молитва",
+    "save": "спас", "rescue": "спас", "deliver": "избав",
+    "sin": "грех", "sinned": "согрешил",
+    "love": "люб", "covenant": "завет", "promise": "обет",
+    "temple": "храм", "idol": "идол", "dream": "сон",
+    "die": "умер", "death": "смерть", "died": "умер",
+    "why": "почему", "how": "как", "who": "кто", "what": "что",
+    "listen": "слыш", "hear": "слыш", "answer": "отвеча",
+    "command": "повелен", "law": "закон", "torah": "тор",
+}
+
+
+def en_tokens(text: str):
+    return [t for t in re.findall(r"[a-z]{2,}", text.lower()) if t not in EN_STOP]
+
+
+EN_STOP = set("the and are for you your its with from that this have has had was were will would could should there here whom whose them they their our ours ours whom".split())
+
+
+def en_to_ru_enriched(text: str):
+    """EN-запрос -> русские концепты (псевдотокены) для doc-matching."""
+    words = re.findall(r"[a-z']{2,}", text.lower())
+    out = []
+    for w in words:
+        if w in EN_MAP:
+            out.append(EN_MAP[w])
+        else:
+            stem = w.rstrip("".join("edings"))
+            for p in ("es", "ing", "ed"):
+                if w.endswith(p) and len(w) > len(p) + 2:
+                    stem = w[:-len(p)]
+                    if stem in EN_MAP:
+                        out.append(EN_MAP[stem])
+    return " ".join(out)
+
+
 def _syn_roots(tokens):
     """Каждый токен -> множество корней его синонимического пучка (для реколла)."""
     out = set(tokens)
@@ -159,7 +205,7 @@ def retrieve(query, docs, k=TOP_K):
     """BM25-подобный поиск: IDF по корпусу, нормализация длины документа,
     синонимические пучки для русского, префиксно-суффиксная нормализация иврита."""
     from collections import Counter
-    ru_q = rus_tokens(query)
+    ru_q = rus_tokens(query) | rus_tokens(en_to_ru_enriched(query))
     he_q = _he_roots(he_tokens(strip_nikud(query)))
     if not ru_q and not he_q:
         return []
