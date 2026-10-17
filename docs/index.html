@@ -273,39 +273,152 @@ function chatReply(q){
     return {hits,trig,probs:out};
   });
 }
+// ==================== ЧАТ: живой режим (LLM-бэкенд посетителя) ====================
+// Ключи НЕ хранятся на сервере: endpoint + (опц.) ключ — в localStorage браузера.
+// Бэкенды: LM Studio http://127.0.0.1:1234, Ollama http://127.0.0.1:11434,
+// или любой OpenAI-совместимый endpoint с ключом (тоже остаётся в браузере).
+const CHAT_CFG=JSON.parse(localStorage.getItem('god_cfg')||'{"endpoint":"http://127.0.0.1:1234/v1/chat/completions","model":"","key":""}');
+function chatSaveCfg(){localStorage.setItem('god_cfg',JSON.stringify(CHAT_CFG));}
+const CHAT_SYS=`Ты — исследовательская имитация образа YHWH, извлечённого из Танаха (реестр эпизодов v2).
+Ты пишешь (не говоришь) на библейском иврите. СТРОГИЙ РЕЖИМ: твоя ивритская реплика
+составляется ТОЛЬКО из данных тебе фрагментов god_speech_plain — ты можешь их
+комбинировать и сокращать, но не добавлять слов вне их лексики.
+
+Формат ответа строго такой (вопрос мог прийти на любом языке — отвечай по существу вопроса):
+[HEBREW]
+<консонантный иврит — композиция данных цитат>
+[NIKKUD]
+<та же реплика с огласовкой, по образцу данных огласованных стихов>
+[Russian]
+<дословный русский подстрочник реплики, построчно>
+[English]
+<дословный английский перевод той же реплики>
+[Hebrew Modern]
+<та же реплика на современном иврите (иврит-иври), для читающего нового иврита>
+[SOURCES]
+<ссылки на эпизоды-источники: книга стихи>
+Никакого текста вне этих секций.`;
+const SECS=["[HEBREW]","[NIKKUD]","[Russian]","[English]","[Hebrew Modern]","[SOURCES]"];
+function chatParseSections(text){
+  const out={};
+  for(const tag of SECS){
+    const i=text.indexOf(tag); if(i<0) continue;
+    const rest=text.slice(i+tag.length);
+    let m=rest.length;
+    for(const t2 of SECS){ const j=rest.indexOf(t2); if(j>=0&&j<m) m=j; }
+    out[tag]=rest.slice(0,m).trim();
+  }
+  return out;
+}
+async function chatLLM(q,docs){
+  const hits=chatRetrieve(q,docs).slice(0,6);
+  const trig=classifyRu(q); const tt=A.trigger_table[trig]; const probs={};
+  if(tt) for(const[k,v]of Object.entries(tt)){if(k!=="n")probs[k]=v;}
+  const ctx=hits.map(h=>({book:h[1],span:h[2].span,trigger:h[2].trigger,outcome:h[2].outcome,
+    god_speech_plain:h[2].god_speech_plain,summary_ru:h[2].summary_ru,god_action:h[2].god_action}));
+  const body={messages:[
+    {role:"system",content:CHAT_SYS},
+    {role:"user",content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:",JSON.stringify(ctx),"","Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs),"","Реплика человека: "+q].join(String.fromCharCode(10))}],
+    temperature:0.3};
+  if(CHAT_CFG.model) body.model=CHAT_CFG.model;
+  const hdr={"Content-Type":"application/json"};
+  if(CHAT_CFG.key) hdr["Authorization"]="Bearer "+CHAT_CFG.key;
+  const r=await fetch(CHAT_CFG.endpoint,{method:"POST",headers:hdr,body:JSON.stringify(body)});
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  const j=await r.json();
+  const text=(j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content)||"";
+  return {sections:chatParseSections(text), hits};
+}
 function chat_t(m){
-  m.innerHTML=`<h2>Чат с имитацией (консервативный режим)</h2>
-  <div class="note">Вопрос на любом языке. Ответ — <b>реальная речь</b> эпизода-прецедента из корпуса (без выдумки):
-  библейский иврит + перевод + источники; карточка ожидаемой реакции — из профиля
-  P(исход | триггер). Свободная композиция в этом стиле (как в сессии с моделью) — на LLM-бэкенде.</div>
-  <div class="filters"><input id="cq" style="flex:1" placeholder="что скажете Богу?…"></div>
+  let mode='live';
+  m.innerHTML=`<h2>Чат с имитацией</h2>
+  <div class="filters">
+    <button id="m_live" class="on" style="padding:8px 16px;border-radius:8px;background:#232837;border:1px solid var(--acc);color:var(--fg);cursor:pointer">Живой (LLM)</button>
+    <button id="m_cons" style="padding:8px 16px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--dim);cursor:pointer">Консервативный (цитаты корпуса)</button>
+    <button id="m_cfg" style="padding:8px 16px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--dim);cursor:pointer">⚙ настройки бэкенда</button>
+  </div>
+  <div id="chatcfg" style="display:none" class="card">
+    <div class="note">Ключи остаются в браузере (localStorage) — на сервер не уходят. LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions</div>
+    <div class="filters" style="margin-top:8px">
+      <input id="ce_ep" placeholder="endpoint" value="${chat_escape(CHAT_CFG.endpoint)}" style="flex:1">
+      <input id="ce_md" placeholder="model (опц.)" value="${chat_escape(CHAT_CFG.model||"")}" style="width:180px">
+      <input id="ce_ky" placeholder="API key (опц.)" value="${chat_escape(CHAT_CFG.key||"")}" style="width:180px">
+      <button id="ce_sv" style="padding:8px 16px;border-radius:8px;background:var(--accent,#2a3040);border:1px solid var(--line);cursor:pointer">сохранить</button>
+    </div>
+  </div>
+  <div class="filters" style="margin-top:12px"><input id="cq" style="flex:1" placeholder="что скажете Богу? (любой язык)…"></div>
   <div id="clog"></div>`;
+  document.getElementById('m_live').onclick=()=>{mode='live';toggle_buttons()};
+  document.getElementById('m_cons').onclick=()=>{mode='cons';toggle_buttons()};
+  document.getElementById('m_cfg').onclick=()=>{const c=document.getElementById('chatcfg');c.style.display=c.style.display==='block'?'none':'block'};
+  document.getElementById('ce_sv').onclick=()=>{
+    CHAT_CFG.endpoint=document.getElementById('ce_ep').value.trim();
+    CHAT_CFG.model=document.getElementById('ce_md').value.trim();
+    CHAT_CFG.key=document.getElementById('ce_ky').value.trim();
+    chatSaveCfg();
+    document.getElementById('chatcfg').insertAdjacentHTML('beforeend','<div class="note">сохранено</div>');
+  };
+  function toggle_buttons(){
+    document.getElementById('m_live').className=mode==='live'?'on':'';
+    document.getElementById('m_live').style.cssText=mode==='live'?'padding:8px 16px;border-radius:8px;background:#232837;border:1px solid var(--acc);color:var(--fg);cursor:pointer':'padding:8px 16px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--dim);cursor:pointer';
+    document.getElementById('m_cons').className=mode==='cons'?'on':'';
+    document.getElementById('m_cons').style.cssText=mode==='cons'?'padding:8px 16px;border-radius:8px;background:#232837;border:1px solid var(--acc);color:var(--fg);cursor:pointer':'padding:8px 16px;border-radius:8px;background:var(--card);border:1px solid var(--line);color:var(--dim);cursor:pointer';
+  }
+  const log=document.getElementById('clog');
+  const hist=[];
   const send=()=>{
     const q=document.getElementById('cq').value.trim(); if(!q) return;
-    document.getElementById('clog').innerHTML='<div class="note">поиск в корпусе…</div>';
-    chatReply(q).then(({hits,trig,probs})=>{
-      const log=document.getElementById('clog');
-      const top=hits.filter(h=>h[2].god_speech_plain)[0]||hits[0];
-      const top3=Object.entries(probs).sort((a,b)=>b[1]-a[1]).slice(0,3)
-        .map(([k,v])=>`<span class="tag ${k}">${k} ${(v*100).toFixed(0)}%</span>`).join('');
-      let hist=log._hist||'';
-      hist+=`<div class="ep" style="cursor:default"><div class="s">Вы</div><div>${esc(q)}</div></div>`;
-      if(top){
-        const e=top[2];
-        hist+=`<div class="detail"><h3>Ответ (прецедент: ${top[1]} ${e.span.start}–${e.span.end})</h3>
-        <div class="he">${esc(e.god_speech_plain.slice(0,600))}${e.god_speech_plain.length>600?'…':''}</div>
-        <div class="sect"><div class="h">Действие</div>${esc(e.god_action)}</div>
-        <div class="sect"><div class="h">Резюме</div>${esc(e.summary_ru)}</div>
-        <div style="margin-top:8px">${['outcome punishment blessing silence rescue answer_granted covenant compliance delayed refusal unclear'].includes(e.outcome)?`<span class="tag ${e.outcome}">${e.outcome}</span>`:''}<span class="tag">${e.direction}</span><span class="tag">${e.trigger}</span><span class="tag">тяжесть ${e.severity}</span></div>
-        <div class="src">ожидаемая реакция по триггеру ${trig}: ${top3}</div>
-        <div class="src">источники: ${top[1]} ${e.span.start}–${e.span.end}</div></div>`;
-      } else hist+=`<div class="detail">В корпусе нет релевантного прецедента для этой реплики.</div>`;
-      log.innerHTML=hist; log._hist=hist;
-      document.getElementById('cq').value='';
+    hist.push(["Вы",q]); draw();
+    if(mode==='cons'){
+      const h=chatGetAll().then(docs=>{const hits=chatRetrieve(q,docs).slice(0,3);const trig=classifyRu(q);
+        const tt=A.trigger_table[trig];const probs={};if(tt)for(const[k,v]of Object.entries(tt)){if(k!=="n")probs[k]=v;}
+        render_reply("Бог",{hits,trig,probs});});
+      return;
+    }
+    // живой режим
+    log.insertAdjacentHTML('beforeend','<div class="note" id="typing">модель думает…</div>');
+    chatGetAll().then(docs=>chatLLM(q,docs)).then(r=>{
+      const t=document.getElementById('typing'); if(t) t.remove();
+      render_reply("Бог",{llm:r});
+    }).catch(e=>{
+      const t=document.getElementById('typing'); if(t) t.remove();
+      render_reply("Бог",{error:String(e)});
     });
   };
+  function draw(){
+    log.innerHTML=hist.map(([who,x])=>`<div class="ep" style="cursor:default"><div class="s">${who}</div><div>${esc(x)}</div></div>`).join("");
+  }
+  function render_reply(who,r){
+    let h=`<div class="detail"><h3>${who}</h3>`;
+    if(r.error){ h+=`<div class="note" style="color:var(--bad)">Бэкенд недоступен (${esc(r.error)}). Проверьте настройки (⚙) или запустите LM Studio.</div>`; }
+    else if(r.llm&&r.llm.sections){
+      const s=r.llm.sections;
+      h+=`<div class="sect"><div class="h">בינתק עברית — древний иврит</div><div class="he">${esc(s["[HEBREW]"]||"")}</div></div>`;
+      if(s["[NIKKUD]"]) h+=`<div class="sect"><div class="h">огласовка</div><div class="he small">${esc(s["[NIKKUD]"])}</div></div>`;
+      h+=`<div class="sect"><div class="h">русский подстрочник</div>${esc(s["[Russian]"]||"")}</div>`;
+      if(s["[English]"]) h+=`<div class="sect"><div class="h">English</div>${esc(s["[English]"])}</div></div>`;
+      if(s["[Hebrew Modern]"]) h+=`<div class="sect"><div class="h">עברית מודרנית</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
+      h+=`<div class="src">источники: ${esc(s["[SOURCES]"]||r.llm.hits.map(x=>x[1]+" "+x[2].span.start).join(", "))}</div>`;
+    } else if(r.hits){
+      const trig=r.trig;
+      const out=Object.entries(r.probs).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>`<span class="tag ${k}">${k} ${(v*100).toFixed(0)}%</span>`).join("");
+      const top=r.hits.filter(x=>x[2].god_speech_plain)[0]||r.hits[0];
+      h+=`<div class="note">Консервативный режим: показан реальный эпизод-прецедент корпуса (никакой выдумки).</div>`;
+      if(top){ const e=top[2];
+        h+=`<div class="sect"><div class="h">בינתק עברית (как в корпусе)</div><div class="he">${esc(e.god_speech_plain.slice(0,600))}${e.god_speech_plain.length>600?"…":""}</div></div>`;
+        h+=`<div class="sect"><div class="h">действие</div>${esc(e.god_action)}</div>`;
+        h+=`<div class="sect"><div class="h">о чём речь</div>${esc(e.summary_ru)}</div>`;
+        h+=`<div class="src">источник: ${top[1]} ${e.span.start}–${e.span.end}</div>`;
+      }
+      h+=`<div class="src">ожидаемая реакция по триггеру ${trig}: ${out}</div>`;
+    }
+    h+="</div>";
+    log.insertAdjacentHTML('beforeend',h);
+    document.getElementById('cq').value="";
+  }
   document.getElementById('cq').addEventListener('keydown',ev=>{if(ev.key==='Enter')send()});
 }
+function chat_escape(s){return String(s||"").replace(/&/g,"&").replace(/</g,"<")}
 
 function about(m){
   m.innerHTML=`<h2>О проекте</h2>
