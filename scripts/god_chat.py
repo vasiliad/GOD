@@ -239,13 +239,17 @@ SYSTEM_PROMPT = """Ты — исследовательская имитация 
 составляется ТОЛЬКО из данных тебе фрагментов god_speech_plain — ты можешь их
 комбинировать и сокращать, но не добавлять слов вне их лексики.
 
-Формат ответа строго такой:
+Формат ответа строго такой (вопрос мог прийти на любом языке — отвечай по существу вопроса):
 [HEBREW]
 <консонантный иврит — композиция данных цитат>
 [NIKKUD]
 <та же реплика с огласовкой, по образцу данных огласованных стихов>
 [Russian]
 <дословный русский подстрочник реплики, построчно>
+[English]
+<дословный английский перевод той же реплики>
+[Hebrew Modern]
+<та же реплика на современном иврите (иврит-иври), для читающего нового иврита>
 [SOURCES]
 <ссылки на эпизоды-источники: книга стихи>
 Никакого текста вне этих секций."""
@@ -268,7 +272,8 @@ def build_messages(query, hits, verses):
 
 def parse_sections(text):
     secs = {}
-    for tag, key in [("[HEBREW]", "he"), ("[NIKKUD]", "nik"), ("[Russian]", "ru"), ("[SOURCES]", "src")]:
+    for tag, key in [("[HEBREW]", "he"), ("[NIKKUD]", "nik"), ("[Russian]", "ru"),
+                     ("[English]", "en"), ("[Hebrew Modern]", "he_mod"), ("[SOURCES]", "src")]:
         m = re.search(re.escape(tag) + r"\s*(.*?)(?=\[HEBREW\]|\[NIKKUD\]|\[Russian\]|\[SOURCES\]|$)", text, re.S)
         secs[key] = m.group(1).strip() if m else ""
     return secs
@@ -278,7 +283,9 @@ def answer(query, docs, verses, free=False, use_llm=True):
     hits = retrieve(query, docs)
     if not use_llm:
         he, nik, ru, src = compose_strict_reply(query, docs, hits, verses)
-        return {"he": he, "nik": nik, "ru": ru, "src": src, "episodes": [h["book"] + " " + h["span"]["start"] for h in hits]}
+        return {"he": he, "nik": nik, "ru": ru, "en": "(требуется LLM-бэкенд: DictaLM/любой OpenAI-совместимый)",
+                "he_mod": "(требуется LLM-бэкенд)", "src": src,
+                "episodes": [h["book"] + " " + h["span"]["start"] for h in hits]}
     if free:
         prompt = SYSTEM_PROMPT.replace("СТРОГИЙ РЕЖИМ: твоя ивритская реплика\nсоставляется ТОЛЬКО из данных тебе фрагментов god_speech_plain — ты можешь их\nкомбинировать и сокращать, но не добавлять слов вне их лексики.",
                                        "СВОБОДНЫЙ РЕЖИМ: стиль и лексика — по образцу данных цитат; не цитируй их дословно обязательно.")

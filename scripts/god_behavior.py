@@ -43,7 +43,14 @@ TRIGGER_RULES = [
     ("intercession", ["прости им", "не губи", "пощади", "защити их", "за них", "сбереги их",
                       "не карай их", "сжалься над ними"]),
     ("confession_only", ["согрешил", "согрешила", "прости меня", "раскаиваюсь", "провинился",
-                         "виновен перед тобой", "отступил от тебя"]),
+                         "виновен перед тобой", "отступил от тебя",
+                         # EN intake (вопросы принимаются на любых языках)
+                         "i have sinned", "forgive me", "i repent"]),
+    ("en_distress", ["help me", "save me", "i am afraid", "i'm afraid", "i am scared",
+                     "enemies surround", "i am perishing", "rescue me", "deliver me"]),
+    ("en_prayer", ["i pray", "i beg you", "please hear"]),
+    ("en_inquiry", ["what shall i do", "tell me", "why did you", "who am i"]),
+    ("en_gratitude", ["thank you", "i praise you", "i bless you"]),
     ("complaint", ["почему ты", "зачем ты", "несправедливо", "жалуюсь", "ропщу", "ты покинул",
                    "ты оставил меня", "не заботишься"]),
     ("distress", ["спаси", "погибаю", "беда", "окружили", "напали", "враг одолел", "умираю",
@@ -71,6 +78,10 @@ def classify(message):
             scores.append((s, trig))
     scores.sort(reverse=True)
     trigger = scores[0][1] if scores else "inquiry"
+    # EN-триггеры -> канонические классы корпуса
+    en_map = {"en_distress": "distress", "en_prayer": "prayer", "en_inquiry": "inquiry",
+              "en_gratitude": "gratitude"}
+    trigger = en_map.get(trigger, trigger)
     # confession может сопутствовать любому триггеру
     confession = any(k in m for k in ["согрешил", "согрешила", "прости", "раскаиваюсь", "провинился"])
     if trigger == "confession_only":
