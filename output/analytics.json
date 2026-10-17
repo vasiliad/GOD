@@ -1,0 +1,1645 @@
+{
+ "generated": "2026-10-17",
+ "corpus": {
+  "books": 39,
+  "episodes": 2050
+ },
+ "book_order": {
+  "Тора": [
+   "genesis",
+   "Exodus",
+   "Leviticus",
+   "Numbers",
+   "Deuteronomy"
+  ],
+  "Невиим (ранние)": [
+   "Joshua",
+   "Judges",
+   "I_Samuel",
+   "II_Samuel",
+   "I_Kings",
+   "II_Kings"
+  ],
+  "Невиим (поздние)": [
+   "Isaiah",
+   "Jeremiah",
+   "Ezekiel",
+   "Hosea",
+   "Joel",
+   "Amos",
+   "Obadiah",
+   "Jonah",
+   "Micah",
+   "Nahum",
+   "Habakkuk",
+   "Zephaniah",
+   "Haggai",
+   "Zechariah",
+   "Malachi"
+  ],
+  "Кетувим": [
+   "Psalms",
+   "Proverbs",
+   "Job",
+   "Song_of_Songs",
+   "Ruth",
+   "Lamentations",
+   "Ecclesiastes",
+   "Esther",
+   "Daniel",
+   "Ezra",
+   "Nehemiah",
+   "I_Chronicles",
+   "II_Chronicles"
+  ]
+ },
+ "per_book": {
+  "genesis": {
+   "episodes": 101,
+   "outcome_p": {
+    "blessing": 0.238,
+    "compliance": 0.149,
+    "silence": 0.149,
+    "answer_granted": 0.109,
+    "punishment": 0.099,
+    "revelation": 0.079,
+    "rescue": 0.069,
+    "covenant": 0.04,
+    "delayed": 0.03,
+    "unclear": 0.03,
+    "refusal": 0.01
+   },
+   "direction_p": {
+    "god_initiated": 0.366,
+    "human_initiated": 0.356,
+    "divine_action": 0.277
+   },
+   "via_p": {
+    "direct": 0.683,
+    "unclear": 0.109,
+    "internal": 0.079,
+    "dream": 0.069,
+    "angel": 0.04,
+    "vision": 0.02
+   },
+   "top_triggers": {
+    "unprompted": 24,
+    "covenant_follow_up": 17,
+    "distress": 15,
+    "disobedience": 12,
+    "gratitude": 11
+   },
+   "severity_mean": 1.75,
+   "silence_rate": 0.149,
+   "punishment_rate": 0.099,
+   "speech_rate": 0.455,
+   "era": "Тора"
+  },
+  "Exodus": {
+   "episodes": 84,
+   "outcome_p": {
+    "covenant": 0.31,
+    "revelation": 0.19,
+    "punishment": 0.155,
+    "compliance": 0.131,
+    "answer_granted": 0.071,
+    "blessing": 0.036,
+    "unclear": 0.036,
+    "rescue": 0.036,
+    "refusal": 0.024,
+    "delayed": 0.012
+   },
+   "direction_p": {
+    "god_initiated": 0.762,
+    "human_initiated": 0.167,
+    "divine_action": 0.071
+   },
+   "via_p": {
+    "direct": 0.583,
+    "prophet": 0.357,
+    "unclear": 0.06
+   },
+   "top_triggers": {
+    "covenant_follow_up": 46,
+    "disobedience": 17,
+    "distress": 5,
+    "complaint": 4,
+    "faithfulness": 3
+   },
+   "severity_mean": 3.48,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.155,
+   "speech_rate": 0.81,
+   "era": "Тора"
+  },
+  "Leviticus": {
+   "episodes": 45,
+   "outcome_p": {
+    "revelation": 0.8,
+    "compliance": 0.089,
+    "punishment": 0.067,
+    "delayed": 0.022,
+    "blessing": 0.022
+   },
+   "direction_p": {
+    "god_initiated": 0.911,
+    "divine_action": 0.044,
+    "human_initiated": 0.044
+   },
+   "via_p": {
+    "direct": 0.933,
+    "prophet": 0.067
+   },
+   "top_triggers": {
+    "covenant_follow_up": 21,
+    "unprompted": 19,
+    "inquiry": 3,
+    "disobedience": 2
+   },
+   "severity_mean": 2.58,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.067,
+   "speech_rate": 0.933,
+   "era": "Тора"
+  },
+  "Numbers": {
+   "episodes": 94,
+   "outcome_p": {
+    "revelation": 0.319,
+    "compliance": 0.234,
+    "punishment": 0.16,
+    "answer_granted": 0.128,
+    "blessing": 0.064,
+    "refusal": 0.032,
+    "covenant": 0.021,
+    "unclear": 0.021,
+    "silence": 0.011,
+    "delayed": 0.011
+   },
+   "direction_p": {
+    "god_initiated": 0.617,
+    "human_initiated": 0.298,
+    "divine_action": 0.085
+   },
+   "via_p": {
+    "direct": 0.883,
+    "unclear": 0.053,
+    "prophet": 0.032,
+    "vision": 0.021,
+    "angel": 0.011
+   },
+   "top_triggers": {
+    "unprompted": 46,
+    "inquiry": 13,
+    "complaint": 11,
+    "covenant_follow_up": 9,
+    "disobedience": 8
+   },
+   "severity_mean": 2.27,
+   "silence_rate": 0.011,
+   "punishment_rate": 0.16,
+   "speech_rate": 0.819,
+   "era": "Тора"
+  },
+  "Deuteronomy": {
+   "episodes": 116,
+   "outcome_p": {
+    "covenant": 0.595,
+    "blessing": 0.121,
+    "revelation": 0.086,
+    "punishment": 0.069,
+    "answer_granted": 0.052,
+    "refusal": 0.026,
+    "rescue": 0.026,
+    "silence": 0.017,
+    "compliance": 0.009
+   },
+   "direction_p": {
+    "god_initiated": 0.828,
+    "human_initiated": 0.103,
+    "divine_action": 0.069
+   },
+   "via_p": {
+    "prophet": 0.767,
+    "direct": 0.233
+   },
+   "top_triggers": {
+    "covenant_follow_up": 90,
+    "unprompted": 8,
+    "distress": 5,
+    "disobedience": 5,
+    "intercession": 4
+   },
+   "severity_mean": 2.76,
+   "silence_rate": 0.017,
+   "punishment_rate": 0.069,
+   "speech_rate": 0.862,
+   "era": "Тора"
+  },
+  "Joshua": {
+   "episodes": 41,
+   "outcome_p": {
+    "compliance": 0.268,
+    "revelation": 0.146,
+    "covenant": 0.122,
+    "punishment": 0.122,
+    "unclear": 0.098,
+    "answer_granted": 0.098,
+    "rescue": 0.073,
+    "blessing": 0.073
+   },
+   "direction_p": {
+    "human_initiated": 0.439,
+    "god_initiated": 0.317,
+    "divine_action": 0.244
+   },
+   "via_p": {
+    "unclear": 0.561,
+    "direct": 0.341,
+    "prophet": 0.073,
+    "angel": 0.024
+   },
+   "top_triggers": {
+    "covenant_follow_up": 21,
+    "faithfulness": 9,
+    "disobedience": 4,
+    "inquiry": 3,
+    "distress": 2
+   },
+   "severity_mean": 2.73,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.122,
+   "speech_rate": 0.366,
+   "era": "Невиим (ранние)"
+  },
+  "Judges": {
+   "episodes": 39,
+   "outcome_p": {
+    "unclear": 0.333,
+    "rescue": 0.231,
+    "answer_granted": 0.154,
+    "punishment": 0.154,
+    "revelation": 0.077,
+    "compliance": 0.026,
+    "delayed": 0.026
+   },
+   "direction_p": {
+    "human_initiated": 0.564,
+    "divine_action": 0.231,
+    "god_initiated": 0.205
+   },
+   "via_p": {
+    "unclear": 0.462,
+    "direct": 0.359,
+    "prophet": 0.103,
+    "angel": 0.077
+   },
+   "top_triggers": {
+    "distress": 10,
+    "disobedience": 7,
+    "unprompted": 5,
+    "inquiry": 3,
+    "covenant_follow_up": 3
+   },
+   "severity_mean": 3.77,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.154,
+   "speech_rate": 0.333,
+   "era": "Невиим (ранние)"
+  },
+  "I_Samuel": {
+   "episodes": 41,
+   "outcome_p": {
+    "punishment": 0.293,
+    "rescue": 0.22,
+    "revelation": 0.146,
+    "answer_granted": 0.098,
+    "blessing": 0.073,
+    "compliance": 0.049,
+    "silence": 0.049,
+    "covenant": 0.049,
+    "unclear": 0.024
+   },
+   "direction_p": {
+    "human_initiated": 0.463,
+    "divine_action": 0.317,
+    "god_initiated": 0.22
+   },
+   "via_p": {
+    "direct": 0.439,
+    "unclear": 0.293,
+    "prophet": 0.146,
+    "internal": 0.122
+   },
+   "top_triggers": {
+    "unprompted": 11,
+    "disobedience": 7,
+    "faithfulness": 6,
+    "inquiry": 4,
+    "covenant_follow_up": 4
+   },
+   "severity_mean": 3.41,
+   "silence_rate": 0.049,
+   "punishment_rate": 0.293,
+   "speech_rate": 0.317,
+   "era": "Невиим (ранние)"
+  },
+  "II_Samuel": {
+   "episodes": 33,
+   "outcome_p": {
+    "punishment": 0.273,
+    "rescue": 0.182,
+    "answer_granted": 0.152,
+    "covenant": 0.121,
+    "blessing": 0.121,
+    "unclear": 0.091,
+    "revelation": 0.03,
+    "delayed": 0.03
+   },
+   "direction_p": {
+    "human_initiated": 0.545,
+    "divine_action": 0.303,
+    "god_initiated": 0.152
+   },
+   "via_p": {
+    "direct": 0.455,
+    "unclear": 0.394,
+    "prophet": 0.152
+   },
+   "top_triggers": {
+    "disobedience": 8,
+    "unprompted": 5,
+    "distress": 4,
+    "inquiry": 3,
+    "covenant_follow_up": 3
+   },
+   "severity_mean": 3.3,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.273,
+   "speech_rate": 0.333,
+   "era": "Невиим (ранние)"
+  },
+  "I_Kings": {
+   "episodes": 49,
+   "outcome_p": {
+    "punishment": 0.367,
+    "answer_granted": 0.163,
+    "blessing": 0.102,
+    "revelation": 0.102,
+    "covenant": 0.082,
+    "compliance": 0.061,
+    "unclear": 0.041,
+    "delayed": 0.041,
+    "rescue": 0.041
+   },
+   "direction_p": {
+    "god_initiated": 0.449,
+    "divine_action": 0.306,
+    "human_initiated": 0.245
+   },
+   "via_p": {
+    "direct": 0.347,
+    "prophet": 0.327,
+    "unclear": 0.184,
+    "internal": 0.061,
+    "dream": 0.041,
+    "angel": 0.02,
+    "vision": 0.02
+   },
+   "top_triggers": {
+    "disobedience": 16,
+    "unprompted": 11,
+    "inquiry": 5,
+    "covenant_follow_up": 4,
+    "prayer": 3
+   },
+   "severity_mean": 2.84,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.367,
+   "speech_rate": 0.551,
+   "era": "Невиим (ранние)"
+  },
+  "II_Kings": {
+   "episodes": 79,
+   "outcome_p": {
+    "punishment": 0.329,
+    "rescue": 0.139,
+    "unclear": 0.139,
+    "blessing": 0.101,
+    "answer_granted": 0.089,
+    "revelation": 0.063,
+    "covenant": 0.051,
+    "compliance": 0.051,
+    "delayed": 0.025,
+    "refusal": 0.013
+   },
+   "direction_p": {
+    "human_initiated": 0.38,
+    "god_initiated": 0.316,
+    "divine_action": 0.304
+   },
+   "via_p": {
+    "prophet": 0.443,
+    "direct": 0.266,
+    "unclear": 0.266,
+    "angel": 0.025
+   },
+   "top_triggers": {
+    "disobedience": 23,
+    "unprompted": 17,
+    "distress": 13,
+    "faithfulness": 8,
+    "inquiry": 6
+   },
+   "severity_mean": 3.29,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.329,
+   "speech_rate": 0.367,
+   "era": "Невиим (ранние)"
+  },
+  "Isaiah": {
+   "episodes": 210,
+   "outcome_p": {
+    "punishment": 0.376,
+    "revelation": 0.224,
+    "blessing": 0.133,
+    "rescue": 0.09,
+    "answer_granted": 0.057,
+    "delayed": 0.038,
+    "unclear": 0.029,
+    "covenant": 0.019,
+    "refusal": 0.014,
+    "silence": 0.01,
+    "compliance": 0.01
+   },
+   "direction_p": {
+    "god_initiated": 0.819,
+    "human_initiated": 0.133,
+    "divine_action": 0.048
+   },
+   "via_p": {
+    "prophet": 0.876,
+    "direct": 0.067,
+    "unclear": 0.029,
+    "vision": 0.024,
+    "angel": 0.005
+   },
+   "top_triggers": {
+    "unprompted": 125,
+    "disobedience": 38,
+    "distress": 16,
+    "covenant_follow_up": 10,
+    "gratitude": 7
+   },
+   "severity_mean": 2.91,
+   "silence_rate": 0.01,
+   "punishment_rate": 0.376,
+   "speech_rate": 0.852,
+   "era": "Невиим (поздние)"
+  },
+  "Jeremiah": {
+   "episodes": 229,
+   "outcome_p": {
+    "punishment": 0.463,
+    "revelation": 0.275,
+    "answer_granted": 0.052,
+    "silence": 0.044,
+    "unclear": 0.044,
+    "rescue": 0.035,
+    "refusal": 0.026,
+    "compliance": 0.026,
+    "covenant": 0.017,
+    "delayed": 0.009,
+    "blessing": 0.009
+   },
+   "direction_p": {
+    "god_initiated": 0.803,
+    "human_initiated": 0.17,
+    "divine_action": 0.026
+   },
+   "via_p": {
+    "prophet": 0.782,
+    "direct": 0.17,
+    "unclear": 0.031,
+    "vision": 0.017
+   },
+   "top_triggers": {
+    "unprompted": 112,
+    "disobedience": 63,
+    "complaint": 18,
+    "distress": 10,
+    "faithfulness": 6
+   },
+   "severity_mean": 3.49,
+   "silence_rate": 0.044,
+   "punishment_rate": 0.463,
+   "speech_rate": 0.852,
+   "era": "Невиим (поздние)"
+  },
+  "Ezekiel": {
+   "episodes": 137,
+   "outcome_p": {
+    "punishment": 0.511,
+    "revelation": 0.336,
+    "blessing": 0.051,
+    "compliance": 0.029,
+    "covenant": 0.029,
+    "answer_granted": 0.015,
+    "refusal": 0.015,
+    "delayed": 0.007,
+    "rescue": 0.007
+   },
+   "direction_p": {
+    "god_initiated": 0.934,
+    "human_initiated": 0.036,
+    "divine_action": 0.029
+   },
+   "via_p": {
+    "prophet": 0.723,
+    "vision": 0.241,
+    "direct": 0.036
+   },
+   "top_triggers": {
+    "unprompted": 98,
+    "disobedience": 25,
+    "covenant_follow_up": 8,
+    "inquiry": 2,
+    "complaint": 2
+   },
+   "severity_mean": 3.58,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.511,
+   "speech_rate": 0.964,
+   "era": "Невиим (поздние)"
+  },
+  "Hosea": {
+   "episodes": 32,
+   "outcome_p": {
+    "punishment": 0.719,
+    "blessing": 0.094,
+    "compliance": 0.062,
+    "unclear": 0.062,
+    "covenant": 0.031,
+    "rescue": 0.031
+   },
+   "direction_p": {
+    "god_initiated": 1.0
+   },
+   "via_p": {
+    "prophet": 0.875,
+    "direct": 0.125
+   },
+   "top_triggers": {
+    "disobedience": 22,
+    "unprompted": 7,
+    "distress": 2,
+    "covenant_follow_up": 1
+   },
+   "severity_mean": 3.97,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.719,
+   "speech_rate": 1.0,
+   "era": "Невиим (поздние)"
+  },
+  "Joel": {
+   "episodes": 8,
+   "outcome_p": {
+    "revelation": 0.375,
+    "punishment": 0.25,
+    "delayed": 0.125,
+    "answer_granted": 0.125,
+    "blessing": 0.125
+   },
+   "direction_p": {
+    "god_initiated": 0.875,
+    "human_initiated": 0.125
+   },
+   "via_p": {
+    "prophet": 0.875,
+    "direct": 0.125
+   },
+   "top_triggers": {
+    "unprompted": 6,
+    "intercession": 1,
+    "disobedience": 1
+   },
+   "severity_mean": 3.5,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.25,
+   "speech_rate": 1.0,
+   "era": "Невиим (поздние)"
+  },
+  "Amos": {
+   "episodes": 38,
+   "outcome_p": {
+    "punishment": 0.763,
+    "unclear": 0.079,
+    "answer_granted": 0.053,
+    "revelation": 0.026,
+    "silence": 0.026,
+    "rescue": 0.026,
+    "blessing": 0.026
+   },
+   "direction_p": {
+    "god_initiated": 0.974,
+    "human_initiated": 0.026
+   },
+   "via_p": {
+    "prophet": 0.842,
+    "vision": 0.132,
+    "unclear": 0.026
+   },
+   "top_triggers": {
+    "disobedience": 18,
+    "unprompted": 17,
+    "intercession": 2,
+    "complaint": 1
+   },
+   "severity_mean": 3.97,
+   "silence_rate": 0.026,
+   "punishment_rate": 0.763,
+   "speech_rate": 0.974,
+   "era": "Невиим (поздние)"
+  },
+  "Obadiah": {
+   "episodes": 3,
+   "outcome_p": {
+    "punishment": 1.0
+   },
+   "direction_p": {
+    "god_initiated": 1.0
+   },
+   "via_p": {
+    "prophet": 1.0
+   },
+   "top_triggers": {
+    "disobedience": 2,
+    "unprompted": 1
+   },
+   "severity_mean": 4.67,
+   "silence_rate": 0.0,
+   "punishment_rate": 1.0,
+   "speech_rate": 1.0,
+   "era": "Невиим (поздние)"
+  },
+  "Jonah": {
+   "episodes": 9,
+   "outcome_p": {
+    "revelation": 0.222,
+    "rescue": 0.222,
+    "refusal": 0.111,
+    "compliance": 0.111,
+    "answer_granted": 0.111,
+    "delayed": 0.111,
+    "unclear": 0.111
+   },
+   "direction_p": {
+    "human_initiated": 0.444,
+    "god_initiated": 0.333,
+    "divine_action": 0.222
+   },
+   "via_p": {
+    "direct": 0.778,
+    "unclear": 0.222
+   },
+   "top_triggers": {
+    "distress": 3,
+    "unprompted": 2,
+    "divine_test": 2,
+    "disobedience": 1,
+    "complaint": 1
+   },
+   "severity_mean": 3.0,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.556,
+   "era": "Невиим (поздние)"
+  },
+  "Micah": {
+   "episodes": 27,
+   "outcome_p": {
+    "punishment": 0.37,
+    "rescue": 0.148,
+    "revelation": 0.111,
+    "blessing": 0.111,
+    "delayed": 0.111,
+    "answer_granted": 0.074,
+    "silence": 0.037,
+    "covenant": 0.037
+   },
+   "direction_p": {
+    "god_initiated": 0.815,
+    "human_initiated": 0.185
+   },
+   "via_p": {
+    "prophet": 0.963,
+    "internal": 0.037
+   },
+   "top_triggers": {
+    "unprompted": 10,
+    "disobedience": 10,
+    "distress": 3,
+    "covenant_follow_up": 1,
+    "inquiry": 1
+   },
+   "severity_mean": 2.89,
+   "silence_rate": 0.037,
+   "punishment_rate": 0.37,
+   "speech_rate": 0.889,
+   "era": "Невиим (поздние)"
+  },
+  "Nahum": {
+   "episodes": 7,
+   "outcome_p": {
+    "punishment": 0.571,
+    "rescue": 0.286,
+    "revelation": 0.143
+   },
+   "direction_p": {
+    "god_initiated": 1.0
+   },
+   "via_p": {
+    "prophet": 0.857,
+    "vision": 0.143
+   },
+   "top_triggers": {
+    "disobedience": 4,
+    "unprompted": 3
+   },
+   "severity_mean": 3.86,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.571,
+   "speech_rate": 1.0,
+   "era": "Невиим (поздние)"
+  },
+  "Habakkuk": {
+   "episodes": 6,
+   "outcome_p": {
+    "revelation": 0.5,
+    "silence": 0.5
+   },
+   "direction_p": {
+    "god_initiated": 0.5,
+    "human_initiated": 0.5
+   },
+   "via_p": {
+    "direct": 0.667,
+    "vision": 0.333
+   },
+   "top_triggers": {
+    "complaint": 4,
+    "unprompted": 1,
+    "prayer": 1
+   },
+   "severity_mean": 3.0,
+   "silence_rate": 0.5,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.5,
+   "era": "Невиим (поздние)"
+  },
+  "Zephaniah": {
+   "episodes": 15,
+   "outcome_p": {
+    "revelation": 0.667,
+    "blessing": 0.267,
+    "unclear": 0.067
+   },
+   "direction_p": {
+    "god_initiated": 0.933,
+    "human_initiated": 0.067
+   },
+   "via_p": {
+    "prophet": 1.0
+   },
+   "top_triggers": {
+    "disobedience": 9,
+    "covenant_follow_up": 4,
+    "unprompted": 1,
+    "distress": 1
+   },
+   "severity_mean": 2.93,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.933,
+   "era": "Невиим (поздние)"
+  },
+  "Haggai": {
+   "episodes": 11,
+   "outcome_p": {
+    "revelation": 0.545,
+    "compliance": 0.182,
+    "blessing": 0.182,
+    "punishment": 0.091
+   },
+   "direction_p": {
+    "god_initiated": 0.909,
+    "divine_action": 0.091
+   },
+   "via_p": {
+    "prophet": 0.909,
+    "internal": 0.091
+   },
+   "top_triggers": {
+    "disobedience": 5,
+    "faithfulness": 2,
+    "unprompted": 2,
+    "distress": 1,
+    "inquiry": 1
+   },
+   "severity_mean": 2.82,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.091,
+   "speech_rate": 0.909,
+   "era": "Невиим (поздние)"
+  },
+  "Zechariah": {
+   "episodes": 52,
+   "outcome_p": {
+    "blessing": 0.365,
+    "revelation": 0.231,
+    "punishment": 0.192,
+    "rescue": 0.135,
+    "answer_granted": 0.038,
+    "compliance": 0.019,
+    "covenant": 0.019
+   },
+   "direction_p": {
+    "god_initiated": 0.981,
+    "human_initiated": 0.019
+   },
+   "via_p": {
+    "prophet": 0.538,
+    "angel": 0.212,
+    "vision": 0.173,
+    "direct": 0.077
+   },
+   "top_triggers": {
+    "unprompted": 43,
+    "covenant_follow_up": 5,
+    "inquiry": 3,
+    "disobedience": 1
+   },
+   "severity_mean": 2.65,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.192,
+   "speech_rate": 0.865,
+   "era": "Невиим (поздние)"
+  },
+  "Malachi": {
+   "episodes": 8,
+   "outcome_p": {
+    "revelation": 0.375,
+    "punishment": 0.375,
+    "blessing": 0.25
+   },
+   "direction_p": {
+    "god_initiated": 0.875,
+    "human_initiated": 0.125
+   },
+   "via_p": {
+    "prophet": 1.0
+   },
+   "top_triggers": {
+    "unprompted": 3,
+    "disobedience": 3,
+    "complaint": 2
+   },
+   "severity_mean": 2.88,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.375,
+   "speech_rate": 1.0,
+   "era": "Невиим (поздние)"
+  },
+  "Psalms": {
+   "episodes": 178,
+   "outcome_p": {
+    "silence": 0.365,
+    "unclear": 0.343,
+    "answer_granted": 0.096,
+    "rescue": 0.056,
+    "revelation": 0.056,
+    "blessing": 0.039,
+    "covenant": 0.022,
+    "punishment": 0.017,
+    "delayed": 0.006
+   },
+   "direction_p": {
+    "human_initiated": 0.899,
+    "god_initiated": 0.079,
+    "divine_action": 0.022
+   },
+   "via_p": {
+    "direct": 0.949,
+    "unclear": 0.028,
+    "internal": 0.017,
+    "vision": 0.006
+   },
+   "top_triggers": {
+    "distress": 54,
+    "gratitude": 42,
+    "prayer": 20,
+    "faithfulness": 18,
+    "complaint": 14
+   },
+   "severity_mean": 2.37,
+   "silence_rate": 0.365,
+   "punishment_rate": 0.017,
+   "speech_rate": 0.129,
+   "era": "Кетувим"
+  },
+  "Proverbs": {
+   "episodes": 59,
+   "outcome_p": {
+    "unclear": 0.898,
+    "revelation": 0.034,
+    "blessing": 0.034,
+    "punishment": 0.017,
+    "silence": 0.017
+   },
+   "direction_p": {
+    "human_initiated": 0.831,
+    "god_initiated": 0.136,
+    "divine_action": 0.034
+   },
+   "via_p": {
+    "unclear": 0.966,
+    "internal": 0.017,
+    "direct": 0.017
+   },
+   "top_triggers": {
+    "unprompted": 58,
+    "prayer": 1
+   },
+   "severity_mean": 1.95,
+   "silence_rate": 0.017,
+   "punishment_rate": 0.017,
+   "speech_rate": 0.136,
+   "era": "Кетувим"
+  },
+  "Job": {
+   "episodes": 49,
+   "outcome_p": {
+    "silence": 0.449,
+    "unclear": 0.245,
+    "revelation": 0.122,
+    "compliance": 0.082,
+    "answer_granted": 0.061,
+    "delayed": 0.02,
+    "blessing": 0.02
+   },
+   "direction_p": {
+    "human_initiated": 0.735,
+    "god_initiated": 0.204,
+    "divine_action": 0.061
+   },
+   "via_p": {
+    "direct": 0.959,
+    "vision": 0.02,
+    "unclear": 0.02
+   },
+   "top_triggers": {
+    "complaint": 36,
+    "unprompted": 4,
+    "divine_test": 3,
+    "distress": 2,
+    "inquiry": 1
+   },
+   "severity_mean": 3.2,
+   "silence_rate": 0.449,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.204,
+   "era": "Кетувим"
+  },
+  "Song_of_Songs": {
+   "episodes": 25,
+   "outcome_p": {
+    "unclear": 1.0
+   },
+   "direction_p": {
+    "human_initiated": 1.0
+   },
+   "via_p": {
+    "unclear": 1.0
+   },
+   "top_triggers": {
+    "unprompted": 15,
+    "inquiry": 6,
+    "distress": 4
+   },
+   "severity_mean": 1.0,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.0,
+   "era": "Кетувим"
+  },
+  "Ruth": {
+   "episodes": 7,
+   "outcome_p": {
+    "blessing": 0.286,
+    "delayed": 0.286,
+    "rescue": 0.143,
+    "unclear": 0.143,
+    "silence": 0.143
+   },
+   "direction_p": {
+    "human_initiated": 0.714,
+    "divine_action": 0.286
+   },
+   "via_p": {
+    "unclear": 1.0
+   },
+   "top_triggers": {
+    "vow": 2,
+    "distress": 1,
+    "complaint": 1,
+    "gratitude": 1,
+    "prayer": 1
+   },
+   "severity_mean": 1.86,
+   "silence_rate": 0.143,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.0,
+   "era": "Кетувим"
+  },
+  "Lamentations": {
+   "episodes": 5,
+   "outcome_p": {
+    "silence": 0.6,
+    "answer_granted": 0.2,
+    "punishment": 0.2
+   },
+   "direction_p": {
+    "human_initiated": 0.8,
+    "divine_action": 0.2
+   },
+   "via_p": {
+    "direct": 0.8,
+    "unclear": 0.2
+   },
+   "top_triggers": {
+    "distress": 3,
+    "disobedience": 1,
+    "prayer": 1
+   },
+   "severity_mean": 4.6,
+   "silence_rate": 0.6,
+   "punishment_rate": 0.2,
+   "speech_rate": 0.2,
+   "era": "Кетувим"
+  },
+  "Ecclesiastes": {
+   "episodes": 21,
+   "outcome_p": {
+    "unclear": 0.81,
+    "delayed": 0.095,
+    "blessing": 0.048,
+    "revelation": 0.048
+   },
+   "direction_p": {
+    "human_initiated": 0.667,
+    "god_initiated": 0.333
+   },
+   "via_p": {
+    "internal": 0.667,
+    "direct": 0.19,
+    "unclear": 0.143
+   },
+   "top_triggers": {
+    "inquiry": 14,
+    "unprompted": 6,
+    "vow": 1
+   },
+   "severity_mean": 1.95,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.333,
+   "era": "Кетувим"
+  },
+  "Esther": {
+   "episodes": 5,
+   "outcome_p": {
+    "answer_granted": 0.4,
+    "rescue": 0.4,
+    "delayed": 0.2
+   },
+   "direction_p": {
+    "divine_action": 0.6,
+    "human_initiated": 0.4
+   },
+   "via_p": {
+    "unclear": 1.0
+   },
+   "top_triggers": {
+    "intercession": 3,
+    "distress": 1,
+    "unprompted": 1
+   },
+   "severity_mean": 2.4,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.0,
+   "era": "Кетувим"
+  },
+  "Daniel": {
+   "episodes": 21,
+   "outcome_p": {
+    "revelation": 0.524,
+    "answer_granted": 0.19,
+    "rescue": 0.095,
+    "punishment": 0.095,
+    "blessing": 0.048,
+    "delayed": 0.048
+   },
+   "direction_p": {
+    "god_initiated": 0.619,
+    "divine_action": 0.19,
+    "human_initiated": 0.19
+   },
+   "via_p": {
+    "angel": 0.381,
+    "dream": 0.238,
+    "direct": 0.19,
+    "vision": 0.143,
+    "unclear": 0.048
+   },
+   "top_triggers": {
+    "inquiry": 8,
+    "unprompted": 4,
+    "faithfulness": 3,
+    "intercession": 2,
+    "disobedience": 2
+   },
+   "severity_mean": 3.43,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.095,
+   "speech_rate": 0.619,
+   "era": "Кетувим"
+  },
+  "Ezra": {
+   "episodes": 22,
+   "outcome_p": {
+    "compliance": 0.545,
+    "blessing": 0.136,
+    "answer_granted": 0.136,
+    "delayed": 0.045,
+    "rescue": 0.045,
+    "silence": 0.045,
+    "covenant": 0.045
+   },
+   "direction_p": {
+    "human_initiated": 0.682,
+    "divine_action": 0.227,
+    "god_initiated": 0.091
+   },
+   "via_p": {
+    "direct": 0.636,
+    "internal": 0.227,
+    "prophet": 0.091,
+    "unclear": 0.045
+   },
+   "top_triggers": {
+    "faithfulness": 6,
+    "gratitude": 4,
+    "covenant_follow_up": 3,
+    "inquiry": 3,
+    "prayer": 2
+   },
+   "severity_mean": 2.09,
+   "silence_rate": 0.045,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.136,
+   "era": "Кетувим"
+  },
+  "Nehemiah": {
+   "episodes": 41,
+   "outcome_p": {
+    "compliance": 0.415,
+    "silence": 0.195,
+    "blessing": 0.122,
+    "unclear": 0.098,
+    "delayed": 0.073,
+    "answer_granted": 0.049,
+    "rescue": 0.024,
+    "covenant": 0.024
+   },
+   "direction_p": {
+    "human_initiated": 0.902,
+    "divine_action": 0.098
+   },
+   "via_p": {
+    "direct": 0.585,
+    "unclear": 0.293,
+    "prophet": 0.073,
+    "internal": 0.049
+   },
+   "top_triggers": {
+    "faithfulness": 12,
+    "distress": 10,
+    "complaint": 4,
+    "intercession": 3,
+    "prayer": 3
+   },
+   "severity_mean": 2.27,
+   "silence_rate": 0.195,
+   "punishment_rate": 0.0,
+   "speech_rate": 0.098,
+   "era": "Кетувим"
+  },
+  "I_Chronicles": {
+   "episodes": 35,
+   "outcome_p": {
+    "blessing": 0.229,
+    "punishment": 0.2,
+    "compliance": 0.171,
+    "answer_granted": 0.114,
+    "rescue": 0.086,
+    "revelation": 0.086,
+    "covenant": 0.057,
+    "unclear": 0.057
+   },
+   "direction_p": {
+    "human_initiated": 0.429,
+    "divine_action": 0.4,
+    "god_initiated": 0.171
+   },
+   "via_p": {
+    "unclear": 0.571,
+    "direct": 0.257,
+    "prophet": 0.086,
+    "angel": 0.057,
+    "internal": 0.029
+   },
+   "top_triggers": {
+    "faithfulness": 8,
+    "disobedience": 7,
+    "unprompted": 5,
+    "gratitude": 4,
+    "distress": 3
+   },
+   "severity_mean": 2.71,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.2,
+   "speech_rate": 0.343,
+   "era": "Кетувим"
+  },
+  "II_Chronicles": {
+   "episodes": 68,
+   "outcome_p": {
+    "blessing": 0.221,
+    "punishment": 0.221,
+    "compliance": 0.103,
+    "revelation": 0.088,
+    "rescue": 0.088,
+    "answer_granted": 0.074,
+    "delayed": 0.074,
+    "unclear": 0.074,
+    "covenant": 0.059
+   },
+   "direction_p": {
+    "human_initiated": 0.559,
+    "divine_action": 0.221,
+    "god_initiated": 0.221
+   },
+   "via_p": {
+    "direct": 0.515,
+    "prophet": 0.265,
+    "unclear": 0.132,
+    "vision": 0.059,
+    "dream": 0.015,
+    "angel": 0.015
+   },
+   "top_triggers": {
+    "faithfulness": 22,
+    "disobedience": 20,
+    "distress": 9,
+    "inquiry": 4,
+    "gratitude": 3
+   },
+   "severity_mean": 2.63,
+   "silence_rate": 0.0,
+   "punishment_rate": 0.221,
+   "speech_rate": 0.309,
+   "era": "Кетувим"
+  }
+ },
+ "per_era": {
+  "Тора": {
+   "episodes": 440,
+   "outcome_p": {
+    "covenant": 0.23,
+    "revelation": 0.227,
+    "compliance": 0.12,
+    "punishment": 0.111,
+    "blessing": 0.109,
+    "answer_granted": 0.08,
+    "silence": 0.041,
+    "rescue": 0.03,
+    "refusal": 0.02,
+    "unclear": 0.018,
+    "delayed": 0.014
+   },
+   "direction_p": {
+    "god_initiated": 0.673,
+    "human_initiated": 0.209,
+    "divine_action": 0.118
+   },
+   "via_p": {
+    "direct": 0.614,
+    "prophet": 0.284,
+    "unclear": 0.048,
+    "internal": 0.018,
+    "dream": 0.016,
+    "angel": 0.011,
+    "vision": 0.009
+   },
+   "top_triggers": {
+    "covenant_follow_up": 183,
+    "unprompted": 100,
+    "disobedience": 44,
+    "distress": 25,
+    "inquiry": 20
+   },
+   "severity_mean": 2.54,
+   "silence_rate": 0.041,
+   "punishment_rate": 0.111,
+   "speech_rate": 0.757
+  },
+  "Невиим (ранние)": {
+   "episodes": 282,
+   "outcome_p": {
+    "punishment": 0.27,
+    "rescue": 0.142,
+    "unclear": 0.121,
+    "answer_granted": 0.121,
+    "revelation": 0.092,
+    "blessing": 0.082,
+    "compliance": 0.074,
+    "covenant": 0.067,
+    "delayed": 0.021,
+    "silence": 0.007,
+    "refusal": 0.004
+   },
+   "direction_p": {
+    "human_initiated": 0.422,
+    "god_initiated": 0.291,
+    "divine_action": 0.287
+   },
+   "via_p": {
+    "direct": 0.351,
+    "unclear": 0.34,
+    "prophet": 0.245,
+    "internal": 0.028,
+    "angel": 0.025,
+    "dream": 0.007,
+    "vision": 0.004
+   },
+   "top_triggers": {
+    "disobedience": 65,
+    "unprompted": 50,
+    "covenant_follow_up": 40,
+    "distress": 36,
+    "faithfulness": 28
+   },
+   "severity_mean": 3.22,
+   "silence_rate": 0.007,
+   "punishment_rate": 0.27,
+   "speech_rate": 0.383
+  },
+  "Невиим (поздние)": {
+   "episodes": 792,
+   "outcome_p": {
+    "punishment": 0.429,
+    "revelation": 0.253,
+    "blessing": 0.091,
+    "rescue": 0.057,
+    "answer_granted": 0.043,
+    "unclear": 0.029,
+    "compliance": 0.023,
+    "silence": 0.021,
+    "delayed": 0.02,
+    "covenant": 0.019,
+    "refusal": 0.015
+   },
+   "direction_p": {
+    "god_initiated": 0.859,
+    "human_initiated": 0.112,
+    "divine_action": 0.029
+   },
+   "via_p": {
+    "prophet": 0.789,
+    "direct": 0.098,
+    "vision": 0.074,
+    "unclear": 0.02,
+    "angel": 0.015,
+    "internal": 0.003
+   },
+   "top_triggers": {
+    "unprompted": 431,
+    "disobedience": 202,
+    "distress": 37,
+    "covenant_follow_up": 34,
+    "complaint": 32
+   },
+   "severity_mean": 3.29,
+   "silence_rate": 0.021,
+   "punishment_rate": 0.429,
+   "speech_rate": 0.886
+  },
+  "Кетувим": {
+   "episodes": 536,
+   "outcome_p": {
+    "unclear": 0.336,
+    "silence": 0.188,
+    "compliance": 0.086,
+    "blessing": 0.084,
+    "answer_granted": 0.076,
+    "revelation": 0.073,
+    "punishment": 0.054,
+    "rescue": 0.049,
+    "delayed": 0.032,
+    "covenant": 0.022
+   },
+   "direction_p": {
+    "human_initiated": 0.754,
+    "god_initiated": 0.14,
+    "divine_action": 0.106
+   },
+   "via_p": {
+    "direct": 0.58,
+    "unclear": 0.274,
+    "internal": 0.049,
+    "prophet": 0.049,
+    "angel": 0.021,
+    "vision": 0.017,
+    "dream": 0.011
+   },
+   "top_triggers": {
+    "unprompted": 110,
+    "distress": 90,
+    "faithfulness": 69,
+    "gratitude": 55,
+    "complaint": 55
+   },
+   "severity_mean": 2.41,
+   "silence_rate": 0.188,
+   "punishment_rate": 0.054,
+   "speech_rate": 0.19
+  }
+ },
+ "trigger_table": {
+  "unprompted": {
+   "revelation": 0.336,
+   "punishment": 0.258,
+   "unclear": 0.126,
+   "blessing": 0.097,
+   "rescue": 0.067,
+   "compliance": 0.067,
+   "covenant": 0.025,
+   "delayed": 0.01,
+   "answer_granted": 0.009,
+   "refusal": 0.004,
+   "silence": 0.003,
+   "n": 691
+  },
+  "disobedience": {
+   "punishment": 0.803,
+   "revelation": 0.077,
+   "unclear": 0.04,
+   "compliance": 0.026,
+   "refusal": 0.017,
+   "answer_granted": 0.011,
+   "silence": 0.009,
+   "blessing": 0.009,
+   "delayed": 0.006,
+   "rescue": 0.003,
+   "n": 350
+  },
+  "covenant_follow_up": {
+   "covenant": 0.443,
+   "revelation": 0.181,
+   "blessing": 0.151,
+   "compliance": 0.122,
+   "rescue": 0.044,
+   "punishment": 0.026,
+   "refusal": 0.011,
+   "answer_granted": 0.011,
+   "unclear": 0.007,
+   "silence": 0.004,
+   "n": 271
+  },
+  "distress": {
+   "silence": 0.245,
+   "rescue": 0.191,
+   "answer_granted": 0.16,
+   "unclear": 0.149,
+   "delayed": 0.09,
+   "blessing": 0.059,
+   "revelation": 0.053,
+   "compliance": 0.032,
+   "refusal": 0.011,
+   "punishment": 0.011,
+   "n": 188
+  },
+  "faithfulness": {
+   "blessing": 0.297,
+   "compliance": 0.246,
+   "unclear": 0.127,
+   "rescue": 0.093,
+   "covenant": 0.059,
+   "silence": 0.059,
+   "answer_granted": 0.051,
+   "revelation": 0.034,
+   "delayed": 0.017,
+   "punishment": 0.017,
+   "n": 118
+  },
+  "complaint": {
+   "silence": 0.357,
+   "unclear": 0.174,
+   "revelation": 0.174,
+   "punishment": 0.113,
+   "answer_granted": 0.113,
+   "blessing": 0.026,
+   "rescue": 0.017,
+   "compliance": 0.017,
+   "delayed": 0.009,
+   "n": 115
+  },
+  "inquiry": {
+   "answer_granted": 0.307,
+   "unclear": 0.257,
+   "revelation": 0.129,
+   "punishment": 0.079,
+   "delayed": 0.069,
+   "blessing": 0.059,
+   "compliance": 0.04,
+   "refusal": 0.03,
+   "silence": 0.02,
+   "rescue": 0.01,
+   "n": 101
+  },
+  "gratitude": {
+   "unclear": 0.46,
+   "blessing": 0.184,
+   "silence": 0.161,
+   "answer_granted": 0.069,
+   "compliance": 0.046,
+   "rescue": 0.046,
+   "refusal": 0.011,
+   "revelation": 0.011,
+   "covenant": 0.011,
+   "n": 87
+  },
+  "prayer": {
+   "answer_granted": 0.309,
+   "silence": 0.291,
+   "revelation": 0.091,
+   "rescue": 0.091,
+   "unclear": 0.073,
+   "blessing": 0.055,
+   "delayed": 0.055,
+   "covenant": 0.018,
+   "punishment": 0.018,
+   "n": 55
+  },
+  "intercession": {
+   "answer_granted": 0.478,
+   "rescue": 0.109,
+   "refusal": 0.087,
+   "silence": 0.087,
+   "delayed": 0.065,
+   "revelation": 0.065,
+   "punishment": 0.022,
+   "covenant": 0.022,
+   "blessing": 0.022,
+   "compliance": 0.022,
+   "unclear": 0.022,
+   "n": 46
+  },
+  "vow": {
+   "unclear": 0.353,
+   "answer_granted": 0.235,
+   "delayed": 0.176,
+   "silence": 0.118,
+   "compliance": 0.059,
+   "rescue": 0.059,
+   "n": 17
+  },
+  "divine_test": {
+   "compliance": 0.273,
+   "blessing": 0.182,
+   "unclear": 0.182,
+   "answer_granted": 0.182,
+   "punishment": 0.091,
+   "revelation": 0.091,
+   "n": 11
+  }
+ },
+ "punishment_split": {
+  "total": 494,
+  "announced_oracle": 392,
+  "executed_action": 84,
+  "announced_p": 0.794,
+  "executed_p": 0.17
+ }
+}
