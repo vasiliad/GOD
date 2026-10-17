@@ -215,7 +215,7 @@ function classifyRu(q){
   return "inquiry";
 }
 const RUS_SYN=[["умер","смерть","смерт","умирает","погиб","погибель"],["гнев","разгневал","гнева","гневен"],["милосерд","милост","простил","прощение","простить","пощадил"],["люб","любов","любовь","любим"],["страх","боюсь","боится","страшно","устраш"],["наказа","кара","наказание"],["спас","спасение","спасает","избав"],["молитв","молитва","молится","мол"],["завет"],["грех","греха","согрешил","преступ"]];
-function syn(tok){const out=new Set([tok]);for(const g of RUS_SYN){if(g.some(x=>x===tok||tok.startsWith(x)))g.forEach(x=>out.add(x));}return[...out];}
+function syn(tok){const out=new Set([tok]);for(const g of RUS_SYN){if(g.some(x=>x===tok||(x.length>=4&&(tok.includes(x)||x.includes(tok)))))g.forEach(x=>out.add(x));}return[...out];}
 async function chatGetAll(){
   if(chatGetAll._c) return chatGetAll._c;
   const out={};
@@ -226,16 +226,38 @@ async function chatGetAll(){
   }
   chatGetAll._c=out; return out;
 }
+// сходство темы запроса с исходом (имитация отвечает по типу реакции)
+const AFFIN=[
+  ["punishment",["покарал","наказ","кара","гнев","азви","разруш","истреб","поразил","казнил"]],
+  ["blessing",["благослови","милосерд","мольба о милости","прости","пощади","даровал"]],
+  ["rescue",["спаси","спасения","избав","помоги","защити"]],
+  ["answer_granted",["ответил","почему","зачем","даровал","довольно"]],
+  ["silence",["молчал","не отвечаешь","почему молчишь"]],
+];
+function affinities(q){
+  const m=q.toLowerCase(); const out=new Set();
+  for(const[oc,kws]of AFFIN) for(const k of kws) if(m.includes(k)) out.add(oc);
+  return out;
+}
 function chatRetrieve(q,docs){
+  const aff=affinities(q);
   const qtok=new Set();for(const t of q.toLowerCase().match(/[а-яё-]{4,}/g)||[]) syn(t).forEach(x=>qtok.add(x));
   for(const t of q.toLowerCase().match(/[a-z]{2,}/g)||[]) qtok.add(t);
+  const qs=q.split(/[^A-Za-zА-Яа-яёЁ]+/).filter(w=>/^[А-ЯA-Z]/.test(w)&&w.length>=4);
   let best=[];
   for(const [b,eps] of Object.entries(docs)){
     for(const e of eps){
       const txt=(e.summary_ru+" "+e.god_action).toLowerCase();
       let s=0;
-      for(const t of qtok){ if(txt.includes(t)) s+= 1/Math.log(3+txt.length); }
+      for(const t of qtok){
+        if(txt.includes(t)){
+          // длинные слова (имена/топонимы: Иерихон, Навуфея) бустим сильнее
+          s+= t.length>=6 ? 10/Math.log(4+txt.length) : 1/Math.log(3+txt.length);
+        }
+      }
+      for(const k of qs){ const w=k.toLowerCase(); if(w.length>=5&&k.startsWith(w.toUpperCase()[0])) s+=6/Math.log(4+txt.length); }
       if(e.god_speech_plain){ s+=1.5; }    // предпочитаем эпизоды с прямой речью
+      if(aff.has(e.outcome)){ s+=2.5; }      // буст за соответствие ожидаемому исходу
       if(s>0) best.push([s,b,e]);
     }
   }
