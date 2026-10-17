@@ -343,7 +343,7 @@ const memNote=`ПАМЯТЬ ДИАЛОГА: проступков в этой с�
   return {sections:chatParseSections(text), hits};
 }
 function chat_t(m){
-  let mode='live';
+  let mode='cons'; // по умолчанию то, что работает у любого посетителя без бэкенда
   m.innerHTML=`<h2>Чат с имитацией</h2>
   <div class="filters">
     <button id="m_live" class="on" style="padding:8px 16px;border-radius:8px;background:#232837;border:1px solid var(--acc);color:var(--fg);cursor:pointer">Живой (LLM)</button>
@@ -359,6 +359,7 @@ function chat_t(m){
       <button id="ce_sv" style="padding:8px 16px;border-radius:8px;background:var(--accent,#2a3040);border:1px solid var(--line);cursor:pointer">сохранить</button>
     </div>
   </div>
+  <div class="note" style="margin-top:10px">По умолчанию — корпусный режим: ответ реальной речью эпизода-прецедента (работает без всякой модели, источники проверяемы). «Живой» — если у вас запущен свой бэкенд (LM Studio/Ollama) — свободная речь имитации пятью слоями.</div>
   <div class="filters" style="margin-top:12px"><input id="cq" style="flex:1" placeholder="что скажете Богу? (любой язык)…"></div>
   <div id="clog"></div>`;
   document.getElementById('m_live').onclick=()=>{mode='live';toggle_buttons()};
