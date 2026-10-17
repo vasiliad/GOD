@@ -310,15 +310,28 @@ function chatParseSections(text){
   }
   return out;
 }
+const CHAT_MEM={offenses:0,grace:0};
+function memUpdate(q){
+  const m=q.toLowerCase();
+  const dis=/не буду|наруш|не послуш|отвергаю|идол|другого бога|не выполню|проигнорирую|мне всё равно|плевать/.test(m);
+  const rep=/согрешил|прости меня|раскаиваюсь|провинился/.test(m);
+  if(dis) CHAT_MEM.offenses++;
+  if(rep||/благодарю|хвала тебе|славлю/.test(m)){ CHAT_MEM.offenses=Math.max(0,CHAT_MEM.offenses-1); CHAT_MEM.grace++; }
+}
 async function chatLLM(q,docs){
+  memUpdate(q);
   const hits=chatRetrieve(q,docs).slice(0,6);
   const trig=classifyRu(q); const tt=A.trigger_table[trig]; const probs={};
   if(tt) for(const[k,v]of Object.entries(tt)){if(k!=="n")probs[k]=v;}
   const ctx=hits.map(h=>({book:h[1],span:h[2].span,trigger:h[2].trigger,outcome:h[2].outcome,
     god_speech_plain:h[2].god_speech_plain,summary_ru:h[2].summary_ru,god_action:h[2].god_action}));
+const memNote=`ПАМЯТЬ ДИАЛОГА: проступков в этой сессии: ${CHAT_MEM.offenses}, благодати: ${CHAT_MEM.grace}.`
+    + (CHAT_MEM.offenses>0?` Тяжесть отклика повышена накопленными проступками.`:"")
+    + (/согрешил|раскаиваюсь/.test(q.toLowerCase())?` Покаяние снижает тяжесть.`:"");
+
   const body={messages:[
     {role:"system",content:CHAT_SYS},
-    {role:"user",content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:",JSON.stringify(ctx),"","Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs),"","Реплика человека: "+q].join(String.fromCharCode(10))}],
+    {role:"user",content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:",JSON.stringify(ctx),"","Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs),memNote,"","Реплика человека: "+q].join(String.fromCharCode(10))}],
     temperature:0.3};
   if(CHAT_CFG.model) body.model=CHAT_CFG.model;
   const hdr={"Content-Type":"application/json"};
@@ -399,6 +412,7 @@ function chat_t(m){
       if(s["[English]"]) h+=`<div class="sect"><div class="h">English</div>${esc(s["[English]"])}</div></div>`;
       if(s["[Hebrew Modern]"]) h+=`<div class="sect"><div class="h">עברית מודרנית</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
       h+=`<div class="src">источники: ${esc(s["[SOURCES]"]||r.llm.hits.map(x=>x[1]+" "+x[2].span.start).join(", "))}</div>`;
+      h+=`<div class="src">память диалога: проступки ${CHAT_MEM.offenses} · благодать ${CHAT_MEM.grace}</div>`;
     } else if(r.hits){
       const trig=r.trig;
       const out=Object.entries(r.probs).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>`<span class="tag ${k}">${k} ${(v*100).toFixed(0)}%</span>`).join("");
