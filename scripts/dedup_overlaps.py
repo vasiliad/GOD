@@ -98,6 +98,8 @@ def main():
     master = {}
     report = {}
     for fp in sorted(BASE.glob(GLOB)):
+        if fp.name == "episodes_TANAKH_v2.json":
+            continue  # это ВЫХОД скрипта (словарь), а не вход
         book = fp.stem.replace("episodes_", "").replace("_v2", "")
         eps = json.load(open(fp, encoding="utf-8"))
         try:
