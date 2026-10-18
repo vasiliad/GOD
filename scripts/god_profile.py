@@ -31,6 +31,8 @@ OUT_FILE = BASE / "output/god_behavior_profile.json"
 def load_episodes():
     eps = []
     for fp in sorted(BASE.glob(EPISODES_GLOB)):
+        if fp.name == "episodes_TANAKH_v2.json":
+            continue  # мастер-файл — словарь {книга: [эп]}; книги читаем напрямую
         book = fp.stem.replace("episodes_", "").replace("_v2", "")
         for ep in json.load(open(fp, encoding="utf-8")):
             ep["_book"] = book
