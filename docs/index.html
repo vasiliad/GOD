@@ -65,6 +65,7 @@ a{color:var(--acc2)}
   <button data-t="episodes">Эпизоды</button>
   <button data-t="profile">Профиль реакции</button>
   <button data-t="chat">Чат</button>
+  <button data-t="report">Отчёт</button>
   <button data-t="about">О проекте</button>
 </nav>
 <main id="main"></main>
@@ -93,6 +94,7 @@ async function render(t){
   if(t==='episodes') return episodes(m);
   if(t==='profile') return profile(m);
   if(t==='chat') return chat_t(m);
+  if(t==='report') return report_t(m);
   if(t==='about') return about(m);
 }
 
@@ -315,6 +317,43 @@ function chat_t(m){
 }
 
 
+function md2html(md){
+  const esc=s=>s.replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">");
+  const lines=md.split("\n"); let out=[]; let i=0; let inList=false;
+  const inline=t=>esc(t)
+    .replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>")
+    .replace(/\*([^*]+)\*/g,"<i>$1</i>")
+    .replace(/`([^`]+)`/g,"<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  while(i<lines.length){
+    const L=lines[i];
+    if(/^\|/.test(L)&&i+1<lines.length&&/^\|[\s:|-]+\|/.test(lines[i+1])){
+      const rows=[L]; let j=i+2;
+      while(j<lines.length&&/^\|/.test(lines[j])){rows.push(lines[j]);j++;}
+      const cells=r=>r.replace(/^\||\|$/g,"").split("|").map(c=>inline(c.trim()));
+      out.push("<table><tr>"+cells(rows[0]).map(c=>"<th>"+c+"</th>").join("")+"</tr>");
+      for(let k=1;k<rows.length;k++) out.push("<tr>"+cells(rows[k]).map(c=>"<td>"+c+"</td>").join("")+"</tr>");
+      out.push("</table>"); i=j; continue;
+    }
+    if(/^###\s/.test(L)) out.push("<h3>"+inline(L.slice(4))+"</h3>");
+    else if(/^##\s/.test(L)) out.push("<h2>"+inline(L.slice(3))+"</h2>");
+    else if(/^#\s/.test(L)) out.push("<h1 style='font-size:22px'>"+inline(L.slice(2))+"</h1>");
+    else if(/^---+\s*$/.test(L)) out.push("<hr style='border:0;border-top:1px solid var(--line);margin:18px 0'>");
+    else if(/^[-*]\s/.test(L)){ if(!inList){out.push("<ul>");inList=true;} out.push("<li>"+inline(L.replace(/^[-*]\s/,""))+"</li>");
+      if(i+1>=lines.length||!/^[-*]\s/.test(lines[i+1])){out.push("</ul>");inList=false;} }
+    else if(/^\d+\.\s/.test(L)) out.push("<li>"+inline(L.replace(/^\d+\.\s/,""))+"</li>");
+    else if(/^>\s?/.test(L)) out.push("<blockquote style='border-left:3px solid #e0b050;margin:8px 0;padding:4px 12px;color:#9aa3b5'>"+inline(L.replace(/^>\s?/,""))+"</blockquote>");
+    else if(L.trim()==="") ;
+    else out.push("<p>"+inline(L)+"</p>");
+    i++;
+  }
+  return out.join("\n");
+}
+async function report_t(m){
+  m.innerHTML='<div class="note">загрузка отчёта…</div>';
+  const md=await (await fetch('research_report.md')).text();
+  m.innerHTML='<div class="card" style="padding:26px 30px;max-width:860px">'+md2html(md)+'</div>';
+}
 function about(m){
   m.innerHTML=`<h2>О проекте</h2>
   <div class="card">
@@ -331,7 +370,7 @@ function about(m){
   <p><b>Ограничения.</b> «Исходы» — кодировка исследователя (LLM-агенты с аудитом), а не теология; молчание в
   поэтических книгах часто литературный приём. Сопоставление с мартовской методологией (стихи vs эпизоды) —
   в документе ретроспективы. Текст Танаха — общественное достояние (масоретский текст); русские описания — CC BY 4.0.</p>
-  <p class="note">Данные: <a href="/GOD/data/analytics.json">analytics.json</a> · эпизоды по книгам:
+  <p><b>Научный отчёт v1.0</b> — полный текст: вкладка «Отчёт» или <a href="/GOD/research_report.md" target="_blank">research_report.md</a>.</p><p class="note">Данные: <a href="/GOD/data/analytics.json">analytics.json</a> · эпизоды по книгам:
   <a href="/GOD/data/books/Genesis.json">…/data/books/<книга>.json</a> · код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps).</p>
   </div>`;
 }
