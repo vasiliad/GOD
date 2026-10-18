@@ -3,339 +3,513 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GOD — поведенческий профиль Бога в Танахе</title>
+<title>GOD — образ Бога в Танахе: корпус 2050 эпизодов</title>
 <style>
-:root{--bg:#12141a;--card:#1b1f2a;--line:#2a3040;--fg:#e8eaf0;--dim:#9aa3b5;--acc:#e0b050;--acc2:#7fb2e5;--bad:#e07a6a;--ok:#7fce9a}
+:root{--bg:#0f1116;--card:#181c26;--card2:#1e2330;--line:#2a3040;--fg:#e8eaf0;--dim:#9aa3b5;--acc:#e0b050;--acc2:#7fb2e5;--bad:#e07a6a;--ok:#7fce9a}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 "Segoe UI",system-ui,sans-serif}
-header{padding:28px 24px 14px;max-width:1180px;margin:0 auto}
-h1{margin:0;font-size:26px;font-weight:600}
-h1 span{color:var(--acc)}
-.sub{color:var(--dim);margin-top:6px}
-nav{display:flex;gap:8px;max-width:1180px;margin:18px auto 0;padding:0 24px;flex-wrap:wrap}
+header{padding:26px 24px 10px;max-width:1200px;margin:0 auto}
+h1{margin:0;font-size:25px;font-weight:650}
+h1 b{color:var(--acc);font-weight:650}
+.sub{color:var(--dim);margin-top:6px;font-size:14px}
+nav{display:flex;gap:8px;max-width:1200px;margin:16px auto 0;padding:0 24px;flex-wrap:wrap}
 nav button{background:var(--card);border:1px solid var(--line);color:var(--dim);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px}
-nav button.on{color:var(--fg);border-color:var(--acc);background:#232837}
-main{max-width:1180px;margin:0 auto;padding:20px 24px 60px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+nav button.on{color:var(--fg);border-color:var(--acc);background:var(--card2)}
+main{max-width:1200px;margin:0 auto;padding:18px 24px 70px}
+h2{font-size:18px;margin:24px 0 10px;font-weight:650}
+h3{font-size:15.5px;margin:14px 0 6px;color:var(--acc);font-weight:650}
+p{margin:8px 0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.5px}
+th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--dim);font-weight:600;background:var(--card2)}
+tr:hover td{background:var(--card2)}
+ul,ol{margin:6px 0;padding-left:22px}
+li{margin:4px 0}
+code{background:var(--card2);padding:1px 6px;border-radius:4px;font-size:13px}
+blockquote{border-left:3px solid var(--acc);margin:8px 0;padding:4px 12px;color:var(--dim)}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+a{color:var(--acc2)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
-.card .v{font-size:24px;font-weight:600;color:var(--acc)}
+.card .v{font-size:24px;font-weight:650;color:var(--acc)}
 .card .l{color:var(--dim);font-size:13px}
-.card .b{font-size:12px;color:var(--fg2,#c8cdd8)}
+.card .b{font-size:12.5px;color:#c8cdd8;margin-top:2px}
 .bar{display:flex;height:10px;border-radius:5px;overflow:hidden;margin:8px 0 4px;background:var(--line)}
 .bar i{display:block;height:100%}
 .leg{font-size:12px;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap}
 .leg i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}
-h2{font-size:18px;margin:26px 0 10px;font-weight:600}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
-th,td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line);font-size:13.5px}
-th{color:var(--dim);font-weight:600;cursor:pointer;background:#20242f}
-tr:hover td{background:#20242f}
-input,select{background:#20242f;border:1px solid var(--line);color:var(--fg);padding:8px 12px;border-radius:8px;font-size:14px}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.note{color:var(--dim);font-size:12.5px;margin:8px 0}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}
+input,select{background:var(--card2);border:1px solid var(--line);color:var(--fg);padding:8px 12px;border-radius:8px;font-size:14px}
+input{flex:1;min-width:160px}
 .he{font-family:"Times New Roman",serif;font-size:19px;line-height:1.9;direction:rtl;text-align:right}
 .he.small{font-size:16px;color:#cdd3e0}
-.out-P punishment{color:var(--bad)}.out-blessing{color:var(--ok)}.out-silence{color:var(--dim)}
-.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11.5px;border:1px solid var(--line);color:var(--dim);margin-right:4px}
+.tag{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11.5px;border:1px solid var(--line);color:var(--dim);margin-right:4px;white-space:nowrap}
 .tag.punishment{color:var(--bad);border-color:#5a3a34}
 .tag.blessing,.tag.rescue,.tag.answer_granted{color:var(--ok);border-color:#2f4f3c}
 .tag.silence{color:var(--dim)}
-.detail{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:14px}
-.detail h3{margin:0 0 6px;font-size:16px;color:var(--acc)}
-.sect{margin-top:12px}
-.sect .h{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
-.src{color:var(--acc2);font-size:13px;margin-top:10px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:820px){.grid2{grid-template-columns:1fr}}
 .ep{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:8px;cursor:pointer}
 .ep:hover{border-color:var(--acc)}
 .ep .s{color:var(--acc2);font-size:13px}
-.note{color:var(--dim);font-size:12.5px;margin-top:8px}
-a{color:var(--acc2)}
+.detail{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-top:14px}
+.sect{margin-top:12px}
+.sect .h{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.src{color:var(--acc2);font-size:13px;margin-top:10px}
+.modes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.modes button{background:var(--card);border:1px solid var(--line);color:var(--dim);padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px}
+.modes button.on{color:var(--fg);border-color:var(--acc);background:var(--card2)}
+.msg-user{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0}
+.msg-user .s{color:var(--acc2);font-size:13px}
+#chatcfg{display:none;margin:8px 0}
 </style>
 </head>
 <body>
 <header>
-  <h1>GOD <span>·</span> поведенческий профиль Бога в Танахе</h1>
-  <div class="sub">2 050 эпизодов взаимодействия Человек↔Бог · 39 книг · консонантный иврит + огласовка + подстрочник.
-  Данные: экстракция эпизодов по контракту v2 (триггер → реакция → исход), аудит покрытия 100%.</div>
+  <h1>GOD <b>·</b> образ Бога в Танахе</h1>
+  <div class="sub">Все 39 книг · 2 050 размеченных эпизодов взаимодействия Человек↔Бог ·
+  речь на консонантном иврите с источниками · поведенческий профиль P(исход | триггер)</div>
 </header>
-<nav>
-  <button class="on" data-t="overview">Обзор</button>
-  <button data-t="books">Книги</button>
-  <button data-t="episodes">Эпизоды</button>
-  <button data-t="profile">Профиль реакции</button>
-  <button data-t="chat">Чат</button>
-  <button data-t="about">О проекте</button>
-</nav>
+<nav id="nav"></nav>
 <main id="main"></main>
 
 <script>
-const C={punishment:'#e07a6a',revelation:'#e0b050',blessing:'#7fce9a',covenant:'#7fb2e5',rescue:'#8fd4c8',
-answer_granted:'#a8d08d',compliance:'#c9b1e0',silence:'#6b7280',unclear:'#565e6e',delayed:'#b58e5f',refusal:'#c25a8e'};
-let A=null; // analytics
-const cache={};
-async function jget(u){ if(!cache[u]) cache[u]=await (await fetch(u)).json(); return cache[u]; }
-const B=b=>'/GOD/data/books/'+b+'.json';
-function esc(s){return (s||'').replace(/&/g,'&').replace(/</g,'<')}
-function bar(obj,limit){
-  const tot=Object.values(obj).reduce((a,b)=>a+b,0)||1;
-  const items=Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,limit||99);
-  return `<div class="bar">${items.map(([k,v])=>`<i style="width:${(v/tot*100).toFixed(1)}%;background:${C[k]||'#888'}"></i>`).join('')}</div>
-  <div class="leg">${items.map(([k,v])=>`<span><i style="background:${C[k]||'#888'}"></i>${k} ${(v/tot*100).toFixed(0)}%</span>`).join('')}</div>`;
-}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');render(b.dataset.t)});
+"use strict";
+/* =====================================================================
+   GOD — единый файл страницы. Разделы: данные, вкладки, чат, роутер.
+   ===================================================================== */
 
-async function render(t){
-  const m=document.getElementById('main');
-  if(!A) A=await jget('/GOD/data/analytics.json');
-  if(t==='overview') return overview(m);
-  if(t==='books') return books(m);
-  if(t==='episodes') return episodes(m);
-  if(t==='profile') return profile(m);
-  if(t==='chat') return chat_t(m);
-  if(t==='about') return about(m);
+/* ---------- утилиты ---------- */
+const esc = s => String(s ?? "").replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">");
+const OUT = { punishment:"#e07a6a", revelation:"#e0b050", blessing:"#7fce9a", covenant:"#7fb2e5",
+  rescue:"#8fd4c8", answer_granted:"#a8d08d", compliance:"#c9b1e0", silence:"#6b7280",
+  unclear:"#565e6e", delayed:"#b58e5f", refusal:"#c25a8e" };
+const bar = (obj, limit) => {
+  const lim = limit || 99;
+  const items = Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,lim);
+  const tot = items.reduce((s,x)=>s+x[1],0) || 1;
+  return `<div class="bar">${items.map(([k,v])=>`<i style="width:${(v/tot*100).toFixed(1)}%;background:${OUT[k]||"#888"}"></i>`).join("")}</div>` +
+  `<div class="leg">${items.map(([k,v])=>`<span><i style="background:${OUT[k]||"#888"}"></i>${k} ${(v/tot*100).toFixed(0)}%</span>`).join("")}</div>`;
+};
+const store = {
+  get(k,d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+
+/* ---------- данные ---------- */
+const cache = {};
+async function jget(u){
+  if(!cache[u]) cache[u] = await (await fetch(u)).json();
+  return cache[u];
+}
+const BOOK_URL = b => "data/books/" + b + ".json";
+let A = null;
+async function analytics(){ if(!A) A = await jget("data/analytics.json"); return A; }
+const allDocs = {};
+async function bookDocs(b){
+  if(!allDocs[b]) allDocs[b] = await jget(BOOK_URL(b));
+  return allDocs[b];
+}
+async function everyBook(onOne){
+  const a = await analytics();
+  for(const era of Object.values(a.book_order))
+    for(const b of era) await onOne(b);
 }
 
-function overview(m){
-  const c=A.corpus, e=A.per_era;
-  m.innerHTML=`
+/* =====================================================================
+   ЧАТ — классификация и retrieval (общие для обоих режимов)
+   ===================================================================== */
+const RU_STOP = new Set("и в на с по о не что как это то же ли бы а но или у к из за до для при".split(" "));
+const TRIGGERS = [
+  ["disobedience",["не буду","наруш","не послуш","отвергаю","идол","другого бога","не выполню","проигнор","откажусь слушаться","мне всё равно","плевать","i will not","i won't","i disobey"]],
+  ["intercession",["прости им","не губи","пощади","защити их","за них","сбереги","не карай их","сжалься над ними","spare them","do not destroy them"]],
+  ["confession",  ["согрешил","согрешила","прости меня","раскаиваюсь","провинился","виновен перед","i have sinned","forgive me","i repent"]],
+  ["complaint",   ["почему ты","зачем ты","несправедливо","жалуюсь","ропщу","ты покинул","ты оставил","не заботишься","why did you","why have you"]],
+  ["distress",    ["спаси","погибаю","беда","окружили","напали","враг одолел","умираю","утопаю","горит","страх","боюсь","боится","страшно","help me","save me","i am afraid","i'm afraid","scared"]],
+  ["prayer",      ["молю","молюсь","прошу тебя","воззвал","обращаюсь к тебе","i pray","i beg you"]],
+  ["inquiry",     ["скажи мне","что мне делать","спрашиваю","истолкуй","довольно ли","кто виноват","объясни","tell me","what shall i do"]],
+  ["vow",         ["даю обет","клянусь","обещаю тебе","обязуюсь","i vow","i swear"]],
+  ["gratitude",   ["благодарю","славлю","хвала тебе","воспою тебе","thank you","i praise you"]],
+  ["faithfulness",["делаю как велел","следую за тобой","верен тебе","исполнил всё","хожу путями","люблю тебя всем сердцем","i follow you","i am faithful"]],
+  ["covenant",    ["завет","обещание отцам","ради авраама","ради израиля","земля обещанная","потомству"]],
+];
+function classify(q){
+  const m = q.toLowerCase();
+  for(const [t,kws] of TRIGGERS) for(const k of kws) if(m.includes(k)) return t;
+  return "inquiry";
+}
+const RU_SYN = [
+  ["умер","смерть","смерт","умирает","погиб","погибель","умрет","мертв"],
+  ["гнев","разгневал","гнева","гневен","ярост"],
+  ["милосерд","милост","простил","прощение","простить","пощадил","милость"],
+  ["люб","любов","любовь","любим","возлюб"],
+  ["страх","боюсь","боится","страшно","устраш","трепет"],
+  ["наказа","кара","карает","наказание","покарал"],
+  ["спас","спасение","спасает","избав","избавит"],
+  ["молитв","молитва","молится","молит"],
+  ["завет","завета","завету","договор"],
+  ["грех","греха","грехов","согрешил","преступ"],
+];
+const EN_BRIDGE = { fear:"страх", afraid:"страх", scared:"страх", anger:"гнев", wrath:"гнев",
+  destroy:"разруш", destroyed:"разруш", punish:"наказа", punishment:"наказание", mercy:"милость",
+  forgive:"простил", forgiveness:"прощение", silence:"молчание", pray:"молитва", prayer:"молитва",
+  save:"спас", rescue:"спас", deliver:"избав", sin:"грех", sinned:"согрешил", love:"люб",
+  covenant:"завет", temple:"храм", idol:"идол", dream:"сон", die:"умер", death:"смерть",
+  died:"умер", why:"почему", listen:"слыш", hear:"слыш", answer:"отвеча", command:"повел",
+  law:"закон", torah:"тор", help:"спас", enemies:"враг" };
+function queryTokens(q){
+  const m = q.toLowerCase();
+  const toks = new Set();
+  for(const t of (m.match(/[а-яё-]{4,}/g) || [])) if(!RU_STOP.has(t)) toks.add(t);
+  for(const w of (m.match(/[a-z]{2,}/g) || [])) if(EN_BRIDGE[w]) toks.add(EN_BRIDGE[w]);
+  for(const w of (m.match(/[\u05D0-\u05EA]{3,}/g) || [])) toks.add(w);
+  const syn = new Set(toks);
+  for(const t of toks) for(const g of RU_SYN)
+    if(g.some(x => t===x || (x.length>=4 && (t.includes(x)||x.includes(t))))) g.forEach(x=>syn.add(x));
+  return syn;
+}
+function isProper(w){ return /^[A-ZА-Я]/.test(w) && w.length>=4; }
+async function retrieve(q, k){
+  const lim = k || 6;
+  const toks = queryTokens(q);
+  const props = q.split(/[^A-Za-zА-Яа-яёЁ\u05D0-\u05EA]+/).filter(isProper);
+  const scored = [];
+  await everyBook(async b => {
+    const eps = await bookDocs(b);
+    for(const e of eps){
+      const txt = (e.summary_ru+" "+e.god_action).toLowerCase();
+      let s = 0;
+      for(const t of toks) if(txt.includes(t)) s += t.length>=6 ? 10/Math.log(4+txt.length) : 1/Math.log(3+txt.length);
+      for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())) s += 6/Math.log(4+txt.length);
+      if(e.god_speech_plain) s += 1.5;
+      if(s>0) scored.push([s,b,e]);
+    }
+  });
+  scored.sort((x,y)=>y[0]-x[0]);
+  return scored.slice(0,lim);
+}
+/* диалоговая память */
+const MEM = { offenses:0, grace:0, turns:0 };
+function memUpdate(q){
+  const m = q.toLowerCase();
+  if(/не буду|наруш|не послуш|отвергаю|идол|другого бога|мне всё равно|плевать|i will not|i won't/.test(m)) MEM.offenses++;
+  if(/согрешил|раскаиваюсь|прости меня|покаян|forgive me|i repent/.test(m)){
+    MEM.offenses = Math.max(0, MEM.offenses-1); MEM.grace++;
+  }
+  MEM.turns++;
+}
+
+/* =====================================================================
+   ЧАТ — живой режим (LLM-бэкенд посетителя; ключи только в браузере)
+   ===================================================================== */
+const SYS_PROMPT = "Ты — исследовательская имитация образа YHWH, извлечённого из Танаха (реестр эпизодов v2).\n" +
+"Ты пишешь (не говоришь) на библейском иврите. СТРОГИЙ РЕЖИМ: твоя ивритская реплика составляется\n" +
+"ТОЛЬКО из данных тебе фрагментов god_speech_plain — комбинируй и сокращай, но не добавляй слов вне их лексики.\n" +
+"Отвечай по существу вопроса, каким бы языком он ни был задан.\n\n" +
+"Формат ответа строго из шести секций и ничего кроме них:\n" +
+"[HEBREW] консонантный иврит (композиция данных цитат)\n" +
+"[NIKKUD] та же реплика с огласовкой по образцу данных стихов\n" +
+"[Russian] дословный русский подстрочник\n" +
+"[English] дословный английский перевод\n" +
+"[Hebrew Modern] та же реплика на современном иврите\n" +
+"[SOURCES] ссылки на эпизоды-источники: книга глава:стих";
+const SECTIONS = ["[HEBREW]","[NIKKUD]","[Russian]","[English]","[Hebrew Modern]","[SOURCES]"];
+function parseSections(text){
+  const out = {};
+  for(const tag of SECTIONS){
+    const i = text.indexOf(tag); if(i<0) continue;
+    const rest = text.slice(i+tag.length);
+    let end = rest.length;
+    for(const t2 of SECTIONS){ const j = rest.indexOf(t2); if(j>=0 && j<end) end = j; }
+    out[tag] = rest.slice(0,end).trim();
+  }
+  return out;
+}
+async function liveReply(q){
+  const a = await analytics();
+  const hits = await retrieve(q, 6);
+  const trig = classify(q);
+  const tt = a.trigger_table[trig] || {};
+  const probs = {}; for(const k of Object.keys(tt)) if(k!=="n") probs[k]=tt[k];
+  const ctx = hits.map(h => ({ book:h[1], span:h[2].span, trigger:h[2].trigger, outcome:h[2].outcome,
+    god_speech_plain:h[2].god_speech_plain, summary_ru:h[2].summary_ru, god_action:h[2].god_action }));
+  const mem = "ПАМЯТЬ ДИАЛОГА: проступков в этой сессии "+MEM.offenses+", благодати "+MEM.grace+"."
+    + (MEM.offenses>0 ? " Тяжесть отклика повышена накопленными проступками." : "")
+    + (/согрешил|раскаиваюсь|прости меня/.test(q.toLowerCase()) ? " Покаяние снижает тяжесть." : "");
+  const cfg = store.get("god_cfg", { endpoint:"http://127.0.0.1:1234/v1/chat/completions", model:"", key:"" });
+  const body = { messages:[
+    { role:"system", content:SYS_PROMPT },
+    { role:"user", content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:", JSON.stringify(ctx),
+      "", "Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs), mem,
+      "", "Реплика человека: "+q].join("\n") } ], temperature:0.3 };
+  if(cfg.model) body.model = cfg.model;
+  const hdr = { "Content-Type":"application/json" };
+  if(cfg.key) hdr["Authorization"] = "Bearer "+cfg.key;
+  const r = await fetch(cfg.endpoint, { method:"POST", headers:hdr, body:JSON.stringify(body) });
+  if(!r.ok) throw new Error("HTTP "+r.status);
+  const j = await r.json();
+  const text = (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
+  return { sections:parseSections(text), hits };
+}
+async function corpusReply(q){
+  const hits = await retrieve(q, 3);
+  const a = await analytics();
+  const trig = classify(q);
+  const tt = a.trigger_table[trig] || {};
+  const probs = {}; for(const k of Object.keys(tt)) if(k!=="n") probs[k]=tt[k];
+  return { hits, trig, probs };
+}
+
+/* ---------- рендер чата ---------- */
+const memLine = () => `<div class="src">память диалога: проступки ${MEM.offenses} · благодать ${MEM.grace} · реплика №${MEM.turns}</div>`;
+function errHTML(e){
+  return `<div class="detail"><h3>Бог</h3><div class="note" style="color:var(--bad)">Бэкенд недоступен (${esc(String(e))}).\n`+
+  `Запустите LM Studio/Ollama и проверьте endpoint в ⚙, либо переключитесь на «Корпусный» режим.</div></div>`;
+}
+function liveHTML(r){
+  const s = r.sections;
+  let h = `<div class="detail"><h3>Бог</h3>`;
+  if(s["[HEBREW]"]) h += `<div class="sect"><div class="h">עברית — древний иврит</div><div class="he">${esc(s["[HEBREW]"])}</div></div>`;
+  if(s["[NIKKUD]"]) h += `<div class="sect"><div class="h">огласовка</div><div class="he small">${esc(s["[NIKKUD]"])}</div></div>`;
+  if(s["[Russian]"]) h += `<div class="sect"><div class="h">русский подстрочник</div>${esc(s["[Russian]"])}</div>`;
+  if(s["[English]"]) h += `<div class="sect"><div class="h">English</div>${esc(s["[English]"])}</div>`;
+  if(s["[Hebrew Modern]"]) h += `<div class="sect"><div class="h">עברית מודרנית</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
+  const src = s["[SOURCES]"] || r.hits.map(x=>x[1]+" "+x[2].span.start).join(", ");
+  h += `<div class="src">источники: ${esc(src)}</div>${memLine()}</div>`;
+  return h;
+}
+function corpusHTML(r){
+  let h = `<div class="detail"><h3>Бог</h3><div class="note">Прецедент из корпуса — реальная речь, без генерации.</div>`;
+  const top = r.hits.filter(x=>x[2].god_speech_plain)[0] || r.hits[0];
+  if(top){
+    const e = top[2];
+    h += `<div class="sect"><div class="h">עברית (речь как в корпусе)</div><div class="he">${esc(e.god_speech_plain.slice(0,600))}${e.god_speech_plain.length>600?"…":""}</div></div>`;
+    h += `<div class="sect"><div class="h">действие</div>${esc(e.god_action)}</div>`;
+    h += `<div class="sect"><div class="h">о чём речь</div>${esc(e.summary_ru)}</div>`;
+    h += `<div class="src">источник: ${top[1]} ${e.span.start}–${e.span.end}</div>`;
+  } else h += `<div class="note">Релевантного прецедента в корпусе нет.</div>`;
+  const out = Object.entries(r.probs).sort((a,b)=>b[1]-a[1]).slice(0,3)
+    .map(p=>`<span class="tag ${p[0]}">${p[0]} ${(p[1]*100).toFixed(0)}%</span>`).join("");
+  h += `<div class="src">ожидаемая реакция по триггеру ${r.trig}: ${out||"н/д"}</div>${memLine()}</div>`;
+  return h;
+}
+function chatUI(m){
+  m.innerHTML = `
+  <h2>Чат с имитацией</h2>
+  <div class="note">Вопрос — на любом языке. Два режима:
+  <b>Корпусный</b> — ответ реальной речью эпизода-прецедента из 2 050 размеченных эпизодов (источник проверяем, работает у всех);
+  <b>Живой</b> — свободная речь имитации пятью слоями (древний иврит · огласовка · русский · English · современный иврит),
+  требует вашего локального бэкенда (LM Studio / Ollama) или ключа — задаётся в ⚙ и хранится только в вашем браузере.</div>
+  <div class="modes">
+    <button id="mdCorpus" class="on">Корпусный</button>
+    <button id="mdLive">Живой (LLM)</button>
+    <button id="mdCfg">⚙ настройки бэкенда</button>
+  </div>
+  <div id="chatcfg" class="card">
+    <div class="note">Ключи остаются в localStorage вашего браузера и не хранятся на сервере.
+    LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions</div>
+    <div class="filters" style="margin-top:8px">
+      <input id="cfgEp" placeholder="endpoint">
+      <input id="cfgMd" placeholder="model (необяз.)" style="max-width:180px">
+      <input id="cfgKy" placeholder="API key (необяз.)" style="max-width:180px">
+      <button id="cfgSv">сохранить</button>
+    </div>
+  </div>
+  <div class="filters" style="margin-top:12px"><input id="cq" placeholder="что скажете Богу? (любой язык)…"></div>
+  <div id="clog"></div>`;
+  let mode = "corpus";
+  const cfg0 = store.get("god_cfg", { endpoint:"http://127.0.0.1:1234/v1/chat/completions", model:"", key:"" });
+  cfgEp.value = cfg0.endpoint; cfgMd.value = cfg0.model||""; cfgKy.value = cfg0.key||"";
+  mdCorpus.onclick = () => { mode="corpus"; mdCorpus.classList.add("on"); mdLive.classList.remove("on"); };
+  mdLive.onclick   = () => { mode="live";   mdLive.classList.add("on"); mdCorpus.classList.remove("on"); };
+  mdCfg.onclick    = () => { chatcfg.style.display = chatcfg.style.display==="block" ? "none" : "block"; };
+  cfgSv.onclick    = () => { store.set("god_cfg",{ endpoint:cfgEp.value.trim(), model:cfgMd.value.trim(), key:cfgKy.value.trim() });
+    cfgSv.textContent="сохранено ✓"; setTimeout(()=>{cfgSv.textContent="сохранить";},1200); };
+  const log = clog;
+  async function send(){
+    const q = cq.value.trim(); if(!q) return;
+    cq.value = "";
+    log.insertAdjacentHTML("beforeend", `<div class="msg-user"><div class="s">Вы</div>${esc(q)}</div>`);
+    memUpdate(q);
+    log.insertAdjacentHTML("beforeend",'<div class="note" id="wt">…</div>');
+    try{
+      if(mode==="corpus"){
+        const r = await corpusReply(q);
+        wt.textContent = "поиск в корпусе…";
+        wt.remove();
+        log.insertAdjacentHTML("beforeend", corpusHTML(r));
+      } else {
+        wt.textContent = "имитация отвечает…";
+        const r = await liveReply(q);
+        wt.remove();
+        log.insertAdjacentHTML("beforeend", liveHTML(r));
+      }
+    }catch(e){
+      wt.remove();
+      log.insertAdjacentHTML("beforeend", errHTML(e));
+    }
+    if(log.lastElementChild) log.lastElementChild.scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+  cq.addEventListener("keydown", e => { if(e.key==="Enter") send(); });
+}
+
+/* =====================================================================
+   ВКЛАДКИ: обзор, книги, эпизоды, профиль, отчёт, о проекте
+   ===================================================================== */
+async function tOverview(m){
+  const a = await analytics();
+  const oc = {};
+  for(const s of Object.values(a.per_era)) for(const k of Object.keys(s.outcome_p))
+    oc[k] = (oc[k]||0) + s.outcome_p[k];
+  m.innerHTML = `
   <div class="cards">
-    <div class="card"><div class="v">${c.episodes}</div><div class="l">эпизодов взаимодействия</div></div>
-    <div class="card"><div class="v">${c.books}</div><div class="l">книг Танаха</div></div>
+    <div class="card"><div class="v">${a.corpus.episodes}</div><div class="l">эпизодов взаимодействия</div></div>
+    <div class="card"><div class="v">${a.corpus.books}</div><div class="l">книг Танаха</div></div>
     <div class="card"><div class="v">24%</div><div class="l">эпизодов-наказаний</div><div class="b">из них 79% — объявленные оракулы</div></div>
     <div class="card"><div class="v">2.89</div><div class="l">средняя тяжесть (1–5)</div></div>
     <div class="card"><div class="v">55%</div><div class="l">инициатив у Бога</div><div class="b">человек инициирует 34%</div></div>
   </div>
   <h2>Портрет по эпохам</h2>
-  <div class="cards">${Object.entries(e).map(([era,s])=>`
-    <div class="card">
-      <div class="l" style="color:var(--acc)">${era}</div>
-      <div class="v">${s.episodes}</div>
-      <div class="b">тяжесть ${s.severity_mean} · молчание ${(s.silence_rate*100).toFixed(0)}% · кара ${(s.punishment_rate*100).toFixed(0)}%</div>
-      ${bar(s.outcome_p,5)}
-    </div>`).join('')}</div>
+  <div class="cards">${Object.entries(a.per_era).map(p=>`
+    <div class="card"><div class="l" style="color:var(--acc)">${p[0]}</div><div class="v">${p[1].episodes}</div>
+    <div class="b">тяжесть ${p[1].severity_mean} · молчание ${(p[1].silence_rate*100).toFixed(0)}% · кара ${(p[1].punishment_rate*100).toFixed(0)}%</div>
+    ${bar(p[1].outcome_p,5)}</div>`).join("")}</div>
   <h2>Весь корпус по исходам</h2>
-  <div class="card">${bar(A.per_era['Тора'] ? mergeOutcomes() : {},12)}</div>
-  <div class="note">Характерная асимметрия корпуса: наказание почти детерминировано проступком (57% кар — за непослушание),
-  милость событийна и связана с заступничеством или покаянием (явная — 2,6% эпизодов).</div>`;
-  function mergeOutcomes(){
-    const o={};for(const s of Object.values(A.per_era))for(const[k,v]of Object.entries(s.outcome_p))o[k]=(o[k]||0)+v;
-    return Object.fromEntries(Object.entries(o).map(([k,v])=>[k,Math.round(v*A.per_era['Тора'].episodes)||v]));
-  }
+  <div class="card">${bar(oc,11)}</div>
+  <div class="note">Асимметрия: наказание детерминировано проступком (57% кар — за непослушание; мольба наказана в 0,4%),
+  явная милость событийна — 2,6% эпизодов, обычно через заступничество или покаяние.</div>`;
 }
-
-function books(m){
-  const rows=Object.entries(A.per_book).filter(([b,s])=>!s.missing).map(([b,s])=>({b,...s}));
-  m.innerHTML=`<h2>Книги (${rows.length})</h2><div id="tb"></div>`;
-  draw(rows);
-  function draw(rows){
-    document.getElementById('tb').innerHTML=`<table><tr><th data-k="b">Книга</th><th data-k="episodes">Эпизоды</th><th data-k="severity_mean">Тяжесть</th><th>Исходы</th><th data-k="silence_rate">Молчание</th><th data-k="punishment_rate">Кара</th><th>Эпоха</th></tr>
-    ${rows.map(r=>`<tr><td><b>${r.b.replace('_',' ')}</b></td><td>${r.episodes}</td><td>${r.severity_mean}</td>
-    <td style="min-width:220px">${bar(r.outcome_p,4)}</td>
-    <td>${(r.silence_rate*100).toFixed(0)}%</td><td>${(r.punishment_rate*100).toFixed(0)}%</td><td>${r.era}</td></tr>`).join('')}</table>`;
-  }
+async function tBooks(m){
+  const a = await analytics();
+  const rows = Object.entries(a.per_book).filter(p=>!p[1].missing);
+  m.innerHTML = `<h2>Книги (${rows.length})</h2><table>
+  <tr><th>Книга</th><th>Эпизоды</th><th>Тяжесть</th><th style="min-width:230px">Исходы</th><th>Молчание</th><th>Кара</th><th>Эпоха</th></tr>
+  ${rows.map(p=>`<tr><td><b>${esc(p[0].replace(/_/g," "))}</b></td><td>${p[1].episodes}</td><td>${p[1].severity_mean}</td>
+  <td>${bar(p[1].outcome_p,4)}</td><td>${(p[1].silence_rate*100).toFixed(0)}%</td><td>${(p[1].punishment_rate*100).toFixed(0)}%</td><td>${esc(p[1].era)}</td></tr>`).join("")}
+  </table>`;
 }
-
-async function episodes(m){
-  m.innerHTML=`<h2>Эпизоды</h2>
+async function tEpisodes(m){
+  const a = await analytics();
+  const opt = b => `<option value="${b}">${b.replace(/_/g," ")}</option>`;
+  m.innerHTML = `<h2>Эпизоды</h2>
   <div class="filters">
-    <select id="fb"><option value="">все книги</option>${Object.entries(A.book_order).flatMap(([era,bs])=>bs.map(b=>`<option value="${b}">${b.replace('_',' ')} · ${era}</option>`)).join('')}</select>
-    <select id="fo"><option value="">все исходы</option>${Object.keys(C).map(k=>`<option>${k}</option>`).join('')}</select>
-    <select id="fd"><option value="">инициатор: любой</option><option>god_initiated</option><option>human_initiated</option><option>divine_action</option></select>
-    <input id="fq" placeholder="поиск по описанию (рус.)…">
-  </div><div id="elist"><div class="note">Выберите книгу или фильтры — батчи книги подгружаются по требованию.</div></div>`;
-  const load=async()=>{
-    const b=document.getElementById('fb').value;
-    const el=document.getElementById('elist');
-    if(!b){el.innerHTML='<div class="note">Выберите книгу — загрузится её батч (лениво, по одной).</div>';return}
-    el.innerHTML='<div class="note">загрузка…</div>';
-    let eps=await jget(B(b));
-    const fo=document.getElementById('fo').value, fd=document.getElementById('fd').value, q=document.getElementById('fq').value.toLowerCase();
-    eps=eps.filter(e=>(!fo||e.outcome===fo)&&(!fd||e.direction===fd)&&(!q||(e.summary_ru+' '+e.god_action).toLowerCase().includes(q)));
-    el.innerHTML=`<div class="note">${eps.length} эпизодов</div>`+eps.map((e,i)=>`
-      <div class="ep" data-b="${b}" data-i="${i}"><span class="s">${b} ${e.span.start}–${e.span.end}</span>
-      <span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span><span class="tag">${e.trigger}</span><span class="tag">тяжесть ${e.severity}</span>
-      <div>${esc(e.summary_ru)}</div></div>`).join('');
-    el.querySelectorAll('.ep').forEach(d=>d.onclick=()=>show(d.dataset.b,+d.dataset.i));
-  };
-  ['fb','fo','fd'].forEach(id=>document.getElementById(id).onchange=load);
-  document.getElementById('fq').oninput=()=>{clearTimeout(window._t);window._t=setTimeout(load,250)};
+    <select id="fBook"><option value="">все книги</option>${Object.values(a.book_order).flat().map(opt).join("")}</select>
+    <select id="fOut"><option value="">все исходы</option>${Object.keys(OUT).map(o=>`<option>${o}</option>`).join("")}</select>
+    <input id="fQ" placeholder="поиск по описанию (рус.)…">
+  </div><div id="elist"><div class="note">Выберите книгу — её эпизоды загрузятся по требованию.</div></div>`;
+  async function load(){
+    const b = fBook.value; const el = elist;
+    if(!b){ el.innerHTML = `<div class="note">Выберите книгу — загрузятся её эпизоды.</div>`; return; }
+    let eps = await bookDocs(b);
+    const fo = fOut.value, q = fQ.value.toLowerCase();
+    eps = eps.filter(e => (!fo||e.outcome===fo) && (!q||(e.summary_ru+" "+e.god_action).toLowerCase().includes(q)));
+    el.innerHTML = `<div class="note">${eps.length} эпизодов</div>` + eps.map((e,i)=>`
+      <div class="ep" data-b="${b}" data-i="${i}">
+        <span class="s">${b} ${e.span.start}–${e.span.end}</span>
+        <span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span>
+        <span class="tag">${e.trigger}</span><span class="tag">тяжесть ${e.severity}</span>
+        <div>${esc(e.summary_ru)}</div></div>`).join("");
+    el.querySelectorAll(".ep").forEach(d => d.onclick = () => showOne(b, +d.dataset.i));
+  }
+  fBook.onchange = load; fOut.onchange = load;
+  fQ.oninput = () => { clearTimeout(window._t); window._t = setTimeout(load, 250); };
 }
-
-async function show(b,i){
-  const eps=await jget(B(b)); const e=eps[i];
-  const d=document.createElement('div'); d.className='detail';
-  d.innerHTML=`<h3>${b} ${e.span.start}–${e.span.end}</h3>
-    <div><span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span><span class="tag">${e.via}</span>
-    <span class="tag">${e.trigger}</span><span class="tag">тяжесть ${e.severity}</span><span class="tag">доверие ${e.confidence}</span></div>
-    <div class="sect"><div class="h">Речь Бога (консонантный иврит)</div><div class="he">${esc(e.god_speech_plain)||'—'}</div></div>
-    <div class="sect"><div class="h">Оласовка</div><div class="he small">${esc(Array.isArray(e._nik?e._nik:[]).join(' ')||'')}</div></div>
-    <div class="sect"><div class="h">Действие Бога</div>${esc(e.god_action)}</div>
-    ${e.human_speech_plain?`<div class="sect"><div class="h">Речь человека</div><div class="he small">${esc(e.human_speech_plain)}</div></div>`:''}
-    <div class="sect"><div class="h">Резюме</div>${esc(e.summary_ru)}</div>
-    <div class="sect"><div class="h">Эмоции</div>${(e.emotions||[]).map(x=>'<span class="tag">'+esc(x.emotion||x)+'</span>').join('')}</div>
-    <div class="src">источники: ${e.book||b} ${e.span.start}–${e.span.end}</div>`;
-  document.getElementById('elist').prepend(d);
-  window.scrollTo({top:0,behavior:'smooth'});
+async function showOne(b, i){
+  const eps = await bookDocs(b); const e = eps[i];
+  const d = document.createElement("div"); d.className = "detail";
+  d.innerHTML = `<h3>${b} ${e.span.start}–${e.span.end}</h3>
+  <div><span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span>
+  <span class="tag">${e.via}</span><span class="tag">${e.trigger}</span><span class="tag">тяжесть ${e.severity}</span>
+  <span class="tag">${e.confidence==="low"?"низкое доверие":"высокое доверие"}</span></div>
+  <div class="sect"><div class="h">речь Бога (консонантный иврит)</div><div class="he">${esc(e.god_speech_plain)||"—"}</div></div>
+  <div class="sect"><div class="h">действие</div>${esc(e.god_action)}</div>
+  ${e.human_speech_plain?`<div class="sect"><div class="h">речь человека</div><div class="he small">${esc(e.human_speech_plain)}</div></div>`:""}
+  <div class="sect"><div class="h">резюме</div>${esc(e.summary_ru)}</div>
+  <div class="sect"><div class="h">эмоции</div>${(e.emotions||[]).map(x=>`<span class="tag">${esc(typeof x==="object"?x.emotion:x)}</span>`).join("")||"—"}</div>
+  <div class="src">источник: ${b} ${e.span.start}–${e.span.end}</div>`;
+  elist.prepend(d);
+  window.scrollTo({top:0, behavior:"smooth"});
 }
-
-function profile(m){
-  const tt=A.trigger_table;
-  m.innerHTML=`<h2>Профиль реакции: P(исход | триггер)</h2>
-  <table><tr><th>Триггер (что человек сделал)</th><th>n</th><th>Распределение исходов</th></tr>
-  ${Object.entries(tt).map(([t,s])=>`<tr><td><b>${t}</b></td><td>${s.n}</td><td style="min-width:340px">${bar(Object.fromEntries(Object.entries(s).filter(([k])=>k!=='n')),6)}</td></tr>`).join('')}</table>
+async function tProfile(m){
+  const a = await analytics();
+  m.innerHTML = `<h2>Профиль реакции: P(исход | триггер)</h2>
+  <table><tr><th>Триггер</th><th>n</th><th style="min-width:360px">Распределение исходов</th></tr>
+  ${Object.entries(a.trigger_table).map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1].n}</td>
+  <td>${bar(Object.fromEntries(Object.entries(p[1]).filter(x=>x[0]!=="n")),6)}</td></tr>`).join("")}</table>
   <h2>Кара: объявлена vs исполнена</h2>
-  <div class="card"><div class="v">${A.punishment_split.total}</div><div class="l">эпизодов-наказаний</div>
-  ${bar({announced_oracle:A.punishment_split.announced_oracle,executed_action:A.punishment_split.executed_action},2)}
-  <div class="note">79% наказаний — пророческие оракулы-приговоры; исполненные действия без речи — 84 эпизода (4% корпуса). Это уточняет мартовскую оценку 15%: Бог как «грозящий» вчетверо чаще, чем как «бьющий».</div></div>`;
+  <div class="card"><div class="v">${a.punishment_split.total}</div><div class="l">эпизодов-наказаний</div>
+  ${bar({announced_oracle:a.punishment_split.announced_oracle, executed_action:a.punishment_split.executed_action},2)}
+  <div class="note">79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса).
+  «Грозящий» Бог вчетверо чаще «бьющего».</div></div>`;
 }
-
-// ==================== ЧАТ (консервативный корпусный режим) ====================
-// Без LLM на статичном сайте диалог невозможен в свободном режиме; здесь —
-// retrieval по корпусу в браузере + ответ РЕАЛЬНОЙ речью эпизода-прецедента
-// (никакой выдумки) + карточка ожидаемой реакции P(исход|триггер).
-const TRIGS=[
- ["disobedience",["не буду","нарушу","нарушил","нарушила","нарушаю","не послушал","не послушаю","не исполнил","не буду слушать","отвергаю","идол","другого бога","не выполню","проигнорирую","откажусь","не стану","мне всё равно","плевать"]],
- ["intercession",["прости им","не губи","пощади","защити их","за них","сбереги их","не карай их","сжалься над ними"]],
- ["complaint",["согрешил","согрешила","прости меня","раскаиваюсь","провинился","виновен перед тобой","отступил от тебя"]],
- ["complaint",["почему ты","зачем ты","несправедливо","жалуюсь","ропщу","ты покинул","ты оставил","не заботишься"]],
- ["distress",["спаси","погибаю","беда","окружили","напали","враг одолел","умираю","утопаю","горит","страх","боюсь","боится"]],
- ["prayer",["молю","молюсь","прошу тебя","воззвал","обращаюсь к тебе с просьбой"]],
- ["inquiry",["скажи мне","что мне делать","спрашиваю","истолкуй","довольно ли","мне идти","кто виноват","объясни","почему так вышло","алейхем","what shall i do","tell me","why did you"]],
- ["vow",["даю обет","клянусь","обещаю тебе","обязуюсь"]],
- ["gratitude",["благодарю","славлю","хвала тебе","благодарю тебя","воспою тебе","thank you","i bless you"]],
- ["faithfulness",["делаю как велел","следую за тобой","верен тебе","исполнил всё","хожу путями твоими","люблю тебя всем сердцем"]],
- ["covenant_follow_up",["завет","обещание отцам","ради авраама","ради израиля","земля обещанная","потомству"]],
-];
-const CLASS_TRIGS=TRIGS.filter((_,i)=>i!==3); // confession-only группы не нужны для чата
-function classifyRu(q){
-  const m=q.toLowerCase();
-  let trig=null;
-  for(const [t,kws] of CLASS_TRIGS){ for(const k of kws){ if(m.includes(k)) return t;} }
-  return "inquiry";
-}
-const RUS_SYN=[["умер","смерть","смерт","умирает","погиб","погибель"],["гнев","разгневал","гнева","гневен"],["милосерд","милост","простил","прощение","простить","пощадил"],["люб","любов","любовь","любим"],["страх","боюсь","боится","страшно","устраш"],["наказа","кара","наказание"],["спас","спасение","спасает","избав"],["молитв","молитва","молится","мол"],["завет"],["грех","греха","согрешил","преступ"]];
-function syn(tok){const out=new Set([tok]);for(const g of RUS_SYN){if(g.some(x=>x===tok||(x.length>=4&&(tok.includes(x)||x.includes(tok)))))g.forEach(x=>out.add(x));}return[...out];}
-async function chatGetAll(){
-  if(chatGetAll._c) return chatGetAll._c;
-  const out={};
-  // грузим все 39 книг (лениво, по одной; ~4 МБ суммарно)
-  for(const era of Object.values(A.book_order)) for(const b of era){
-    if(b!=="genesis"&&!A.per_book[b]) continue;
-    try{out[b]=await jget(B(b));}catch(e){}
-  }
-  chatGetAll._c=out; return out;
-}
-// сходство темы запроса с исходом (имитация отвечает по типу реакции)
-const AFFIN=[
-  ["punishment",["покарал","наказ","кара","гнев","азви","разруш","истреб","поразил","казнил"]],
-  ["blessing",["благослови","милосерд","мольба о милости","прости","пощади","даровал"]],
-  ["rescue",["спаси","спасения","избав","помоги","защити"]],
-  ["answer_granted",["ответил","почему","зачем","даровал","довольно"]],
-  ["silence",["молчал","не отвечаешь","почему молчишь"]],
-];
-function affinities(q){
-  const m=q.toLowerCase(); const out=new Set();
-  for(const[oc,kws]of AFFIN) for(const k of kws) if(m.includes(k)) out.add(oc);
-  return out;
-}
-function chatRetrieve(q,docs){
-  const aff=affinities(q);
-  const qtok=new Set();for(const t of q.toLowerCase().match(/[а-яё-]{4,}/g)||[]) syn(t).forEach(x=>qtok.add(x));
-  for(const t of q.toLowerCase().match(/[a-z]{2,}/g)||[]) qtok.add(t);
-  const qs=q.split(/[^A-Za-zА-Яа-яёЁ]+/).filter(w=>/^[А-ЯA-Z]/.test(w)&&w.length>=4);
-  let best=[];
-  for(const [b,eps] of Object.entries(docs)){
-    for(const e of eps){
-      const txt=(e.summary_ru+" "+e.god_action).toLowerCase();
-      let s=0;
-      for(const t of qtok){
-        if(txt.includes(t)){
-          // длинные слова (имена/топонимы: Иерихон, Навуфея) бустим сильнее
-          s+= t.length>=6 ? 10/Math.log(4+txt.length) : 1/Math.log(3+txt.length);
-        }
-      }
-      for(const k of qs){ const w=k.toLowerCase(); if(w.length>=5&&k.startsWith(w.toUpperCase()[0])) s+=6/Math.log(4+txt.length); }
-      if(e.god_speech_plain){ s+=1.5; }    // предпочитаем эпизоды с прямой речью
-      if(aff.has(e.outcome)){ s+=2.5; }      // буст за соответствие ожидаемому исходу
-      if(s>0) best.push([s,b,e]);
+function md2html(md){
+  const lines = md.split("\n"); const out = []; let inList = false;
+  const inline = t => esc(t)
+    .replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>")
+    .replace(/\*([^*]+)\*/g,"<i>$1</i>")
+    .replace(/`([^`]+)`/g,"<code>$1</code>")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');
+  let i = 0;
+  while(i < lines.length){
+    const L = lines[i];
+    if(/^\|/.test(L) && i+1<lines.length && /^\|[\s:|-]+\|/.test(lines[i+1])){
+      const rows = [L]; let j = i+2;
+      while(j<lines.length && /^\|/.test(lines[j])){ rows.push(lines[j]); j++; }
+      const cells = r => r.replace(/^\||\|$/g,"").split("|").map(c=>inline(c.trim()));
+      out.push("<table><tr>"+cells(rows[0]).map(c=>"<th>"+c+"</th>").join("")+"</tr>");
+      for(let k=1;k<rows.length;k++) out.push("<tr>"+cells(rows[k]).map(c=>"<td>"+c+"</td>").join("")+"</tr>");
+      out.push("</table>"); i = j; continue;
     }
+    if(/^###\s/.test(L)) out.push("<h3>"+inline(L.slice(4))+"</h3>");
+    else if(/^##\s/.test(L)) out.push("<h2>"+inline(L.slice(3))+"</h2>");
+    else if(/^#\s/.test(L)) out.push("<h2 style='font-size:21px'>"+inline(L.slice(2))+"</h2>");
+    else if(/^---+\s*$/.test(L)) out.push("<hr>");
+    else if(/^[-*]\s/.test(L)){
+      if(!inList){ out.push("<ul>"); inList = true; }
+      out.push("<li>"+inline(L.replace(/^[-*]\s/,""))+"</li>");
+      if(i+1>=lines.length || !/^[-*]\s/.test(lines[i+1])){ out.push("</ul>"); inList = false; }
+    }
+    else if(/^\d+\.\s/.test(L)) out.push("<li>"+inline(L.replace(/^\d+\.\s/,""))+"</li>");
+    else if(/^>\s?/.test(L)) out.push("<blockquote>"+inline(L.replace(/^>\s?/,""))+"</blockquote>");
+    else if(L.trim()!=="") out.push("<p>"+inline(L)+"</p>");
+    i++;
   }
-  best.sort((a,c)=>c[0]-a[0]);
-  return best.slice(0,40);
+  if(inList) out.push("</ul>");
+  return out.join("\n");
 }
-function chatReply(q){
-  return chatGetAll().then(docs=>{
-    const hits=chatRetrieve(q,docs);
-    const trig=classifyRu(q);
-    const tt=A.trigger_table[trig]; const out={};
-    if(tt) for(const[k,v]of Object.entries(tt)){if(k!=="n")out[k]=v;}
-    return {hits,trig,probs:out};
-  });
+async function tReport(m){
+  m.innerHTML = `<div class="note">загрузка отчёта…</div>`;
+  const md = await (await fetch("research_report.md")).text();
+  m.innerHTML = `<div class="card" style="padding:26px 30px;max-width:880px">${md2html(md)}</div>`;
 }
-// ==================== ЧАТ (консервативный корпусный режим) ====================
-// Без LLM на статичном сайте диалог невозможен в свободном режиме; здесь —
-// retrieval по корпусу в браузере + ответ РЕАЛЬНОЙ речью эпизода-прецедента
-// (никакой выдумки) + карточка ожидаемой реакции P(исход|триггер).
-function chat_t(m){
-  m.innerHTML=`<h2>Чат с имитацией</h2>
-  <div class="note">Корпусный режим: вопрос на любом языке → поиск по 2 050 размеченным эпизодам →
-  ответ <b>реальной речью</b> эпизода-прецедента (источник проверяем, без генерации).</div>
-  <div class="filters" style="margin-top:12px"><input id="cq" style="flex:1" placeholder="что скажете Богу? (любой язык)…"></div>
-  <div id="clog"></div>`;
-  const log=document.getElementById('clog');
-  const hist=[];
-  const send=()=>{
-    const q=document.getElementById('cq').value.trim(); if(!q) return;
-    hist.push(["Вы",q]); draw();
-    chatGetAll().then(docs=>{
-      const hits=chatRetrieve(q,docs).slice(0,3);
-      const trig=classifyRu(q);
-      const tt=A.trigger_table[trig]; const probs={};
-      if(tt) for(const[k,v]of Object.entries(tt)){if(k!=="n")probs[k]=v;}
-      let h=`<div class="detail"><h3>Бог</h3>`;
-      const top=hits.filter(x=>x[2].god_speech_plain)[0]||hits[0];
-      if(top){
-        const e=top[2];
-        h+=`<div class="note">Прецедент — реальная речь корпуса, без выдумки.</div>`;
-        h+=`<div class="sect"><div class="h">עברית (как в корпусе)</div><div class="he">${esc(e.god_speech_plain.slice(0,600))}${e.god_speech_plain.length>600?"…":""}</div></div>`;
-        h+=`<div class="sect"><div class="h">действие</div>${esc(e.god_action)}</div>`;
-        h+=`<div class="sect"><div class="h">о чём речь</div>${esc(e.summary_ru)}</div>`;
-        h+=`<div class="src">источник: ${top[1]} ${e.span.start}–${e.span.end}</div>`;
-      } else {
-        h+=`<div class="note">В корпусе нет релевантного прецедента для этой реплики.</div>`;
-      }
-      const out=Object.entries(probs).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>`<span class="tag ${k}">${k} ${(v*100).toFixed(0)}%</span>`).join("");
-      h+=`<div class="src">ожидаемая реакция по триггеру ${trig}: ${out||"н/д"}</div></div>`;
-      log.insertAdjacentHTML('beforeend',h);
-    });
-  };
-  function draw(){ log.innerHTML=hist.map(([who,x])=>`<div class="ep" style="cursor:default"><div class="s">${who}</div><div>${esc(x)}</div></div>`).join(""); }
-  document.getElementById('cq').addEventListener('keydown',ev=>{if(ev.key==='Enter')send()});
+async function tAbout(m){
+  const a = await analytics();
+  m.innerHTML = `<h2>О проекте</h2><div class="card">
+  <p>Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>${a.corpus.episodes}</b> эпизодов
+  взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь,
+  действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам; аудиты покрытия — 100%.</p>
+  <p><b>Научный отчёт v1.0</b> — вкладка «Отчёт» или <a href="research_report.md" target="_blank">research_report.md</a>.</p>
+  <p><b>Ключевые находки.</b> Наказание детерминировано проступком (80% при непослушании; мольба наказана в 0,4% случаев)
+  и в 79% объявляется, а не исполняется. Явная милость — 2,6%, через заступничество или покаяние.
+  Молчание — жанровый феномен поэзии (27% против 3% в нарративе). Заступничество — самый слышимый тип обращения (48% ответов).</p>
+  <p><b>Ограничения.</b> Исходы — кодировка исследователя, а не теология; сопоставимость эпох требует одинаковых
+  единиц измерения (см. <a href="retrospective_v1.md" target="_blank">ретроспективу v1</a>).</p>
+  <p class="note">Данные: <a href="data/analytics.json">analytics.json</a> · эпизоды по книгам: data/books/<книга>.json ·
+  код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps). Текст Танаха — общественное достояние;
+  русские аннотации — CC BY 4.0; код — MIT.</p></div>`;
 }
 
-
-function about(m){
-  m.innerHTML=`<h2>О проекте</h2>
-  <div class="card">
-  <p>Исследование образа Бога в Танахе: из всех 39 книг извлечены <b>${A.corpus.episodes}</b> эпизодов взаимодействия
-  Человек↔Бог (контракт v2: спан стихов, направление, канал, триггер, дословная консонантная речь, огласовка,
-  действие, исход, тяжесть 1–5, эмоции с обоснованиями). Каждый эпизод прослеживается к стихам.</p>
-  <p><b>Метод.</b> Экстракция эпизодов агентами по единому контракту; аудит покрытия 100% (формулы речи,
-  обращения, молчание, действия без речи, контрольные стихи); глобальная дедупликация перекрытий.
-  Поведенческий профиль: P(исход | триггер) — эмпирические вероятности реакции.</p>
-  <p><b>Ключевые находки.</b> Наказание детерминировано проступком (57% кар — за непослушание; мольба наказывается
-  в 0,4%). Милость событийна (явная — 2,6%) и связана с заступничеством. 79% наказаний — объявленные оракулы,
-  исполненных действий 4% корпуса. Портрет по эпохам: Тора — завет; ранние Пророки — спасение; поздние Пророки —
-  приговор (43%); Кетувим — молчание (19%).</p>
-  <p><b>Ограничения.</b> «Исходы» — кодировка исследователя (LLM-агенты с аудитом), а не теология; молчание в
-  поэтических книгах часто литературный приём. Сопоставление с мартовской методологией (стихи vs эпизоды) —
-  в документе ретроспективы. Текст Танаха — общественное достояние (масоретский текст); русские описания — CC BY 4.0.</p>
-  <p class="note">Данные: <a href="/GOD/data/analytics.json">analytics.json</a> · эпизоды по книгам:
-  <a href="/GOD/data/books/Genesis.json">…/data/books/<книга>.json</a> · код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps).</p>
-  </div>`;
-}
-render('overview');
+/* ---------- роутер ---------- */
+const TABS = [ ["overview","Обзор"], ["books","Книги"], ["episodes","Эпизоды"], ["profile","Профиль реакции"],
+               ["chat","Чат"], ["report","Отчёт"], ["about","О проекте"] ];
+const RENDER = { overview:tOverview, books:tBooks, episodes:tEpisodes, profile:tProfile,
+                 chat:chatUI, report:tReport, about:tAbout };
+nav.innerHTML = TABS.map((t,i)=>`<button data-t="${t[0]}"${i===0?' class="on"':""}>${t[1]}</button>`).join("");
+nav.querySelectorAll("button").forEach(b => b.onclick = () => {
+  nav.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+  b.classList.add("on");
+  RENDER[b.dataset.t](main);
+});
+RENDER.overview(main);
 </script>
 </body>
 </html>
