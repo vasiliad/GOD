@@ -19,10 +19,11 @@ import json
 import re
 import sys
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path("C:/GOD2")
+BASE = Path(_REPO)
 GLOB = "output/episodes_*_v2.json"
 OUT = BASE / "output/episodes_TANAKH_v2.json"
 

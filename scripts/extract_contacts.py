@@ -18,14 +18,15 @@ import sys
 import argparse
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 # ============================================================
 # ПУТИ
 # ============================================================
-TANAKH_DIR  = Path("C:/GOD2/data/tanakh")
-OUTPUT_FILE = Path("C:/GOD2/output/contacts_registry.json")
+TANAKH_DIR  = Path(_REPO + "/data/tanakh")
+OUTPUT_FILE = Path(_REPO + "/output/contacts_registry.json")
 
 # ============================================================
 # 1. ОЧИСТКА ОТ ОГЛАСОВОК

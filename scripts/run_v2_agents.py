@@ -14,11 +14,12 @@ import argparse
 import subprocess
 import json
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-OUTPUT_BASE = Path("C:/GOD2/output/pilot_v2")
-AGENT_PROMPT_FILE = Path("C:/GOD2/prompts/segment_agent_v2.txt")
+OUTPUT_BASE = Path(_REPO + "/output/pilot_v2")
+AGENT_PROMPT_FILE = Path(_REPO + "/prompts/segment_agent_v2.txt")
 
 
 def compute_batches(num_chapters: int, batch_size: int = 6, overlap: int = 1) -> list[tuple[int, int]]:

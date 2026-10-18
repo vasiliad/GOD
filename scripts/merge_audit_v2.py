@@ -19,12 +19,13 @@ import sys
 import argparse
 from pathlib import Path
 from collections import Counter, defaultdict
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-OUTPUT_BASE = Path("C:/GOD2/output/pilot_v2")
-TANAKH_DIR = Path("C:/GOD2/data/tanakh")
-OLD_CODED = Path("C:/GOD2/output/situations_coded.json")
+OUTPUT_BASE = Path(_REPO + "/output/pilot_v2")
+TANAKH_DIR = Path(_REPO + "/data/tanakh")
+OLD_CODED = Path(_REPO + "/output/situations_coded.json")
 
 REQ_FIELDS = {
     "span", "direction", "via", "participants", "addressee_type", "trigger",
@@ -225,7 +226,7 @@ def main():
     book = args.book
     book_file = TANAKH_DIR / f"{book}.json"
     episodes_dir = OUTPUT_BASE / f"{book}_episodes"
-    out_file = Path(f"C:/GOD2/output/episodes_{book}_v2.json")
+    out_file = Path(f_REPO + "/output/episodes_{book}_v2.json")
 
     if not book_file.exists():
         print(f"ОШИБКА: Файл {book_file} не найден")

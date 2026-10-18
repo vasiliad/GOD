@@ -15,6 +15,7 @@ import time
 import argparse
 from pathlib import Path
 from openai import OpenAI
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -24,9 +25,9 @@ sys.stdout.reconfigure(encoding="utf-8")
 LM_STUDIO_URL = "http://localhost:1234/v1"
 LM_STUDIO_KEY = "lm-studio"
 
-INPUT_FILE    = Path("C:/GOD2/output/situations_coded.json")
-OUTPUT_FILE   = Path("C:/GOD2/output/situations_coded_enriched.json")
-BACKUP_FILE   = Path("C:/GOD2/output/situations_coded_backup.json")
+INPUT_FILE    = Path(_REPO + "/output/situations_coded.json")
+OUTPUT_FILE   = Path(_REPO + "/output/situations_coded_enriched.json")
+BACKUP_FILE   = Path(_REPO + "/output/situations_coded_backup.json")
 
 SAVE_EVERY    = 50
 REQUEST_DELAY = 0.05

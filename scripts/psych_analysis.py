@@ -9,11 +9,12 @@ import sys
 import argparse
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-CODED_FILE = Path("C:/GOD2/output/situations_coded.json")
-OUTPUT     = Path("C:/GOD2/output")
+CODED_FILE = Path(_REPO + "/output/situations_coded.json")
+OUTPUT     = Path(_REPO + "/output")
 
 def pct(key, dist, total_n=None):
     n = total_n or max(sum(dist.values()), 1)

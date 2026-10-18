@@ -15,12 +15,13 @@ import time
 import argparse
 from pathlib import Path
 from openai import OpenAI
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 LM_STUDIO_URL = "http://localhost:1234/v1"
 LM_API_KEY    = "lm-studio"
-CODED_FILE    = Path("C:/GOD2/output/situations_coded.json")
+CODED_FILE    = Path(_REPO + "/output/situations_coded.json")
 API_TIMEOUT   = 600
 MAX_TOKENS    = 3000
 SLEEP_BETWEEN = 0.5

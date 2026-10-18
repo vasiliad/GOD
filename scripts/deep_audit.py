@@ -4,10 +4,11 @@
 import json, re, sys
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-OUTPUT = Path("C:/GOD2/output")
+OUTPUT = Path(_REPO + "/output")
 
 with open(OUTPUT / "god_vocabulary.json", encoding="utf-8") as f:
     vocab = json.load(f)

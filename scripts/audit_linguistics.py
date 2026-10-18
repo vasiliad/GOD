@@ -8,8 +8,9 @@ import sys, json, re
 sys.stdout = open(sys.stdout.fileno(), mode='w', encoding='utf-8', buffering=1)
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
-OUTPUT = Path("C:/GOD2/output")
+OUTPUT = Path(_REPO + "/output")
 
 print("=" * 60)
 print("АУДИТ КАЧЕСТВА: linguistics-001")

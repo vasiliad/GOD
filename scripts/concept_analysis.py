@@ -11,11 +11,12 @@ import sys
 import unicodedata
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-CODED  = Path("C:/GOD2/output/situations_coded.json")
-OUTPUT = Path("C:/GOD2/output/concept_analysis.json")
+CODED  = Path(_REPO + "/output/situations_coded.json")
+OUTPUT = Path(_REPO + "/output/concept_analysis.json")
 
 with open(CODED, encoding="utf-8") as f:
     situations = json.load(f)

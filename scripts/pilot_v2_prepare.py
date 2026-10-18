@@ -15,11 +15,12 @@ import sys
 import argparse
 from pathlib import Path
 from collections import defaultdict
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-TANAKH_DIR = Path("C:/GOD2/data/tanakh")
-OUTPUT_BASE = Path("C:/GOD2/output/pilot_v2")
+TANAKH_DIR = Path(_REPO + "/data/tanakh")
+OUTPUT_BASE = Path(_REPO + "/output/pilot_v2")
 
 
 def normalize_he(text: str) -> str:

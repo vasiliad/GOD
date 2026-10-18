@@ -11,13 +11,14 @@ import re
 import sys
 from pathlib import Path
 from collections import Counter, defaultdict
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-PILOT_DIR = Path("C:/GOD2/output/pilot_v2")
-GENESIS = Path("C:/GOD2/data/tanakh/Genesis.json")
-OLD_CODED = Path("C:/GOD2/output/situations_coded.json")
-OUT_FILE = Path("C:/GOD2/output/episodes_genesis_v2.json")
+PILOT_DIR = Path(_REPO + "/output/pilot_v2")
+GENESIS = Path(_REPO + "/data/tanakh/Genesis.json")
+OLD_CODED = Path(_REPO + "/output/situations_coded.json")
+OUT_FILE = Path(_REPO + "/output/episodes_genesis_v2.json")
 
 REQ_FIELDS = {"span", "direction", "via", "participants", "addressee_type", "trigger",
               "god_speech_refs", "god_speech_plain", "human_speech_refs", "human_speech_plain",

@@ -12,6 +12,7 @@ import time
 import argparse
 from pathlib import Path
 from openai import OpenAI
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -21,14 +22,14 @@ sys.stdout.reconfigure(encoding="utf-8")
 LM_STUDIO_URL  = "http://localhost:1234/v1"
 LM_STUDIO_KEY  = "lm-studio"
 
-CODED    = Path("C:/GOD2/output/situations_coded.json")
-PROFILE  = Path("C:/GOD2/output/god_profile.json")
-CONCEPTS = Path("C:/GOD2/output/concept_analysis.json")
-OUTPUT   = Path("C:/GOD2/output/reasoning_dataset.jsonl")
-ERRORS   = Path("C:/GOD2/output/reasoning_errors.jsonl")
+CODED    = Path(_REPO + "/output/situations_coded.json")
+PROFILE  = Path(_REPO + "/output/god_profile.json")
+CONCEPTS = Path(_REPO + "/output/concept_analysis.json")
+OUTPUT   = Path(_REPO + "/output/reasoning_dataset.jsonl")
+ERRORS   = Path(_REPO + "/output/reasoning_errors.jsonl")
 
-PROMPT_SYS   = Path("C:/GOD2/prompts/god_reasoning_sys.md")
-PROMPT_JUDGE = Path("C:/GOD2/prompts/god_reasoning_judge.md")
+PROMPT_SYS   = Path(_REPO + "/prompts/god_reasoning_sys.md")
+PROMPT_JUDGE = Path(_REPO + "/prompts/god_reasoning_judge.md")
 
 MAX_SITUATIONS = 10000
 SKIP_BEHAVIORS = {"other"}

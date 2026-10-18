@@ -1,13 +1,28 @@
 {
  "total_verses": 23206,
  "pipeline_lexicon": [
+  "אביר יעקב",
   "אדני",
+  "אדני יהוה",
+  "אל עולם",
+  "אל עליון",
+  "אל ראי",
   "אל שדי",
+  "אלהי",
   "אלהים",
+  "אלוה",
   "יה",
   "יהוה",
   "יהוה אלהים",
-  "יהוה צבאות"
+  "יהוה ירה",
+  "יהוה נסי",
+  "יהוה צבאות",
+  "יהוה צדקנו",
+  "יהוה שלום",
+  "מלאך אלהים",
+  "מלאך יהוה",
+  "קדוש ישראל",
+  "שר צבא יהוה"
  ],
  "coded_names_counts": {
   "יהוה": 331,
@@ -73,7 +88,7 @@
    "count": 0,
    "books": [],
    "first_refs": [],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -81,7 +96,7 @@
    "count": 0,
    "books": [],
    "first_refs": [],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -96,7 +111,7 @@
     "Judges 6:23",
     "Judges 6:24"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -104,7 +119,7 @@
    "count": 0,
    "books": [],
    "first_refs": [],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -131,7 +146,7 @@
     "Amos 3:11",
     "Amos 3:13"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -158,7 +173,7 @@
     "Genesis 16:10",
     "Genesis 16:11"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -178,7 +193,7 @@
     "I_Samuel 29:9",
     "II_Samuel 14:17"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -191,7 +206,7 @@
     "Joshua 5:14",
     "Joshua 5:15"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -254,7 +269,7 @@
     "Genesis 14:22",
     "Psalms 78:35"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -289,7 +304,7 @@
    "first_refs": [
     "Genesis 21:33"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -307,7 +322,7 @@
     "I_Samuel 19:5",
     "II_Chronicles 7:3"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -457,7 +472,7 @@
     "Habakkuk 3:3",
     "II_Chronicles 32:15"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -530,7 +545,7 @@
     "Isaiah 5:24",
     "Isaiah 10:20"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
@@ -548,7 +563,7 @@
     "Psalms 132:2",
     "Psalms 132:5"
    ],
-   "in_pipeline_lexicon": false,
+   "in_pipeline_lexicon": true,
    "ambiguous": false
   },
   {
