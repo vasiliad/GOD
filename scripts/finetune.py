@@ -13,12 +13,13 @@ finetune.py
 import json
 import sys
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-DATASET_FILE  = Path("C:/GOD2/output/reasoning_dataset.jsonl")
-LORA_OUT_DIR  = Path("C:/GOD2/models/god2-lora")
-GGUF_OUT_PATH = Path("C:/GOD2/models/god2.gguf")
+DATASET_FILE  = Path(_REPO + "/output/reasoning_dataset.jsonl")
+LORA_OUT_DIR  = Path(_REPO + "/models/god2-lora")
+GGUF_OUT_PATH = Path(_REPO + "/models/god2.gguf")
 LORA_OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 STUDENT_MODEL = "dicta-il/dictaLM-2.0-Instruct"

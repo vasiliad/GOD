@@ -1,8 +1,10 @@
+from pathlib import Path
 ﻿import json
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 paths = {
-    'ext': 'C:/GOD2/output/situations_extracted.json',
-    'coded': 'C:/GOD2/output/situations_coded.json'
+    'ext': _REPO + '/output/situations_extracted.json',
+    'coded': _REPO + '/output/situations_coded.json'
 }
 
 with open(paths['ext'], 'r', encoding='utf-8') as f:

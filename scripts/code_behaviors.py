@@ -11,12 +11,13 @@ import time
 import argparse
 from pathlib import Path
 from openai import OpenAI
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-INPUT_FILE    = Path("C:/GOD2/output/situations_registry.json")
-OUTPUT_FILE   = Path("C:/GOD2/output/situations_coded.json")
-PROMPT_FILE   = Path("C:/GOD2/prompts/god_behavior_sys.md")
+INPUT_FILE    = Path(_REPO + "/output/situations_registry.json")
+OUTPUT_FILE   = Path(_REPO + "/output/situations_coded.json")
+PROMPT_FILE   = Path(_REPO + "/prompts/god_behavior_sys.md")
 LM_STUDIO_URL = "http://localhost:1234/v1"
 LM_API_KEY    = "lm-studio"
 

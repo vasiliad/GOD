@@ -5,8 +5,9 @@ from pathlib import Path
 
 # Временно ограничиваем до 3 книг
 import scripts.extract_contacts as ec
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
-TANAKH_DIR  = Path("C:/GOD2/data/tanakh")
+TANAKH_DIR  = Path(_REPO + "/data/tanakh")
 index = json.load(open(TANAKH_DIR / "_index.json", encoding="utf-8"))
 
 results = []

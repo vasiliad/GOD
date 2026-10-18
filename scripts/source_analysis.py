@@ -7,10 +7,11 @@ import os
 import argparse
 from collections import defaultdict, Counter
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-BASE_DIR = Path("C:/GOD2")
+BASE_DIR = Path(_REPO)
 INPUT     = BASE_DIR / "output" / "situations_coded.json"
 TANAKH    = BASE_DIR / "data" / "tanakh"
 PROFILE   = BASE_DIR / "output" / "god_profile.json"

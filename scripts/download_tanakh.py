@@ -4,8 +4,9 @@
 """
 import requests, json, re, time, sys, argparse
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
-OUTPUT_DIR = Path("C:/GOD2/data/tanakh")
+OUTPUT_DIR = Path(_REPO + "/data/tanakh")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 TANAKH_BOOKS = {

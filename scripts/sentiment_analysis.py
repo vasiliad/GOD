@@ -10,6 +10,7 @@ import sys
 import argparse
 from pathlib import Path
 from collections import defaultdict
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 try:
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -80,7 +81,7 @@ def main():
     parser.add_argument("--test", action="store_true", help="DRY-RUN limit 10")
     args = parser.parse_args()
 
-    ROOT = Path("C:/GOD2")
+    ROOT = Path(_REPO)
     INPUT  = ROOT / "output" / "situations_coded.json"
     OUT_TL = ROOT / "output" / "sentiment_timeline.json"
     OUT_BK = ROOT / "output" / "sentiment_by_book.json"

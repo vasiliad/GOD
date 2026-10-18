@@ -5,14 +5,15 @@ import json, re, sys, argparse
 from pathlib import Path
 from collections import Counter
 import stanza
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 def strip_diacritics(text: str) -> str:
     return re.sub(r'[\u0591-\u05C7\u05F3\u05F4]', '', text)
 
-REGISTRY_FILE = Path("C:/GOD2/output/situations_registry.json")
-OUTPUT = Path("C:/GOD2/output")
+REGISTRY_FILE = Path(_REPO + "/output/situations_registry.json")
+OUTPUT = Path(_REPO + "/output")
 
 def freq_by_root(root_stripped: str, freq_dict: Counter) -> int:
     total = 0

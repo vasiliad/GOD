@@ -16,15 +16,16 @@ import time
 import argparse
 from pathlib import Path
 from openai import OpenAI
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 LM_STUDIO_URL = "http://localhost:1234/v1"
 LM_API_KEY    = "lm-studio"
-INPUT_FILE    = Path("C:/GOD2/output/reasoning_dataset.jsonl")
-OUTPUT_CLEAN  = Path("C:/GOD2/output/reasoning_dataset_clean.jsonl")
-OUTPUT_REJECT = Path("C:/GOD2/output/reasoning_dataset_rejected.jsonl")
-PROMPT_JUDGE  = Path("C:/GOD2/prompts/god_reasoning_judge.md")
+INPUT_FILE    = Path(_REPO + "/output/reasoning_dataset.jsonl")
+OUTPUT_CLEAN  = Path(_REPO + "/output/reasoning_dataset_clean.jsonl")
+OUTPUT_REJECT = Path(_REPO + "/output/reasoning_dataset_rejected.jsonl")
+PROMPT_JUDGE  = Path(_REPO + "/prompts/god_reasoning_judge.md")
 API_TIMEOUT   = 600
 MAX_TOKENS    = 800
 SLEEP_BETWEEN = 3   # пауза между запросами (один вызов, нет перегрузки)

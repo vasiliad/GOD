@@ -1,7 +1,8 @@
 import json
+from pathlib import Path
 from collections import Counter
 
-with open(r'C:\GOD2\output\contacts_registry.json', encoding='utf-8') as f:
+with open(str(Path(__file__).resolve().parents[1] / 'output' / 'contacts_registry.json'), encoding='utf-8') as f:
     data = json.load(f)
 
 print(f'Всего контактов: {len(data)}')

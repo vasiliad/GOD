@@ -15,10 +15,11 @@ import json
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path("C:/GOD2")
+BASE = Path(_REPO)
 MASTER = BASE / "output/episodes_TANAKH_v2.json"
 OUT = BASE / "output/analytics.json"
 

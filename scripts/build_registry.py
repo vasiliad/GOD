@@ -8,11 +8,12 @@ import sys
 import argparse
 from pathlib import Path
 from collections import Counter
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-CONTACTS_FILE = Path("C:/GOD2/output/contacts_registry.json")
-OUTPUT = Path("C:/GOD2/output")
+CONTACTS_FILE = Path(_REPO + "/output/contacts_registry.json")
+OUTPUT = Path(_REPO + "/output")
 
 KEYWORD_TO_CATEGORY = {
     # Речь / повеление

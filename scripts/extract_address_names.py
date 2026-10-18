@@ -14,12 +14,13 @@ import re
 import sys
 from pathlib import Path
 from collections import Counter, defaultdict
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-TANAKH_DIR = Path("C:/GOD2/data/tanakh")
-OUT_FILE = Path("C:/GOD2/output/address_names.json")
-GOD_NAMES_FILE = Path("C:/GOD2/data/god_names.json")
+TANAKH_DIR = Path(_REPO + "/data/tanakh")
+OUT_FILE = Path(_REPO + "/output/address_names.json")
+GOD_NAMES_FILE = Path(_REPO + "/data/god_names.json")
 
 # --- нормализация: консонантный текст (та же, что в merge_audit_v2) ---
 def normalize_he(text: str) -> str:

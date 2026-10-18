@@ -13,6 +13,7 @@ import json
 import sys
 import argparse
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 # ============================================================
 # ТАБЛИЦА КОНТРАКТОВ МЕЖДУ ФАЗАМИ
@@ -21,7 +22,7 @@ from pathlib import Path
 PHASE_CONTRACTS = {
 
     "phase_3": {
-        "file": "C:/GOD2/output/situations_registry.json",
+        "file": _REPO + "/output/situations_registry.json",
         "description": "Реестр ситуаций (build_registry.py)",
         "fields": {
             "id":          {"threshold": 1.00, "critical": True},
@@ -34,7 +35,7 @@ PHASE_CONTRACTS = {
     },
 
     "phase_4": {
-        "file": "C:/GOD2/output/situations_coded.json",
+        "file": _REPO + "/output/situations_coded.json",
         "description": "LLM-разметка: поведение Бога (code_behaviors.py)",
         "fields": {
             "behavior_type": {"threshold": 0.95, "critical": True,  "note": "Используется: Фаза 5, LLM-датасет"},
@@ -48,7 +49,7 @@ PHASE_CONTRACTS = {
     },
 
     "phase_5": {
-        "file": "C:/GOD2/output/god_profile.json",
+        "file": _REPO + "/output/god_profile.json",
         "description": "Психологический профиль (psych_analysis.py)",
         "fields": {
             "jung_archetypes":   {"threshold": 1.00, "critical": True},
@@ -58,7 +59,7 @@ PHASE_CONTRACTS = {
     },
 
     "llm_dataset": {
-        "file": "C:/GOD2/output/reasoning_dataset.jsonl",
+        "file": _REPO + "/output/reasoning_dataset.jsonl",
         "description": "Датасет для fine-tuning (generate_reasoning_dataset.py)",
         "is_jsonl": True,
         "min_records": 300,

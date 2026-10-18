@@ -1,7 +1,8 @@
-import json, random, sys
+import json
+from pathlib import Path, random, sys
 sys.stdout.reconfigure(encoding='utf-8')
 
-with open(r'C:\GOD2\output\situations_coded.json', encoding='utf-8') as f:
+with open(str(Path(__file__).resolve().parents[1] / 'output' / 'situations_coded.json'), encoding='utf-8') as f:
     data = json.load(f)
 
 random.seed(42)

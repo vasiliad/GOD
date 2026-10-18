@@ -23,10 +23,11 @@ import re
 import sys
 import urllib.request
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-BASE = Path("C:/GOD2")
+BASE = Path(_REPO)
 EPISODES_GLOB = "output/episodes_*_v2.json"
 TANAKH_DIR = BASE / "data/tanakh"
 LM_API = "http://127.0.0.1:1234/v1/chat/completions"

@@ -12,8 +12,9 @@
 """
 import requests, json, sys, argparse
 from pathlib import Path
+_REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
-OUTPUT_DIR = Path("C:/GOD2/data/dss")
+OUTPUT_DIR = Path(_REPO + "/data/dss")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Доступные через Sefaria DSS тексты
