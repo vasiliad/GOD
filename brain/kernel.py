@@ -297,8 +297,7 @@ def main():
                      "accel": None, "error": repr(e)})
         except Exception as e2:
             log("не удалось опубликовать статус:", repr(e2))
-        # в автономном режиме держим процесс живым, чтобы лог читался в UI Kaggle
-        time.sleep(3600)
+        time.sleep(60)   # короткий сон: упавший запуск не должен жечь GPU-квоту
 
 
 if __name__ == "__main__":
