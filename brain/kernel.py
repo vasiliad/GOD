@@ -83,13 +83,19 @@ def setup_llamacpp():
     tag = rel["tag_name"]
     log("llama.cpp build:", tag)
     os.makedirs(BIN_DIR, exist_ok=True)
+    def cuda_asset(match):
+        """ассеты бинарников; бандлы рантайма 'cudart-llama-*' не содержат сервера"""
+        return pick_asset(rel, lambda n: match(n) and "cudart" not in n)
     if IS_WIN:
-        url = pick_asset(rel, lambda n: "bin-win-cpu-x64" in n)
+        url = cuda_asset(lambda n: "bin-win-cpu-x64" in n)
     else:
-        url = pick_asset(rel, lambda n: "bin-ubuntu-cuda-12.8-x64" in n) \
-              or pick_asset(rel, lambda n: "bin-ubuntu-cuda-12.4-x64" in n)
+        url = cuda_asset(lambda n: "bin-ubuntu-cuda-12.8-x64" in n) \
+              or cuda_asset(lambda n: "bin-ubuntu-cuda-12.4-x64" in n)
     if not url and not IS_WIN:
-        url = pick_asset(rel, lambda n: n.endswith("bin-ubuntu-x64.tar.gz"))
+        url = cuda_asset(lambda n: n.endswith("bin-ubuntu-x64.tar.gz"))
+    if not url:
+        log("ассеты сборки:", [a["name"] for a in rel["assets"]])
+        raise RuntimeError("не нашли подходящий ассет llama.cpp")
     dest = os.path.join(BIN_DIR, "llama_dist")
     if url.endswith(".zip"):
         download(url, dest + ".zip")
