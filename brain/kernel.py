@@ -35,8 +35,11 @@ if LOCAL_TEST:
     MODEL_REPO = "Qwen/Qwen2.5-0.5B-Instruct-GGUF"
     MODEL_FILES = ["qwen2.5-0.5b-instruct-q4_k_m.gguf"]
 else:
-    MODEL_REPO = "Qwen/Qwen2.5-14B-Instruct-GGUF"
-    MODEL_FILES = [f"qwen2.5-14b-instruct-q4_k_m-{i:05d}-of-00003.gguf" for i in (1, 2, 3)]
+    # Мозг = DictaLM-3.0 (Nemotron-12B-Instruct): специалист по древнему ивриту,
+    # Hebrew+English; официальный GGUF. Апгрейд-опция: dicta-il/DictaLM-3.0-24B-Thinking-GGUF
+    # (Apache-2.0, Q4_K_M ~13.5GB — тоже влезает в T4, но медленнее и с режимом рассуждений).
+    MODEL_REPO = "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF"
+    MODEL_FILES = ["DictaLM-3.0-Nemotron-12B-Instruct-Q5_K_M.gguf"]
 
 LOG = print
 
