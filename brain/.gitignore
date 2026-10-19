@@ -3,3 +3,4 @@ _localtest/
 *.gguf
 bin/
 model/
+_kagglepush/

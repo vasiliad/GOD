@@ -204,23 +204,31 @@ def start_tunnel():
 
 # ---------------- 5) самопроверка ----------------
 def self_test(url):
-    body = json.dumps({"messages": [{"role": "user", "content": "Ответь одним словом: Шалом"}],
+    body = json.dumps({"messages": [{"role": "user", "content": "Say OK"}],
                        "max_tokens": 20, "temperature": 0.1}).encode()
-    req = urllib.request.Request(url + "/v1/chat/completions", data=body,
-                                 headers={"Content-Type": "application/json",
-                                          "Authorization": "Bearer " + API_KEY,
-                                          "Origin": "https://vasiliad.github.io"})
-    with urllib.request.urlopen(req, timeout=300) as r:
-        j = json.loads(r.read())
-        cors = r.headers.get("Access-Control-Allow-Origin")
-    content = j["choices"][0]["message"]["content"]
-    log("self-test ответ:", content[:80].replace("\n", " "))
-    log("CORS Access-Control-Allow-Origin:", cors)
-    if not content:
-        raise RuntimeError("пустой ответ модели")
-    if cors != "*":
-        log("ВНИМАНИЕ: CORS не '*', возможно нужен прокси")
-    return content
+    last = None
+    for attempt in range(8):           # свежий туннель: DNS может догонять секунды
+        time.sleep(10 if attempt else 3)
+        try:
+            req = urllib.request.Request(url + "/v1/chat/completions", data=body,
+                                         headers={"Content-Type": "application/json",
+                                                  "Authorization": "Bearer " + API_KEY,
+                                                  "Origin": "https://vasiliad.github.io"})
+            with urllib.request.urlopen(req, timeout=300) as r:
+                j = json.loads(r.read())
+                cors = r.headers.get("Access-Control-Allow-Origin")
+            content = j["choices"][0]["message"]["content"]
+            log("self-test ответ:", str(content)[:80].replace("\n", " "))
+            log("CORS Access-Control-Allow-Origin:", cors)
+            if not content:
+                raise RuntimeError("пустой ответ модели")
+            if cors != "*":
+                log("ВНИМАНИЕ: CORS не '*' (эхо origin тоже годится):", cors)
+            return content
+        except Exception as e:
+            last = e
+            log(f"self-test попытка {attempt+1}/8 не удалась: {e!r}")
+    raise RuntimeError("самопроверка не прошла: " + repr(last))
 
 
 # ---------------- 6) публикация статуса ----------------
