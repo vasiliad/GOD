@@ -1,5 +1,5 @@
 /* E2E рекомбинации: реальный retrieval по корпусу -> реальный мозг -> 6 секций.
-   Вопрос передаётся аргументом. Использует локальные данные сайта (docs/data). */
+   Вопрос передаётся аргументом. Локальные данные сайта (docs/data) + настоящий HTTP к мозгу. */
 const fs = require("fs");
 const path = require("path");
 const html = fs.readFileSync(__dirname + "/../docs/index.html", "utf8");
@@ -8,34 +8,27 @@ code = code.split("/* ---------- роутер ---------- */")[0];
 
 const QUESTION = process.argv[2] || "почему ты медлишь спасти меня от врагов?";
 const DOCS = path.join(__dirname, "..", "docs");
+const realFetch = globalThis.fetch.bind(globalThis);
 
 global.localStorage = { getItem: () => null, setItem(){}, removeItem(){} };
-global.fetch = async (url) => {
-  if (url.includes("god-brain-status") || url.startsWith("https://"))
-    return (await import("node:https")).request ? null : null; // не используется: brainRefresh мокнем ниже
-  const p = path.join(DOCS, url.replace(/^\.\//, ""));
-  const data = fs.readFileSync(p);
-  const json = JSON.parse(data);
-  return { ok: true, json: async () => json };
-};
 global.document = { getElementById: () => ({ textContent:"", title:"" }) };
 global.window = { setInterval: () => 1, clearInterval(){} };
+global.fetch = async (url, opts) => {
+  const u = String(url);
+  if (u.includes("god-brain-status")) {
+    const status = JSON.parse(fs.readFileSync(__dirname + "/brain_snapshot.json", "utf8"));
+    return { ok: true, json: async () => status };
+  }
+  if (u.startsWith("http")) return realFetch(u, opts);      // настоящий запрос к мозгу
+  const p = path.join(DOCS, u.replace(/^\.\//, ""));        // data/ сайта — локально
+  return { ok: true, json: async () => JSON.parse(fs.readFileSync(p)) };
+};
 
 const api = new Function(code + "\nreturn { brainRefresh, liveReply, BRAIN };")();
 
 (async () => {
-  // brain.json берём по-настоящему (fetch выше перехватит только локальные пути)
-  const status = JSON.parse(fs.readFileSync(__dirname + "/brain_snapshot.json", "utf8"));
-  const ageSec = Date.now() / 1000 - status.ts;
-  console.log("мозг:", status.url, "| модель:", status.model, "| возраст пульса, c:", Math.round(ageSec));
-  global.fetch = async (url) => {
-    if (url.includes("god-brain-status"))
-      return { ok: true, json: async () => status };
-    const p = path.join(DOCS, url.replace(/^\.\//, ""));
-    return { ok: true, json: async () => JSON.parse(fs.readFileSync(p)) };
-  };
   await api.brainRefresh();
-  console.log("BRAIN.info:", JSON.stringify(api.BRAIN.info));
+  console.log("мозг:", api.BRAIN.info.url, "| fresh:", api.BRAIN.info.fresh);
   console.log("ВОПРОС:", QUESTION);
   const t0 = Date.now();
   const r = await api.liveReply(QUESTION);

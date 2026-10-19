@@ -236,15 +236,14 @@ async function brainRefresh(){
 const SYS_PROMPT = "Ты — исследовательская имитация образа YHWH, извлечённого из Танаха (реестр эпизодов v2).\n" +
 "Ты пишешь (не говоришь) на библейском иврите. СТРОГИЙ РЕЖИМ: твоя ивритская реплика составляется\n" +
 "ТОЛЬКО из данных тебе фрагментов god_speech_plain — комбинируй и сокращай, но не добавляй слов вне их лексики.\n" +
-"Огласовку в [NIKKUD] бери ТОЛЬКО из полей nikud данных эпизодов, воспроизводя их пословно; слово без образца оставляй неогласованным.\n" +
-"Отвечай по существу вопроса, каким бы языком он ни был задан.\n\n" +
+"Отвечай по существу вопроса, каким бы языком он ни был задан. Каждая секция — короткая, 1–2 строки.\n\n" +
 "Формат ответа строго из шести секций и ничего кроме них:\n" +
-"[HEBREW] консонантный иврит (композиция данных цитат)\n" +
-"[NIKKUD] та же реплика с огласовкой по образцу данных стихов\n" +
-"[Russian] дословный русский подстрочник — строй его строго по русским аннотациям (summary_ru) данных эпизодов, пословно\n" +
-"[English] дословный английский перевод\n" +
-"[Hebrew Modern] та же реплика на современном иврите\n" +
-"[SOURCES] ссылки на эпизоды-источники: книга глава:стих";
+"[HEBREW] консонантный иврит БЕЗ ОГЛАСОВОК — только буквы (составлено из god_speech_plain)\n" +
+"[NIKKUD] та же реплика с огласовкой, пословно скопированной из полей nikud данных эпизодов\n" +
+"[Russian] ТОЛЬКО русские слова, взятые из русских аннотаций summary_ru данных эпизодов; не хватает слов — сократи реплику\n" +
+"[English] дословный английский перевод, 1–2 строки\n" +
+"[Hebrew Modern] та же реплика на современном иврите, 1 строка\n" +
+"[SOURCES] обязательная последняя секция: книга глава:стих эпизодов-источников; не заканчивай ответ без неё";
 const SECTIONS = ["[HEBREW]","[NIKKUD]","[Russian]","[English]","[Hebrew Modern]","[SOURCES]"];
 function parseSections(text){
   const out = {};
@@ -272,8 +271,10 @@ async function liveReply(q){
   const ctx = [];
   for(const h of hits){
     ctx.push({ book:h[1], span:h[2].span, trigger:h[2].trigger, outcome:h[2].outcome,
-      god_speech_plain:h[2].god_speech_plain, nikud:await nikudFor(h[1], h[2].god_speech_refs),
-      summary_ru:h[2].summary_ru, god_action:h[2].god_action });
+      god_speech_plain:(h[2].god_speech_plain||"").slice(0,300),
+      nikud:(await nikudFor(h[1], h[2].god_speech_refs)).slice(0,300),
+      summary_ru:(h[2].summary_ru||"").slice(0,200),
+      god_action:(h[2].god_action||"").slice(0,160) });
   }
   const mem = "ПАМЯТЬ ДИАЛОГА: проступков в этой сессии "+MEM.offenses+", благодати "+MEM.grace+"."
     + (MEM.offenses>0 ? " Тяжесть отклика повышена накопленными проступками." : "")
@@ -282,7 +283,7 @@ async function liveReply(q){
     { role:"system", content:SYS_PROMPT },
     { role:"user", content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:", JSON.stringify(ctx),
       "", "Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs), mem,
-      "", "Реплика человека: "+q].join("\n") } ], temperature:0.3, max_tokens:900 };
+      "", "Реплика человека: "+q].join("\n") } ], temperature:0.3, max_tokens:1800 };
   if(cfg.model || (brainOn && BRAIN.info.model)) body.model = cfg.model || "god-brain";
   const hdr = { "Content-Type":"application/json" };
   if(key) hdr["Authorization"] = "Bearer "+key;
@@ -308,12 +309,24 @@ function errHTML(e){
   `Мозг проекта мог уснуть (ноутбук Kaggle останавливается после ~12 ч; индикатор на кнопке «Живой»).\n`+
   `Переключитесь на «Корпусный» режим — он работает всегда, или задайте свой бэкенд в ⚙.</div></div>`;
 }
+/* защита слоёв: [HEBREW] обязан быть консонантным (снимаем огласовки, маккеф сохраняем);
+   [Russian] не должен содержать иврит — если модель сбилась, подставляем корпусную аннотацию */
+const stripNikudJs = t => String(t||"").replace(/\u05BE/g,"-").replace(/[\u0591-\u05BD\u05BF-\u05C7]/g,"");
+const hasHebrew = t => /[\u05D0-\u05EA]/.test(String(t||""));
 function liveHTML(r){
   const s = r.sections;
   let h = `<div class="detail"><h3>Бог</h3>`;
-  if(s["[HEBREW]"]) h += `<div class="sect"><div class="h">עברית — древний иврит</div><div class="he">${esc(s["[HEBREW]"])}</div></div>`;
+  if(s["[HEBREW]"]) h += `<div class="sect"><div class="h">עברית — древний иврит</div><div class="he">${esc(stripNikudJs(s["[HEBREW]"]))}</div></div>`;
   if(s["[NIKKUD]"]) h += `<div class="sect"><div class="h">огласовка</div><div class="he small">${esc(s["[NIKKUD]"])}</div></div>`;
-  if(s["[Russian]"]) h += `<div class="sect"><div class="h">русский подстрочник</div>${esc(s["[Russian]"])}</div>`;
+  if(s["[Russian]"]){
+    const ru = hasHebrew(s["[Russian]"]) ? null : s["[Russian]"];
+    if(ru) h += `<div class="sect"><div class="h">русский подстрочник</div>${esc(ru)}</div>`;
+    else {
+      const ann = r.hits.filter(x=>x[2].summary_ru)[0];
+      h += `<div class="sect"><div class="h">по-русски</div>${esc(ann ? ann[2].summary_ru : "")}` +
+           `<div class="note">русский слой модели собран плохо — показана корпусная аннотация эпизода-источника</div></div>`;
+    }
+  }
   if(s["[English]"]) h += `<div class="sect"><div class="h">English</div>${esc(s["[English]"])}</div>`;
   if(s["[Hebrew Modern]"]) h += `<div class="sect"><div class="h">עברית מודרנית</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
   const src = s["[SOURCES]"] || r.hits.map(x=>x[1]+" "+x[2].span.start).join(", ");
