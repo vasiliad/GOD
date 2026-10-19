@@ -1,0 +1,5 @@
+_localtest/
+*.log
+*.gguf
+bin/
+model/
