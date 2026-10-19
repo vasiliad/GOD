@@ -35,26 +35,11 @@ if LOCAL_TEST:
     MODEL_REPO = "Qwen/Qwen2.5-0.5B-Instruct-GGUF"
     MODEL_FILES = ["qwen2.5-0.5b-instruct-q4_k_m.gguf"]
 else:
-    # Мозг по умолчанию = DictaLM-3.0-Nemotron-12B-Instruct: специалист по древнему
-    # ивриту (Hebrew+English), официальный GGUF. МОЖНО ПЕРЕКЛЮЧИТЬ УДАЛЁННО: файл
-    # brain_config.json в датасете god-brain-status {"model_repo": ..., "model_files": [...]}
-    # перебивает эти значения — смена модели не требует нового kaggle-пуша.
-    # Апгрейд-опция: dicta-il/DictaLM-3.0-24B-Thinking-GGUF (Apache-2.0, Q4_K_M ~13.5GB).
+    # Мозг = DictaLM-3.0 (Nemotron-12B-Instruct): специалист по древнему ивриту,
+    # Hebrew+English; официальный GGUF. Апгрейд-опция: dicta-il/DictaLM-3.0-24B-Thinking-GGUF
+    # (Apache-2.0, Q4_K_M ~13.5GB — тоже влезает в T4, но медленнее и с режимом рассуждений).
     MODEL_REPO = "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF"
     MODEL_FILES = ["DictaLM-3.0-Nemotron-12B-Instruct-Q5_K_M.gguf"]
-
-
-def load_remote_model_config():
-    """Модель можно сменить в датасете god-brain-status (brain_config.json) без перепуша ядра."""
-    try:
-        url = f"https://huggingface.co/datasets/{STATUS_REPO}/resolve/main/brain_config.json"
-        with urllib.request.urlopen(url, timeout=30) as r:
-            cfg = json.loads(r.read())
-        if cfg.get("model_repo") and cfg.get("model_files"):
-            return cfg["model_repo"], list(cfg["model_files"])
-    except Exception as e:
-        log("remote model config не прочитан, работают значения по умолчанию:", repr(e))
-    return None, None
 
 LOG = print
 
@@ -283,13 +268,6 @@ def main():
         "| LOCAL_TEST:", LOCAL_TEST, "| work:", WORK)
     if not IS_WIN:
         os.system("nvidia-smi --query-gpu=name,memory.total --format=csv 2>/dev/null || echo 'nvidia-smi недоступен'")
-    global MODEL_REPO, MODEL_FILES
-    r_repo, r_files = load_remote_model_config()
-    if r_repo and not LOCAL_TEST:
-        MODEL_REPO, MODEL_FILES = r_repo, r_files
-        log("модель переключена brain_config.json:", MODEL_REPO, MODEL_FILES)
-    else:
-        log("модель:", MODEL_REPO, MODEL_FILES)
     try:
         exe = setup_llamacpp()
         model_path = setup_model()
