@@ -28,8 +28,19 @@ HF_TOKEN = os.environ.get("HF_TOKEN", "__HF_TOKEN__")   # плейсхолдер
 LOCAL_TEST = os.environ.get("GOD_LOCAL_TEST") == "1"
 IS_WIN = sys.platform.startswith("win")
 WORK = os.environ.get("GOD_WORK", os.getcwd())
-BIN_DIR = os.path.join(WORK, "bin")
-MDL_DIR = os.path.join(WORK, "model")
+# тяжёлые загрузки — в /tmp на Kaggle (не попадают в выходной бандл ядра)
+DL_BASE = WORK if IS_WIN else "/tmp/godbrain"
+BIN_DIR = os.path.join(DL_BASE, "bin")
+MDL_DIR = os.path.join(DL_BASE, "model")
+
+
+def have_nvidia():
+    """GPU-сессия Kaggle или нет (TPU-сессии и чистый CPU идут через CPU-сборку:
+    у TPU VM v3-8 — 96 vCPU и ~330ГБ RAM, 12B Q5 на них идёт со скоростью ~10-20 ток/с;
+    сами TPU-чипы llama.cpp не поддерживает)."""
+    if IS_WIN or LOCAL_TEST:
+        return False
+    return shutil.which("nvidia-smi") is not None
 
 if LOCAL_TEST:
     MODEL_REPO = "Qwen/Qwen2.5-0.5B-Instruct-GGUF"
@@ -84,17 +95,18 @@ def pick_asset(rel, match):
 def setup_llamacpp():
     rel = latest_llamacpp_release()
     tag = rel["tag_name"]
-    log("llama.cpp build:", tag)
+    GPU = have_nvidia()
+    log("llama.cpp build:", tag, "| ускоритель:", "NVIDIA GPU" if GPU else "TPU VM / CPU (без NVIDIA)")
     os.makedirs(BIN_DIR, exist_ok=True)
     def cuda_asset(match):
         """ассеты бинарников; бандлы рантайма 'cudart-llama-*' не содержат сервера"""
         return pick_asset(rel, lambda n: match(n) and "cudart" not in n)
     if IS_WIN:
         url = cuda_asset(lambda n: "bin-win-cpu-x64" in n)
-    else:
+    elif GPU:
         url = cuda_asset(lambda n: "bin-ubuntu-cuda-12.8-x64" in n) \
               or cuda_asset(lambda n: "bin-ubuntu-cuda-12.4-x64" in n)
-    if not url and not IS_WIN:
+    else:
         url = cuda_asset(lambda n: n.endswith("bin-ubuntu-x64.tar.gz"))
     if not url:
         log("ассеты сборки:", [a["name"] for a in rel["assets"]])
@@ -133,16 +145,20 @@ def setup_model():
 
 # ---------------- 3) сервер ----------------
 def start_server(exe, model_path):
+    GPU = have_nvidia()
     def spawn():
         env = dict(os.environ)
-        if not IS_WIN and not LOCAL_TEST:
-            env["CUDA_VISIBLE_DEVICES"] = "0"
         cmd = [exe, "-m", model_path, "--host", "127.0.0.1", "--port", str(PORT),
-               "-c", "8192" if LOCAL_TEST else "16384",
-               "--parallel", "1" if LOCAL_TEST else "2",
+               "-c", "8192" if LOCAL_TEST else "20480",
+               "--parallel", "1",
                "--api-key", API_KEY, "--alias", "god-brain", "--no-webui"]
-        if not IS_WIN and not LOCAL_TEST:
-            cmd += ["-ngl", "99", "-fa"]
+        if GPU:
+            env["CUDA_VISIBLE_DEVICES"] = "0"
+            cmd += ["-ngl", "99"]
+            # NOTE: '-fa' в сборках >=2026 требует значение ('on'/'off'/'auto');
+            # по умолчанию 'auto' — флаг не задаём вообще
+        elif not IS_WIN:
+            cmd += ["-t", str(max(2, (os.cpu_count() or 4) - 2))]
         log("cmd:", " ".join(cmd))
         return subprocess.Popen(cmd, stdout=open(os.path.join(WORK, "server.log"), "w"),
                                 stderr=subprocess.STDOUT, env=env)
@@ -164,7 +180,7 @@ def start_server(exe, model_path):
                 os.system(f"tail -c 2000 '{os.path.join(WORK, 'server.log')}' 2>/dev/null || "
                           f"powershell -c \"Get-Content '{os.path.join(WORK, 'server.log')}' -Tail 20\"")
                 break
-        if attempt == 1 and not IS_WIN and not LOCAL_TEST:
+        if attempt == 1 and GPU and not IS_WIN:
             # у сервера CUDA-сборка: если упал на рантайме — кладём рядом бандл cudart и пробуем снова
             log("подкладываю cudart-бандл и повторяю")
             try:
@@ -275,7 +291,8 @@ def main():
         url = start_tunnel()
         self_test(url)
         status = {"ok": True, "url": url, "key": API_KEY, "model": MODEL_REPO,
-                  "accel": "cpu-local" if LOCAL_TEST else ("gpu" if not IS_WIN else "cpu-win"),
+                  "accel": "cpu-local" if LOCAL_TEST else
+                           ("gpu-cuda" if have_nvidia() else ("tpu-vm-cpu" if not IS_WIN else "cpu-win")),
                   "model_files": MODEL_FILES, "error": None}
         publish(status)
         log("ГОТОВО: мозг онлайн ->", url)
