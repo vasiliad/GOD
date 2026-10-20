@@ -1,0 +1,26 @@
+name: Restart GOD brain
+
+# Кнопка перезапуска мозга чата: Actions -> Restart GOD brain -> Run workflow.
+# Требуются секреты репозитория (один раз): KAGGLE_KEY (KGAT-токен) и HF_TOKEN.
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  restart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install kaggle
+      - name: Restart brain
+        env:
+          KAGGLE_USERNAME: vasiliadi911
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python brain/restart_brain.py
