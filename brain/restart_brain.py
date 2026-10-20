@@ -20,16 +20,17 @@ def log(*a):
 
 
 def ensure_kaggle_auth():
-    """В GitHub Actions env KAGGLE_USERNAME/KAGGLE_KEY новыми версиями kaggle CLI
-    читаются не всегда — надёжно пишем классический ~/.kaggle/kaggle.json."""
-    u, k = os.environ.get("KAGGLE_USERNAME"), os.environ.get("KAGGLE_KEY")
-    if not (u and k):
+    """Новые kaggle CLI (2.2+) для KGAT-токенов читают env KAGGLE_API_TOKEN или файл
+    ~/.kaggle/access_token — kaggle.json они игнорируют. Пишем оба, чтобы работало везде."""
+    k = os.environ.get("KAGGLE_KEY")
+    if not k:
         return
     kd = os.path.expanduser("~/.kaggle")
     os.makedirs(kd, exist_ok=True)
-    with open(os.path.join(kd, "kaggle.json"), "w") as f:
-        json.dump({"username": u, "key": k}, f)
-    log("kaggle.json записан из env (Actions)")
+    with open(os.path.join(kd, "access_token"), "w") as f:
+        f.write(k)
+    os.environ["KAGGLE_API_TOKEN"] = k
+    log("~/.kaggle/access_token + KAGGLE_API_TOKEN установлены из KAGGLE_KEY")
 
 
 def main():
