@@ -302,7 +302,15 @@ async function liveReply(q){
   body.model = cfg.model || "god-brain";
   const hdr = { "Content-Type":"application/json" };
   if(key) hdr["Authorization"] = "Bearer "+key;
-  const r = await fetch(ep, { method:"POST", headers:hdr, body:JSON.stringify(body) });
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), 75000);   // мёртвый туннель не должен висеть вечно
+  let r;
+  try{
+    r = await fetch(ep, { method:"POST", headers:hdr, body:JSON.stringify(body), signal:ac.signal });
+  }catch(e){
+    brainRefresh();   // туннель мог смениться — сразу обновляем адрес для следующей попытки
+    throw new Error("мозг не ответил за 75 с (туннель мог смениться)");
+  }finally{ clearTimeout(timer); }
   if(!r.ok) throw new Error("HTTP "+r.status);
   const j = await r.json();
   const text = (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
