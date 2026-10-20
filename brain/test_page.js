@@ -60,7 +60,7 @@ global.window = { scrollTo(){}, _brainTimer: null, setInterval: () => 1, clearIn
 
 const api = new Function(
   "var nav={innerHTML:'',querySelectorAll:()=>({forEach(){}})};var main={innerHTML:''};" +
-  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N };")();
+  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex };")();
 
 (async () => {
   let pass = 0, fail = 0;
@@ -117,6 +117,11 @@ const api = new Function(
   await api.brainRefresh();
   check("протухший пульс: state=off", api.BRAIN.info.state === "off");
 
+  // 6) векторные хелперы
+  const row = { s: 2.0, q: Buffer.from(new Int8Array([-127, 0, 127]).buffer).toString("base64") };
+  const dv = api.dequant(row);
+  check("dequant: раундтрип [-2, 0, 2]", Math.abs(dv[0]+2)<1e-6 && dv[1]===0 && Math.abs(dv[2]-2)<1e-6);
+  check("cosv: ортогональные 0, коллинеарные 1", api.cosv([1,0],[0,1])===0 && api.cosv([1,0],[1,0])===1);
   console.log(`\n${pass} PASS, ${fail} FAIL`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error("CRASH:", e); process.exit(2); });
