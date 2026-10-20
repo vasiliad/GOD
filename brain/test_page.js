@@ -50,19 +50,29 @@ global.fetch = async (url) => {
   return { ok: true, json: async () => ({}) };
 };
 global.document = {
-  getElementById: () => ({ textContent:"", title:"", value:"" }),
-  createElement: () => ({ className:"", innerHTML:"", prepend(){} }),
-  querySelectorAll: () => ({ forEach(){} })
+  documentElement: { lang: "", dir: "" },
+  title: "",
+  getElementById: () => ({ textContent: "", title: "", value: "" }),
+  createElement: () => ({ className: "", innerHTML: "", prepend() {} }),
+  querySelectorAll: () => ({ forEach() {} })
 };
 global.window = { scrollTo(){}, _brainTimer: null, setInterval: () => 1, clearInterval(){} };
 
 const api = new Function(
   "var nav={innerHTML:'',querySelectorAll:()=>({forEach(){}})};var main={innerHTML:''};" +
-  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store };")();
+  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N };")();
 
 (async () => {
   let pass = 0, fail = 0;
   const check = (name, cond) => { cond ? (pass++, console.log("PASS", name)) : (fail++, console.log("FAIL", name)); };
+
+  // 0) i18n: словари RU/EN/HE покрывают одинаковый набор ключей
+  const keysOf = o => Object.keys(o).sort().join(",");
+  check("i18n: EN покрывает все ключи RU", keysOf(api.I18N.ru) === keysOf(api.I18N.en));
+  check("i18n: HE покрывает все ключи RU", keysOf(api.I18N.ru) === keysOf(api.I18N.he));
+  const hebrewUi = api.I18N.he.chat_note;
+  check("i18n: HE-интерфейс действительно на иврите", /[\u05D0-\u05EA]/.test(hebrewUi));
+  check("i18n: тон «говори, а не спрашивай» — нет «спрашивай» в RU-статусе готовности", !/спрашивай/.test(api.I18N.ru.b_on));
 
   // 1) мозг офлайн: brain.json недоступен -> state off, liveReply кидает ошибку
   brainJson = null;
