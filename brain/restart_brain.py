@@ -19,7 +19,21 @@ def log(*a):
     print(*a, flush=True)
 
 
+def ensure_kaggle_auth():
+    """В GitHub Actions env KAGGLE_USERNAME/KAGGLE_KEY новыми версиями kaggle CLI
+    читаются не всегда — надёжно пишем классический ~/.kaggle/kaggle.json."""
+    u, k = os.environ.get("KAGGLE_USERNAME"), os.environ.get("KAGGLE_KEY")
+    if not (u and k):
+        return
+    kd = os.path.expanduser("~/.kaggle")
+    os.makedirs(kd, exist_ok=True)
+    with open(os.path.join(kd, "kaggle.json"), "w") as f:
+        json.dump({"username": u, "key": k}, f)
+    log("kaggle.json записан из env (Actions)")
+
+
 def main():
+    ensure_kaggle_auth()
     hf = os.environ.get("HF_TOKEN") or open(os.path.join(ROOT, ".agent", "hf_token")).read().strip()
     src = open(os.path.join(REPO, "kernel.py"), encoding="utf-8").read()
     pushdir = os.path.join(REPO, "_kagglepush")
