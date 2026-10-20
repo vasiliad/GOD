@@ -324,11 +324,12 @@ let NIK = null;
 async function nikudIndex(){ if(!NIK) NIK = await jget("data/nikud.json"); return NIK; }
 async function nikudFor(book, refs){
   const idx = await nikudIndex();
+  const bk = book.charAt(0).toUpperCase() + book.slice(1);  // nikud.json хранит имена с заглавной ("Genesis|…"), а в book_order книга "genesis" — регистр нормализуем
   const out = [];
   for(const r of (refs||[]).slice(0,3)){
     const m = r.match(/^(\d+):(\d+)$/);
     if(!m) continue;
-    const t = idx[book+"|"+m[1]+"|"+m[2]];
+    const t = idx[bk+"|"+m[1]+"|"+m[2]];
     if(t) out.push(t);
   }
   return out.join("  ");
