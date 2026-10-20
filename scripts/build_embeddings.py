@@ -22,9 +22,9 @@ DIM = 384
 
 
 def episode_text(e):
-    return "passage: " + " ".join(filter(None, [
-        e.get("trigger", ""), e.get("summary_ru", ""), e.get("god_action", ""),
-        (e.get("god_speech_plain") or "")[:300]])).strip()
+    """Только семантически плотное ядро: длинные склейки с речью/действием
+    размывают mean-pooling — косинусы запроса слипаются в полосу (аудит 2026-10-21)."""
+    return ("passage: " + e.get("trigger", "") + " | " + e.get("summary_ru", ""))[:280].strip()
 
 
 def rows_in_order():
