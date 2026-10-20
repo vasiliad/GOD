@@ -1,5 +1,5 @@
 from pathlib import Path
-﻿import json
+import json
 _REPO = str(Path(__file__).resolve().parents[1])  # корень репозитория, без машинных путей
 
 paths = {
