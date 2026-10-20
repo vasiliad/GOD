@@ -146,7 +146,7 @@ ru:{
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
   prof_pun_h:"Кара: объявлена vs исполнена", prof_pun_card:"эпизодов-наказаний",
   prof_pun_note:"79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса). «Грозящий» Бог вчетверо чаще «бьющего».",
-  rep_loading:"загрузка отчёта…", rep_note:"Научный отчёт v1.0 пока издан только на русском языке — вкладка показывает оригинал.",
+  rep_loading:"загрузка отчёта…", rep_note:"перевод отчёта не загрузился — показан русский оригинал.",
   about_h:"О проекте",
   about_p1:"Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>{eps}</b> эпизодов взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь, действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам; аудиты покрытия — 100%.",
   about_p2:'<b>Научный отчёт v1.0</b> — вкладка «Отчёт» или <a href="research_report.md" target="_blank">research_report.md</a>.',
@@ -206,7 +206,7 @@ en:{
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
   prof_pun_h:"Punishment: announced vs executed", prof_pun_card:"punishment episodes",
   prof_pun_note:"79% of punishments are verdict-oracles; executed actions — 84 episodes (4% of the corpus). The «threatening» God is four times more frequent than the «striking» one.",
-  rep_loading:"loading the report…", rep_note:"Research report v1.0 is currently published in Russian only — the tab shows the original.",
+  rep_loading:"loading the report…", rep_note:"the report translation failed to load — showing the Russian original.",
   about_h:"About the project",
   about_p1:"A study of God's image in the Tanakh: <b>{eps}</b> human↔God interaction episodes extracted from all 39 books (17 fields: verse span, direction, channel, trigger, verbatim consonantal speech, action, outcome, severity, emotions). Every episode is traceable to verses; coverage audits — 100%.",
   about_p2:'<b>Research report v1.0</b> — the «Report» tab or <a href="research_report.md" target="_blank">research_report.md</a>.',
@@ -266,7 +266,7 @@ he:{
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
   prof_pun_h:"ענישה: מוכרזת לעומת מבוצעת", prof_pun_card:"אפיזודות ענישה",
   prof_pun_note:"79% מהעונשים — אורקלים של פסק-דין; פעולות מבוצעות — 84 אפיזודות (4% מהקורפוס). האלוהים ה«מאיים» שכיח פי ארבעה מה«מכה».",
-  rep_loading:"טוען את הדוח…", rep_note:"דוח המחקר v1.0 פורסם לעת עתה ברוסית בלבד — הלשונית מציגה את המקור.",
+  rep_loading:"טוען את הדוח…", rep_note:"תרגום הדוח לא נטען — מוצג המקור הרוסי.",
   about_h:"אודות הפרויקט",
   about_p1:"מחקר דמות האלוהים בתנ״ך: מכל 39 הספרים חולצו <b>{eps}</b> אפיזודות אינטראקציה אדם↔אלוהים (17 שדות: טווח פסוקים, כיוון, ערוץ, טריגר, דיבור עיצורי מילולי, מעשה, תוצאה, חומרה, רגשות). כל אפיזודה ניתנת למעקב לפסוקים; ביקורות כיסוי — 100%.",
   about_p2:'<b>דוח מחקר v1.0</b> — לשונית «הדוח» או <a href="research_report.md" target="_blank">research_report.md</a>.',
@@ -842,9 +842,19 @@ function md2html(md){
 }
 async function tReport(m){
   m.innerHTML = `<div class="note">${t("rep_loading")}</div>`;
-  const md = await (await fetch("research_report.md")).text();
-  m.innerHTML = (LANG==="ru" ? "" : `<div class="note" style="color:var(--acc)">${t("rep_note")}</div>`) +
-    `<div class="card" style="padding:26px 30px;max-width:880px">${md2html(md)}</div>`;
+  const file = LANG==="en" ? "research_report.en.md" : LANG==="he" ? "research_report.he.md" : "research_report.md";
+  let md, fallback = false;
+  try{
+    const r = await fetch(file);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    md = await r.text();
+  }catch(e){
+    md = await (await fetch("research_report.md")).text();
+    fallback = LANG !== "ru";
+  }
+  const style = 'style="padding:26px 30px;max-width:880px' + (LANG==="he" ? ';text-align:right;direction:rtl' : '') + '"';
+  m.innerHTML = (fallback ? `<div class="note" style="color:var(--acc)">${t("rep_note")}</div>` : "") +
+    `<div class="card" ${LANG==="he" ? 'dir="rtl" ' : ""}${style}>${md2html(md)}</div>`;
 }
 async function tAbout(m){
   const a = await analytics();
