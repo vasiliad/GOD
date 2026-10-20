@@ -302,11 +302,29 @@ def main():
                   "model_files": MODEL_FILES, "error": None}
         publish(status)
         log("ГОТОВО: мозг онлайн ->", url)
-        # пульс: обновляем ts каждые 15 мин; при смерти сервера — ok:false
+
+        def tunnel_ok(u):
+            try:
+                with urllib.request.urlopen(u + "/health", timeout=20) as r:
+                    return json.loads(r.read()).get("status") == "ok"
+            except Exception:
+                return False
+
+        # пульс: каждые 15 мин проверяем и сервер, и туннель снаружи; мёртвый
+        # туннель переподнимаем сами и публикуем новый адрес
         while True:
             time.sleep(900)
             alive = server_alive()
             log("heartbeat: server_alive =", alive)
+            if alive and not tunnel_ok(url):
+                log("туннель мёртв снаружи; перезапускаю cloudflared")
+                try:
+                    url = start_tunnel()
+                    status = dict(status, url=url)
+                    self_test(url)
+                    log("новый туннель:", url)
+                except Exception as e:
+                    log("переподнять туннель не удалось:", repr(e))
             publish(dict(status, ok=alive, error=None if alive else "llama-server не отвечает"))
             if not alive:
                 log("попытка перезапуска llama-server")
