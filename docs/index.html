@@ -690,7 +690,7 @@ async function tBooks(m){
   const rows = Object.entries(a.per_book).filter(p=>!p[1].missing);
   m.innerHTML = `<h2>${tfmt("books_h", {n:rows.length})}</h2><table>
   <tr><th>${t("th_book")}</th><th>${t("th_eps")}</th><th>${t("th_sev")}</th><th style="min-width:230px">${t("th_out")}</th><th>${t("th_sil")}</th><th>${t("th_pun")}</th><th>${t("th_era")}</th></tr>
-  ${rows.map(p=>`<tr><td><b>${esc(p[0].replace(/_/g," "))}</b></td><td>${p[1].episodes}</td><td>${p[1].severity_mean}</td>
+  ${rows.map(p=>`<tr><td><b>${esc(p[0].charAt(0).toUpperCase()+p[0].slice(1).replace(/_/g," "))}</b></td><td>${p[1].episodes}</td><td>${p[1].severity_mean}</td>
   <td>${bar(p[1].outcome_p,4)}</td><td>${(p[1].silence_rate*100).toFixed(0)}%</td><td>${(p[1].punishment_rate*100).toFixed(0)}%</td><td>${esc(p[1].era)}</td></tr>`).join("")}
   </table>`;
 }
