@@ -285,6 +285,12 @@ def main():
     if not IS_WIN:
         os.system("nvidia-smi --query-gpu=name,memory.total --format=csv 2>/dev/null || echo 'nvidia-smi недоступен'")
     try:
+        # фаза старта: страница по brain.json покажет 🟡 и закроет ввод в живом режиме
+        publish({"ok": False, "phase": "starting", "url": None, "key": API_KEY,
+                 "model": MODEL_REPO, "error": None})
+    except Exception as e:
+        log("не удалось опубликовать фазу starting:", repr(e))
+    try:
         exe = setup_llamacpp()
         model_path = setup_model()
         srv = start_server(exe, model_path)
@@ -313,7 +319,7 @@ def main():
     except Exception as e:
         log("ОШИБКА:", repr(e))
         try:
-            publish({"ok": False, "url": None, "key": API_KEY, "model": MODEL_REPO,
+            publish({"ok": False, "phase": "error", "url": None, "key": API_KEY, "model": MODEL_REPO,
                      "accel": None, "error": repr(e)})
         except Exception as e2:
             log("не удалось опубликовать статус:", repr(e2))

@@ -1,6 +1,9 @@
-_localtest/
-*.log
 *.gguf
-bin/
-model/
+*.log
+_brain_now.json
 _kagglepush/
+_localtest/
+_v1out/
+bin/
+brain_snapshot.json
+model/

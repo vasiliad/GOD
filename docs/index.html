@@ -156,7 +156,7 @@ const RU_SYN = [
   ["гнев","разгневал","гнева","гневен","ярост"],
   ["милосерд","милост","простил","прощение","простить","пощадил","милость"],
   ["люб","любов","любовь","любим","возлюб"],
-  ["страх","боюсь","боится","страшно","устраш","трепет"],
+  ["страх","боюсь","боится","страшно","устраш","трепет","бойся","бойтесь","испуг","пугает"],
   ["наказа","кара","карает","наказание","покарал"],
   ["спас","спасение","спасает","избав","избавит"],
   ["молитв","молитва","молится","молит"],
@@ -186,7 +186,8 @@ async function retrieve(q, k){
   const lim = k || 6;
   const toks = queryTokens(q);
   const props = q.split(/[^A-Za-zА-Яа-яёЁ\u05D0-\u05EA]+/).filter(isProper);
-  const scored = [];
+  const trig = classify(q);            // тип обращения выбирает эпизоды с тем же триггером:
+  const scored = [];                    // «я боюсь» (distress) → эпизоды, где Бог ОТВЕЧАЕТ на беду
   await everyBook(async b => {
     const eps = await bookDocs(b);
     for(const e of eps){
@@ -194,7 +195,8 @@ async function retrieve(q, k){
       let s = 0;
       for(const t of toks) if(txt.includes(t)) s += t.length>=6 ? 10/Math.log(4+txt.length) : 1/Math.log(3+txt.length);
       for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())) s += 6/Math.log(4+txt.length);
-      if(e.god_speech_plain) s += 1.5;
+      if(e.god_speech_plain) s += 2.5;        // Бог говорил в эпизоде — материал для рекомбинации
+      if(e.trigger === trig) s += 4;          // тот же тип обращения — главный буст голоса
       if(s>0) scored.push([s,b,e]);
     }
   });
@@ -216,28 +218,39 @@ function memUpdate(q){
    ЧАТ — живой режим (LLM-мозг проекта на Kaggle; ключи только в браузере)
    ===================================================================== */
 const BRAIN_STATUS_URL = "https://huggingface.co/datasets/arabyan/god-brain-status/resolve/main/brain.json";
-const BRAIN = { info:null };
+const BRAIN = { info:{state:"off"} };
 async function brainRefresh(){
+  let j = null;
   try{
     const r = await fetch(BRAIN_STATUS_URL, {cache:"no-store"});
-    const j = await r.json();
-    const fresh = j && j.url && (Date.now()/1000 - (j.ts||0)) < 3600;
-    BRAIN.info = (j && j.ok && j.url) ? { url:j.url, key:j.key||"", model:j.model||"", fresh:!!fresh } : null;
-  }catch(e){ BRAIN.info = null; }
+    j = await r.json();
+  }catch(e){ j = null; }
+  let state = "off";
+  if(j && j.ok && j.url && (Date.now()/1000 - (j.ts||0)) < 3600) state = "on";
+  else if(j && !j.ok && j.phase === "starting" && (Date.now()/1000 - (j.ts||0)) < 1800) state = "starting";
+  BRAIN.info = { state, url:(j&&j.url)||"", key:(j&&j.key)||"", model:(j&&j.model)||"",
+                 phase:(j&&j.phase)||"", error:(j&&j.error)||null };
   const el = document.getElementById("brainDot");
   if(el){
-    const on = !!(BRAIN.info && BRAIN.info.fresh);
-    el.textContent = on ? "🟢" : "🔴";
-    el.title = on ? "мозг онлайн: " + (BRAIN.info.model || "?")
-                  : "мозг офлайн — ноутбук на Kaggle спит или упал; работает корпусный режим";
+    el.textContent = state==="on" ? "🟢" : state==="starting" ? "🟡" : "🔴";
+    el.title = state==="on" ? "голос Бога готов: " + (BRAIN.info.model || "?")
+      : state==="starting" ? "голос Бога поднимается: модель грузится на сервере (минуты)"
+      : "голос Бога спит" + (BRAIN.info.error ? " (ошибка: " + BRAIN.info.error + ")" : "")
+        + "; работает корпусный режим. Перезапуск — GitHub Actions «Restart GOD brain» или brain/restart_brain.bat";
   }
+  const st = document.getElementById("brainState");
+  if(st) st.textContent =
+    state==="on" ? "Голос Бога готов — спрашивай." :
+    state==="starting" ? "Голос Бога поднимается — модель грузится (минуты); ввод в живом режиме откроется сам." :
+    "Голос Бога спит — живой режим закрыт, отвечает корпусный режим (реальная речь эпизодов, всегда работает).";
+  if(window.brainSyncInput) window.brainSyncInput();
   return BRAIN.info;
 }
 const SYS_PROMPT = "Ты — исследовательская имитация образа YHWH, извлечённого из Танаха (реестр эпизодов v2).\n" +
 "Ты пишешь (не говоришь) на библейском иврите. СТРОГИЙ РЕЖИМ: твоя ивритская реплика составляется\n" +
 "ТОЛЬКО из данных тебе фрагментов god_speech_plain — комбинируй и сокращай, но не добавляй слов вне их лексики.\n" +
 "Отвечай по существу вопроса, каким бы языком он ни был задан. Каждая секция — короткая, 1–2 строки.\n\n" +
-"Формат ответа строго из шести секций и ничего кроме них:\n" +
+"Формат ответа: ровно шесть секций, ни одна не пропускается, ничего кроме них:\n" +
 "[HEBREW] консонантный иврит БЕЗ ОГЛАСОВОК — только буквы (составлено из god_speech_plain)\n" +
 "[NIKKUD] та же реплика с огласовкой, пословно скопированной из полей nikud данных эпизодов\n" +
 "[Russian] ТОЛЬКО русские слова, взятые из русских аннотаций summary_ru данных эпизодов; не хватает слов — сократи реплику\n" +
@@ -257,12 +270,13 @@ function parseSections(text){
   return out;
 }
 async function liveReply(q){
-  if(!BRAIN.info) await brainRefresh();
+  if(!BRAIN.info || !BRAIN.info.state) await brainRefresh();
+  if(!BRAIN.info || BRAIN.info.state !== "on")
+    throw new Error(BRAIN.info && BRAIN.info.state === "starting"
+      ? "голос Бога поднимается — минуты" : "голос Бога спит");
   const cfg = store.get("god_cfg", { endpoint:"", model:"", key:"" });
-  const brainOn = BRAIN.info && BRAIN.info.fresh;
-  const ep = cfg.endpoint || (brainOn ? BRAIN.info.url.replace(/\/+$/,"") + "/v1/chat/completions" : null);
-  if(!ep) throw new Error("мозг офлайн, ручной endpoint не задан");
-  const key = cfg.key || (brainOn ? BRAIN.info.key : "") || "";
+  const ep = cfg.endpoint || BRAIN.info.url.replace(/\/+$/,"") + "/v1/chat/completions";
+  const key = cfg.key || BRAIN.info.key || "";
   const a = await analytics();
   const hits = await retrieve(q, 6);
   const trig = classify(q);
@@ -283,8 +297,9 @@ async function liveReply(q){
     { role:"system", content:SYS_PROMPT },
     { role:"user", content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:", JSON.stringify(ctx),
       "", "Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs), mem,
-      "", "Реплика человека: "+q].join("\n") } ], temperature:0.3, max_tokens:1800 };
-  if(cfg.model || (brainOn && BRAIN.info.model)) body.model = cfg.model || "god-brain";
+      "", "Реплика человека: "+q,
+      "", "Напоминание: ответ обязан кончаться секцией [SOURCES] со стихами-источниками."].join("\n") } ], temperature:0.3, max_tokens:1800 };
+  body.model = cfg.model || "god-brain";
   const hdr = { "Content-Type":"application/json" };
   if(key) hdr["Authorization"] = "Bearer "+key;
   const r = await fetch(ep, { method:"POST", headers:hdr, body:JSON.stringify(body) });
@@ -364,6 +379,7 @@ function chatUI(m){
     <button id="mdLive">Живой (LLM) <span id="brainDot" title="статус мозга">…</span></button>
     <button id="mdCfg">⚙ настройки бэкенда</button>
   </div>
+  <div id="brainState" class="note" style="color:var(--acc)">уточняю голос Бога…</div>
   <div id="chatcfg" class="card">
     <div class="note">Пустой endpoint = авто (мозг проекта). Свои ключи остаются в localStorage вашего браузера и не хранятся на сервере.
     LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions</div>
@@ -379,10 +395,22 @@ function chatUI(m){
   let mode = "corpus";
   const cfg0 = store.get("god_cfg", { endpoint:"", model:"", key:"" });
   cfgEp.value = cfg0.endpoint; cfgMd.value = cfg0.model||""; cfgKy.value = cfg0.key||"";
-  brainRefresh();
+  /* физический запрет: в живом режиме поле ввода закрыто, пока голос не готов.
+     corpus-режим работает всегда — его ввод не блокируется никогда. */
+  function syncInput(){
+    const ready = mode!=="live" || (BRAIN.info && BRAIN.info.state==="on");
+    cq.disabled = !ready;
+    cq.placeholder = ready ? "что скажете Богу? (любой язык)…"
+      : (BRAIN.info && BRAIN.info.state==="starting"
+          ? "голос Бога поднимается — поле откроется само (минуты)"
+          : "голос Бога спит — включён «Корпусный» режим или перезапусти мозг");
+  }
+  window.brainSyncInput = syncInput;
+  const rr = async () => { await brainRefresh(); };
+  rr();
   if(window._brainTimer) clearInterval(window._brainTimer);
-  window._brainTimer = setInterval(brainRefresh, 120000);
-  mdCorpus.onclick = () => { mode="corpus"; mdCorpus.classList.add("on"); mdLive.classList.remove("on"); };
+  window._brainTimer = setInterval(rr, 120000);
+  mdCorpus.onclick = () => { mode="corpus"; mdCorpus.classList.add("on"); mdLive.classList.remove("on"); syncInput(); };
   mdLive.onclick   = () => { mode="live";   mdLive.classList.add("on"); mdCorpus.classList.remove("on"); brainRefresh(); };
   mdCfg.onclick    = () => { chatcfg.style.display = chatcfg.style.display==="block" ? "none" : "block"; };
   cfgSv.onclick    = () => { store.set("god_cfg",{ endpoint:cfgEp.value.trim(), model:cfgMd.value.trim(), key:cfgKy.value.trim() });

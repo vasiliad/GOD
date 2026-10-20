@@ -64,20 +64,19 @@ const api = new Function(
   let pass = 0, fail = 0;
   const check = (name, cond) => { cond ? (pass++, console.log("PASS", name)) : (fail++, console.log("FAIL", name)); };
 
-  // 1) мозг офлайн: brain.json недоступен -> BRAIN.info null, liveReply кидает ошибку (страница фолбэкится)
+  // 1) мозг офлайн: brain.json недоступен -> state off, liveReply кидает ошибку
   brainJson = null;
   await api.brainRefresh();
-  check("офлайн: BRAIN.info=null", api.BRAIN.info === null);
+  check("офлайн: state=off", api.BRAIN.info.state === "off");
   let threw = false;
   try { await api.liveReply("я боюсь"); } catch (e) { threw = true; }
-  check("офлайн: liveReply бросает (фолбэк на корпус)", threw);
+  check("офлайн: liveReply бросает (корпусный фолбэк)", threw);
 
-  // 2) мозг онлайн: свежий brain.json -> endpoint из него, LLM отвечает 6 секциями
+  // 2) мозг онлайн: свежий ok:true -> state on, POST на туннель, 6 секций
   brainJson = { ok: true, url: "https://tun.trycloudflare.com", key: "godbrain-v1-vasiliad",
-                model: "Qwen/Qwen2.5-14B-Instruct-GGUF", ts: Math.floor(Date.now() / 1000) - 60 };
+                model: "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF", ts: Math.floor(Date.now() / 1000) - 60 };
   await api.brainRefresh();
-  check("онлайн: BRAIN.info загружен", api.BRAIN.info && api.BRAIN.info.url === "https://tun.trycloudflare.com");
-  check("онлайн: свежесть определена", api.BRAIN.info.fresh === true);
+  check("онлайн: state=on", api.BRAIN.info.state === "on");
   llmResponse = { choices: [{ message: { content:
     "[HEBREW] איכה\n[NIKKUD] אַיֵּה\n[Russian] Где ты?\n[English] Where art thou?\n[Hebrew Modern] איפה אתה\n[SOURCES] Genesis 3:9" } }] };
   calls.length = 0;
@@ -94,10 +93,19 @@ const api = new Function(
   try { await api.liveReply("спаси меня"); } catch (e) { threw = true; }
   check("LLM-ошибка: liveReply бросает (=> корпусный фолбэк)", threw);
 
-  // 4) протухший ts (2 часа) -> fresh=false, живой режим откажется
-  brainJson.ts = Math.floor(Date.now() / 1000) - 7200;
+  // 4) мозг поднимается: ok:false + phase=starting, свежий пульс -> state starting, liveReply отказывает
+  brainJson = { ok: false, phase: "starting", url: null, key: "godbrain-v1-vasiliad",
+                model: "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF", ts: Math.floor(Date.now() / 1000) - 120 };
   await api.brainRefresh();
-  check("протухший пульс: fresh=false", api.BRAIN.info && api.BRAIN.info.fresh === false);
+  check("старт: state=starting (🟡)", api.BRAIN.info.state === "starting");
+  threw = false;
+  try { await api.liveReply("я боюсь"); } catch (e) { threw = true; }
+  check("старт: liveReply отказывает (ввод заблокирован)", threw);
+
+  // 5) протухший пульс (2 часа) -> state off
+  brainJson.ok = true; brainJson.ts = Math.floor(Date.now() / 1000) - 7200;
+  await api.brainRefresh();
+  check("протухший пульс: state=off", api.BRAIN.info.state === "off");
 
   console.log(`\n${pass} PASS, ${fail} FAIL`);
   process.exit(fail ? 1 : 0);
