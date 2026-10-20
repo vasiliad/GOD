@@ -434,7 +434,8 @@ async function retrieve(q, k){
   const scored = [];                    // «я боюсь» (distress) → эпизоды, где Бог ОТВЕЧАЕТ на беду
   const idx = await embIndex();
   const qv = idx ? await embedQuery(q) : null;
-  const VEC_W = 3.0;                   // вектор доминирует на абстракциях, лексика держит имена
+  const VEC_W = 6.0;                   // вес z-нормированного косинуса (абстракции решает вектор)
+  const cosRows = [];                  // [entry, cos] — z-нормировка после полного прохода
   await everyBook(async b => {
     const eps = await bookDocs(b);
     for(const e of eps){
@@ -444,18 +445,29 @@ async function retrieve(q, k){
       for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())) s += 6/Math.log(4+txt.length);
       if(e.god_speech_plain) s += 2.5;        // Бог говорил в эпизоде — материал для рекомбинации
       if(e.trigger === trig) s += 4;          // тот же тип обращения — главный буст голоса
-      let cos = 0;
+      let cos = null;
       if(qv && idx){
         const ri = idx.map[b+"|"+e.span.start];
         if(ri !== undefined){
           if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
           cos = cosv(qv, idx.vecs[ri]);
-          s += VEC_W * cos;
         }
       }
-      if(s>0 || cos>0.5) scored.push([s,b,e]);   // вектор поднимает и то, где лексика дала ноль
+      const entry = [s,b,e];
+      scored.push(entry);
+      if(cos !== null) cosRows.push([entry, cos]);
     }
   });
+  // z-нормировка косинусов: сырые cos e5 слипаются в полосу (~0.8) и не различают,
+  // z = (cos-среднее)/std ранжирует относительно — полоса уходит
+  if(cosRows.length > 20){
+    const mean = cosRows.reduce((acc,x)=>acc+x[1],0)/cosRows.length;
+    const std = Math.sqrt(cosRows.reduce((acc,x)=>acc+(x[1]-mean)*(x[1]-mean),0)/cosRows.length) || 1e-9;
+    for(const [entry, cos] of cosRows){
+      entry[0] += VEC_W * (cos-mean)/std;
+      entry[3] = cos;                        // для отладки: сырой косинус в хвосте
+    }
+  }
   scored.sort((x,y)=>y[0]-x[0]);
   return scored.slice(0,lim);
 }
