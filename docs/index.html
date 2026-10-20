@@ -393,12 +393,48 @@ function queryTokens(q){
   return syn;
 }
 function isProper(w){ return /^[A-ZА-Я]/.test(w) && w.length>=4; }
+/* ---------- векторный retrieval: те же веса e5-small, что считали индекс ---------- */
+let VECM = null;   // null = не пытались; false = недоступен (CDN/ошибка) — тогда чистая лексика
+let EMBD = null;   // embeddings.json + деквантованные строки + карта ключей
+async function vectorReady(){
+  if(VECM !== null) return VECM;
+  try{
+    const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2");
+    VECM = await pipeline("feature-extraction", "Xenova/multilingual-e5-small", { quantized: true });
+  }catch(e){ VECM = false; }
+  return VECM;
+}
+function dequant(row){
+  const bin = atob(row.q), n = bin.length, out = new Float32Array(n);
+  for(let i=0;i<n;i++) out[i] = (bin.charCodeAt(i) << 24 >> 24) * row.s / 127;  // int8 → float
+  return out;
+}
+const cosv = (a,b) => { let d=0; for(let i=0;i<a.length;i++) d += a[i]*b[i]; return d; };
+async function embIndex(){
+  if(EMBD !== null) return EMBD;
+  try{
+    const j = await jget("data/embeddings.json");
+    const map = {}; for(let i=0;i<j.meta.length;i++) map[j.meta[i].b+"|"+j.meta[i].s1] = i;
+    EMBD = { j, map, vecs: new Array(j.rows.length) };
+  }catch(e){ EMBD = false; }
+  return EMBD;
+}
+const QCACHE = {};
+async function embedQuery(q){
+  const m = await vectorReady();
+  if(!m) return null;
+  if(!QCACHE[q]) QCACHE[q] = Array.from((await m("query: "+q, { pooling:"mean", normalize:true })).data);
+  return QCACHE[q];
+}
 async function retrieve(q, k){
   const lim = k || 6;
   const toks = queryTokens(q);
   const props = q.split(/[^A-Za-zА-Яа-яёЁ\u05D0-\u05EA]+/).filter(isProper);
   const trig = classify(q);            // тип обращения выбирает эпизоды с тем же триггером:
   const scored = [];                    // «я боюсь» (distress) → эпизоды, где Бог ОТВЕЧАЕТ на беду
+  const idx = await embIndex();
+  const qv = idx ? await embedQuery(q) : null;
+  const VEC_W = 3.0;                   // вектор доминирует на абстракциях, лексика держит имена
   await everyBook(async b => {
     const eps = await bookDocs(b);
     for(const e of eps){
@@ -408,7 +444,16 @@ async function retrieve(q, k){
       for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())) s += 6/Math.log(4+txt.length);
       if(e.god_speech_plain) s += 2.5;        // Бог говорил в эпизоде — материал для рекомбинации
       if(e.trigger === trig) s += 4;          // тот же тип обращения — главный буст голоса
-      if(s>0) scored.push([s,b,e]);
+      let cos = 0;
+      if(qv && idx){
+        const ri = idx.map[b+"|"+e.span.start];
+        if(ri !== undefined){
+          if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
+          cos = cosv(qv, idx.vecs[ri]);
+          s += VEC_W * cos;
+        }
+      }
+      if(s>0 || cos>0.5) scored.push([s,b,e]);   // вектор поднимает и то, где лексика дала ноль
     }
   });
   scored.sort((x,y)=>y[0]-x[0]);
