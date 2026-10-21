@@ -90,7 +90,7 @@ const bar = (obj, limit) => {
   const items = Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,lim);
   const tot = items.reduce((s,x)=>s+x[1],0) || 1;
   return `<div class="bar">${items.map(([k,v])=>`<i style="width:${(v/tot*100).toFixed(1)}%;background:${OUT[k]||"#888"}"></i>`).join("")}</div>` +
-  `<div class="leg">${items.map(([k,v])=>`<span><i style="background:${OUT[k]||"#888"}"></i>${k} ${(v/tot*100).toFixed(0)}%</span>`).join("")}</div>`;
+  `<div class="leg">${items.map(([k,v])=>`<span><i style="background:${OUT[k]||"#888"}"></i>${dn("out",k)} ${(v/tot*100).toFixed(0)}%</span>`).join("")}</div>`;
 };
 const store = {
   get(k,d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } },
@@ -328,6 +328,30 @@ he: { genesis:"בראשית", Exodus:"שמות", Leviticus:"ויקרא", Numbers
   Ecclesiastes:"קהלת", Esther:"אסתר", Daniel:"דניאל", Ezra:"עזרא", Nehemiah:"נחמיה",
   I_Chronicles:"דברי הימים א", II_Chronicles:"דברי הימים ב" }
 };
+
+/* ---------- словарь данных: триггеры, исходы, направление, канал, доверие ---------- */
+const DATA_NAMES = {
+trig: { ru:{unprompted:"по инициативе Бога",disobedience:"непослушание",covenant_follow_up:"следование завету",distress:"бедствие",faithfulness:"верность",complaint:"жалоба",inquiry:"вопрошание",gratitude:"благодарность",prayer:"молитва",intercession:"заступничество",vow:"обет",divine_test:"божественное испытание"},
+        en:{unprompted:"unprompted",disobedience:"disobedience",covenant_follow_up:"covenant follow-up",distress:"distress",faithfulness:"faithfulness",complaint:"complaint",inquiry:"inquiry",gratitude:"gratitude",prayer:"prayer",intercession:"intercession",vow:"vow",divine_test:"divine test"},
+        he:{unprompted:"מיוזמת האלוהים",disobedience:"מרי",covenant_follow_up:"המשך ברית",distress:"מצוקה",faithfulness:"נאמנות",complaint:"תלונה",inquiry:"שאילה",gratitude:"הודיה",prayer:"תפילה",intercession:"פרוטקציה",vow:"נדר",divine_test:"מבחן אלוהי"} },
+out: { ru:{answer_granted:"ответ дан",blessing:"благословение",compliance:"послушание",covenant:"завет",delayed:"отложено",punishment:"кара",refusal:"отказ",rescue:"спасение",revelation:"откровение",silence:"молчание",unclear:"неясно"},
+       en:{answer_granted:"answer granted",blessing:"blessing",compliance:"compliance",covenant:"covenant",delayed:"delayed",punishment:"punishment",refusal:"refusal",rescue:"rescue",revelation:"revelation",silence:"silence",unclear:"unclear"},
+       he:{answer_granted:"מענה ניתן",blessing:"ברכה",compliance:"ציות",covenant:"ברית",delayed:"נדחה",punishment:"ענישה",refusal:"סירוב",rescue:"הצלה",revelation:"התגלות",silence:"שתיקה",unclear:"לא ברור"} },
+dir: { ru:{divine_action:"действие Бога",god_initiated:"Бог инициирует",human_initiated:"человек инициирует"},
+       en:{divine_action:"divine action",god_initiated:"God initiates",human_initiated:"human initiates"},
+       he:{divine_action:"מעשה אלוהים",god_initiated:"האלוהים יוזם",human_initiated:"האדם יוזם"} },
+via: { ru:{direct:"напрямую",prophet:"через пророка",angel:"через ангела",dream:"во сне",vision:"видение",internal:"внутренний голос",unclear:"неясно"},
+       en:{direct:"directly",prophet:"through prophet",angel:"through angel",dream:"in a dream",vision:"vision",internal:"inner voice",unclear:"unclear"},
+       he:{direct:"ישירות",prophet:"דרך נביא",angel:"דרך מלאך",dream:"בחלום",vision:"מראה",internal:"קול פנימי",unclear:"לא ברור"} },
+conf: { ru:{high:"высокое доверие",low:"низкое доверие"},
+        en:{high:"high confidence",low:"low confidence"},
+        he:{high:"אמון גבוה",low:"אמון נמוך"} }
+};
+function dn(type, key){
+  const d = DATA_NAMES[type];
+  return (d[LANG] && d[LANG][key]) || (d.en && d.en[key]) || key;
+}
+
 const bookName = b => (BOOK_NAMES[LANG] && BOOK_NAMES[LANG][b]) ||
                       (b.charAt(0).toUpperCase() + b.slice(1).replace(/_/g, " "));
 let CURTAB = "chat";
@@ -664,7 +688,7 @@ async function corpusHTML(r){
     h += `<div class="src">${t("src")}${esc(bookName(top[1]) + " " + e.span.start + "–" + e.span.end)}</div>`;
   } else h += `<div class="note">${t("no_precedent")}</div>`;
   const out = Object.entries(r.probs).sort((a,b)=>b[1]-a[1]).slice(0,3)
-    .map(p=>`<span class="tag ${p[0]}">${p[0]} ${(p[1]*100).toFixed(0)}%</span>`).join("");
+    .map(p=>`<span class="tag ${p[0]}">${dn("out",p[0])} ${(p[1]*100).toFixed(0)}%</span>`).join("");
   h += `<div class="src">${t("expected")} ${esc(r.trig)}: ${out||"—"}</div>${memLine()}</div>`;
   return h;
 }
@@ -767,8 +791,8 @@ async function tEpisodes(m){
     el.innerHTML = `<div class="note">${tfmt("eps_count", {n:eps.length})}</div>` + eps.map((e,i)=>`
       <div class="ep" data-b="${b}" data-i="${i}">
         <span class="s">${bookName(b)} ${e.span.start}–${e.span.end}</span>
-        <span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span>
-        <span class="tag">${e.trigger}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
+        <span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>
+        <span class="tag">${dn("trig",e.trigger)}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
         <div>${esc(e.summary_ru)}</div></div>`).join("");
     el.querySelectorAll(".ep").forEach(d => d.onclick = () => showOne(b, +d.dataset.i));
   }
@@ -779,9 +803,9 @@ async function showOne(b, i){
   const eps = await bookDocs(b); const e = eps[i];
   const d = document.createElement("div"); d.className = "detail";
   d.innerHTML = `<h3>${bookName(b)} ${e.span.start}–${e.span.end}</h3>
-  <div><span class="tag ${e.outcome}">${e.outcome}</span><span class="tag">${e.direction}</span>
-  <span class="tag">${e.via}</span><span class="tag">${e.trigger}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
-  <span class="tag">${e.confidence==="low"?t("eps_low"):t("eps_high")}</span></div>
+  <div><span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>
+  <span class="tag">${dn("via",e.via)}</span><span class="tag">${dn("trig",e.trigger)}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
+  <span class="tag">${dn("conf",e.confidence)}</span></div>
   <div class="sect"><div class="h">${t("sec_god_speech")}</div><div class="he">${esc(e.god_speech_plain)||"—"}</div></div>
   <div class="sect"><div class="h">${t("sec_action")}</div>${esc(e.god_action)}</div>
   ${e.human_speech_plain?`<div class="sect"><div class="h">${t("sec_human")}</div><div class="he small">${esc(e.human_speech_plain)}</div></div>`:""}
@@ -795,7 +819,7 @@ async function tProfile(m){
   const a = await analytics();
   m.innerHTML = `<h2>${t("prof_h")}</h2>
   <table><tr><th>${t("prof_th_trig")}</th><th>${t("prof_th_n")}</th><th style="min-width:360px">${t("prof_th_dist")}</th></tr>
-  ${Object.entries(a.trigger_table).map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1].n}</td>
+  ${Object.entries(a.trigger_table).map(p=>`<tr><td><b>${dn("trig",p[0])}</b></td><td>${p[1].n}</td>
   <td>${bar(Object.fromEntries(Object.entries(p[1]).filter(x=>x[0]!=="n")),6)}</td></tr>`).join("")}</table>
   <h2>${t("prof_pun_h")}</h2>
   <div class="card"><div class="v">${a.punishment_split.total}</div><div class="l">${t("prof_pun_card")}</div>
