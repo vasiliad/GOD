@@ -107,7 +107,7 @@ ru:{
   tab_profile:"Профиль реакции", tab_report:"Отчёт", tab_about:"О проекте",
   lang_btn:"язык",
   chat_h2:"Симуляция разговора с Богом",
-  chat_note:"Задайте вопрос на любом языке. Два режима: <b>Корпусный</b> — ответ реальной речью эпизода-прецедента из 2 050 размеченных эпизодов (источник проверяем, работает у всех); <b>Живой</b> — свободная речь имитации пятью слоями (древний иврит · огласовка · русский · English · современный иврит) от общего мозга проекта (DictaLM 3.0, специалист по древнему ивриту, на бесплатном Kaggle-ноутбуке) — работает, когда мозг включён (индикатор на кнопке); свой бэкенд (LM Studio/Ollama/ключ) можно задать в ⚙ и хранится только в вашем браузере.",
+  chat_note:"Задайте вопрос — симуляция ответит речью Танаха в 5 слоях (древний иврит · огласовка · русский · English · современный иврит) с указанием источника. Если общий мозг (DictaLM 3.0 на Kaggle) спит — автоматически покажется ближайший прецедент корпуса.",
   mode_corpus:"Корпусный", mode_live:"Живой (LLM)", mode_cfg:"⚙ настройки бэкенда",
   b_on:"Симуляция готова — задайте ваш вопрос.",
   b_starting:"Голос Бога поднимается — модель грузится (минуты); ввод в живом режиме откроется сам.",
@@ -167,7 +167,7 @@ en:{
   tab_profile:"Reaction profile", tab_report:"Report", tab_about:"About",
   lang_btn:"language",
   chat_h2:"A simulation of conversation with God",
-  chat_note:"Ask a question in any language. Two modes: <b>Corpus</b> — the answer is the real speech of a precedent episode from the 2,050 annotated episodes (verifiable source, works for everyone); <b>Live</b> — free speech of the imitation in five layers (ancient Hebrew · vocalization · Russian · English · modern Hebrew) from the project's shared brain (DictaLM 3.0, an ancient-Hebrew specialist, on a free Kaggle notebook) — works while the brain is on (indicator on the button); your own backend (LM Studio/Ollama/key) can be set in ⚙ and is stored only in your browser.",
+  chat_note:"Ask a question — the simulation will answer with Tanakh speech in 5 layers (ancient Hebrew · vocalization · Russian · English · modern Hebrew) with source citation. If the shared brain (DictaLM 3.0 on Kaggle) is asleep, the nearest corpus precedent is shown automatically.",
   mode_corpus:"Corpus", mode_live:"Live (LLM)", mode_cfg:"⚙ backend settings",
   b_on:"The simulation is ready — ask your question.",
   b_starting:"The voice of God is rising — the model is loading (minutes); live-mode input will open by itself.",
@@ -227,7 +227,7 @@ he:{
   tab_profile:"פרופיל התגובה", tab_report:"הדוח", tab_about:"אודות הפרויקט",
   lang_btn:"שפה",
   chat_h2:"הדמיית שיחה עם אלוהים",
-  chat_note:"שאלו שאלה בכל שפה. שני מצבים: <b>קורפוס</b> — התשובה היא דיבור אמיתי של אפיזודת-תקדים מתוך 2,050 האפיזודות המסומנות (מקור ניתן לאימות, עובד לכולם); <b>חי</b> — דיבור חופשי של החיקוי בחמש שכבות (עברית מקראית · ניקוד · רוסית · English · עברית מודרנית) מהמוח המשותף של הפרויקט (DictaLM 3.0, מומחית לעברית העתיקה, במחברת Kaggle חינמית) — עובד כשהמוח דולק (חיווי על הכפתור); בקאנד עצמאי (LM Studio/Ollama/מפתח) ניתן להגדיר ב-⚙ ונשמר רק בדפדפן שלכם.",
+  chat_note:"שאלו שאלה — ההדמיה תענה בדיבור התנ״ך ב-5 שכבות (עברית מקראית · ניקוד · רוסית · English · עברית מודרנית) עם ציון מקור. אם המוח המשותף (DictaLM 3.0 על Kaggle) ישן — יוצג תקדים מהקורפוס באופן אוטומטי.",
   mode_corpus:"קורפוס", mode_live:"חי (LLM)", mode_cfg:"⚙ הגדרות שרת",
   b_on:"ההדמיה מוכנה — שאלו את שאלתכם.",
   b_starting:"קול אלוהים עולה — המודל בטעינה (דקות); שדה הקלט במצב החי ייפתח מעצמו.",
@@ -673,30 +673,19 @@ function chatUI(m){
   <h2>${t("chat_h2")}</h2>
   <div class="note">${t("chat_note")}</div>
   <div class="modes">
-    <button id="mdCorpus" class="on">${t("mode_corpus")}</button>
-    <button id="mdLive">${t("mode_live")} <span id="brainDot" title="">…</span></button>
+    <span id="brainDot" title="">…</span> <span id="brainState" style="color:var(--acc)">…</span>
   </div>
-  <div id="brainState" class="note" style="color:var(--acc)">…</div>
 
   <div class="filters" style="margin-top:12px"><input id="cq" placeholder="${t("input_ph")}"></div>
   <div id="clog"></div>`;
-  let mode = "corpus";
 
-  /* физический запрет: в живом режиме поле ввода закрыто, пока голос не готов.
-     corpus-режим работает всегда — его ввод не блокируется никогда. */
-  function syncInput(){
-    const ready = mode!=="live" || (BRAIN.info && BRAIN.info.state==="on");
-    cq.disabled = !ready;
-    cq.placeholder = ready ? t("input_ph")
-      : (BRAIN.info && BRAIN.info.state==="starting" ? t("input_ph_starting") : t("input_ph_off"));
-  }
-  window.brainSyncInput = syncInput;
+  /* Один режим: все вопросы идут через мозг (LLM + retrieval + цитаты + 6 слоёв).
+     Если мозг спит — автоматический фолбэк на ближайший прецедент корпуса. */
+  window.brainSyncInput = () => {};   // заглушка: ввод не блокируется никогда
   const rr = async () => { await brainRefresh(); };
   rr();
   if(window._brainTimer) clearInterval(window._brainTimer);
   window._brainTimer = setInterval(rr, 120000);
-  mdCorpus.onclick = () => { mode="corpus"; mdCorpus.classList.add("on"); mdLive.classList.remove("on"); syncInput(); };
-  mdLive.onclick   = () => { mode="live";   mdLive.classList.add("on"); mdCorpus.classList.remove("on"); brainRefresh(); };
 
   const log = clog;
   async function send(){
@@ -706,29 +695,21 @@ function chatUI(m){
     memUpdate(q);
     log.insertAdjacentHTML("beforeend",'<div class="note waiting" id="wt">…</div>');
     try{
-      if(mode==="corpus"){
-        wt.textContent = t("searching");   // индикатор ДО поиска, не после
-        const r = await corpusReply(q);
-        const html = await corpusHTML(r);
+      wt.textContent = t("answering");
+      let r;
+      try{ r = await liveReply(q); }
+      catch(e2){
+        wt.textContent = t("brain_silent");
+        const rc = await corpusReply(q);
+        const html = await corpusHTML(rc);
         wt.remove();
-        log.insertAdjacentHTML("beforeend", html);
-      } else {
-        wt.textContent = t("answering");
-        let r;
-        try{ r = await liveReply(q); }
-        catch(e2){
-          wt.textContent = t("brain_silent");
-          const rc = await corpusReply(q);
-          const html = await corpusHTML(rc);
-          wt.remove();
-          log.insertAdjacentHTML("beforeend",
-            `<div class="note" style="color:var(--bad)">${tfmt("brain_unavail", {e:esc(String(e2))})}</div>` + html);
-          if(log.lastElementChild) log.lastElementChild.scrollIntoView({behavior:"smooth",block:"nearest"});
-          return;
-        }
-        wt.remove();
-        log.insertAdjacentHTML("beforeend", liveHTML(r));
+        log.insertAdjacentHTML("beforeend",
+          `<div class="note" style="color:var(--bad)">${tfmt("brain_unavail", {e:esc(String(e2))})}</div>` + html);
+        if(log.lastElementChild) log.lastElementChild.scrollIntoView({behavior:"smooth",block:"nearest"});
+        return;
       }
+      wt.remove();
+      log.insertAdjacentHTML("beforeend", liveHTML(r));
     }catch(e){
       wt.remove();
       log.insertAdjacentHTML("beforeend", errHTML(e));
