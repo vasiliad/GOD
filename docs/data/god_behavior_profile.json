@@ -1,0 +1,566 @@
+{
+ "metadata": {
+  "version": "behavioral-v1 (episodes v2)",
+  "episodes": 2056,
+  "books": [
+   "Amos",
+   "Daniel",
+   "Deuteronomy",
+   "Ecclesiastes",
+   "Esther",
+   "Exodus",
+   "Ezekiel",
+   "Ezra",
+   "Habakkuk",
+   "Haggai",
+   "Hosea",
+   "II_Chronicles",
+   "II_Kings",
+   "II_Samuel",
+   "I_Chronicles",
+   "I_Kings",
+   "I_Samuel",
+   "Isaiah",
+   "Jeremiah",
+   "Job",
+   "Joel",
+   "Jonah",
+   "Joshua",
+   "Judges",
+   "Lamentations",
+   "Leviticus",
+   "Malachi",
+   "Micah",
+   "Nahum",
+   "Nehemiah",
+   "Numbers",
+   "Obadiah",
+   "Proverbs",
+   "Psalms",
+   "Ruth",
+   "Song_of_Songs",
+   "Zechariah",
+   "Zephaniah",
+   "genesis"
+  ],
+  "note": "P(outcome|trigger) — предсказание реакции Бога; вероятности по наблюдениям реестра v2"
+ },
+ "overall": {
+  "outcome": {
+   "punishment": 0.241,
+   "revelation": 0.178,
+   "unclear": 0.12,
+   "blessing": 0.091,
+   "covenant": 0.071,
+   "answer_granted": 0.071,
+   "silence": 0.067,
+   "compliance": 0.067,
+   "rescue": 0.061,
+   "delayed": 0.022,
+   "refusal": 0.011
+  },
+  "direction": {
+   "god_initiated": 0.552,
+   "human_initiated": 0.344,
+   "divine_action": 0.104
+  },
+  "via": {
+   "prophet": 0.411,
+   "direct": 0.371,
+   "unclear": 0.136,
+   "vision": 0.036,
+   "internal": 0.021,
+   "angel": 0.018,
+   "dream": 0.007
+  },
+  "addressee": {
+   "nation": 0.479,
+   "individual": 0.372,
+   "foreign_individual": 0.043,
+   "humanity": 0.041,
+   "family": 0.026,
+   "patriarch": 0.021,
+   "self": 0.018
+  },
+  "severity_mean": 2.89
+ },
+ "by_trigger": {
+  "complaint": {
+   "n": 115,
+   "outcome_p": {
+    "silence": 0.357,
+    "unclear": 0.174,
+    "revelation": 0.174,
+    "punishment": 0.113,
+    "answer_granted": 0.113,
+    "blessing": 0.026,
+    "rescue": 0.017,
+    "compliance": 0.017,
+    "delayed": 0.009
+   },
+   "severity_mean": 3.23,
+   "top_emotions": [
+    "тревога и враждебность жреца",
+    "унизительный приказ уйти",
+    "страх и малодушие",
+    "ропот, приписывающий Богу ненависть",
+    "неверие"
+   ],
+   "typical_quote": "אם יראה איש באנשים האלה הדור הרע הזה את הארץ הטובה אשר נשבעתי לתת לאבתיכם זולתי "
+  },
+  "covenant_follow_up": {
+   "n": 272,
+   "outcome_p": {
+    "covenant": 0.441,
+    "revelation": 0.18,
+    "blessing": 0.151,
+    "compliance": 0.121,
+    "rescue": 0.044,
+    "punishment": 0.026,
+    "refusal": 0.011,
+    "answer_granted": 0.011,
+    "unclear": 0.007,
+    "delayed": 0.004,
+    "silence": 0.004
+   },
+   "severity_mean": 2.53,
+   "top_emotions": [
+    "трепет",
+    "благоговение",
+    "страх перед огнём",
+    "страх Божий",
+    "любовь к Богу"
+   ],
+   "typical_quote": "רב לכם שבת בהר הזה פנו וסעו לכם ובאו הר האמרי ואל כל שכניו בערבה בהר ובשפלה ובנג"
+  },
+  "disobedience": {
+   "n": 352,
+   "outcome_p": {
+    "punishment": 0.801,
+    "revelation": 0.077,
+    "unclear": 0.04,
+    "compliance": 0.026,
+    "refusal": 0.02,
+    "answer_granted": 0.011,
+    "silence": 0.009,
+    "blessing": 0.009,
+    "delayed": 0.006,
+    "rescue": 0.003
+   },
+   "severity_mean": 4.2,
+   "top_emotions": [
+    "гнев за отвержение Торы",
+    "опечаленность хождением за ложью отцов",
+    "гнев за продажу праведника за серебро",
+    "горькое напоминание о благодеяниях",
+    "отчаяние бегства в судный день"
+   ],
+   "typical_quote": "כה אמר יהוה על שלשה פשעי יהודה ועל ארבעה לא אשיבנו על מאסם את תורת יהוה וחקיו לא"
+  },
+  "distress": {
+   "n": 189,
+   "outcome_p": {
+    "silence": 0.243,
+    "rescue": 0.19,
+    "answer_granted": 0.164,
+    "unclear": 0.148,
+    "delayed": 0.09,
+    "blessing": 0.058,
+    "revelation": 0.053,
+    "compliance": 0.032,
+    "refusal": 0.011,
+    "punishment": 0.011
+   },
+   "severity_mean": 2.98,
+   "top_emotions": [
+    "ужас спутников",
+    "бессилие Даниила",
+    "раскаяние",
+    "самонадеянное непослушание",
+    "плач и скорбь"
+   ],
+   "typical_quote": "לא תעלו ולא תלחמו כי אינני בקרבכם ולא תנגפו לפני איביכם"
+  },
+  "divine_test": {
+   "n": 11,
+   "outcome_p": {
+    "compliance": 0.273,
+    "blessing": 0.182,
+    "unclear": 0.182,
+    "answer_granted": 0.182,
+    "punishment": 0.091,
+    "revelation": 0.091
+   },
+   "severity_mean": 3.09,
+   "top_emotions": [
+    "испытующая строгость",
+    "одобрение",
+    "щедрость",
+    "таинственность",
+    "признание победы Иакова"
+   ],
+   "typical_quote": "אברהם | קח נא את בנך את יחידך אשר אהבת את יצחק | אברהם אברהם | אל תשלח ידך אל הנ"
+  },
+  "faithfulness": {
+   "n": 118,
+   "outcome_p": {
+    "blessing": 0.297,
+    "compliance": 0.246,
+    "unclear": 0.127,
+    "rescue": 0.093,
+    "covenant": 0.059,
+    "silence": 0.059,
+    "answer_granted": 0.051,
+    "revelation": 0.034,
+    "delayed": 0.017,
+    "punishment": 0.017
+   },
+   "severity_mean": 1.86,
+   "top_emotions": [
+    "решимость сохранить чистоту",
+    "опасение стража",
+    "ярость царя",
+    "непреклонность юношей",
+    "благословение Бога царём"
+   ],
+   "typical_quote": "בא אתה וכל ביתך אל התבה כי אתך ראיתי צדיק לפני בדור הזה"
+  },
+  "gratitude": {
+   "n": 88,
+   "outcome_p": {
+    "unclear": 0.466,
+    "blessing": 0.182,
+    "silence": 0.159,
+    "answer_granted": 0.068,
+    "compliance": 0.045,
+    "rescue": 0.045,
+    "refusal": 0.011,
+    "revelation": 0.011,
+    "covenant": 0.011
+   },
+   "severity_mean": 1.59,
+   "top_emotions": [
+    "радость от дарованного добра",
+    "память о притеснении и вопле к Богу в Египте",
+    "радость внешнего свидетеля",
+    "щедрость по силам — «ככחם נתנו לאוצר המלאכה» (2:69)",
+    "ликование — «הריעו תרועה גדולה... בשמחה» (3:12-13)"
+   ],
+   "typical_quote": "למה חרה לך ולמה נפלו פניך"
+  },
+  "inquiry": {
+   "n": 101,
+   "outcome_p": {
+    "answer_granted": 0.307,
+    "unclear": 0.257,
+    "revelation": 0.129,
+    "punishment": 0.079,
+    "delayed": 0.069,
+    "blessing": 0.059,
+    "compliance": 0.04,
+    "refusal": 0.03,
+    "silence": 0.02,
+    "rescue": 0.01
+   },
+   "severity_mean": 2.52,
+   "top_emotions": [
+    "изумление и поклонение царя",
+    "признание Бога царём",
+    "тяжёлое замешательство Даниила",
+    "страх царя",
+    "тревога Даниила"
+   ],
+   "typical_quote": "ברם איתי אלה בשמיא גלא רזין והודע למלכא נבוכדנצר מה די להוא באחרית יומיא"
+  },
+  "intercession": {
+   "n": 46,
+   "outcome_p": {
+    "answer_granted": 0.478,
+    "rescue": 0.109,
+    "refusal": 0.087,
+    "silence": 0.087,
+    "delayed": 0.065,
+    "revelation": 0.065,
+    "punishment": 0.022,
+    "covenant": 0.022,
+    "blessing": 0.022,
+    "compliance": 0.022,
+    "unclear": 0.022
+   },
+   "severity_mean": 2.98,
+   "top_emotions": [
+    "сострадание к малому Иакову",
+    "милость и раскаяние Бога",
+    "мольба о пощаде",
+    "милость и раскаяние Бога",
+    "слава и благодарность"
+   ],
+   "typical_quote": "נחם יהוה על זאת לא תהיה אמר יהוה"
+  },
+  "prayer": {
+   "n": 55,
+   "outcome_p": {
+    "answer_granted": 0.309,
+    "silence": 0.291,
+    "revelation": 0.091,
+    "rescue": 0.091,
+    "unclear": 0.073,
+    "blessing": 0.055,
+    "delayed": 0.055,
+    "covenant": 0.018,
+    "punishment": 0.018
+   },
+   "severity_mean": 2.25,
+   "top_emotions": [
+    "умиление (Даниил вмилости у Бога)",
+    "смирение — «להתענות לפני אלהינו לבקש ממנו דרך ישרה» (8:21)",
+    "стыд просить у царя воинов — «כי בשתי לשאול מן המלך חיל ופרשים» (8:22)",
+    "благосклонность",
+    "верность (хесед)"
+   ],
+   "typical_quote": "דניאל עתה יצאתי להשכילך בינה בתחלת תחנוניך יצא דבר ואני באתי להגיד כי חמודות אתה"
+  },
+  "unprompted": {
+   "n": 692,
+   "outcome_p": {
+    "revelation": 0.335,
+    "punishment": 0.257,
+    "unclear": 0.126,
+    "blessing": 0.097,
+    "rescue": 0.068,
+    "compliance": 0.066,
+    "covenant": 0.025,
+    "delayed": 0.01,
+    "answer_granted": 0.009,
+    "refusal": 0.004,
+    "silence": 0.003
+   },
+   "severity_mean": 2.73,
+   "top_emotions": [
+    "грозное предостережение",
+    "скорбь о запустении земли",
+    "гнев за жестокость к Галааду",
+    "непреклонность суда",
+    "гнев за депортацию целых народов"
+   ],
+   "typical_quote": "ויאמר יהוה מציון ישאג ומירושלם יתן קולו ואבלו נאות הרעים ויבש ראש הכרמל"
+  },
+  "vow": {
+   "n": 17,
+   "outcome_p": {
+    "unclear": 0.353,
+    "answer_granted": 0.235,
+    "delayed": 0.176,
+    "silence": 0.118,
+    "compliance": 0.059,
+    "rescue": 0.059
+   },
+   "severity_mean": 2.41,
+   "top_emotions": [
+    "страх Божий",
+    "предостережение от гнева Божия",
+    "горечь души и излияние души",
+    "клятвенная твёрдость в чистоте",
+    "страх Божий как мотив праведности"
+   ],
+   "typical_quote": "אל תבהל על פיך ולבך אל ימהר להוציא דבר לפני האלהים כי האלהים בשמים ואתה על הארץ "
+  }
+ },
+ "by_trigger_direction": {
+  "unprompted": {
+   "god_initiated": 554,
+   "divine_action": 59,
+   "human_initiated": 79
+  },
+  "disobedience": {
+   "god_initiated": 257,
+   "divine_action": 73,
+   "human_initiated": 22
+  },
+  "intercession": {
+   "god_initiated": 6,
+   "human_initiated": 36,
+   "divine_action": 4
+  },
+  "complaint": {
+   "human_initiated": 91,
+   "god_initiated": 22,
+   "divine_action": 2
+  },
+  "faithfulness": {
+   "divine_action": 24,
+   "god_initiated": 14,
+   "human_initiated": 80
+  },
+  "inquiry": {
+   "god_initiated": 17,
+   "human_initiated": 81,
+   "divine_action": 3
+  },
+  "prayer": {
+   "god_initiated": 7,
+   "human_initiated": 41,
+   "divine_action": 7
+  },
+  "distress": {
+   "god_initiated": 23,
+   "human_initiated": 152,
+   "divine_action": 14
+  },
+  "covenant_follow_up": {
+   "god_initiated": 228,
+   "divine_action": 21,
+   "human_initiated": 23
+  },
+  "gratitude": {
+   "human_initiated": 84,
+   "divine_action": 3,
+   "god_initiated": 1
+  },
+  "vow": {
+   "god_initiated": 1,
+   "human_initiated": 16
+  },
+  "divine_test": {
+   "god_initiated": 5,
+   "divine_action": 4,
+   "human_initiated": 2
+  }
+ },
+ "severity_by_outcome": {
+  "revelation": 2.63,
+  "punishment": 4.31,
+  "unclear": 2.07,
+  "answer_granted": 2.68,
+  "silence": 2.88,
+  "rescue": 2.82,
+  "blessing": 1.63,
+  "delayed": 2.91,
+  "refusal": 3.57,
+  "covenant": 2.59,
+  "compliance": 2.13
+ },
+ "response_modes": {
+  "unprompted": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.78,
+   "distribution": {
+    "speaks_and_acts": 0.78,
+    "acts_silently": 0.21
+   },
+   "total": 691
+  },
+  "disobedience": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.75,
+   "distribution": {
+    "speaks_and_acts": 0.75,
+    "acts_silently": 0.24
+   },
+   "total": 350
+  },
+  "intercession": {
+   "mode": "acts_silently",
+   "confidence": 0.52,
+   "distribution": {
+    "speaks_and_acts": 0.46,
+    "acts_silently": 0.52,
+    "silence": 0.02
+   },
+   "total": 46
+  },
+  "complaint": {
+   "mode": "acts_silently",
+   "confidence": 0.62,
+   "distribution": {
+    "speaks_and_acts": 0.37,
+    "acts_silently": 0.62
+   },
+   "total": 115
+  },
+  "faithfulness": {
+   "mode": "acts_silently",
+   "confidence": 0.82,
+   "distribution": {
+    "speaks_and_acts": 0.14,
+    "acts_silently": 0.82,
+    "silence": 0.03
+   },
+   "total": 118
+  },
+  "inquiry": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.52,
+   "distribution": {
+    "speaks_and_acts": 0.52,
+    "acts_silently": 0.47
+   },
+   "total": 101
+  },
+  "prayer": {
+   "mode": "acts_silently",
+   "confidence": 0.75,
+   "distribution": {
+    "speaks_and_acts": 0.24,
+    "acts_silently": 0.75,
+    "silence": 0.02
+   },
+   "total": 55
+  },
+  "distress": {
+   "mode": "acts_silently",
+   "confidence": 0.73,
+   "distribution": {
+    "speaks_and_acts": 0.24,
+    "acts_silently": 0.73,
+    "silence": 0.02
+   },
+   "total": 188
+  },
+  "covenant_follow_up": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.83,
+   "distribution": {
+    "speaks_and_acts": 0.83,
+    "acts_silently": 0.15,
+    "speaks_only": 0.01
+   },
+   "total": 271
+  },
+  "gratitude": {
+   "mode": "acts_silently",
+   "confidence": 0.77,
+   "distribution": {
+    "speaks_and_acts": 0.1,
+    "acts_silently": 0.77,
+    "silence": 0.13
+   },
+   "total": 87
+  },
+  "vow": {
+   "mode": "acts_silently",
+   "confidence": 0.76,
+   "distribution": {
+    "speaks_and_acts": 0.06,
+    "acts_silently": 0.76,
+    "silence": 0.18
+   },
+   "total": 17
+  },
+  "divine_test": {
+   "mode": "acts_silently",
+   "confidence": 0.55,
+   "distribution": {
+    "speaks_and_acts": 0.45,
+    "acts_silently": 0.55
+   },
+   "total": 11
+  }
+ },
+ "response_mode_legend": {
+  "speaks_and_acts": "Бог говорит И действует (основной паттерн для непослушания, завета)",
+  "acts_silently": "Бог действует МОЛЧА — без слов, только действие (доминирует для мольбы, молитвы, верности)",
+  "silence": "Бог молчит полностью — ни слова, ни действия",
+  "speaks_only": "Бог только говорит без видимого действия (редчайший паттерн — 0-1%)"
+ }
+}

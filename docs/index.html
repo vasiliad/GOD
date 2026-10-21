@@ -699,12 +699,8 @@ function chatUI(m){
       let r;
       try{ r = await liveReply(q); }
       catch(e2){
-        wt.textContent = t("brain_silent");
-        const rc = await corpusReply(q);
-        const html = await corpusHTML(rc);
         wt.remove();
-        log.insertAdjacentHTML("beforeend",
-          `<div class="note" style="color:var(--bad)">${tfmt("brain_unavail", {e:esc(String(e2))})}</div>` + html);
+        log.insertAdjacentHTML("beforeend", errHTML(e2));
         if(log.lastElementChild) log.lastElementChild.scrollIntoView({behavior:"smooth",block:"nearest"});
         return;
       }

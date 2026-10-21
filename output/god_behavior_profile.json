@@ -439,5 +439,128 @@
   "refusal": 3.57,
   "covenant": 2.59,
   "compliance": 2.13
+ },
+ "response_modes": {
+  "unprompted": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.78,
+   "distribution": {
+    "speaks_and_acts": 0.78,
+    "acts_silently": 0.21
+   },
+   "total": 691
+  },
+  "disobedience": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.75,
+   "distribution": {
+    "speaks_and_acts": 0.75,
+    "acts_silently": 0.24
+   },
+   "total": 350
+  },
+  "intercession": {
+   "mode": "acts_silently",
+   "confidence": 0.52,
+   "distribution": {
+    "speaks_and_acts": 0.46,
+    "acts_silently": 0.52,
+    "silence": 0.02
+   },
+   "total": 46
+  },
+  "complaint": {
+   "mode": "acts_silently",
+   "confidence": 0.62,
+   "distribution": {
+    "speaks_and_acts": 0.37,
+    "acts_silently": 0.62
+   },
+   "total": 115
+  },
+  "faithfulness": {
+   "mode": "acts_silently",
+   "confidence": 0.82,
+   "distribution": {
+    "speaks_and_acts": 0.14,
+    "acts_silently": 0.82,
+    "silence": 0.03
+   },
+   "total": 118
+  },
+  "inquiry": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.52,
+   "distribution": {
+    "speaks_and_acts": 0.52,
+    "acts_silently": 0.47
+   },
+   "total": 101
+  },
+  "prayer": {
+   "mode": "acts_silently",
+   "confidence": 0.75,
+   "distribution": {
+    "speaks_and_acts": 0.24,
+    "acts_silently": 0.75,
+    "silence": 0.02
+   },
+   "total": 55
+  },
+  "distress": {
+   "mode": "acts_silently",
+   "confidence": 0.73,
+   "distribution": {
+    "speaks_and_acts": 0.24,
+    "acts_silently": 0.73,
+    "silence": 0.02
+   },
+   "total": 188
+  },
+  "covenant_follow_up": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.83,
+   "distribution": {
+    "speaks_and_acts": 0.83,
+    "acts_silently": 0.15,
+    "speaks_only": 0.01
+   },
+   "total": 271
+  },
+  "gratitude": {
+   "mode": "acts_silently",
+   "confidence": 0.77,
+   "distribution": {
+    "speaks_and_acts": 0.1,
+    "acts_silently": 0.77,
+    "silence": 0.13
+   },
+   "total": 87
+  },
+  "vow": {
+   "mode": "acts_silently",
+   "confidence": 0.76,
+   "distribution": {
+    "speaks_and_acts": 0.06,
+    "acts_silently": 0.76,
+    "silence": 0.18
+   },
+   "total": 17
+  },
+  "divine_test": {
+   "mode": "acts_silently",
+   "confidence": 0.55,
+   "distribution": {
+    "speaks_and_acts": 0.45,
+    "acts_silently": 0.55
+   },
+   "total": 11
+  }
+ },
+ "response_mode_legend": {
+  "speaks_and_acts": "Бог говорит И действует (основной паттерн для непослушания, завета)",
+  "acts_silently": "Бог действует МОЛЧА — без слов, только действие (доминирует для мольбы, молитвы, верности)",
+  "silence": "Бог молчит полностью — ни слова, ни действия",
+  "speaks_only": "Бог только говорит без видимого действия (редчайший паттерн — 0-1%)"
  }
 }
