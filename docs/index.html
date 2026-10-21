@@ -69,16 +69,8 @@ body::before {
     linear-gradient(180deg, #080c16 0%, #0d1322 50%, #12102a 100%);
 }
 
-/* Subtle Hebrew letter pattern overlay */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Cdefs%3E%3C/style%3E%3Cg fill='%23c9a84c' opacity='0.025' font-family='serif' font-size='72'%3E%3Ctext x='60' y='120'%3E%D7%90%3C/text%3E%3Ctext x='300' y='180' font-size='48'%3E%D7%91%3C/text%3E%3Ctext x='480' y='100' font-size='60'%3E%D7%92%3C/text%3E%3Ctext x='150' y='350' font-size='55'%3E%D7%93%3C/text%3E%3Ctext x='400' y='320' font-size='45'%3E%D7%94%3C/text%3E%3Ctext x='550' y='400' font-size='65'%3E%D7%95%3C/text%3E%3Ctext x='80' y='500' font-size='50'%3E%D7%96%3C/text%3E%3Ctext x='280' y='480' font-size='42'%3E%D7%97%3C/text%3E%3Ctext x='460' y='550' font-size='58'%3E%D7%98%3C/text%3E%3Ctext x='580' y='520' font-size='48'%3E%D7%99%3C/text%3E%3Ctext x='200' y='580' font-size='40'%3E%D7%9B%3C/text%3E%3Ctext x='420' y='580' font-size='52'%3E%D7%9C%3C/text%3E%3C/g%3E%3C/svg%3E");
-  background-size: 800px 800px;
-}
+body::after { display:none; }
+
 
 /* ===== HEADER: The golden inscription ===== */
 header {
@@ -86,6 +78,7 @@ header {
   max-width: 1160px;
   margin: 0 auto;
   position: relative;
+  text-align: center;
 }
 
 h1 {
@@ -106,9 +99,9 @@ h1 b {
 h1 b::after {
   content: '';
   display: block;
-  width: 100%;
+  width: 120px;
   height: 2px;
-  margin-top: 4px;
+  margin: 4px auto 0;
   background: var(--gold-grad);
   border-radius: 1px;
   opacity: 0.6;
@@ -128,6 +121,7 @@ h1 b::after {
   display: flex;
   gap: 4px;
   margin-top: 14px;
+  justify-content: center;
 }
 
 .langs button {
@@ -238,7 +232,7 @@ h2::after {
   display: block;
   width: 40px;
   height: 2px;
-  margin-top: 6px;
+  margin: 6px auto 0;
   background: var(--gold-grad);
   border-radius: 1px;
   opacity: 0.5;
@@ -330,6 +324,7 @@ tr:last-child td { border-bottom: none; }
   font-weight: 800;
   color: var(--acc);
   line-height: 1;
+  text-align: center;
 }
 
 .card .l {
@@ -337,6 +332,7 @@ tr:last-child td { border-bottom: none; }
   font-size: 12.5px;
   margin-top: 6px;
   font-weight: 500;
+  text-align: center;
 }
 
 .card .b {
@@ -596,6 +592,86 @@ a:hover { color: var(--acc-bright); }
 </style>
 </head>
 <body>
+<svg id="bg-scene" style="position:fixed;top:0;left:0;width:100%;height:100vh;z-index:-2;pointer-events:none" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+<stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.06"/>
+<stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+</radialGradient>
+<radialGradient id="glow2" cx="50%" cy="50%" r="50%">
+<stop offset="0%" style="stop-color:#e07a4c;stop-opacity:0.04"/>
+<stop offset="100%" style="stop-color:#e07a4c;stop-opacity:0"/>
+</radialGradient>
+<radialGradient id="star1" cx="50%" cy="50%" r="50%">
+<stop offset="0%" style="stop-color:#e8d4a0;stop-opacity:0.8"/>
+<stop offset="100%" style="stop-color:#e8d4a0;stop-opacity:0"/>
+</radialGradient>
+<linearGradient id="mountain" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" style="stop-color:#0d1220;stop-opacity:0.6"/>
+<stop offset="100%" style="stop-color:#0a0e18;stop-opacity:1"/>
+</linearGradient>
+<linearGradient id="ray" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.06"/>
+<stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+</linearGradient>
+</defs>
+<!-- Light rays from above (divine revelation) -->
+<polygon points="400,0 480,0 600,900 200,900" fill="url(#ray)"/>
+<polygon points="700,0 740,0 840,900 560,900" fill="url(#ray)" opacity="0.7"/>
+<polygon points="1000,0 1060,0 1160,900 880,900" fill="url(#ray)" opacity="0.5"/>
+<!-- Burning bush glow (upper right) -->
+<ellipse cx="1150" cy="200" rx="180" ry="120" fill="url(#glow2)"/>
+<ellipse cx="1150" cy="200" rx="80" ry="50" fill="url(#glow2)" opacity="1.5"/>
+<!-- Divine glow (center) -->
+<ellipse cx="720" cy="150" rx="400" ry="200" fill="url(#glow1)"/>
+<!-- Mountain silhouettes (Mount Sinai) -->
+<path d="M0,900 L0,720 L80,680 L160,700 L240,640 L320,660 L400,600 L480,640 L560,580 L640,620 L720,560 L800,600 L880,540 L960,580 L1040,540 L1120,580 L1200,540 L1280,580 L1360,540 L1440,600 L1440,900 Z" fill="url(#mountain)"/>
+<!-- Wave patterns (Red Sea) -->
+<path d="M0,750 Q120,740 240,750 T480,750 T720,750 T960,750 T1200,750 T1440,750" stroke="#c9a84c" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+<path d="M0,800 Q150,790 300,800 T600,800 T900,800 T1200,800 T1440,800" stroke="#c9a84c" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+<path d="M0,850 Q180,840 360,850 T720,850 T1080,850 T1440,850" stroke="#c9a84c" stroke-opacity="0.03" stroke-width="1" fill="none"/>
+<!-- Star field -->
+<g fill="#e8d4a0">
+<circle cx="100" cy="80" r="2" opacity="0.4"/>
+<circle cx="250" cy="150" r="1.5" opacity="0.3"/>
+<circle cx="400" cy="60" r="2.5" opacity="0.5"/>
+<circle cx="550" cy="120" r="1" opacity="0.25"/>
+<circle cx="700" cy="40" r="3" opacity="0.6"/>
+<circle cx="850" cy="100" r="1.5" opacity="0.3"/>
+<circle cx="1000" cy="50" r="2" opacity="0.4"/>
+<circle cx="1150" cy="90" r="1" opacity="0.2"/>
+<circle cx="1300" cy="60" r="2.5" opacity="0.45"/>
+<circle cx="1400" cy="140" r="1.5" opacity="0.3"/>
+<circle cx="200" cy="250" r="1" opacity="0.15"/>
+<circle cx="600" cy="200" r="1.5" opacity="0.2"/>
+<circle cx="900" cy="180" r="1" opacity="0.15"/>
+<circle cx="1250" cy="220" r="1" opacity="0.2"/>
+<circle cx="350" cy="300" r="1" opacity="0.1"/>
+<circle cx="750" cy="280" r="1.5" opacity="0.12"/>
+<circle cx="1050" cy="300" r="1" opacity="0.1"/>
+</g>
+<!-- Glowing stars (with radial gradient) -->
+<circle cx="400" cy="60" r="12" fill="url(#star1)"/>
+<circle cx="700" cy="40" r="15" fill="url(#star1)"/>
+<circle cx="1300" cy="60" r="12" fill="url(#star1)"/>
+<!-- Hebrew letters scattered -->
+<g fill="#c9a84c" opacity="0.04" font-family="serif">
+<text x="60" y="250" font-size="80" transform="rotate(-8,60,250)">א</text>
+<text x="320" y="180" font-size="55" transform="rotate(5,320,180)">ב</text>
+<text x="580" y="120" font-size="70" transform="rotate(-3,580,120)">ג</text>
+<text x="900" y="200" font-size="60" transform="rotate(4,900,200)">ד</text>
+<text x="1200" y="150" font-size="75" transform="rotate(-6,1200,150)">ה</text>
+<text x="200" y="450" font-size="65" transform="rotate(3,200,450)">ו</text>
+<text x="520" y="380" font-size="50" transform="rotate(-5,520,380)">ז</text>
+<text x="820" y="420" font-size="72" transform="rotate(2,820,420)">ח</text>
+<text x="1120" y="380" font-size="58" transform="rotate(-4,1120,380)">ט</text>
+<text x="80" y="600" font-size="62" transform="rotate(6,80,600)">י</text>
+<text x="400" y="560" font-size="48" transform="rotate(-2,400,560)">כ</text>
+<text x="700" y="620" font-size="68" transform="rotate(5,700,620)">ל</text>
+<text x="1000" y="560" font-size="55" transform="rotate(-3,1000,560)">מ</text>
+<text x="1300" y="620" font-size="60" transform="rotate(4,1300,620)">ם</text>
+</g>
+</svg>
 <header id="hdr"></header>
 <nav id="nav"></nav>
 <main id="main"></main>
