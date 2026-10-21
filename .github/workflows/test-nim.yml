@@ -1,0 +1,37 @@
+name: Test NVIDIA NIM API
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  test-nim:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test GLM-5.3-Flash
+        env:
+          NVIDIA_KEY: ${{ secrets.NVIDIA_KEY_1 }}
+        run: |
+          echo "=== Список моделей ==="
+          curl -s --max-time 30 "https://integrate.api.nvidia.com/v1/models" \
+            -H "Authorization: Bearer $NVIDIA_KEY" | head -c 2000
+          echo ""
+          echo "=== GLM-5.3-Flash тест ==="
+          curl -s --max-time 60 "https://integrate.api.nvidia.com/v1/chat/completions" \
+            -H "Authorization: Bearer $NVIDIA_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"model":"zai-org/glm-5.3-flash","messages":[{"role":"user","content":"Say OK in Hebrew"}],"max_tokens":20}' | head -c 1000
+          echo ""
+          echo "=== GLM-5.5B-Ultra тест ==="
+          curl -s --max-time 60 "https://integrate.api.nvidia.com/v1/chat/completions" \
+            -H "Authorization: Bearer $NVIDIA_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"model":"nvidia/glm-5.5b-ultra","messages":[{"role":"user","content":"Say OK in Hebrew"}],"max_tokens":20}' | head -c 1000
+          echo ""
+          echo "=== Hebrew recombination test ==="
+          curl -s --max-time 120 "https://integrate.api.nvidia.com/v1/chat/completions" \
+            -H "Authorization: Bearer $NVIDIA_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"model":"zai-org/glm-5.3-flash","messages":[{"role":"system","content":"You are a biblical Hebrew expert. Recombine these fragments into a short Hebrew reply: אל תירא + כי אתך אנכי. Reply in [HEBREW] and [SOURCES] sections only."},{"role":"user","content":"Compose a brief Hebrew reply"}],"max_tokens":100}' | head -c 1500
