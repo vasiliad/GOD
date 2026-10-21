@@ -1,0 +1,34 @@
+name: List NVIDIA NIM Models
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  list-models:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get full model list, find GLM/Hebrew
+        env:
+          NVIDIA_KEY: ${{ secrets.NVIDIA_KEY_1 }}
+        run: |
+          curl -s --max-time 30 "https://integrate.api.nvidia.com/v1/models" \
+            -H "Authorization: Bearer $NVIDIA_KEY" | python3 -c "
+import json, sys
+d = json.load(sys.stdin)
+models = d.get('data', [])
+print(f'Total models: {len(models)}')
+glm = [m['id'] for m in models if 'glm' in m['id'].lower()]
+print(f'GLM models: {glm}')
+nvidia = [m['id'] for m in models if 'nvidia' in m['id'].lower()]
+print(f'NVIDIA models: {nvidia}')
+ultra = [m['id'] for m in models if 'ultra' in m['id'].lower()]
+print(f'Ultra models: {ultra}')
+flash = [m['id'] for m in models if 'flash' in m['id'].lower()]
+print(f'Flash models: {flash}')
+hebrew = [m['id'] for m in models if any(x in m['id'].lower() for x in ['dicta','heb','qwen','llama-3.3','llama-4','gemma-3-27'])]
+print(f'Hebrew-capable: {hebrew}')
+print(f'ALL: {json.dumps([m[\"id\"] for m in models], indent=2)}')
+"
