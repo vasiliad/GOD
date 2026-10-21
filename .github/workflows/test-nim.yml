@@ -10,28 +10,31 @@ jobs:
   test-nim:
     runs-on: ubuntu-latest
     steps:
-      - name: Test GLM-5.3-Flash
+      - name: Full model list + GLM test + Hebrew
         env:
           NVIDIA_KEY: ${{ secrets.NVIDIA_KEY_1 }}
         run: |
-          echo "=== Список моделей ==="
+          echo "=== FULL MODEL LIST ==="
           curl -s --max-time 30 "https://integrate.api.nvidia.com/v1/models" \
-            -H "Authorization: Bearer $NVIDIA_KEY" | head -c 2000
-          echo ""
-          echo "=== GLM-5.3-Flash тест ==="
-          curl -s --max-time 60 "https://integrate.api.nvidia.com/v1/chat/completions" \
-            -H "Authorization: Bearer $NVIDIA_KEY" \
-            -H "Content-Type: application/json" \
-            -d '{"model":"zai-org/glm-5.3-flash","messages":[{"role":"user","content":"Say OK in Hebrew"}],"max_tokens":20}' | head -c 1000
-          echo ""
-          echo "=== GLM-5.5B-Ultra тест ==="
-          curl -s --max-time 60 "https://integrate.api.nvidia.com/v1/chat/completions" \
-            -H "Authorization: Bearer $NVIDIA_KEY" \
-            -H "Content-Type: application/json" \
-            -d '{"model":"nvidia/glm-5.5b-ultra","messages":[{"role":"user","content":"Say OK in Hebrew"}],"max_tokens":20}' | head -c 1000
-          echo ""
-          echo "=== Hebrew recombination test ==="
-          curl -s --max-time 120 "https://integrate.api.nvidia.com/v1/chat/completions" \
-            -H "Authorization: Bearer $NVIDIA_KEY" \
-            -H "Content-Type: application/json" \
-            -d '{"model":"zai-org/glm-5.3-flash","messages":[{"role":"system","content":"You are a biblical Hebrew expert. Recombine these fragments into a short Hebrew reply: אל תירא + כי אתך אנכי. Reply in [HEBREW] and [SOURCES] sections only."},{"role":"user","content":"Compose a brief Hebrew reply"}],"max_tokens":100}' | head -c 1500
+            -H "Authorization: Bearer $NVIDIA_KEY" > /tmp/models.json
+          python3 -c "
+import json
+d = json.load(open('/tmp/models.json'))
+models = [m['id'] for m in d.get('data',[])]
+print(f'Total: {len(models)}')
+glm = [m for m in models if 'glm' in m.lower()]
+print(f'GLM: {glm}')
+nv = [m for m in models if 'nvidia' in m.lower() or 'ultra' in m.lower()]
+print(f'NVIDIA/Ultra: {nv}')
+heb = [m for m in models if any(x in m.lower() for x in ['llama-3.3','llama-4','qwen3','gemma-3-27','mistral-small'])]
+print(f'Hebrew-capable: {heb}')
+"
+          echo "=== TEST known GLM model IDs ==="
+          for MODEL in "zai-org/glm-5.3-flash" "zai-org/glm-4.7-flash" "nvidia/glm-5.5b-ultra" "01-ai/yi-large"; do
+            echo "--- $MODEL ---"
+            curl -s --max-time 30 "https://integrate.api.nvidia.com/v1/chat/completions" \
+              -H "Authorization: Bearer $NVIDIA_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{\"model\":\"$MODEL\",\"messages\":[{\"role\":\"user\",\"content\":\"Say OK in Hebrew: שלום\"}],\"max_tokens\":20}" | head -c 300
+            echo ""
+          done
