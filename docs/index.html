@@ -299,6 +299,35 @@ function renderHeader(){
     renderAll();
   });
 }
+/* ---------- названия книг на языке интерфейса (знаток Танаха видит «Михей», не «Micah») ---------- */
+const BOOK_NAMES = {
+ru: { genesis:"Бытие", Exodus:"Исход", Leviticus:"Левит", Numbers:"Числа", Deuteronomy:"Второзаконие",
+  Joshua:"Иисус Навин", Judges:"Судьи", I_Samuel:"1 Царств", II_Samuel:"2 Царств", I_Kings:"3 Царств",
+  II_Kings:"4 Царств", Isaiah:"Исаия", Jeremiah:"Иеремия", Ezekiel:"Иезекииль", Hosea:"Осия", Joel:"Иоиль",
+  Amos:"Амос", Obadiah:"Авдий", Jonah:"Иона", Micah:"Михей", Nahum:"Наум", Habakkuk:"Аввакум",
+  Zephaniah:"Софония", Haggai:"Аггей", Zechariah:"Захария", Malachi:"Малахия", Psalms:"Псалтирь",
+  Proverbs:"Притчи", Job:"Иов", Song_of_Songs:"Песнь Песней", Ruth:"Руфь", Lamentations:"Плач Иеремии",
+  Ecclesiastes:"Екклесиаст", Esther:"Есфирь", Daniel:"Даниил", Ezra:"Ездра", Nehemiah:"Неемия",
+  I_Chronicles:"1 Паралипоменон", II_Chronicles:"2 Паралипоменон" },
+en: { genesis:"Genesis", Exodus:"Exodus", Leviticus:"Leviticus", Numbers:"Numbers", Deuteronomy:"Deuteronomy",
+  Joshua:"Joshua", Judges:"Judges", I_Samuel:"I Samuel", II_Samuel:"II Samuel", I_Kings:"I Kings",
+  II_Kings:"II Kings", Isaiah:"Isaiah", Jeremiah:"Jeremiah", Ezekiel:"Ezekiel", Hosea:"Hosea", Joel:"Joel",
+  Amos:"Amos", Obadiah:"Obadiah", Jonah:"Jonah", Micah:"Micah", Nahum:"Nahum", Habakkuk:"Habakkuk",
+  Zephaniah:"Zephaniah", Haggai:"Haggai", Zechariah:"Zechariah", Malachi:"Malachi", Psalms:"Psalms",
+  Proverbs:"Proverbs", Job:"Job", Song_of_Songs:"Song of Songs", Ruth:"Ruth", Lamentations:"Lamentations",
+  Ecclesiastes:"Ecclesiastes", Esther:"Esther", Daniel:"Daniel", Ezra:"Ezra", Nehemiah:"Nehemiah",
+  I_Chronicles:"I Chronicles", II_Chronicles:"II Chronicles" },
+he: { genesis:"בראשית", Exodus:"שמות", Leviticus:"ויקרא", Numbers:"במדבר", Deuteronomy:"דברים",
+  Joshua:"יהושע", Judges:"שופטים", I_Samuel:"שמואל א", II_Samuel:"שמואל ב", I_Kings:"מלכים א",
+  II_Kings:"מלכים ב", Isaiah:"ישעיהו", Jeremiah:"ירמיהו", Ezekiel:"יחזקאל", Hosea:"הושע", Joel:"יואל",
+  Amos:"עמוס", Obadiah:"עובדיה", Jonah:"יונה", Micah:"מיכה", Nahum:"נחום", Habakkuk:"חבקוק",
+  Zephaniah:"צפניה", Haggai:"חגי", Zechariah:"זכריה", Malachi:"מלאכי", Psalms:"תהלים",
+  Proverbs:"משלי", Job:"איוב", Song_of_Songs:"שיר השירים", Ruth:"רות", Lamentations:"איכה",
+  Ecclesiastes:"קהלת", Esther:"אסתר", Daniel:"דניאל", Ezra:"עזרא", Nehemiah:"נחמיה",
+  I_Chronicles:"דברי הימים א", II_Chronicles:"דברי הימים ב" }
+};
+const bookName = b => (BOOK_NAMES[LANG] && BOOK_NAMES[LANG][b]) ||
+                      (b.charAt(0).toUpperCase() + b.slice(1).replace(/_/g, " "));
 let CURTAB = "chat";
 function renderAll(){
   applyLangMeta();
