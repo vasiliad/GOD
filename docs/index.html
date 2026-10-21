@@ -673,23 +673,13 @@ function chatUI(m){
   <div class="modes">
     <button id="mdCorpus" class="on">${t("mode_corpus")}</button>
     <button id="mdLive">${t("mode_live")} <span id="brainDot" title="">…</span></button>
-    <button id="mdCfg">${t("mode_cfg")}</button>
   </div>
   <div id="brainState" class="note" style="color:var(--acc)">…</div>
-  <div id="chatcfg" class="card">
-    <div class="note">${t("cfg_note")}</div>
-    <div class="filters" style="margin-top:8px">
-      <input id="cfgEp" placeholder="${t("cfg_ep_ph")}">
-      <input id="cfgMd" placeholder="${t("cfg_md_ph")}" style="max-width:180px">
-      <input id="cfgKy" placeholder="${t("cfg_key_ph")}" style="max-width:180px">
-      <button id="cfgSv">${t("cfg_save")}</button>
-    </div>
-  </div>
+
   <div class="filters" style="margin-top:12px"><input id="cq" placeholder="${t("input_ph")}"></div>
   <div id="clog"></div>`;
   let mode = "corpus";
-  const cfg0 = store.get("god_cfg", { endpoint:"", model:"", key:"" });
-  cfgEp.value = cfg0.endpoint; cfgMd.value = cfg0.model||""; cfgKy.value = cfg0.key||"";
+
   /* физический запрет: в живом режиме поле ввода закрыто, пока голос не готов.
      corpus-режим работает всегда — его ввод не блокируется никогда. */
   function syncInput(){
@@ -705,9 +695,7 @@ function chatUI(m){
   window._brainTimer = setInterval(rr, 120000);
   mdCorpus.onclick = () => { mode="corpus"; mdCorpus.classList.add("on"); mdLive.classList.remove("on"); syncInput(); };
   mdLive.onclick   = () => { mode="live";   mdLive.classList.add("on"); mdCorpus.classList.remove("on"); brainRefresh(); };
-  mdCfg.onclick    = () => { chatcfg.style.display = chatcfg.style.display==="block" ? "none" : "block"; };
-  cfgSv.onclick    = () => { store.set("god_cfg",{ endpoint:cfgEp.value.trim(), model:cfgMd.value.trim(), key:cfgKy.value.trim() });
-    cfgSv.textContent=t("cfg_saved"); setTimeout(()=>{cfgSv.textContent=t("cfg_save");},1200); };
+
   const log = clog;
   async function send(){
     const q = cq.value.trim(); if(!q) return;
