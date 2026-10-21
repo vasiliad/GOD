@@ -15,6 +15,7 @@
 import base64, io, json, math, os, random, sys, unicodedata
 
 _REPO = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# NOTE: --test пишет во временный лист в output/ (самокоррупция аудита 2026-10-21)
 OUT = os.path.join(_REPO, "docs", "bench_retrieval_sheet.md")
 MODEL = "intfloat/multilingual-e5-small"
 
@@ -91,6 +92,7 @@ def lexical_scores(q, episodes, expected=None):
 def main():
     selftest = "--test" in sys.argv
     questions = QUESTIONS[:3] if selftest else QUESTIONS
+    out_path = os.path.join(_REPO, "output", "bench_test_sheet.md") if selftest else OUT
     qtrig = dict(questions)
 
     a = json.load(io.open(os.path.join(_REPO, "docs", "data", "analytics.json"), encoding="utf-8"))
@@ -171,8 +173,8 @@ def main():
              "rrf": "RRF (союз рангов)"}
     for n, (q, tops, keys3) in enumerate(sheet, 1):
         lines.append(f"{n}. «{q}» — " + "; ".join(f"{ltr} = {names[k]}" for ltr, k in zip("АБВ", keys3)))
-    io.open(OUT, "w", encoding="utf-8", newline="\n").write(NL.join(lines))
-    print(f"лист записан: {OUT} (3 варианта x {len(questions)} вопросов)")
+    io.open(out_path, "w", encoding="utf-8", newline="\n").write(NL.join(lines))
+    print(f"лист записан: {out_path} (3 варианта x {len(questions)} вопросов)")
     print("механика (грубый прокси, НЕ приговор):",
           ", ".join(f"{n} {tm[n]}/{len(questions)}" for n in ("lex", "zhyb", "rrf")))
     return 0
