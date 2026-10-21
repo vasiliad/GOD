@@ -60,7 +60,7 @@ global.window = { scrollTo(){}, _brainTimer: null, setInterval: () => 1, clearIn
 
 const api = new Function(
   "var nav={innerHTML:'',querySelectorAll:()=>({forEach(){}})};var main={innerHTML:''};" +
-  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex };")();
+  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex, bookName, BOOK_NAMES, LANG };")();
 
 (async () => {
   let pass = 0, fail = 0;
@@ -122,6 +122,18 @@ const api = new Function(
   const dv = api.dequant(row);
   check("dequant: раундтрип [-2, 0, 2]", Math.abs(dv[0]+2)<1e-6 && dv[1]===0 && Math.abs(dv[2]-2)<1e-6);
   check("cosv: ортогональные 0, коллинеарные 1", api.cosv([1,0],[0,1])===0 && api.cosv([1,0],[1,0])===1);
+  // 7) bookName: имена книг на языке интерфейса
+  const bn = api.bookName, BN = api.BOOK_NAMES;
+  check("bookName ru/genesis = Бытие", bn("genesis") === "Бытие");
+  check("bookName ru/Micah = Михей", bn("Micah") === "Михей");
+  const keys = Object.keys(BN.ru);
+  check("BOOK_NAMES: 39 книг в RU", keys.length === 39);
+  check("BOOK_NAMES: 39 книг в EN", Object.keys(BN.en).length === 39);
+  check("BOOK_NAMES: 39 книг в HE", Object.keys(BN.he).length === 39);
+  check("BOOK_NAMES: ключи RU==EN==HE", JSON.stringify(Object.keys(BN.ru).sort()) === JSON.stringify(Object.keys(BN.en).sort()) && JSON.stringify(Object.keys(BN.ru).sort()) === JSON.stringify(Object.keys(BN.he).sort()));
+  const heBooks = ["genesis","Judges","Psalms","Micah","Haggai"];
+  const heExpected = ["בראשית","שופטים","תהלים","מיכה","חגי"];
+  check("BOOK_NAMES: выборочные HE-имена", heBooks.every((b,i) => BN.he[b] === heExpected[i]));
   console.log(`\n${pass} PASS, ${fail} FAIL`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error("CRASH:", e); process.exit(2); });
