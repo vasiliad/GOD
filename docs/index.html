@@ -62,6 +62,8 @@ input{flex:1;min-width:160px}
 .msg-user{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:10px 0}
 .msg-user .s{color:var(--acc2);font-size:13px}
 #chatcfg{display:none;margin:8px 0}
+.note.waiting{color:var(--acc);animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
 .langs{display:flex;gap:6px;margin-top:10px}
 .langs button{background:var(--card);border:1px solid var(--line);color:var(--dim);padding:3px 12px;border-radius:14px;cursor:pointer;font-size:12.5px}
 .langs button.on{color:var(--fg);border-color:var(--acc);background:var(--card2)}
@@ -702,11 +704,11 @@ function chatUI(m){
     cq.value = "";
     log.insertAdjacentHTML("beforeend", `<div class="msg-user"><div class="s">${t("msg_user")}</div>${esc(q)}</div>`);
     memUpdate(q);
-    log.insertAdjacentHTML("beforeend",'<div class="note" id="wt">…</div>');
+    log.insertAdjacentHTML("beforeend",'<div class="note waiting" id="wt">…</div>');
     try{
       if(mode==="corpus"){
+        wt.textContent = t("searching");   // индикатор ДО поиска, не после
         const r = await corpusReply(q);
-        wt.textContent = t("searching");
         const html = await corpusHTML(r);
         wt.remove();
         log.insertAdjacentHTML("beforeend", html);
