@@ -1145,17 +1145,23 @@ function memUpdate(q){
    ===================================================================== */
 const BRAIN_STATUS_URL = "https://huggingface.co/datasets/arabyan/god-brain-status/resolve/main/brain.json";
 const BRAIN = { info:{state:"off"} };
+const NIM_HEALTH = "http://100.97.248.63:9090/health";
 async function brainRefresh(){
-  let j = null;
+  let nimOk = false, kaggle = null;
+  try{
+    const r = await fetch(NIM_HEALTH, {signal: AbortSignal.timeout(5000)});
+    nimOk = r.ok;
+  }catch(e){ nimOk = false; }
   try{
     const r = await fetch(BRAIN_STATUS_URL, {cache:"no-store"});
-    j = await r.json();
-  }catch(e){ j = null; }
+    kaggle = await r.json();
+  }catch(e){ kaggle = null; }
   let state = "off";
-  if(j && j.ok && j.url && (Date.now()/1000 - (j.ts||0)) < 3600) state = "on";
-  else if(j && !j.ok && j.phase === "starting" && (Date.now()/1000 - (j.ts||0)) < 1800) state = "starting";
-  BRAIN.info = { state, url:(j&&j.url)||"", key:(j&&j.key)||"", model:(j&&j.model)||"",
-                 phase:(j&&j.phase)||"", error:(j&&j.error)||null };
+  if(nimOk) state = "on";
+  else if(kaggle && kaggle.ok && kaggle.url && (Date.now()/1000 - (kaggle.ts||0)) < 3600) state = "on_kaggle";
+  else if(kaggle && !kaggle.ok && kaggle.phase === "starting" && (Date.now()/1000 - (kaggle.ts||0)) < 1800) state = "starting";
+  BRAIN.info = { state, nimOk, url:(kaggle&&kaggle.url)||"", key:(kaggle&&kaggle.key)||"", model:(kaggle&&kaggle.model||""),
+                 phase:(kaggle&&kaggle.phase)||"", error:(kaggle&&kaggle.error)||null };
   const el = document.getElementById("brainDot");
   if(el){
     el.textContent = state==="on" ? "🟢" : state==="starting" ? "🟡" : "🔴";
