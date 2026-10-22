@@ -10,7 +10,8 @@ code = code.split("/* ---------- роутер ---------- */")[0]; // DOM-роу�
 // --- стабы браузера ---
 const LS = {};
 const calls = [];
-let brainJson = null;          // ответ brain_status
+let brainJson = null;
+let nimHealthy = true;          // ответ brain_status
 let llmResponse = null;         // ответ /v1/chat/completions
 let llmShouldFail = false;
 global.localStorage = {
@@ -23,6 +24,10 @@ global.fetch = async (url) => {
   if (url.includes("god-brain-status")) {
     if (brainJson === null) throw new Error("network down");
     return { ok: true, json: async () => brainJson };
+  }
+  if (url.includes("9090/health")) {
+    if (nimHealthy === false) throw new Error("NIM down");
+    return { ok: true, json: async () => ({status:"ok"}) };
   }
   if (url.includes("/v1/chat/completions")) {
     if (llmShouldFail) return { ok: false, status: 503 };
@@ -76,8 +81,9 @@ const api = new Function(
 
   // 1) мозг офлайн: brain.json недоступен -> state off, liveReply кидает ошибку
   brainJson = null;
+  nimHealthy = true;
   await api.brainRefresh();
-  check("офлайн: state=off", api.BRAIN.info.state === "off");
+  check("офлайн brain.json но NIM жив: state=on", api.BRAIN.info.state === "on");
   check("офлайн: liveReply НЕ бросает (NIM-прокси не зависит от brain state)", true);
 
   // 2) мозг онлайн: свежий ok:true -> state on, POST на туннель, 6 секций
@@ -104,16 +110,18 @@ const api = new Function(
   // 4) мозг поднимается: ok:false + phase=starting, свежий пульс -> state starting, liveReply отказывает
   brainJson = { ok: false, phase: "starting", url: null, key: "godbrain-v1-vasiliad",
                 model: "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF", ts: Math.floor(Date.now() / 1000) - 120 };
+  nimHealthy = true;
   await api.brainRefresh();
-  check("старт: state=starting (🟡)", api.BRAIN.info.state === "starting");
-  threw = false;
-  try { await api.liveReply("я боюсь"); } catch (e) { threw = true; }
-  check("старт: liveReply отказывает (ввод заблокирован)", threw);
+  check("старт: NIM жив → state=on (не гейт)", api.BRAIN.info.state === "on");
 
   // 5) протухший пульс (2 часа) -> state off
   brainJson.ok = true; brainJson.ts = Math.floor(Date.now() / 1000) - 7200;
+  nimHealthy = true;
   await api.brainRefresh();
-  check("протухший пульс: state=off", api.BRAIN.info.state === "off");
+  check("протухший brain.json но NIM жив: state=on", api.BRAIN.info.state === "on");
+  nimHealthy = false;
+  await api.brainRefresh();
+  check("NIM и brain.json оба мёртвы: state=off", api.BRAIN.info.state === "off");
 
   // 6) векторные хелперы
   const row = { s: 2.0, q: Buffer.from(new Int8Array([-127, 0, 127]).buffer).toString("base64") };
