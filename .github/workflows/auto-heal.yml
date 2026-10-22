@@ -1,0 +1,47 @@
+name: Auto-heal GOD brain
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # каждые 6 часов
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  heal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check brain health
+        id: check
+        run: |
+          BRAIN=$(curl -sL --max-time 15 "https://huggingface.co/datasets/arabyan/god-brain-status/resolve/main/brain.json")
+          OK=$(echo "$BRAIN" | python3 -c "import json,sys,time;d=json.load(sys.stdin);print('alive' if d.get('ok') and (time.time()-d.get('ts',0))<1800 else 'dead')")
+          echo "status=$OK" >> $GITHUB_OUTPUT
+          echo "brain health: $OK"
+
+      - name: Restart if dead
+        if: steps.check.outputs.status == 'dead'
+        run: |
+          echo "мозг мёртв — перезапускаю автоматически"
+          # собрать push-каталог
+          mkdir -p /tmp/pushdir
+          # получить kernel.py из публичного репо
+          curl -sL "https://raw.githubusercontent.com/vasiliad/GOD/master/brain/kernel.py" > /tmp/pushdir/kernel.py
+          # получить метаданные
+          curl -sL "https://raw.githubusercontent.com/vasiliad/GOD/master/brain/kernel-metadata.json" > /tmp/pushdir/kernel-metadata.json
+          # скачать ключи из секретов
+          pip install kaggle --quiet
+          mkdir -p ~/.kaggle
+          echo "{\"username\":\"vasiliadi911\",\"key\":\"$KAGGLE_KEY\"}" > ~/.kaggle/kaggle.json
+          chmod 600 ~/.kaggle/kaggle.json
+          # удалить старое ядро и запушить новое
+          curl -s --max-time 15 -X DELETE \
+            -H "Authorization: Bearer $NVIDIA_TOKEN" \
+            "https://api.kaggle.com/v1/kernels/delete" 2>/dev/null || true
+          cd /tmp/pushdir
+          kaggle kernels push -p .
+          echo "мозг перезапущен автоматически"
+        env:
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          NVIDIA_TOKEN: ${{ secrets.NVIDIA_KEY_1 }}
