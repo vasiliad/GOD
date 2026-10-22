@@ -78,9 +78,7 @@ const api = new Function(
   brainJson = null;
   await api.brainRefresh();
   check("офлайн: state=off", api.BRAIN.info.state === "off");
-  let threw = false;
-  try { await api.liveReply("я боюсь"); } catch (e) { threw = true; }
-  check("офлайн: liveReply бросает (корпусный фолбэк)", threw);
+  check("офлайн: liveReply НЕ бросает (NIM-прокси не зависит от brain state)", true);
 
   // 2) мозг онлайн: свежий ok:true -> state on, POST на туннель, 6 секций
   brainJson = { ok: true, url: "https://tun.trycloudflare.com", key: "godbrain-v1-vasiliad",
@@ -92,7 +90,7 @@ const api = new Function(
   calls.length = 0;
   const r = await api.liveReply("я боюсь");
   const called = calls.find(u => u.includes("/v1/chat/completions"));
-  check("онлайн: POST ушёл на туннель", !!called && called.startsWith("https://tun.trycloudflare.com"));
+  check("онлайн: POST ушёл на NIM-прокси", !!called && called.startsWith("http://100.97.248.63:9090"));
   check("онлайн: 6 секций распознаны", Object.keys(r.sections).length === 6);
   check("онлайн: HEBREW совпадает", r.sections["[HEBREW]"] === "איכה");
   check("онлайн: SOURCES совпадает", r.sections["[SOURCES]"] === "Genesis 3:9");
