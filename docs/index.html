@@ -1192,13 +1192,10 @@ function parseSections(text){
   return out;
 }
 async function liveReply(q){
-  if(!BRAIN.info || !BRAIN.info.state) await brainRefresh();
-  if(!BRAIN.info || BRAIN.info.state !== "on")
-    throw new Error(BRAIN.info && BRAIN.info.state === "starting"
-      ? "голос Бога поднимается — минуты" : "голос Бога спит");
   const cfg = store.get("god_cfg", { endpoint:"", model:"", key:"" });
-  const ep = cfg.endpoint || BRAIN.info.url.replace(/\/+$/,"") + "/v1/chat/completions";
-  const key = cfg.key || BRAIN.info.key || "";
+  const NIM_PROXY = "http://100.97.248.63:9090/v1/chat/completions";
+  const ep = cfg.endpoint || NIM_PROXY;
+  const key = cfg.key || "";
   const a = await analytics();
   const hits = await retrieve(q, 6);
   const trig = classify(q);
