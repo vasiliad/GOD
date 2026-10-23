@@ -590,6 +590,13 @@ a:hover { color: var(--acc-bright); }
 .verse.god { background: rgba(201, 168, 76, 0.09); box-shadow: inset -3px 0 0 var(--acc); cursor: pointer; }
 .verse.god:hover { background: rgba(201, 168, 76, 0.17); }
 .vn { color: var(--dim); font-size: 12px; margin-left: 8px; user-select: none; }
+.raudio { text-align: center; margin: 10px 0 6px; }
+.raudio .note { font-size: 12px; color: var(--dim); }
+.pbtn { background: none; border: 1px solid var(--line2); color: var(--acc); border-radius: 50%;
+  width: 20px; height: 20px; line-height: 1; cursor: pointer; font-size: 9px; padding: 0; margin-left: 6px; vertical-align: middle; }
+.pbtn:hover { background: rgba(201, 168, 76, 0.2); }
+.pch { border-radius: 14px; width: auto; padding: 3px 14px; font-size: 12px; margin: 0 8px 0 0; }
+.verse.playing, .verse.god.playing { background: rgba(201, 168, 76, 0.22); }
 
 @media (max-width: 640px) {
   header { padding: 28px 16px 12px; }
@@ -782,6 +789,7 @@ ru:{
   tab_read:"Чтение", read_h:"Чтение Танаха",
   read_pick:"Выберите книгу и главу — полный текст с огласовками и кантиляцией. Золотой чертой отмечены эпизоды речи Бога: клик по стиху открывает карточку эпизода.",
   read_prev:"предыдущая глава", read_next:"следующая глава", read_open:"открыть в чтении",
+  listen:"слушать", read_audio_src:"аудио: чтение Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   eps_sev:"тяжесть {n}", eps_low:"низкое доверие", eps_high:"высокое доверие",
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
@@ -850,6 +858,7 @@ en:{
   tab_read:"Reading", read_h:"Reading the Tanakh",
   read_pick:"Pick a book and a chapter — the full vocalized text with cantillation. The gold line marks God's-speech episodes: click a verse to open the episode card.",
   read_prev:"previous chapter", read_next:"next chapter", read_open:"open in Reading",
+  listen:"listen", read_audio_src:"audio: read by Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   eps_sev:"severity {n}", eps_low:"low confidence", eps_high:"high confidence",
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
@@ -918,6 +927,7 @@ he:{
   tab_read:"קריאה", read_h:"קריאת התנ״ך",
   read_pick:"בחרו ספר ופרק — הטקסט המלא עם הניקוד והטעמים. הקו הזהוב מסמן אפיזודות דיבור האלוהים: לחיצה על פסוק פותחת את כרטיס האפיזודה.",
   read_prev:"הפרק הקודם", read_next:"הפרק הבא", read_open:"פתח בקריאה",
+  listen:"האזנה", read_audio_src:"אודיו: קריאת Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   eps_sev:"חומרה {n}", eps_low:"אמון נמוך", eps_high:"אמון גבוה",
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
@@ -1464,6 +1474,47 @@ async function tBooks(m){
 /* ---------- чтение Танаха: полный текст с огласовками и кантиляцией ---------- */
 const RIDX = { p: null };
 async function readIndex(){ if(!RIDX.p) RIDX.p = await jget("data/tanakh/_index.json"); return RIDX.p; }
+
+/* ---------- аудио: чтение Abraham Shmuelof — verbatim-файлы archive.org, CC BY-NC-ND 4.0 ----------
+   Таймкоды (SMIL из аудио-EPUB ebible.org) указывают плееру, с какой секунды главы звучит каждый
+   стих; аудио не нарезается и не изменяется (ND), воспроизведение некоммерческое (NC), источник
+   указан (BY). У ответов чата аудио нет и не может быть: их текст — рекомбинация, его нет в записи. */
+const AUDIO_BASE = "https://archive.org/download/HebBible_AShmuelof/";
+const AMAP = { p: {} };
+async function audioMap(bk){
+  if(AMAP.p[bk] === undefined){
+    try{ AMAP.p[bk] = await jget("data/audio/" + bk + ".json"); }
+    catch(e){ AMAP.p[bk] = false; }
+  }
+  return AMAP.p[bk];
+}
+function audioUrl(m, ch){
+  if(!m || !m.chapters[ch]) return null;
+  const single = Object.keys(m.chapters).length === 1;
+  return AUDIO_BASE + m.src + (single ? ".mp3" : "_" + String(ch).padStart(2,"0") + ".mp3");
+}
+const PLAYER = { a: null, hi: null, stop: null };
+function playClip(url, begin, end, hiEl){
+  if(!url) return;
+  if(!PLAYER.a) PLAYER.a = new Audio();
+  const a = PLAYER.a;
+  if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
+  if(PLAYER.stop){ a.removeEventListener("timeupdate", PLAYER.stop); PLAYER.stop = null; }
+  const seek = () => { a.currentTime = begin; a.play(); };
+  if(a.src !== url){ a.src = url; a.addEventListener("loadedmetadata", seek, {once:true}); }
+  else seek();
+  if(hiEl){ hiEl.classList.add("playing"); PLAYER.hi = hiEl; }
+  PLAYER.stop = () => {
+    if(a.currentTime >= end){
+      a.pause();
+      if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
+      a.removeEventListener("timeupdate", PLAYER.stop);
+      PLAYER.stop = null;
+    }
+  };
+  a.addEventListener("timeupdate", PLAYER.stop);
+}
+
 async function tRead(m){
   const a = await analytics();
   const idx = await readIndex();
@@ -1490,16 +1541,21 @@ async function tRead(m){
     rview.innerHTML = `<div class="note waiting">${t("eps_load")}</div>`;
     const data = await jget("data/tanakh/" + bk + ".json");
     const verses = data.chapters[ch-1] || [];
-    const eps = await bookDocs(bk);
+    const [eps, am] = await Promise.all([bookDocs(bk), audioMap(bk)]);
     const inSpan = {};
     for(const e of eps){
       const [c1,v1] = cvs(e.span.start), [c2,v2] = cvs(e.span.end||e.span.start);
       for(let c=c1;c<=c2;c++) for(let v=(c===c1?v1:1); v<=(c===c2?v2:200); v++) inSpan[c+":"+v] = e;
     }
-    rview.innerHTML = `<div class="chapter he">` + verses.map((tx,i)=>{
+    const au = audioUrl(am, ch);
+    const clips = am && am.chapters[ch] ? am.chapters[ch] : null;
+    const chBtn = au ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(au)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
+    rview.innerHTML = `<div class="raudio">${chBtn}</div><div class="chapter he">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
-      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span> ${esc(tx)}</div>`;
+      const cl = clips ? clips[String(i+1)] : null;
+      const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(au)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
+      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}</div>`;
     }).join("") + `</div>`;
   }
   rBook.onchange = () => { fillChapters(); show(); };
@@ -1579,12 +1635,22 @@ async function tEpisodes(m){
 }
 async function showOne(b, i){
   const eps = await bookDocs(b); const e = eps[i];
+  const cvn = s => s.split(":").map(Number);
+  const [c1,v1] = cvn(e.span.start), [c2,v2] = cvn(e.span.end||e.span.start);
+  const am = await audioMap(b);
+  const chmap = am && am.chapters[String(c1)];
+  let sbtn = "";
+  if(chmap && chmap[String(v1)]){
+    const b0 = chmap[String(v1)][0];
+    const e0 = (c2===c1 && chmap[String(v2)]) ? chmap[String(v2)][1] : chmap[String(v1)][1];
+    sbtn = ` <span class="cl" onclick='playClip(${JSON.stringify(audioUrl(am,c1))},${b0},${e0})'>▶ ${esc(t("listen"))}</span>`;
+  }
   const d = document.createElement("div"); d.className = "detail";
   d.innerHTML = `<h3>${bookName(b)} ${e.span.start}–${e.span.end}</h3>
   <div><span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>
   <span class="tag">${dn("via",e.via)}</span><span class="tag">${dn("trig",e.trigger)}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
   <span class="tag">${dn("conf",e.confidence)}</span></div>
-  <div class="sect"><div class="h">${t("sec_god_speech")}</div><div class="he">${esc(e.god_speech_plain)||"—"}</div></div>
+  <div class="sect"><div class="h">${t("sec_god_speech")}${sbtn}</div><div class="he">${esc(e.god_speech_plain)||"—"}</div></div>
   <div class="sect"><div class="h">${t("sec_action")}</div>${esc(e.god_action)}</div>
   ${e.human_speech_plain?`<div class="sect"><div class="h">${t("sec_human")}</div><div class="he small">${esc(e.human_speech_plain)}</div></div>`:""}
   <div class="sect"><div class="h">${t("sec_summary")}</div>${esc(e.summary_ru)}</div>
