@@ -7,9 +7,10 @@ env/
 .env
 *.egg-info/
 
-# Data / outputs (large files, not for git)
+# Data / outputs (large files, not for git; /data/ — только корневой,
+# docs/data/ — публикуемые данные страницы, он НЕ игнорируется)
 output/
-data/
+/data/
 unsloth_compiled_cache/
 unsloth_env/
 venv311/
