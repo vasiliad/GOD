@@ -597,6 +597,7 @@ a:hover { color: var(--acc-bright); }
 .pbtn:hover { background: rgba(201, 168, 76, 0.2); }
 .pch { border-radius: 14px; width: auto; padding: 3px 14px; font-size: 12px; margin: 0 8px 0 0; }
 .verse.playing, .verse.god.playing { background: rgba(201, 168, 76, 0.22); }
+.spd.on { background: rgba(201, 168, 76, 0.25); color: var(--fg); }
 
 @media (max-width: 640px) {
   header { padding: 28px 16px 12px; }
@@ -790,6 +791,7 @@ ru:{
   read_pick:"Выберите книгу и главу — полный текст с огласовками и кантиляцией. Золотой чертой отмечены эпизоды речи Бога: клик по стиху открывает карточку эпизода.",
   read_prev:"предыдущая глава", read_next:"следующая глава", read_open:"открыть в чтении",
   listen:"слушать", read_audio_src:"аудио: чтение Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
+  read_fast:"обычная скорость", read_slow:"медленно (−20%)",
   eps_sev:"тяжесть {n}", eps_low:"низкое доверие", eps_high:"высокое доверие",
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
@@ -859,6 +861,7 @@ en:{
   read_pick:"Pick a book and a chapter — the full vocalized text with cantillation. The gold line marks God's-speech episodes: click a verse to open the episode card.",
   read_prev:"previous chapter", read_next:"next chapter", read_open:"open in Reading",
   listen:"listen", read_audio_src:"audio: read by Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
+  read_fast:"normal speed", read_slow:"slower (−20%)",
   eps_sev:"severity {n}", eps_low:"low confidence", eps_high:"high confidence",
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
@@ -928,6 +931,7 @@ he:{
   read_pick:"בחרו ספר ופרק — הטקסט המלא עם הניקוד והטעמים. הקו הזהוב מסמן אפיזודות דיבור האלוהים: לחיצה על פסוק פותחת את כרטיס האפיזודה.",
   read_prev:"הפרק הקודם", read_next:"הפרק הבא", read_open:"פתח בקריאה",
   listen:"האזנה", read_audio_src:"אודיו: קריאת Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
+  read_fast:"מהירות רגילה", read_slow:"לאט",
   eps_sev:"חומרה {n}", eps_low:"אמון נמוך", eps_high:"אמון גבוה",
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
@@ -1475,12 +1479,14 @@ async function tBooks(m){
 const RIDX = { p: null };
 async function readIndex(){ if(!RIDX.p) RIDX.p = await jget("data/tanakh/_index.json"); return RIDX.p; }
 
-/* ---------- аудио: чтение Abraham Shmuelof — verbatim-файлы archive.org, CC BY-NC-ND 4.0 ----------
-   Таймкоды (SMIL из аудио-EPUB ebible.org) указывают плееру, с какой секунды главы звучит каждый
-   стих; аудио не нарезается и не изменяется (ND), воспроизведение некоммерческое (NC), источник
-   указан (BY). У ответов чата аудио нет и не может быть: их текст — рекомбинация, его нет в записи. */
-const AUDIO_BASE = "https://archive.org/download/HebBible_AShmuelof/";
+/* ---------- аудио: чтение Abraham Shmuelof — CC BY-NC-ND 4.0 ----------
+   fluent — verbatim-файлы archive.org; slower — verbatim-файлы HF-датасета
+   arabyan/tanakh-audio (извлечены из slower-EPUB без изменений). Аудио не
+   нарезается (ND): плеер играет оригинальную главу с перемоткой по таймкодам.
+   У ответов чата аудио есть только при дословном совпадении [HEBREW] с речью
+   одного эпизода — рекомбинация не существует ни в одной записи, TTS запрещён. */
 const AMAP = { p: {} };
+const SPD = () => store.get("god_spd","f") === "s" ? "s" : "f";
 async function audioMap(bk){
   if(AMAP.p[bk] === undefined){
     try{ AMAP.p[bk] = await jget("data/audio/" + bk + ".json"); }
@@ -1488,10 +1494,18 @@ async function audioMap(bk){
   }
   return AMAP.p[bk];
 }
-function audioUrl(m, ch){
-  if(!m || !m.chapters[ch]) return null;
-  const single = Object.keys(m.chapters).length === 1;
-  return AUDIO_BASE + m.src + (single ? ".mp3" : "_" + String(ch).padStart(2,"0") + ".mp3");
+function clipFor(am, ch, v1, v2){
+  /* → [url, begin, end] для спана; приоритет — выбранная скорость, фолбэк на fluent */
+  if(!am) return null;
+  for(const v of [SPD(), "f"]){
+    const vm = am[v] && am[v].chapters && am[v].chapters[String(ch)];
+    if(vm && vm[String(v1)]){
+      const b = vm[String(v1)][0];
+      const e = (String(v2) in vm) ? vm[String(v2)][1] : vm[String(v1)][1];
+      return [vm.a, b, e];
+    }
+  }
+  return null;
 }
 const PLAYER = { a: null, hi: null, stop: null };
 function playClip(url, begin, end, hiEl){
@@ -1527,6 +1541,8 @@ async function tRead(m){
     <select id="rCh"></select>
     <button id="rPrev" title="${esc(t("read_prev"))}">←</button>
     <button id="rNext" title="${esc(t("read_next"))}">→</button>
+    <button id="rF" class="pbtn spd" title="${esc(t("read_fast"))}">⏵</button>
+    <button id="rS" class="pbtn spd" title="${esc(t("read_slow"))}">🐢</button>
   </div>
   <div id="rview"><div class="note">${t("read_pick")}</div></div>`;
   const cvs = s => s.split(":").map(Number);
@@ -1547,19 +1563,23 @@ async function tRead(m){
       const [c1,v1] = cvs(e.span.start), [c2,v2] = cvs(e.span.end||e.span.start);
       for(let c=c1;c<=c2;c++) for(let v=(c===c1?v1:1); v<=(c===c2?v2:200); v++) inSpan[c+":"+v] = e;
     }
-    const au = audioUrl(am, ch);
-    const clips = am && am.chapters[ch] ? am.chapters[ch] : null;
-    const chBtn = au ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(au)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
+    const vm = am && am[SPD()] && am[SPD()].chapters ? am[SPD()] : (am && am.f ? am.f : null);
+    const vmap = vm && vm.chapters && vm.chapters[ch] ? vm.chapters[ch] : null;
+    const chBtn = vmap ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(vmap.a)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
+    rF.disabled = !(am && am.f); rS.disabled = !(am && am.s);
+    rF.classList.toggle("on", SPD()==="f"); rS.classList.toggle("on", SPD()==="s");
     rview.innerHTML = `<div class="raudio">${chBtn}</div><div class="chapter he">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
-      const cl = clips ? clips[String(i+1)] : null;
-      const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(au)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
+      const cl = vmap && vmap[String(i+1)] ? vmap[String(i+1)] : null;
+      const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(vmap.a)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
       return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}</div>`;
     }).join("") + `</div>`;
   }
   rBook.onchange = () => { fillChapters(); show(); };
   rCh.onchange = show;
+  rF.onclick = () => { store.set("god_spd","f"); show(); };
+  rS.onclick = () => { store.set("god_spd","s"); show(); };
   rPrev.onclick = () => {
     if(!rBook.value) return;
     const bi = keys.indexOf(rBook.value);
@@ -1638,13 +1658,8 @@ async function showOne(b, i){
   const cvn = s => s.split(":").map(Number);
   const [c1,v1] = cvn(e.span.start), [c2,v2] = cvn(e.span.end||e.span.start);
   const am = await audioMap(b);
-  const chmap = am && am.chapters[String(c1)];
-  let sbtn = "";
-  if(chmap && chmap[String(v1)]){
-    const b0 = chmap[String(v1)][0];
-    const e0 = (c2===c1 && chmap[String(v2)]) ? chmap[String(v2)][1] : chmap[String(v1)][1];
-    sbtn = ` <span class="cl" onclick='playClip(${JSON.stringify(audioUrl(am,c1))},${b0},${e0})'>▶ ${esc(t("listen"))}</span>`;
-  }
+  const clip = clipFor(am, c1, v1, c2===c1 ? v2 : v1);
+  let sbtn = clip ? ` <span class="cl" onclick='playClip(${JSON.stringify(clip[0])},${clip[1]},${clip[2]})'>▶ ${esc(t("listen"))}</span>` : "";
   const d = document.createElement("div"); d.className = "detail";
   d.innerHTML = `<h3>${bookName(b)} ${e.span.start}–${e.span.end}</h3>
   <div><span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>

@@ -1,22 +1,30 @@
-"""Сборка аудио-таймкодов Танаха: docs/data/audio/{key}.json.
+"""Сборка аудио-таймкодов и медленных mp3 Танаха.
 
-Источник записи: Abraham Shmuelof (CC BY-NC-ND 4.0):
-  - таймкоды — из Media Overlays (SMIL) внутри EPUB на ebible.org/multimedia/hbo/
-  - аудио — те же файлы verbatim на archive.org (item HebBible_AShmuelof),
-    совпадение байтов проверено (Oba 701724, Gen 1 1054601)
-Принцип: аудио не нарезается и не изменяется (ND) — плеер страницы играет
-оригинальную главу с перемоткой на стих по таймкодам, некоммерчески (NC), с
-атрибуцией (BY). Выход: {"code":"Gen","single":false,"chapters":{"1":{"1":[b,e],...}}}
+Запись: Abraham Shmuelof, CC BY-NC-ND 4.0.
+  - fluent: verbatim с archive.org (item HebBible_AShmuelof, hbof...mp3), байтовое
+    совпадение с EPUB проверено при верификации источника
+  - slower: mp3 извлекаются из slower-EPUB ebible.org verbatim (переименование
+    контейнера — не переработка) и заливаются на HF-датасет arabyan/tanakh-audio
+Таймкоды обоих вариантов — из SMIL (Media Overlays) внутри EPUB; фрагменты —
+полустишия "1a/1b", у коротких стихов буквы нет ("13") — регэксп учитывает оба вида.
+Выход: docs/data/audio/{key}.json =
+  {"fluent": {"chapters": {"1": {"a": "<mp3-url>", "1": [b,e], ...}}}, "slower": {...}}
+Кэш EPUB: data/audio_cache/, извлечённые slower-mp3: data/slow_mp3/ (оба gitignored).
 """
 import io, json, os, re, sys, urllib.request, urllib.parse, zipfile
-from concurrent.futures import ThreadPoolExecutor
 
 TEMP = os.environ.get("TEMP", "/tmp")
 BASE = "https://ebible.org/multimedia/hbo/"
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 ARCHIVE_ITEM = "HebBible_AShmuelof"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE = os.path.join(ROOT, "data", "audio_cache")
+SLOW_MP3 = os.path.join(ROOT, "data", "slow_mp3")
+DST = os.path.join(ROOT, "docs", "data", "audio")
+os.makedirs(CACHE, exist_ok=True)
+os.makedirs(SLOW_MP3, exist_ok=True)
+os.makedirs(DST, exist_ok=True)
 
-# английские имена из href → ключи BOOK_NAMES страницы
 NAME2KEY = {
     "Genesis": "genesis", "Exodus": "Exodus", "Leviticus": "Leviticus", "Numbers": "Numbers",
     "Deuteronomy": "Deuteronomy", "Joshua": "Joshua", "Judges": "Judges", "Ruth": "Ruth",
@@ -31,7 +39,6 @@ NAME2KEY = {
     "Jonah": "Jonah", "Micah": "Micah", "Nahum": "Nahum", "Habakkuk": "Habakkuk",
     "Zephaniah": "Zephaniah", "Haggai": "Haggai", "Zechariah": "Zechariah", "Malachi": "Malachi",
 }
-# USFM-код в SMIL (верхний регистр) → суффикс файла на archive.org
 USFM2ARCH = {
     "GEN": "Gen", "EXO": "Exo", "LEV": "Lev", "NUM": "Num", "DEU": "Deu", "JOS": "Jos",
     "JDG": "Jdg", "RUT": "Rut", "1SA": "1Sa", "2SA": "2Sa", "1KI": "1Ki", "2KI": "2Ki",
@@ -41,13 +48,12 @@ USFM2ARCH = {
     "OBA": "Oba", "JON": "Jon", "MIC": "Mic", "NAM": "Nam", "HAB": "Hab", "ZEP": "Zep",
     "HAG": "Hag", "ZEC": "Zec", "MAL": "Mal",
 }
-DST = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "docs", "data", "audio")
-os.makedirs(DST, exist_ok=True)
+HF_SLOWER_BASE = "https://huggingface.co/datasets/arabyan/tanakh-audio/resolve/main/slower/"
 
 
 def fetch(url, path):
     req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=600) as r, open(path, "wb") as f:
+    with urllib.request.urlopen(req, timeout=900) as r, open(path, "wb") as f:
         while True:
             chunk = r.read(1 << 16)
             if not chunk:
@@ -59,25 +65,23 @@ def epub_urls():
     html = io.open(os.path.join(TEMP, "ebible.html"), encoding="utf-8", errors="ignore").read()
     out = {}
     for href in re.findall(r'href="([^"]+\.epub)"', html):
-        m = re.match(r"Tanakh fluent (\d+)-(.+?) [\u05d0-\u05ff]", href)
+        m = re.match(r"Tanakh (fluent|slower) (\d+)-(.+?) [\u05d0-\u05ff]", href)
         if not m:
             continue
-        name = m.group(2).strip()
-        key = NAME2KEY.get(name)
+        key = NAME2KEY.get(m.group(3).strip())   # группа 3 — имя книги (2 — номер)
         if key:
-            out[key] = urllib.parse.quote(urllib.parse.urljoin(BASE, href), safe=":/")
-    assert len(out) == 39, "найдено %d EPUB вместо 39" % len(out)
+            out.setdefault(m.group(1), {})[key] = urllib.parse.quote(
+                urllib.parse.urljoin(BASE, href), safe=":/")
+    assert len(out.get("fluent", {})) == 39, "fluent: %d" % len(out.get("fluent", {}))
+    assert len(out.get("slower", {})) == 39, "slower: %d" % len(out.get("slower", {}))
     return out
 
 
 def parse_epub(path):
-    """→ {chapter_int: {verse_int: [begin, end]}} из SMIL-ов EPUB."""
+    """→ (USFM-код, {глава: {стих: [begin, end]}}) из SMIL-ов."""
     z = zipfile.ZipFile(path)
-    chapters = {}
-    code = None
+    chapters, code = {}, None
     for n in z.namelist():
-        if not n.endswith(".smil"):
-            continue
         m = re.search(r"00-([A-Z0-9]{3})-(\d+)\.xhtml\.smil$", n)
         if not m:
             continue
@@ -86,7 +90,7 @@ def parse_epub(path):
         smil = z.read(n).decode("utf-8")
         clips = {}
         for par in re.findall(r"<par>.*?</par>", smil, re.S):
-            tid = re.search(r'#([0-9]+)([a-z]+)"/?>?', par)
+            tid = re.search(r'#(\d+)([a-z]*)"/?>?', par)          # буквы может не быть ("13")
             clip = re.search(r'clipBegin="([\d.]+)"\s+clipEnd="([\d.]+)"', par)
             if not tid or not clip:
                 continue
@@ -100,59 +104,94 @@ def parse_epub(path):
     return code, chapters
 
 
-def build(key, url):
-    local = os.path.join(TEMP, "audio_epub_" + key + ".epub")
-    fetch(url, local)
+def chapter_file(code, ch, ch_count):
+    """Имя mp3: Oba одним файлом, Псалтирь — 3 цифры, остальные — 2."""
+    if ch_count == 1:
+        return code + ".mp3"
+    pad = 3 if ch_count >= 100 else 2
+    return code + "_" + ("%0" + str(pad) + "d") % ch + ".mp3"
+
+
+def extract_slow_mp3(path, key):
+    """Извлечь mp3 slower-EPUB verbatim → data/slow_mp3/{key}_{NNN}.mp3."""
+    z = zipfile.ZipFile(path)
+    saved = []
+    for n in z.namelist():
+        if not n.lower().endswith(".mp3"):
+            continue
+        m = re.search(r"00-[A-Z0-9]{3}-(\d+)\.mp3$", n)
+        if not m:
+            continue
+        target = os.path.join(SLOW_MP3, "%s_%s.mp3" % (key, m.group(1)))
+        with z.open(n) as src, open(target, "wb") as dst:
+            while True:
+                chunk = src.read(1 << 16)
+                if not chunk:
+                    break
+                dst.write(chunk)
+        saved.append(int(m.group(1)))
+    return saved
+
+
+def build_variant(variant, key, url):
+    local = os.path.join(CACHE, variant + "_" + key + ".epub")
+    if not os.path.exists(local) or os.path.getsize(local) < 10000:
+        fetch(url, local)
     code, chapters = parse_epub(local)
-    os.remove(local)
-    arch = USFM2ARCH[code]
-    return key, code, arch, chapters
+    if variant == "slower":
+        extract_slow_mp3(local, key)
+    return code, chapters
 
 
 def main():
     urls = epub_urls()
-    urls = {k: u for k, u in urls.items() if not os.path.exists(os.path.join(DST, k + ".json"))}
-    print("EPUB-ов найдено:", len(urls), "— к сборке после пропуска готовых:", flush=True)
-    results = {}
-    from concurrent.futures import as_completed
-    with ThreadPoolExecutor(max_workers=4) as ex:
-        futs = {ex.submit(build, k, u): k for k, u in urls.items()}
-        done = 0
-        for f in as_completed(futs):
-            k = futs[f]
+    print("EPUB: fluent %d, slower %d" % (len(urls["fluent"]), len(urls["slower"])), flush=True)
+    parsed = {}
+    for variant in ("fluent", "slower"):
+        for i, (key, url) in enumerate(sorted(urls[variant].items()), 1):
             try:
-                key, code, arch, chapters = f.result()
-                results[key] = {"code": arch, "chapters": chapters}
-                done += 1
-                n_v = sum(len(c) for c in chapters.values())
-                print("%2d/39 %s (%s): %d глав, %d стихов" % (done, key, code, len(chapters), n_v), flush=True)
+                code, chapters = build_variant(variant, key, url)
+                parsed.setdefault(key, {})[variant] = {"code": code, "chapters": chapters}
+                print("%s %2d/39 %s (%s): %d глав, %d стихов" % (
+                    variant[:3], i, key, code, len(chapters),
+                    sum(len(c) for c in chapters.values())), flush=True)
             except Exception as e:
-                print("ОШИБКА", k, ":", e, flush=True)
-    # имена файлов на archive.org — сверка
+                print("ОШИБКА", variant, key, ":", repr(e), flush=True)
+    # сверка fluent-имён с archive.org
     req = urllib.request.Request("https://archive.org/metadata/" + ARCHIVE_ITEM, headers=UA)
     meta = json.load(urllib.request.urlopen(req, timeout=60))
     have = {f["name"] for f in meta["files"] if f["name"].endswith(".mp3")}
-    total_ch, total_v, missing = 0, 0, []
-    for key, r in sorted(results.items()):
-        code = r["code"]
-        out = {"src": "hbof" + code, "chapters": {}}
-        ch_nums = sorted(r["chapters"])
-        for ch in ch_nums:
-            pad = 3 if max(ch_nums) >= 100 else 2
-            fname = "hbof" + code + ".mp3" if len(ch_nums) == 1 else "hbof" + code + "_" + (("%0" + str(pad) + "d") % ch) + ".mp3"
-            if fname not in have:
-                missing.append(fname)
+    total, missing = 0, []
+    for key, pv in sorted(parsed.items()):
+        out = {}
+        for variant in ("fluent", "slower"):
+            if variant not in pv:
                 continue
-            out["chapters"][str(ch)] = {str(v): c for v, c in sorted(r["chapters"][ch].items())}
-            total_ch += 1
-            total_v += len(r["chapters"][ch])
+            code = pv[variant]["code"]
+            arch = USFM2ARCH[code]
+            ch_nums = sorted(pv[variant]["chapters"])
+            chmap = {}
+            for ch in ch_nums:
+                if variant == "fluent":
+                    fname = chapter_file(arch, ch, len(ch_nums))
+                    if ("hbof" + fname) not in have:
+                        missing.append("hbof" + fname)
+                        continue
+                    url = "https://archive.org/download/%s/hbof%s" % (ARCHIVE_ITEM, fname)
+                else:
+                    fname = chapter_file(code, ch, len(ch_nums))
+                    url = HF_SLOWER_BASE + key + "_" + fname
+                chmap[str(ch)] = {"a": url}
+                for v, clip in pv[variant]["chapters"][ch].items():
+                    chmap[str(ch)][str(v)] = clip
+            out[variant] = {"chapters": chmap}
         io.open(os.path.join(DST, key + ".json"), "w", encoding="utf-8", newline="\n").write(
             json.dumps(out, ensure_ascii=False, separators=(",", ":")))
-    print("\nИТОГ: глав с аудио %d/929, стихов %d; нет на archive.org: %s" % (total_ch, total_v, missing or "нет"))
-    idx = {k: sorted(v["chapters"], key=int) for k, v in results.items()}
-    io.open(os.path.join(DST, "_index.json"), "w", encoding="utf-8", newline="\n").write(
-        json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
-    print("index:", {k: len(v) for k, v in list(idx.items())[:5]})
+        if "fluent" in out:
+            total += len(out["fluent"]["chapters"])
+    slow_files = len([f for f in os.listdir(SLOW_MP3) if f.endswith(".mp3")])
+    print("\nИТОГ: fluent %d/929 глав; slower mp3 извлечено %d; нет на archive.org: %s"
+          % (total, slow_files, missing or "нет"), flush=True)
 
 
 if __name__ == "__main__":
