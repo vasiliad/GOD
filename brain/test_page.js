@@ -81,7 +81,7 @@ const api = new Function(
   calls.length = 0;
   let threw = false;
   try { await api.liveReply("я боюсь"); } catch (e) { threw = true; }
-  check("офлайн: liveReply бросает без POST (=> честное сообщение + корпусный прецедент)",
+  check("офлайн: liveReply бросает без POST (=> честное сообщение «до субботы»)",
         threw && !calls.some(u => u.includes("/v1/chat/completions")));
 
   // 2) мозг онлайн: свежий ok:true -> state on, POST на туннель Kaggle, 6 секций
@@ -103,7 +103,7 @@ const api = new Function(
   llmShouldFail = true;
   threw = false;
   try { await api.liveReply("спаси меня"); } catch (e) { threw = true; }
-  check("LLM-ошибка: liveReply бросает (=> корпусный фолбэк)", threw);
+  check("LLM-ошибка: liveReply бросает (=> честная ошибка)", threw);
 
   // 4) мозг поднимается: ok:false + phase=starting, свежий пульс -> state starting
   brainJson = { ok: false, phase: "starting", url: null, key: "godbrain-v1-vasiliad",
