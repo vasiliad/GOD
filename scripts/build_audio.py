@@ -135,8 +135,21 @@ def extract_slow_mp3(path, key):
 
 def build_variant(variant, key, url):
     local = os.path.join(CACHE, variant + "_" + key + ".epub")
-    if not os.path.exists(local) or os.path.getsize(local) < 10000:
+
+    def valid(p):
+        try:
+            return os.path.getsize(p) > 10000 and zipfile.is_zipfile(p)
+        except OSError:
+            return False
+
+    if not valid(local):                    # битый недокачанный файл — перекачать
         fetch(url, local)
+    if not valid(local):
+        try:
+            os.remove(local)
+        except OSError:
+            pass
+        raise RuntimeError("битый EPUB после загрузки: " + key)
     code, chapters = parse_epub(local)
     if variant == "slower":
         extract_slow_mp3(local, key)
@@ -179,8 +192,7 @@ def main():
                         continue
                     url = "https://archive.org/download/%s/hbof%s" % (ARCHIVE_ITEM, fname)
                 else:
-                    fname = chapter_file(code, ch, len(ch_nums))
-                    url = HF_SLOWER_BASE + key + "_" + fname
+                    url = HF_SLOWER_BASE + key + "_" + ("%03d" % ch) + ".mp3"   # имена как в extract_slow_mp3
                 chmap[str(ch)] = {"a": url}
                 for v, clip in pv[variant]["chapters"][ch].items():
                     chmap[str(ch)][str(v)] = clip
