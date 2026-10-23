@@ -584,6 +584,13 @@ a:hover { color: var(--acc-bright); }
 ::-webkit-scrollbar-thumb:hover { background: rgba(201, 168, 76, 0.35); }
 
 /* ===== MOBILE ===== */
+/* ===== ЧТЕНИЕ ТАНАХА: полный текст, речь Бога подсвечена ===== */
+.chapter { font-size: 20px; line-height: 2.15; text-align: right; direction: rtl; max-width: 780px; margin: 0 auto; }
+.verse { padding: 3px 10px; border-radius: 8px; }
+.verse.god { background: rgba(201, 168, 76, 0.09); box-shadow: inset -3px 0 0 var(--acc); cursor: pointer; }
+.verse.god:hover { background: rgba(201, 168, 76, 0.17); }
+.vn { color: var(--dim); font-size: 12px; margin-left: 8px; user-select: none; }
+
 @media (max-width: 640px) {
   header { padding: 28px 16px 12px; }
   h1 { font-size: 24px; }
@@ -772,6 +779,9 @@ ru:{
   eps_pick:"Выберите книгу, эпоху, исход или триггер — эпизоды загрузятся по требованию.",
   eps_pick2:"Задайте фильтр — книга, эпоха, исход, триггер или поиск.", eps_count:"{n} эпизодов", eps_load:"эпизоды загружаются…",
   eps_cap:"показаны первые {n} из {m}",
+  tab_read:"Чтение", read_h:"Чтение Танаха",
+  read_pick:"Выберите книгу и главу — полный текст с огласовками и кантиляцией. Золотой чертой отмечены эпизоды речи Бога: клик по стиху открывает карточку эпизода.",
+  read_prev:"предыдущая глава", read_next:"следующая глава", read_open:"открыть в чтении",
   eps_sev:"тяжесть {n}", eps_low:"низкое доверие", eps_high:"высокое доверие",
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
@@ -837,6 +847,9 @@ en:{
   eps_pick:"Pick a book, an era, an outcome or a trigger — episodes will load on demand.",
   eps_pick2:"Set a filter — book, era, outcome, trigger or search.", eps_count:"{n} episodes", eps_load:"loading episodes…",
   eps_cap:"showing first {n} of {m}",
+  tab_read:"Reading", read_h:"Reading the Tanakh",
+  read_pick:"Pick a book and a chapter — the full vocalized text with cantillation. The gold line marks God's-speech episodes: click a verse to open the episode card.",
+  read_prev:"previous chapter", read_next:"next chapter", read_open:"open in Reading",
   eps_sev:"severity {n}", eps_low:"low confidence", eps_high:"high confidence",
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
@@ -902,6 +915,9 @@ he:{
   eps_pick:"בחרו ספר, תקופה, תוצאה או טריגר — האפיזודות ייטענו לפי דרישה.",
   eps_pick2:"הגדירו מסנן — ספר, תקופה, תוצאה, טריגר או חיפוש.", eps_count:"{n} אפיזודות", eps_load:"האפיזודות בטעינה…",
   eps_cap:"מוצגים {n} ראשונים מתוך {m}",
+  tab_read:"קריאה", read_h:"קריאת התנ״ך",
+  read_pick:"בחרו ספר ופרק — הטקסט המלא עם הניקוד והטעמים. הקו הזהוב מסמן אפיזודות דיבור האלוהים: לחיצה על פסוק פותחת את כרטיס האפיזודה.",
+  read_prev:"הפרק הקודם", read_next:"הפרק הבא", read_open:"פתח בקריאה",
   eps_sev:"חומרה {n}", eps_low:"אמון נמוך", eps_high:"אמון גבוה",
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
@@ -1408,6 +1424,7 @@ function chatUI(m){
 function dive(f){ window._dive = f || {}; CURTAB = "episodes"; renderAll(); }
 function srcDive(b, start){ window._dive = {book:b}; window._diveOpen = start; CURTAB = "episodes"; renderAll(); }
 function goTab(x){ CURTAB = x; renderAll(); }
+function goRead(b, c){ window._read = {book:b, ch:c}; CURTAB = "read"; renderAll(); }
 
 async function tOverview(m){
   const a = await analytics();
@@ -1442,6 +1459,69 @@ async function tBooks(m){
   <td class="cl" onclick='event.stopPropagation();dive({book:"${p[0]}",out:"punishment"})'>${(p[1].punishment_rate*100).toFixed(0)}%</td>
   <td>${esc(dn("era",p[1].era))}</td></tr>`).join("")}
   </table></div>`;
+}
+
+/* ---------- чтение Танаха: полный текст с огласовками и кантиляцией ---------- */
+const RIDX = { p: null };
+async function readIndex(){ if(!RIDX.p) RIDX.p = await jget("data/tanakh/_index.json"); return RIDX.p; }
+async function tRead(m){
+  const a = await analytics();
+  const idx = await readIndex();
+  const keys = Object.values(a.book_order).flat().filter(k=>idx[k]);
+  const opt = b => `<option value="${b}">${esc(bookName(b))} · ${idx[b]}</option>`;
+  m.innerHTML = `<h2>${t("read_h")}</h2>
+  <div class="note">${t("read_pick")}</div>
+  <div class="filters">
+    <select id="rBook"><option value="">${t("f_all_books")}</option>${Object.keys(a.book_order).map(er=>`<optgroup label="${esc(dn("era",er))}">${a.book_order[er].filter(k=>idx[k]).map(opt).join("")}</optgroup>`).join("")}</select>
+    <select id="rCh"></select>
+    <button id="rPrev" title="${esc(t("read_prev"))}">←</button>
+    <button id="rNext" title="${esc(t("read_next"))}">→</button>
+  </div>
+  <div id="rview"><div class="note">${t("read_pick")}</div></div>`;
+  const cvs = s => s.split(":").map(Number);
+  function fillChapters(){
+    const n = idx[rBook.value] || 0;
+    rCh.innerHTML = Array.from({length:n},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join("");
+    rCh.value = "1";
+  }
+  async function show(){
+    const bk = rBook.value, ch = +rCh.value;
+    if(!bk){ rview.innerHTML = `<div class="note">${t("read_pick")}</div>`; return; }
+    rview.innerHTML = `<div class="note waiting">${t("eps_load")}</div>`;
+    const data = await jget("data/tanakh/" + bk + ".json");
+    const verses = data.chapters[ch-1] || [];
+    const eps = await bookDocs(bk);
+    const inSpan = {};
+    for(const e of eps){
+      const [c1,v1] = cvs(e.span.start), [c2,v2] = cvs(e.span.end||e.span.start);
+      for(let c=c1;c<=c2;c++) for(let v=(c===c1?v1:1); v<=(c===c2?v2:200); v++) inSpan[c+":"+v] = e;
+    }
+    rview.innerHTML = `<div class="chapter he">` + verses.map((tx,i)=>{
+      const ep = inSpan[ch+":"+(i+1)];
+      const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
+      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span> ${esc(tx)}</div>`;
+    }).join("") + `</div>`;
+  }
+  rBook.onchange = () => { fillChapters(); show(); };
+  rCh.onchange = show;
+  rPrev.onclick = () => {
+    if(!rBook.value) return;
+    const bi = keys.indexOf(rBook.value);
+    if(+rCh.value > 1) rCh.value = +rCh.value - 1;
+    else if(bi > 0){ rBook.value = keys[bi-1]; fillChapters(); rCh.value = idx[rBook.value]; }
+    show();
+  };
+  rNext.onclick = () => {
+    if(!rBook.value) return;
+    const bi = keys.indexOf(rBook.value);
+    if(+rCh.value < idx[rBook.value]) rCh.value = +rCh.value + 1;
+    else if(bi < keys.length-1){ rBook.value = keys[bi+1]; fillChapters(); rCh.value = 1; }
+    show();
+  };
+  if(window._read){
+    const d = window._read; window._read = null;
+    if(idx[d.book]){ rBook.value = d.book; fillChapters(); rCh.value = String(d.ch||1); show(); }
+  }
 }
 async function tEpisodes(m){
   const a = await analytics();
@@ -1509,7 +1589,7 @@ async function showOne(b, i){
   ${e.human_speech_plain?`<div class="sect"><div class="h">${t("sec_human")}</div><div class="he small">${esc(e.human_speech_plain)}</div></div>`:""}
   <div class="sect"><div class="h">${t("sec_summary")}</div>${esc(e.summary_ru)}</div>
   <div class="sect"><div class="h">${t("sec_emotions")}</div>${(e.emotions||[]).map(x=>`<span class="tag">${esc(typeof x==="object"?x.emotion:x)}</span>`).join("")||"—"}</div>
-  <div class="src">${t("src")}${esc(bookName(b) + " " + e.span.start + "–" + e.span.end)}</div>`;
+  <div class="src">${t("src")}${esc(bookName(b) + " " + e.span.start + "–" + e.span.end)} · <span class="cl" onclick='goRead("${b}", ${parseInt(e.span.start)})'>${esc(t("read_open"))}</span></div>`;
   elist.prepend(d);
   window.scrollTo({top:0, behavior:"smooth"});
 }
@@ -1598,9 +1678,9 @@ async function tAbout(m){
 }
 
 /* ---------- роутер ---------- */
-const TABS = [ ["chat","tab_chat"], ["overview","tab_overview"], ["books","tab_books"], ["episodes","tab_episodes"],
+const TABS = [ ["chat","tab_chat"], ["overview","tab_overview"], ["books","tab_books"], ["read","tab_read"], ["episodes","tab_episodes"],
                ["profile","tab_profile"], ["report","tab_report"], ["about","tab_about"] ];
-const RENDER = { overview:tOverview, books:tBooks, episodes:tEpisodes, profile:tProfile,
+const RENDER = { overview:tOverview, books:tBooks, read:tRead, episodes:tEpisodes, profile:tProfile,
                  chat:chatUI, report:tReport, about:tAbout };
 function renderNav(){
   nav.innerHTML = TABS.map(x => `<button data-t="${x[0]}"${x[0]===CURTAB?' class="on"':""}>${t(x[1])}</button>`).join("");
