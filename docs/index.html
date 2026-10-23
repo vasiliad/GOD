@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GOD — образ Бога в Танахе: корпус 2050 эпизодов</title>
+<meta property="og:title" content="GOD · симуляция разговора с Богом на базе книг Танаха">
+<meta property="og:description" content="2050 размеченных эпизодов взаимодействия из всех 39 книг Танаха. Живой чат — речью Танаха в 5 слоях с проверяемыми источниками; каждое число статистики — дверь в эпизоды.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vasiliad.github.io/GOD/">
+<meta name="twitter:card" content="summary">
 <style>
 /* =====================================================
    GOD — THE SCROLL OF MIDNIGHT
@@ -589,6 +594,20 @@ a:hover { color: var(--acc-bright); }
   th, td { padding: 8px 10px; }
 }
 
+/* ===== ПОГРУЖЕНИЕ: клик по числу/тегу статистики — дверь в эпизоды ===== */
+html { scroll-behavior: smooth; }
+.cl { cursor: pointer; }
+.cl:hover { color: var(--acc); text-decoration: underline; }
+.dive { cursor: pointer; }
+.dive:hover { outline: 1px solid var(--line2); border-radius: 10px; }
+tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
+.tscroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.toc a { color: var(--fg2); }
+.toc a:hover { color: var(--acc); }
+.totop { display: block; margin: 16px auto; background: var(--card); border: 1px solid var(--line2);
+  color: var(--fg2); border-radius: 10px; padding: 8px 22px; cursor: pointer; font: inherit; }
+.totop:hover { color: var(--acc); }
+
 </style>
 </head>
 <body>
@@ -683,16 +702,20 @@ a:hover { color: var(--acc-bright); }
    ===================================================================== */
 
 /* ---------- утилиты ---------- */
-const esc = s => String(s ?? "").replace(/&/g,"&").replace(/</g,"<").replace(/>/g,">");
+const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const OUT = { punishment:"#e07a6a", revelation:"#e0b050", blessing:"#7fce9a", covenant:"#7fb2e5",
   rescue:"#8fd4c8", answer_granted:"#a8d08d", compliance:"#c9b1e0", silence:"#6b7280",
   unclear:"#565e6e", delayed:"#b58e5f", refusal:"#c25a8e" };
-const bar = (obj, limit) => {
+const bar = (obj, limit, dive) => {
   const lim = limit || 99;
   const items = Object.entries(obj).sort((a,b)=>b[1]-a[1]).slice(0,lim);
   const tot = items.reduce((s,x)=>s+x[1],0) || 1;
   return `<div class="bar">${items.map(([k,v])=>`<i style="width:${(v/tot*100).toFixed(1)}%;background:${OUT[k]||"#888"}"></i>`).join("")}</div>` +
-  `<div class="leg">${items.map(([k,v])=>`<span><i style="background:${OUT[k]||"#888"}"></i>${dn("out",k)} ${(v/tot*100).toFixed(0)}%</span>`).join("")}</div>`;
+  `<div class="leg">${items.map(([k,v])=>{
+    const lbl = `<i style="background:${OUT[k]||"#888"}"></i>${dn("out",k)} ${(v/tot*100).toFixed(0)}%`;
+    return dive ? `<span class="cl" onclick='event.stopPropagation();dive(${JSON.stringify(Object.assign({},dive,{out:k}))})'>${lbl}</span>`
+                : `<span>${lbl}</span>`;
+  }).join("")}</div>`;
 };
 const store = {
   get(k,d){ try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } },
@@ -703,7 +726,7 @@ const store = {
 const I18N = {
 ru:{
   title:"GOD — образ Бога в Танахе: корпус 2050 эпизодов",
-  h1:'GOD <b>·</b> симуляция разговора с Богом на базе Танаха',
+  h1:'GOD <b>·</b> симуляция разговора с Богом на базе книг Танаха',
   sub:"2 050 размеченных эпизодов взаимодействия. Задайте вопрос — симуляция ответит словами текста: древний иврит с огласовкой и подстрочным переводом русский · English · современный иврит. Все 39 книг, каждый ответ проверяем к стиху.",
   tab_chat:"Симуляция", tab_overview:"Обзор", tab_books:"Книги", tab_episodes:"Эпизоды",
   tab_profile:"Профиль реакции", tab_report:"Отчёт", tab_about:"О проекте",
@@ -715,6 +738,7 @@ ru:{
   b_starting:"Голос Бога поднимается — модель грузится (минуты); ввод в живом режиме откроется сам.",
   b_off:"Симуляция недоступна — GPU-лимиты Kaggle обновятся в субботу. Приходите в субботу!",
   brain_off_note:"Симуляция временно недоступна: мозг проекта — DictaLM 3.0 (12B) на Kaggle — спит, GPU-лимиты обновятся в субботу. Приходите в субботу!",
+  off_explore:"Пока мозг спит, корпус открыт — погружайтесь:",
   b_on_tip:"голос Бога готов", b_starting_tip:"голос Бога поднимается: модель грузится на сервере (минуты)",
   b_off_tip:"мозг проекта (DictaLM 3.0 на Kaggle) спит — GPU-лимиты обновятся в субботу; авто-heal поднимет его сам",
   input_ph:"задайте ваш вопрос… (любой язык)",
@@ -744,27 +768,30 @@ ru:{
   ov_note:"Асимметрия: наказание детерминировано проступком (57% кар — за непослушание; мольба наказана в 0,4% случаев), явная милость событийна — 2,6% эпизодов, обычно через заступничество или покаяние.",
   books_h:"Книги ({n})", th_book:"Книга", th_eps:"Эпизоды", th_sev:"Тяжесть", th_out:"Исходы",
   th_sil:"Молчание", th_pun:"Кара", th_era:"Эпоха",
-  eps_h:"Эпизоды", f_all_books:"все книги", f_all_out:"все исходы", f_search:"поиск по описанию (рус.)…",
-  eps_pick:"Выберите книгу — её эпизоды загрузятся по требованию.",
-  eps_pick2:"Выберите книгу — загрузятся её эпизоды.", eps_count:"{n} эпизодов",
+  eps_h:"Эпизоды", f_all_books:"все книги", f_all_out:"все исходы", f_all_trig:"все триггеры", f_all_dir:"все направления", f_search:"поиск по описанию (рус.)…",
+  eps_pick:"Выберите книгу, эпоху, исход или триггер — эпизоды загрузятся по требованию.",
+  eps_pick2:"Задайте фильтр — книга, эпоха, исход, триггер или поиск.", eps_count:"{n} эпизодов", eps_load:"эпизоды загружаются…",
+  eps_cap:"показаны первые {n} из {m}",
   eps_sev:"тяжесть {n}", eps_low:"низкое доверие", eps_high:"высокое доверие",
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
   prof_pun_h:"Кара: объявлена vs исполнена", prof_pun_card:"эпизодов-наказаний",
   prof_pun_note:"79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса). «Грозящий» Бог вчетверо чаще «бьющего».",
-  rep_loading:"загрузка отчёта…", rep_note:"перевод отчёта не загрузился — показан русский оригинал.",
+  prof_ann:"объявлено оракулом", prof_exec:"исполнено действием",
+  rep_loading:"загрузка отчёта…", rep_note:"перевод отчёта не загрузился — показан русский оригинал.", rep_toc:"Содержание", to_top:"наверх",
   about_h:"О проекте",
   about_p1:"Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>{eps}</b> эпизодов взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь, действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам; аудиты покрытия — 100%.",
   about_p2:'<b>Научный отчёт v1.0</b> — вкладка «Отчёт» или <a href="research_report.md" target="_blank">research_report.md</a>.',
   about_p3:"<b>Ключевые находки.</b> Наказание детерминировано проступком (80% при непослушании; мольба наказана в 0,4% случаев) и в 79% объявляется, а не исполняется. Явная милость — 2,6%, через заступничество или покаяние. Молчание — жанровый феномен поэзии (27% против 3% в нарративе). Заступничество — самый слышимый тип обращения (48% ответов).",
   about_p4:"<b>Ограничения.</b> Исходы — кодировка исследователя, а не теология; сопоставимость эпох требует одинаковых единиц измерения (см. <a href=\"retrospective_v1.md\" target=\"_blank\">ретроспективу v1</a>).",
+  about_p5:"<b>Как работает симуляция.</b> По вашему вопросу страница находит в корпусе ближайшие эпизоды — векторный поиск по 2050 эпизодам прямо в браузере — и передаёт их специализированной ивритской модели (DictaLM 3.0, 12B). Модель обязана составить ответ только из дословной речи Бога этих эпизодов: иврит, огласовка, переводы и обязательная ссылка на стихи; писать вне корпусной лексики ей запрещено. Пока мозг спит (GPU-лимиты Kaggle обновляются по субботам), симуляция честно сообщает о недоступности.",
   about_data:"Данные: <a href=\"data/analytics.json\">analytics.json</a> · эпизоды по книгам: data/books/<книга>.json · код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps). Текст Танаха — общественное достояние; русские аннотации — CC BY 4.0; код — MIT.",
   god_h:"Бог",
   msg_user:"Вы"
 },
 en:{
   title:"GOD — the image of God in the Tanakh: a 2050-episode corpus",
-  h1:'GOD <b>·</b> a simulation of conversation with God, based on the Tanakh',
+  h1:'GOD <b>·</b> a simulation of conversation with God, based on the books of the Tanakh',
   sub:"2,050 annotated interaction episodes. Ask a question — the simulation will answer with the text's own words: ancient Hebrew with vocalization and interlinear translation in Russian · English · modern Hebrew. All 39 books, every answer traceable to verses.",
   tab_chat:"Simulation", tab_overview:"Overview", tab_books:"Books", tab_episodes:"Episodes",
   tab_profile:"Reaction profile", tab_report:"Report", tab_about:"About",
@@ -776,6 +803,7 @@ en:{
   b_starting:"The voice of God is rising — the model is loading (minutes); live-mode input will open by itself.",
   b_off:"The simulation is unavailable — Kaggle GPU limits reset on Saturday. Come back on Saturday!",
   brain_off_note:"The simulation is temporarily unavailable: the project's brain — DictaLM 3.0 (12B) on Kaggle — is asleep; GPU limits reset on Saturday. Come back on Saturday!",
+  off_explore:"While the brain sleeps, the corpus is open — dive in:",
   b_on_tip:"the voice of God is ready", b_starting_tip:"the voice of God is rising: the model is loading on the server (minutes)",
   b_off_tip:"the project's brain (DictaLM 3.0 on Kaggle) is asleep — GPU limits reset on Saturday; auto-heal will bring it back by itself",
   input_ph:"ask your question… (any language)",
@@ -805,27 +833,30 @@ en:{
   ov_note:"Asymmetry: punishment is determined by the offense (57% of punishments follow disobedience; a plea is punished in 0.4% of cases), explicit mercy is event-driven — 2.6% of episodes, usually through intercession or repentance.",
   books_h:"Books ({n})", th_book:"Book", th_eps:"Episodes", th_sev:"Severity", th_out:"Outcomes",
   th_sil:"Silence", th_pun:"Punishment", th_era:"Era",
-  eps_h:"Episodes", f_all_books:"all books", f_all_out:"all outcomes", f_search:"search by description (Russian)…",
-  eps_pick:"Pick a book — its episodes will load on demand.",
-  eps_pick2:"Pick a book — its episodes will load.", eps_count:"{n} episodes",
+  eps_h:"Episodes", f_all_books:"all books", f_all_out:"all outcomes", f_all_trig:"all triggers", f_all_dir:"all directions", f_search:"search by description (Russian)…",
+  eps_pick:"Pick a book, an era, an outcome or a trigger — episodes will load on demand.",
+  eps_pick2:"Set a filter — book, era, outcome, trigger or search.", eps_count:"{n} episodes", eps_load:"loading episodes…",
+  eps_cap:"showing first {n} of {m}",
   eps_sev:"severity {n}", eps_low:"low confidence", eps_high:"high confidence",
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
   prof_pun_h:"Punishment: announced vs executed", prof_pun_card:"punishment episodes",
   prof_pun_note:"79% of punishments are verdict-oracles; executed actions — 84 episodes (4% of the corpus). The «threatening» God is four times more frequent than the «striking» one.",
-  rep_loading:"loading the report…", rep_note:"the report translation failed to load — showing the Russian original.",
+  prof_ann:"announced as oracle", prof_exec:"executed by action",
+  rep_loading:"loading the report…", rep_note:"the report translation failed to load — showing the Russian original.", rep_toc:"Contents", to_top:"to top",
   about_h:"About the project",
   about_p1:"A study of God's image in the Tanakh: <b>{eps}</b> human↔God interaction episodes extracted from all 39 books (17 fields: verse span, direction, channel, trigger, verbatim consonantal speech, action, outcome, severity, emotions). Every episode is traceable to verses; coverage audits — 100%.",
   about_p2:'<b>Research report v1.0</b> — the «Report» tab or <a href="research_report.md" target="_blank">research_report.md</a>.',
   about_p3:"<b>Key findings.</b> Punishment is determined by the offense (80% after disobedience; a plea is punished in 0.4%) and is announced rather than executed in 79% of cases. Explicit mercy — 2.6%, through intercession or repentance. Silence is a genre phenomenon of poetry (27% vs 3% in narrative). Intercession is the best-heard form of address (48% answered).",
   about_p4:"<b>Limitations.</b> Outcomes are the researcher's coding, not theology; comparing eras requires the same units of measurement (see <a href=\"retrospective_v1.md\" target=\"_blank\">the v1 retrospective</a>).",
+  about_p5:"<b>How the simulation works.</b> For your question the page finds the nearest episodes in the corpus — vector search over 2,050 episodes, right in the browser — and passes them to a specialized Hebrew model (DictaLM 3.0, 12B). The model must compose its answer only from the verbatim speech of God in those episodes: Hebrew, vocalization, translations and a mandatory verse citation; writing outside the corpus vocabulary is forbidden. While the brain is asleep (Kaggle GPU limits reset on Saturdays), the simulation honestly says it is unavailable.",
   about_data:"Data: <a href=\"data/analytics.json\">analytics.json</a> · episodes by book: data/books/<book>.json · code: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps). Tanakh text is public domain; Russian annotations — CC BY 4.0; code — MIT.",
   god_h:"God",
   msg_user:"You"
 },
 he:{
   title:"GOD — דמות האלוהים בתנ״ך: קורפוס 2050 אפיזודות",
-  h1:'GOD <b>·</b> הדמיית שיחה עם אלוהים על בסיס התנ״ך',
+  h1:'GOD <b>·</b> הדמיית שיחה עם אלוהים על בסיס ספרי התנ״ך',
   sub:"2,050 אפיזודות אינטראקציה מסומנות. שאלו שאלה — ההדמיה תענה במילות הטקסט: עברית מקראית עם ניקוד ותרגום שורה-שורה: רוסית · English · עברית מודרנית. כל 39 הספרים, כל תשובה ניתנת לאימות לפסוקים.",
   tab_chat:"הדמיה", tab_overview:"סקירה", tab_books:"ספרים", tab_episodes:"אפיזודות",
   tab_profile:"פרופיל התגובה", tab_report:"הדוח", tab_about:"אודות הפרויקט",
@@ -837,6 +868,7 @@ he:{
   b_starting:"קול אלוהים עולה — המודל בטעינה (דקות); שדה הקלט במצב החי ייפתח מעצמו.",
   b_off:"ההדמיה אינה זמינה — מכסת ה-GPU של Kaggle מתעדכנת בשבת. חזרו בשבת!",
   brain_off_note:"ההדמיה אינה זמינה זמנית: המוח — DictaLM 3.0 (12B) על Kaggle — ישן; מכסת ה-GPU מתעדכנת בשבת. חזרו בשבת!",
+  off_explore:"כל עוד המוח ישן, הקורפוס פתוח — צללו פנימה:",
   b_on_tip:"קול אלוהים מוכן", b_starting_tip:"קול אלוהים עולה: המודל בטעינה בשרת (דקות)",
   b_off_tip:"המוח (DictaLM 3.0 על Kaggle) ישן — מכסת ה-GPU מתעדכנת בשבת; המערכת תחזיר אותו לבד",
   input_ph:"שאלו את שאלתכם… (כל שפה)",
@@ -866,20 +898,23 @@ he:{
   ov_note:"אסימטריה: עונש נקבע על ידי העבירה (57% מהעונשים אחרי מרי; תחינה נענשת ב-0.4%), חסד מפורש הוא אירועי — 2.6% מהאפיזודות, בדרך כלל דרך פרוטקציה או תשובה.",
   books_h:"ספרים ({n})", th_book:"ספר", th_eps:"אפיזודות", th_sev:"חומרה", th_out:"תוצאות",
   th_sil:"שתיקה", th_pun:"ענישה", th_era:"תקופה",
-  eps_h:"אפיזודות", f_all_books:"כל הספרים", f_all_out:"כל התוצאות", f_search:"חיפוש בתיאור האפיזודות…",
-  eps_pick:"בחרו ספר — האפיזודות שלו ייטענו לפי דרישה.",
-  eps_pick2:"בחרו ספר — האפיזודות שלו ייטענו.", eps_count:"{n} אפיזודות",
+  eps_h:"אפיזודות", f_all_books:"כל הספרים", f_all_out:"כל התוצאות", f_all_trig:"כל הטריגרים", f_all_dir:"כל הכיוונים", f_search:"חיפוש בתיאור האפיזודות (ברוסית)…",
+  eps_pick:"בחרו ספר, תקופה, תוצאה או טריגר — האפיזודות ייטענו לפי דרישה.",
+  eps_pick2:"הגדירו מסנן — ספר, תקופה, תוצאה, טריגר או חיפוש.", eps_count:"{n} אפיזודות", eps_load:"האפיזודות בטעינה…",
+  eps_cap:"מוצגים {n} ראשונים מתוך {m}",
   eps_sev:"חומרה {n}", eps_low:"אמון נמוך", eps_high:"אמון גבוה",
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
   prof_pun_h:"ענישה: מוכרזת לעומת מבוצעת", prof_pun_card:"אפיזודות ענישה",
   prof_pun_note:"79% מהעונשים — אורקלים של פסק-דין; פעולות מבוצעות — 84 אפיזודות (4% מהקורפוס). האלוהים ה«מאיים» שכיח פי ארבעה מה«מכה».",
-  rep_loading:"טוען את הדוח…", rep_note:"תרגום הדוח לא נטען — מוצג המקור הרוסי.",
+  prof_ann:"הוכרז בנבואה", prof_exec:"בוצע בפועל",
+  rep_loading:"טוען את הדוח…", rep_note:"תרגום הדוח לא נטען — מוצג המקור הרוסי.", rep_toc:"תוכן", to_top:"למעלה",
   about_h:"אודות הפרויקט",
   about_p1:"מחקר דמות האלוהים בתנ״ך: מכל 39 הספרים חולצו <b>{eps}</b> אפיזודות אינטראקציה אדם↔אלוהים (17 שדות: טווח פסוקים, כיוון, ערוץ, טריגר, דיבור עיצורי מילולי, מעשה, תוצאה, חומרה, רגשות). כל אפיזודה ניתנת למעקב לפסוקים; ביקורות כיסוי — 100%.",
   about_p2:'<b>דוח מחקר v1.0</b> — לשונית «הדוח» או <a href="research_report.md" target="_blank">research_report.md</a>.',
   about_p3:"<b>ממצאים מרכזיים.</b> עונש נקבע על ידי העבירה (80% אחרי מרי; תחינה נענשת ב-0.4%) וב-79% מוכרז ולא מבוצע. חסד מפורש — 2.6%, דרך פרוטקציה או תשובה. שתיקה היא תופעת ז׳אנר של השירה (27% מול 3% בנרטיב). פרוטקציה היא סוג הפנייה הנשמע ביותר (48% נענו).",
   about_p4:"<b>מגבלות.</b> התוצאות הן קידוד החוקר, לא תאולוגיה; השוואת תקופות דורשת יחידות מדידה זהות (ראו <a href=\"retrospective_v1.md\" target=\"_blank\">רטרוספקטיבת v1</a>).",
+  about_p5:"<b>כך עובדת ההדמיה.</b> לשאלתכם הדף מוצא את האפיזודות הקרובות בקורפוס — חיפוש וקטורי ב־2050 אפיזודות, ישירות בדפדפן — ומעביר אותן למודל עברי ייעודי (DictaLM 3.0, 12B). המודל חייב להרכיב את התשובה רק מדיבור האלוהים המילולי של אותן אפיזודות: עברית, ניקוד, תרגומים וציון פסוק חובה; כתיבה מחוץ לאוצר המילים של הקורפוס אסורה. כל עוד המוח ישן (מכסת ה-GPU של Kaggle מתעדכנת בשבתות), ההדמיה מודיעה ביושר שאינה זמינה.",
   about_data:"נתונים: <a href=\"data/analytics.json\">analytics.json</a> · אפיזודות לפי ספר: data/books/<ספר>.json · קוד: scripts/. טקסט התנ״ך — נחלת הכלל; הערות רוסיות — CC BY 4.0; קוד — MIT.",
   god_h:"אלוהים",
   msg_user:"אתם"
@@ -950,7 +985,10 @@ via: { ru:{direct:"напрямую",prophet:"через пророка",angel:"
        he:{direct:"ישירות",prophet:"דרך נביא",angel:"דרך מלאך",dream:"בחלום",vision:"מראה",internal:"קול פנימי",unclear:"לא ברור"} },
 conf: { ru:{high:"высокое доверие",low:"низкое доверие"},
         en:{high:"high confidence",low:"low confidence"},
-        he:{high:"אמון גבוה",low:"אמון נמוך"} }
+        he:{high:"אמון גבוה",low:"אמון נמוך"} },
+era: { ru:{"Тора":"Тора","Невиим (ранние)":"Невиим (ранние)","Невиим (поздние)":"Невиим (поздние)","Кетувим":"Кетувим"},
+       en:{"Тора":"Torah","Невиим (ранние)":"Early Prophets","Невиим (поздние)":"Late Prophets","Кетувим":"Writings"},
+       he:{"Тора":"תורה","Невиим (ранние)":"נביאים ראשונים","Невиим (поздние)":"נביאים אחרונים","Кетuvim":"כתובים"} }
 };
 function dn(type, key){
   const d = DATA_NAMES[type];
@@ -1259,6 +1297,21 @@ function errHTML(e){
    [Russian] не должен содержать иврит — если модель сбилась, подставляем корпусную аннотацию */
 const stripNikudJs = t => String(t||"").replace(/\u05BE/g,"-").replace(/[\u0591-\u05BD\u05BF-\u05C7]/g,"");
 const hasHebrew = t => /[\u05D0-\u05EA]/.test(String(t||""));
+/* источники ответа кликабельны: «Бытие 3:9» / "Genesis 3:9" → карточка эпизода */
+function linkSources(src){
+  const names = [];
+  for(const L of ["ru","en","he"]) for(const [k,v] of Object.entries(BOOK_NAMES[L])) names.push([v,k]);
+  names.sort((a,b)=>b[0].length-a[0].length);
+  let out = esc(src);
+  for(const [nm,key] of names){
+    const re = new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*\\d+[:.]\\d+", "g");
+    out = out.replace(re, m => {
+      const start = m.match(/\d+[:.]\d+/)[0].replace(".", ":");
+      return `<span class="cl" onclick='srcDive("${key}","${start}")'>${m}</span>`;
+    });
+  }
+  return out;
+}
 function liveHTML(r){
   const s = r.sections;
   let h = `<div class="detail"><h3>${t("god_h")}</h3>`;
@@ -1276,7 +1329,7 @@ function liveHTML(r){
   if(s["[English]"]) h += `<div class="sect"><div class="h">${t("sec_en")}</div>${esc(s["[English]"])}</div>`;
   if(s["[Hebrew Modern]"]) h += `<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
   const src = s["[SOURCES]"] || r.hits.map(x=>bookName(x[1])+" "+x[2].span.start).join(", ");
-  h += `<div class="src">${t("sources")}${esc(src)}</div>${memLine()}</div>`;
+  h += `<div class="src">${t("sources")}${linkSources(src)}</div>${memLine()}</div>`;
   return h;
 }
 async function corpusHTML(r){
@@ -1330,7 +1383,8 @@ function chatUI(m){
       if(off){
         /* честное сообщение вместо неточного прецедента — решение владельца 2026-10-22:
            «неправильный ответ хуже никакого»; corpusReply остаётся неиспользуемым */
-        html = `<div class="detail"><h3>${t("god_h")}</h3><div class="note" style="color:var(--bad)">${t(BRAIN.info.state==="starting" ? "b_starting" : "brain_off_note")}</div></div>`;
+        html = `<div class="detail"><h3>${t("god_h")}</h3><div class="note" style="color:var(--bad)">${t(BRAIN.info.state==="starting" ? "b_starting" : "brain_off_note")}</div>`
+             + `<div class="note">${esc(t("off_explore"))} <span class="cl" onclick='goTab("episodes")'>${esc(t("tab_episodes"))}</span> · <span class="cl" onclick='goTab("profile")'>${esc(t("tab_profile"))}</span> · <span class="cl" onclick='goTab("report")'>${esc(t("tab_report"))}</span></div></div>`;
       }
       else{
         try{ html = liveHTML(await liveReply(q)); }
@@ -1350,6 +1404,11 @@ function chatUI(m){
 /* =====================================================================
    ВКЛАДКИ: обзор, книги, эпизоды, профиль, отчёт, о проекте
    ===================================================================== */
+/* ---------- погружение: каждое число статистики — дверь в эпизоды ---------- */
+function dive(f){ window._dive = f || {}; CURTAB = "episodes"; renderAll(); }
+function srcDive(b, start){ window._dive = {book:b}; window._diveOpen = start; CURTAB = "episodes"; renderAll(); }
+function goTab(x){ CURTAB = x; renderAll(); }
+
 async function tOverview(m){
   const a = await analytics();
   const oc = {};
@@ -1357,55 +1416,86 @@ async function tOverview(m){
     oc[k] = (oc[k]||0) + s.outcome_p[k];
   m.innerHTML = `
   <div class="cards">
-    <div class="card"><div class="v">${a.corpus.episodes}</div><div class="l">${t("ov_eps")}</div></div>
+    <div class="card dive" onclick='dive({all:1})'><div class="v">${a.corpus.episodes}</div><div class="l">${t("ov_eps")}</div></div>
     <div class="card"><div class="v">${a.corpus.books}</div><div class="l">${t("ov_books")}</div></div>
-    <div class="card"><div class="v">24%</div><div class="l">${t("ov_pun")}</div><div class="b">${t("ov_pun_b")}</div></div>
+    <div class="card dive" onclick='dive({out:"punishment"})'><div class="v">24%</div><div class="l">${t("ov_pun")}</div><div class="b">${t("ov_pun_b")}</div></div>
     <div class="card"><div class="v">2.89</div><div class="l">${t("ov_sev")}</div></div>
-    <div class="card"><div class="v">55%</div><div class="l">${t("ov_init")}</div><div class="b">${t("ov_init_b")}</div></div>
+    <div class="card dive" onclick='dive({dir:"god_initiated"})'><div class="v">55%</div><div class="l">${t("ov_init")}</div><div class="b">${t("ov_init_b")}</div></div>
   </div>
   <h2>${t("ov_era_h")}</h2>
   <div class="cards">${Object.entries(a.per_era).map(p=>`
-    <div class="card"><div class="l" style="color:var(--acc)">${p[0]}</div><div class="v">${p[1].episodes}</div>
+    <div class="card dive" onclick='dive(${JSON.stringify({era:p[0]})})'><div class="l" style="color:var(--acc)">${esc(dn("era",p[0]))}</div><div class="v">${p[1].episodes}</div>
     <div class="b">${tfmt("ov_era_b", {s:p[1].severity_mean, si:(p[1].silence_rate*100).toFixed(0), p:(p[1].punishment_rate*100).toFixed(0)})}</div>
-    ${bar(p[1].outcome_p,5)}</div>`).join("")}</div>
+    ${bar(p[1].outcome_p,5,{era:p[0]})}</div>`).join("")}</div>
   <h2>${t("ov_all_h")}</h2>
-  <div class="card">${bar(oc,11)}</div>
+  <div class="card">${bar(oc,11,{})}</div>
   <div class="note">${t("ov_note")}</div>`;
 }
 async function tBooks(m){
   const a = await analytics();
   const rows = Object.entries(a.per_book).filter(p=>!p[1].missing);
-  m.innerHTML = `<h2>${tfmt("books_h", {n:rows.length})}</h2><table>
+  m.innerHTML = `<h2>${tfmt("books_h", {n:rows.length})}</h2><div class="tscroll"><table>
   <tr><th>${t("th_book")}</th><th>${t("th_eps")}</th><th>${t("th_sev")}</th><th style="min-width:230px">${t("th_out")}</th><th>${t("th_sil")}</th><th>${t("th_pun")}</th><th>${t("th_era")}</th></tr>
-  ${rows.map(p=>`<tr><td><b>${esc(bookName(p[0]))}</b></td><td>${p[1].episodes}</td><td>${p[1].severity_mean}</td>
-  <td>${bar(p[1].outcome_p,4)}</td><td>${(p[1].silence_rate*100).toFixed(0)}%</td><td>${(p[1].punishment_rate*100).toFixed(0)}%</td><td>${esc(p[1].era)}</td></tr>`).join("")}
-  </table>`;
+  ${rows.map(p=>`<tr class="dive" onclick='dive({book:"${p[0]}"})'><td><b>${esc(bookName(p[0]))}</b></td><td>${p[1].episodes}</td><td>${p[1].severity_mean}</td>
+  <td>${bar(p[1].outcome_p,4,{book:p[0]})}</td>
+  <td class="cl" onclick='event.stopPropagation();dive({book:"${p[0]}",out:"silence"})'>${(p[1].silence_rate*100).toFixed(0)}%</td>
+  <td class="cl" onclick='event.stopPropagation();dive({book:"${p[0]}",out:"punishment"})'>${(p[1].punishment_rate*100).toFixed(0)}%</td>
+  <td>${esc(dn("era",p[1].era))}</td></tr>`).join("")}
+  </table></div>`;
 }
 async function tEpisodes(m){
   const a = await analytics();
-  const opt = b => `<option value="${b}">${bookName(b)}</option>`;
+  const opt = b => `<option value="${b}">${esc(bookName(b))}</option>`;
   m.innerHTML = `<h2>${t("eps_h")}</h2>
   <div class="filters">
-    <select id="fBook"><option value="">${t("f_all_books")}</option>${Object.values(a.book_order).flat().map(opt).join("")}</select>
-    <select id="fOut"><option value="">${t("f_all_out")}</option>${Object.keys(OUT).map(o=>`<option>${o}</option>`).join("")}</select>
+    <select id="fBook"><option value="">${t("f_all_books")}</option>${Object.keys(a.book_order).map(er=>`<option value="era:${er}">${esc(dn("era",er))}</option>`).join("")}${Object.values(a.book_order).flat().map(opt).join("")}</select>
+    <select id="fOut"><option value="">${t("f_all_out")}</option>${Object.keys(OUT).map(o=>`<option value="${o}">${esc(dn("out",o))}</option>`).join("")}</select>
+    <select id="fTrig"><option value="">${t("f_all_trig")}</option>${Object.keys(a.trigger_table).map(o=>`<option value="${o}">${esc(dn("trig",o))}</option>`).join("")}</select>
+    <select id="fDir"><option value="">${t("f_all_dir")}</option>${Object.keys(DATA_NAMES.dir.ru).map(o=>`<option value="${o}">${esc(dn("dir",o))}</option>`).join("")}</select>
     <input id="fQ" placeholder="${t("f_search")}">
   </div><div id="elist"><div class="note">${t("eps_pick")}</div></div>`;
   async function load(){
     const b = fBook.value; const el = elist;
-    if(!b){ el.innerHTML = `<div class="note">${t("eps_pick2")}</div>`; return; }
-    let eps = await bookDocs(b);
-    const fo = fOut.value, q = fQ.value.toLowerCase();
-    eps = eps.filter(e => (!fo||e.outcome===fo) && (!q||(e.summary_ru+" "+e.god_action).toLowerCase().includes(q)));
-    el.innerHTML = `<div class="note">${tfmt("eps_count", {n:eps.length})}</div>` + eps.map((e,i)=>`
-      <div class="ep" data-b="${b}" data-i="${i}">
-        <span class="s">${bookName(b)} ${e.span.start}–${e.span.end}</span>
-        <span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>
-        <span class="tag">${dn("trig",e.trigger)}</span><span class="tag">${tfmt("eps_sev", {n:e.severity})}</span>
+    const fo = fOut.value, ft = fTrig.value, fd = fDir.value, q = fQ.value.toLowerCase();
+    const all = window._diveAll; window._diveAll = null;
+    if(!b && !fo && !ft && !fd && !q && !all){ el.innerHTML = `<div class="note">${t("eps_pick2")}</div>`; return; }
+    el.innerHTML = `<div class="note waiting">${t("eps_load")}</div>`;
+    const a2 = await analytics();
+    const bookList = !b ? Object.values(a2.book_order).flat()
+      : b.startsWith("era:") ? (a2.book_order[b.slice(4)]||[]) : [b];
+    const packs = await Promise.all(bookList.map(bk => bookDocs(bk)));
+    let items = [];
+    bookList.forEach((bk,bi)=>packs[bi].forEach((e,i)=>items.push([bk,i,e])));
+    items = items.filter(([bk,i,e]) => (!fo||e.outcome===fo) && (!ft||e.trigger===ft)
+      && (!fd||e.direction===fd) && (!q||((e.summary_ru||"")+" "+(e.god_action||"")).toLowerCase().includes(q)));
+    const CAP = 400;
+    el.innerHTML = `<div class="note">${tfmt("eps_count", {n:items.length})}${items.length>CAP ? " · "+tfmt("eps_cap", {n:CAP, m:items.length}) : ""}</div>` +
+      items.slice(0,CAP).map(([bk,i,e])=>`
+      <div class="ep" data-b="${bk}" data-i="${i}">
+        <span class="s">${esc(bookName(bk))} ${esc(e.span.start)}–${esc(e.span.end)}</span>
+        <span class="tag ${e.outcome}">${esc(dn("out",e.outcome))}</span><span class="tag">${esc(dn("dir",e.direction))}</span>
+        <span class="tag">${esc(dn("trig",e.trigger))}</span><span class="tag">${esc(tfmt("eps_sev", {n:e.severity}))}</span>
         <div>${esc(e.summary_ru)}</div></div>`).join("");
-    el.querySelectorAll(".ep").forEach(d => d.onclick = () => showOne(b, +d.dataset.i));
+    el.querySelectorAll(".ep").forEach(d => d.onclick = () => showOne(d.dataset.b, +d.dataset.i));
+    if(window._diveOpen){
+      const start = window._diveOpen; window._diveOpen = null;
+      const hit = items.find(([bk,i,e]) => e.span.start === start);
+      if(hit) showOne(hit[0], hit[1]);
+    }
   }
-  fBook.onchange = load; fOut.onchange = load;
+  fBook.onchange = load; fOut.onchange = load; fTrig.onchange = load; fDir.onchange = load;
   fQ.oninput = () => { clearTimeout(window._t); window._t = setTimeout(load, 250); };
+  if(window._dive){
+    const d = window._dive; window._dive = null;
+    if(d.all) window._diveAll = 1;
+    if(d.era!==undefined) fBook.value = "era:"+d.era;
+    else if(d.book) fBook.value = d.book;
+    if(d.out) fOut.value = d.out;
+    if(d.trig) fTrig.value = d.trig;
+    if(d.dir) fDir.value = d.dir;
+    if(d.q) fQ.value = d.q;
+    load();
+  }
 }
 async function showOne(b, i){
   const eps = await bookDocs(b); const e = eps[i];
@@ -1426,16 +1516,18 @@ async function showOne(b, i){
 async function tProfile(m){
   const a = await analytics();
   m.innerHTML = `<h2>${t("prof_h")}</h2>
-  <table><tr><th>${t("prof_th_trig")}</th><th>${t("prof_th_n")}</th><th style="min-width:360px">${t("prof_th_dist")}</th></tr>
-  ${Object.entries(a.trigger_table).map(p=>`<tr><td><b>${dn("trig",p[0])}</b></td><td>${p[1].n}</td>
-  <td>${bar(Object.fromEntries(Object.entries(p[1]).filter(x=>x[0]!=="n")),6)}</td></tr>`).join("")}</table>
+  <div class="tscroll"><table><tr><th>${t("prof_th_trig")}</th><th>${t("prof_th_n")}</th><th style="min-width:360px">${t("prof_th_dist")}</th></tr>
+  ${Object.entries(a.trigger_table).map(p=>`<tr class="dive" onclick='dive({trig:"${p[0]}"})'><td><b>${esc(dn("trig",p[0]))}</b></td><td>${p[1].n}</td>
+  <td>${bar(Object.fromEntries(Object.entries(p[1]).filter(x=>x[0]!=="n")),6,{trig:p[0]})}</td></tr>`).join("")}</table></div>
   <h2>${t("prof_pun_h")}</h2>
-  <div class="card"><div class="v">${a.punishment_split.total}</div><div class="l">${t("prof_pun_card")}</div>
-  ${bar({announced_oracle:a.punishment_split.announced_oracle, executed_action:a.punishment_split.executed_action},2)}
+  <div class="card dive" onclick='dive({out:"punishment"})'><div class="v">${a.punishment_split.total}</div><div class="l">${t("prof_pun_card")}</div>
+  <div class="bar"><i style="width:${(a.punishment_split.announced_p*100).toFixed(1)}%;background:#e07a6a"></i><i style="width:${(a.punishment_split.executed_p*100).toFixed(1)}%;background:#b58e5f"></i></div>
+  <div class="leg"><span><i style="background:#e07a6a"></i>${esc(t("prof_ann"))} ${(a.punishment_split.announced_p*100).toFixed(0)}%</span><span><i style="background:#b58e5f"></i>${esc(t("prof_exec"))} ${(a.punishment_split.executed_p*100).toFixed(0)}%</span></div>
   <div class="note">${t("prof_pun_note")}</div></div>`;
 }
-function md2html(md){
+function md2html(md, toc){
   const lines = md.split("\n"); const out = []; let inList = false;
+  let h2n = 0;
   const inline = t => esc(t)
     .replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>")
     .replace(/\*([^*]+)\*/g,"<i>$1</i>")
@@ -1453,8 +1545,12 @@ function md2html(md){
       out.push("</table>"); i = j; continue;
     }
     if(/^###\s/.test(L)) out.push("<h3>"+inline(L.slice(4))+"</h3>");
-    else if(/^##\s/.test(L)) out.push("<h2>"+inline(L.slice(3))+"</h2>");
-    else if(/^#\s/.test(L)) out.push("<h2 style='font-size:21px'>"+inline(L.slice(2))+"</h2>");
+    else if(/^##\s/.test(L)){
+      const id = "s"+(h2n++);
+      out.push(`<h2 id="${id}">`+inline(L.slice(3))+"</h2>");
+      if(toc) toc.push([id, L.slice(3).replace(/\*\*/g,"").trim()]);
+    }
+    else if(/^#\s/.test(L)) out.push(`<h2 id="s${h2n++}" style='font-size:21px'>`+inline(L.slice(2))+"</h2>");
     else if(/^---+\s*$/.test(L)) out.push("<hr>");
     else if(/^[-*]\s/.test(L)){
       if(!inList){ out.push("<ul>"); inList = true; }
@@ -1481,9 +1577,14 @@ async function tReport(m){
     md = await (await fetch("research_report.md")).text();
     fallback = LANG !== "ru";
   }
+  const toc = [];
+  const html = md2html(md, toc);
+  const tocBox = toc.length>4 ? `<div class="card toc"><div class="h">${esc(t("rep_toc"))}</div>` +
+    toc.map(e=>`<a href="#${e[0]}">${esc(e[1])}</a>`).join("<br>") + `</div>` : "";
   const style = 'style="padding:26px 30px;max-width:880px' + (LANG==="he" ? ';text-align:right;direction:rtl' : '') + '"';
-  m.innerHTML = (fallback ? `<div class="note" style="color:var(--acc)">${t("rep_note")}</div>` : "") +
-    `<div class="card" ${LANG==="he" ? 'dir="rtl" ' : ""}${style}>${md2html(md)}</div>`;
+  m.innerHTML = (fallback ? `<div class="note" style="color:var(--acc)">${t("rep_note")}</div>` : "") + tocBox +
+    `<div class="card" ${LANG==="he" ? 'dir="rtl" ' : ""}${style}>${html}</div>` +
+    `<button class="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">${esc(t("to_top"))}</button>`;
 }
 async function tAbout(m){
   const a = await analytics();
@@ -1492,6 +1593,7 @@ async function tAbout(m){
   <p>${t("about_p2")}</p>
   <p>${t("about_p3")}</p>
   <p>${t("about_p4")}</p>
+  <p>${t("about_p5")}</p>
   <p class="note">${t("about_data")}</p></div>`;
 }
 
