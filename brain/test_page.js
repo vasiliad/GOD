@@ -60,7 +60,7 @@ global.window = { scrollTo(){}, _brainTimer: null, setInterval: () => 1, clearIn
 
 const api = new Function(
   "var nav={innerHTML:'',querySelectorAll:()=>({forEach(){}})};var main={innerHTML:''};" +
-  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex, bookName, BOOK_NAMES, LANG };")();
+  code + "\nreturn { brainRefresh, liveReply, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex, bookName, BOOK_NAMES, LANG, esc, linkSources };")();
 
 (async () => {
   let pass = 0, fail = 0;
@@ -121,6 +121,14 @@ const api = new Function(
   const dv = api.dequant(row);
   check("dequant: раундтрип [-2, 0, 2]", Math.abs(dv[0]+2)<1e-6 && dv[1]===0 && Math.abs(dv[2]-2)<1e-6);
   check("cosv: ортогональные 0, коллинеарные 1", api.cosv([1,0],[0,1])===0 && api.cosv([1,0],[1,0])===1);
+  // 6b) esc реально экранирует (регрессия: сущности были потеряны, esc был no-op)
+  const A = String.fromCharCode(38);   // &, без литеральных сущностей — их съедает туловый конвейер
+  check("esc: <b> и & экранируются",
+        api.esc("<b>") === A+"lt;b"+A+"gt;" && api.esc("и &") === "и "+A+"amp;");
+  // 6c) источники становятся кликабельными ссылками на эпизоды
+  const linked = api.linkSources("Genesis 3:9; Бытие 1:1");
+  check("linkSources: ссылки обёрнуты в srcDive",
+        linked.includes('srcDive("genesis","3:9")') && linked.includes('srcDive("genesis","1:1")'));
   // 7) bookName: имена книг на языке интерфейса
   const bn = api.bookName, BN = api.BOOK_NAMES;
   check("bookName ru/genesis = Бытие", bn("genesis") === "Бытие");
