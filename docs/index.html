@@ -598,6 +598,9 @@ a:hover { color: var(--acc-bright); }
 .pch { border-radius: 14px; width: auto; padding: 3px 14px; font-size: 12px; margin: 0 8px 0 0; }
 .verse.playing, .verse.god.playing { background: rgba(201, 168, 76, 0.22); }
 .spd.on { background: rgba(201, 168, 76, 0.25); color: var(--fg); }
+.verse .vtr { display: none; }
+.chapter.trall .vtr { display: block; }
+.verse.tr-open .vtr { display: block; }
 .vtr { direction: ltr; text-align: right; font-size: 13px; color: var(--fg2); line-height: 1.5; margin-top: 2px; }
 
 /* дропдауны чтения — в тему сайта вместо белых нативных */
@@ -738,7 +741,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24b";
+const APPVER = "2026-10-24c";
 if (typeof location !== "undefined") {
   fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -824,7 +827,7 @@ ru:{
   eps_pick2:"Задайте фильтр — книга, эпоха, исход, триггер или поиск.", eps_count:"{n} эпизодов", eps_load:"эпизоды загружаются…",
   eps_cap:"показаны первые {n} из {m}",
   tab_read:"Чтение", read_h:"Чтение Танаха",
-  read_pick:"Выберите книгу и главу — полный текст с огласовками и кантиляцией. Золотой чертой отмечены эпизоды речи Бога: клик по стиху открывает карточку эпизода.",
+  read_pick:"Выберите книгу и главу — полный текст с огласовками и кантиляцией. Золотой чертой отмечены эпизоды речи Бога: клик по стиху открывает карточку эпизода. У стиха: ▶ — прослушать, RU — перевод этого стиха (тумблер RU сверху — ко всей главе).",
   read_prev:"предыдущая глава", read_next:"следующая глава", read_open:"открыть в чтении",
   listen:"слушать", read_audio_src:"аудио: чтение Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"обычная скорость", read_slow:"медленно (−20%)",
@@ -895,7 +898,7 @@ en:{
   eps_pick2:"Set a filter — book, era, outcome, trigger or search.", eps_count:"{n} episodes", eps_load:"loading episodes…",
   eps_cap:"showing first {n} of {m}",
   tab_read:"Reading", read_h:"Reading the Tanakh",
-  read_pick:"Pick a book and a chapter — the full vocalized text with cantillation. The gold line marks God's-speech episodes: click a verse to open the episode card.",
+  read_pick:"Pick a book and a chapter — the full vocalized text with cantillation. The gold line marks God's-speech episodes: click a verse to open the episode card. Per verse: ▶ — listen, RU — this verse's translation (the RU toggle above — the whole chapter).",
   read_prev:"previous chapter", read_next:"next chapter", read_open:"open in Reading",
   listen:"listen", read_audio_src:"audio: read by Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"normal speed", read_slow:"slower (−20%)",
@@ -966,7 +969,7 @@ he:{
   eps_pick2:"הגדירו מסנן — ספר, תקופה, תוצאה, טריגר או חיפוש.", eps_count:"{n} אפיזודות", eps_load:"האפיזודות בטעינה…",
   eps_cap:"מוצגים {n} ראשונים מתוך {m}",
   tab_read:"קריאה", read_h:"קריאת התנ״ך",
-  read_pick:"בחרו ספר ופרק — הטקסט המלא עם הניקוד והטעמים. הקו הזהוב מסמן אפיזודות דיבור האלוהים: לחיצה על פסוק פותחת את כרטיס האפיזודה.",
+  read_pick:"בחרו ספר ופרק — הטקסט המלא עם הניקוד והטעמים. הקו הזהוב מסמן אפיזודות דיבור האלוהים: לחיצה על פסוק פותחת את כרטיס האפיזודה. ליד הפסוק: ▶ — האזנה, RU — תרגום הפסוק (המתג למעלה — לכל הפרק).",
   read_prev:"הפרק הקודם", read_next:"הפרק הבא", read_open:"פתח בקריאה",
   listen:"האזנה", read_audio_src:"אודיו: קריאת Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"מהירות רגילה", read_slow:"לאט",
@@ -1547,6 +1550,18 @@ function clipFor(am, ch, v1, v2){
   return null;
 }
 const PLAYER = { a: null, hi: null, stop: null };
+/* перевод у стиха: если показаны все — схлопнуть и оставить только этот; иначе toggle этого */
+function trVerse(btn){
+  const v = btn.closest(".verse");
+  if(store.get("god_tr", 0) === 1){
+    store.set("god_tr", 0);
+    document.querySelectorAll(".chapter").forEach(x => x.classList.remove("trall"));
+    const rt = document.getElementById("rTr"); if(rt) rt.classList.remove("on");
+    v.classList.add("tr-open");
+  } else {
+    v.classList.toggle("tr-open");
+  }
+}
 function playClip(url, begin, end, hiEl){
   if(!url) return;
   if(!PLAYER.a) PLAYER.a = new Audio();
@@ -1592,6 +1607,8 @@ async function tRead(m){
     rBook.innerHTML = bLbl() + caret;
     rCh.innerHTML = (cVal || "—") + caret;
   };
+  const bVal0 = store.get("god_tr", null);
+  if(bVal0 === null) store.set("god_tr", LANG==="ru" ? 1 : 0);   // нормализация дефолта один раз
   async function show(){
     const bk = bVal, ch = cVal;
     if(!bk){ rview.innerHTML = `<div class="note">${t("read_pick")}</div>`; return; }
@@ -1599,7 +1616,7 @@ async function tRead(m){
     const data = await jget("data/tanakh/" + bk + ".json");
     const verses = data.chapters[ch-1] || [];
     const [eps, am] = await Promise.all([bookDocs(bk), audioMap(bk)]);
-    const trOn = store.get("god_tr", LANG==="ru" ? 1 : 0) === 1;
+    const trOn = store.get("god_tr", 0) === 1;
     let ruCh = null;
     if(trOn){
       try{ ruCh = (await jget("data/tanakh-ru/" + bk + ".json")).chapters[ch-1] || null; }
@@ -1617,13 +1634,14 @@ async function tRead(m){
     const trNote = ruCh ? ` <span class="note">${esc(t("read_tr_src"))}</span>` : "";
     rF.disabled = !(am && am.f); rS.disabled = !(am && am.s);
     rF.classList.toggle("on", SPD()==="f"); rS.classList.toggle("on", SPD()==="s");
-    rview.innerHTML = `<div class="raudio">${chBtn}${trNote}</div><div class="chapter he">` + verses.map((tx,i)=>{
+    rview.innerHTML = `<div class="raudio">${chBtn}${trNote}</div><div class="chapter he${trOn?" trall":""}">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
       const cl = vmap && vmap[String(i+1)] ? vmap[String(i+1)] : null;
       const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(vmap.a)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
+      const tbtn = ruCh && ruCh[i] ? `<button class="pbtn" title="${esc(t("read_tr"))}" onclick='event.stopPropagation();trVerse(this)'>RU</button>` : "";
       const ru1 = ruCh && ruCh[i] ? `<div class="vtr">${esc(ruCh[i])}</div>` : "";
-      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}${ru1}</div>`;
+      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb}${tbtn} ${esc(tx)}${ru1}</div>`;
     }).join("") + `</div>`;
   }
   rBook.onclick = (e) => {
