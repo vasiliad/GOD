@@ -600,6 +600,29 @@ a:hover { color: var(--acc-bright); }
 .spd.on { background: rgba(201, 168, 76, 0.25); color: var(--fg); }
 .vtr { direction: ltr; text-align: right; font-size: 13px; color: var(--fg2); line-height: 1.5; margin-top: 2px; }
 
+/* дропдауны чтения — в тему сайта вместо белых нативных */
+.ddwrap { position: relative; }
+.dd { background: rgba(0, 0, 0, 0.25); border: 1px solid var(--line); color: var(--fg); padding: 9px 14px;
+  border-radius: 10px; cursor: pointer; font: inherit; text-align: left; }
+.dd:hover { border-color: var(--line2); }
+.dd .ddc { color: var(--dim); margin-left: 8px; font-size: 11px; }
+.ddch { min-width: 74px; text-align: center; }
+.ddp { display: none; position: absolute; top: calc(100% + 6px); left: 0; z-index: 60; min-width: 300px; max-height: 430px;
+  overflow-y: auto; background: var(--card-solid); border: 1px solid var(--line2); border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); padding: 6px; }
+.ddp.open { display: block; }
+[dir="rtl"] .ddp { left: auto; right: 0; }
+.ddp.ddgrid { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); gap: 4px; min-width: 264px; }
+.ddp.ddgrid.open { display: grid; }
+.ddh { color: var(--acc); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 9px 10px 4px; }
+.ddi { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 7px 10px;
+  border-radius: 8px; cursor: pointer; color: var(--fg); }
+.ddi:hover { background: rgba(201, 168, 76, 0.12); color: var(--acc); }
+.ddi.on { color: var(--acc); }
+.ddi.on::before { content: "●"; font-size: 8px; margin-right: 7px; }
+.ddgrid .ddi { justify-content: center; padding: 6px 0; }
+.ddi .ddn { color: var(--dim); font-size: 12px; }
+
 @media (max-width: 640px) {
   header { padding: 28px 16px 12px; }
   h1 { font-size: 24px; }
@@ -713,6 +736,16 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 
 <script>
 "use strict";
+/* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
+   (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
+const APPVER = "2026-10-24b";
+fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
+  const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
+  if (v && v !== APPVER && !sessionStorage.getItem("appver")) {
+    sessionStorage.setItem("appver", "1");
+    location.reload();
+  }
+}).catch(() => {});
 /* =====================================================================
    GOD — единый файл страницы. Разделы: данные, вкладки, чат, роутер.
    ===================================================================== */
@@ -1537,12 +1570,14 @@ async function tRead(m){
   const a = await analytics();
   const idx = await readIndex();
   const keys = Object.values(a.book_order).flat().filter(k=>idx[k]);
-  const opt = b => `<option value="${b}">${esc(bookName(b))} · ${idx[b]}</option>`;
+  let bVal = "", cVal = 0;
+  const caret = ' <span class="ddc">▾</span>';
+  const bLbl = () => bVal ? `${esc(bookName(bVal))} · ${idx[bVal]}` : esc(t("f_all_books"));
   m.innerHTML = `<h2>${t("read_h")}</h2>
   <div class="note">${t("read_pick")}</div>
   <div class="filters">
-    <select id="rBook"><option value="">${t("f_all_books")}</option>${Object.keys(a.book_order).map(er=>`<optgroup label="${esc(dn("era",er))}">${a.book_order[er].filter(k=>idx[k]).map(opt).join("")}</optgroup>`).join("")}</select>
-    <select id="rCh"></select>
+    <span class="ddwrap"><button id="rBook" class="dd">${t("f_all_books")}${caret}</button><div class="ddp" id="rBookP"></div></span>
+    <span class="ddwrap"><button id="rCh" class="dd ddch">—${caret}</button><div class="ddp ddgrid" id="rChP"></div></span>
     <button id="rPrev" title="${esc(t("read_prev"))}">←</button>
     <button id="rNext" title="${esc(t("read_next"))}">→</button>
     <button id="rF" class="pbtn spd" title="${esc(t("read_fast"))}">⏵</button>
@@ -1551,13 +1586,12 @@ async function tRead(m){
   </div>
   <div id="rview"><div class="note">${t("read_pick")}</div></div>`;
   const cvs = s => s.split(":").map(Number);
-  function fillChapters(){
-    const n = idx[rBook.value] || 0;
-    rCh.innerHTML = Array.from({length:n},(_,i)=>`<option value="${i+1}">${i+1}</option>`).join("");
-    rCh.value = "1";
-  }
+  const syncLbl = () => {
+    rBook.innerHTML = bLbl() + caret;
+    rCh.innerHTML = (cVal || "—") + caret;
+  };
   async function show(){
-    const bk = rBook.value, ch = +rCh.value;
+    const bk = bVal, ch = cVal;
     if(!bk){ rview.innerHTML = `<div class="note">${t("read_pick")}</div>`; return; }
     rview.innerHTML = `<div class="note waiting">${t("eps_load")}</div>`;
     const data = await jget("data/tanakh/" + bk + ".json");
@@ -1590,28 +1624,53 @@ async function tRead(m){
       return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}${ru1}</div>`;
     }).join("") + `</div>`;
   }
-  rBook.onchange = () => { fillChapters(); show(); };
-  rCh.onchange = show;
+  rBook.onclick = (e) => {
+    e.stopPropagation();
+    rBookP.innerHTML = Object.keys(a.book_order).map(er =>
+      `<div class="ddh">${esc(dn("era",er))}</div>` +
+      a.book_order[er].filter(k=>idx[k]).map(k =>
+        `<div class="ddi${k===bVal?" on":""}" data-b="${k}"><span>${esc(bookName(k))}</span><span class="ddn">${idx[k]}</span></div>`).join("")).join("");
+    rBookP.classList.toggle("open"); rChP.classList.remove("open");
+  };
+  rBookP.onclick = (e) => {
+    const it = e.target.closest(".ddi"); if(!it) return;
+    bVal = it.dataset.b; cVal = 1; syncLbl();
+    rBookP.classList.remove("open"); show();
+  };
+  rCh.onclick = (e) => {
+    e.stopPropagation();
+    const n = idx[bVal] || 0;
+    rChP.innerHTML = Array.from({length:n},(_,i)=>`<div class="ddi${i+1===cVal?" on":""}" data-c="${i+1}">${i+1}</div>`).join("");
+    rChP.classList.toggle("open"); rBookP.classList.remove("open");
+  };
+  rChP.onclick = (e) => {
+    const it = e.target.closest(".ddi"); if(!it) return;
+    cVal = +it.dataset.c; syncLbl(); rChP.classList.remove("open"); show();
+  };
   rF.onclick = () => { store.set("god_spd","f"); show(); };
   rS.onclick = () => { store.set("god_spd","s"); show(); };
   rTr.onclick = () => { store.set("god_tr", store.get("god_tr", 0) === 1 ? 0 : 1); show(); };
   rPrev.onclick = () => {
-    if(!rBook.value) return;
-    const bi = keys.indexOf(rBook.value);
-    if(+rCh.value > 1) rCh.value = +rCh.value - 1;
-    else if(bi > 0){ rBook.value = keys[bi-1]; fillChapters(); rCh.value = idx[rBook.value]; }
-    show();
+    if(!bVal) return;
+    const bi = keys.indexOf(bVal);
+    if(cVal > 1) cVal -= 1;
+    else if(bi > 0){ bVal = keys[bi-1]; cVal = idx[bVal]; }
+    syncLbl(); show();
   };
   rNext.onclick = () => {
-    if(!rBook.value) return;
-    const bi = keys.indexOf(rBook.value);
-    if(+rCh.value < idx[rBook.value]) rCh.value = +rCh.value + 1;
-    else if(bi < keys.length-1){ rBook.value = keys[bi+1]; fillChapters(); rCh.value = 1; }
-    show();
+    if(!bVal) return;
+    const bi = keys.indexOf(bVal);
+    if(cVal < idx[bVal]) cVal += 1;
+    else if(bi < keys.length-1){ bVal = keys[bi+1]; cVal = 1; }
+    syncLbl(); show();
   };
+  if(!window._ddClose){
+    window._ddClose = 1;
+    document.addEventListener("click", () => document.querySelectorAll(".ddp.open").forEach(p => p.classList.remove("open")));
+  }
   if(window._read){
     const d = window._read; window._read = null;
-    if(idx[d.book]){ rBook.value = d.book; fillChapters(); rCh.value = String(d.ch||1); show(); }
+    if(idx[d.book]){ bVal = d.book; cVal = d.ch||1; syncLbl(); show(); }
   }
 }
 async function tEpisodes(m){
