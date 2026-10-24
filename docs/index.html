@@ -592,6 +592,18 @@ a:hover { color: var(--acc-bright); }
 .vn { color: var(--dim); font-size: 12px; margin-left: 8px; user-select: none; }
 .raudio { text-align: center; margin: 10px 0 6px; }
 .raudio .note { font-size: 12px; color: var(--dim); }
+.readnote { text-align: center; }
+
+/* встроенный плеер чтения — в стиле сайта */
+.player { display: flex; align-items: center; gap: 10px; max-width: 780px; margin: 0 auto 8px;
+  padding: 10px 14px; background: var(--card); border: 1px solid var(--line2); border-radius: 12px; }
+.pplay { width: 42px; height: 42px; min-width: 42px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--gold-grad); color: #0d1322; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+.pplay:hover { filter: brightness(1.12); }
+.pbar { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.09); border-radius: 3px; cursor: pointer; }
+.pfill { height: 100%; width: 0%; background: var(--gold-grad); border-radius: 3px; }
+.ptime { font-size: 12px; color: var(--dim); min-width: 86px; text-align: center; font-variant-numeric: tabular-nums; }
+.pver { font-size: 12px; color: var(--acc); min-width: 70px; text-align: right; }
 .pbtn { background: none; border: 1px solid var(--line2); color: var(--acc); border-radius: 50%;
   width: 20px; height: 20px; line-height: 1; cursor: pointer; font-size: 9px; padding: 0; margin-left: 6px; vertical-align: middle; }
 .pbtn:hover { background: rgba(201, 168, 76, 0.2); }
@@ -634,6 +646,14 @@ a:hover { color: var(--acc-bright); }
   .he { font-size: 17px; }
   .card .v { font-size: 26px; }
   th, td { padding: 8px 10px; }
+  .ddp { max-width: calc(100vw - 40px); }
+  .dd { max-width: 58vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .verse .pbtn { width: 24px; height: 24px; font-size: 10px; }
+  .chapter { font-size: 18px; }
+  .vtr { font-size: 12px; }
+  .raudio .note { display: block; margin-top: 4px; }
+  .pver { display: none; }
+  .player { padding: 8px 10px; }
 }
 
 /* ===== ПОГРУЖЕНИЕ: клик по числу/тегу статистики — дверь в эпизоды ===== */
@@ -741,7 +761,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24e";
+const APPVER = "2026-10-24g";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -1538,20 +1558,22 @@ async function audioMap(bk){
   }
   return AMAP.p[bk];
 }
-function clipFor(am, ch, v1, v2){
-  /* → [url, begin, end] для спана; приоритет — выбранная скорость, фолбэк на fluent */
-  if(!am) return null;
+function clipList(am, ch, v1, v2){
+  /* → [[url, begin, end], ...]: выбранная скорость + fluent как запасной (дедуп по url) */
+  if(!am) return [];
+  const out = [];
   for(const v of [SPD(), "fluent"]){
     const vm = am[v] && am[v].chapters && am[v].chapters[String(ch)];
     if(vm && vm[String(v1)]){
       const b = vm[String(v1)][0];
       const e = (String(v2) in vm) ? vm[String(v2)][1] : vm[String(v1)][1];
-      return [vm.a, b, e];
+      if(!out.some(c => c[0] === vm.a)) out.push([vm.a, b, e]);
     }
   }
-  return null;
+  return out;
 }
-const PLAYER = { a: null, hi: null, stop: null };
+const PLAYER = { a: null, hi: null, stop: null, ui: null, dur: 0 };
+const fmtT = d => { if(!isFinite(d) || d <= 0) return "–:––"; const t = d|0; return (t/60|0) + ":" + String(t%60).padStart(2,"0"); };
 /* перевод у стиха: если показаны все — схлопнуть и оставить только этот; иначе toggle этого */
 function trVerse(btn){
   const v = btn.closest(".verse");
@@ -1564,25 +1586,57 @@ function trVerse(btn){
     v.classList.toggle("tr-open");
   }
 }
-function playClip(url, begin, end, hiEl){
-  if(!url) return;
-  if(!PLAYER.a) PLAYER.a = new Audio();
+/* clips = [[url, begin, end], ...] — пробуем по порядку: основной источник молчит
+   (медленный CDN/блокировка) — автоматически берём запасной (другую скорость) */
+function playClip(clips, hiEl){
+  if(!clips || !clips.length) return;
+  if(!PLAYER.a){
+    PLAYER.a = new Audio();
+    PLAYER.a.onplay = () => { const b = document.getElementById("pPlay"); if(b) b.textContent = "⏸"; };
+    PLAYER.a.onpause = () => { const b = document.getElementById("pPlay"); if(b) b.textContent = "▶"; };
+    PLAYER.a.onended = () => { const b = document.getElementById("pPlay"); if(b) b.textContent = "▶"; };
+    PLAYER.a.addEventListener("timeupdate", () => {
+      const ui = PLAYER.ui, a2 = PLAYER.a;
+      if(!ui || !a2 || !a2.src || a2.src !== ui.clips[0][0]) return;
+      if(PLAYER.dur && ui.fill) ui.fill.style.width = Math.min(100, a2.currentTime / PLAYER.dur * 100).toFixed(1) + "%";
+      if(ui.time) ui.time.textContent = fmtT(a2.currentTime) + " / " + fmtT(PLAYER.dur);
+      if(ui.vmap && ui.verses){
+        const t = a2.currentTime;
+        let cur = null;
+        for(const [v, cl] of Object.entries(ui.vmap)){
+          if(v === "a") continue;
+          if(t >= cl[0] && t < cl[1]) { cur = +v; break; }
+        }
+        if(cur !== ui.lastV){
+          ui.verses.forEach((el, i) => el.classList.toggle("playing", i + 1 === cur));
+          if(cur && ui.verses[cur - 1]) ui.verses[cur - 1].scrollIntoView({ behavior: "smooth", block: "center" });
+          ui.lastV = cur;
+        }
+      }
+    });
+  }
   const a = PLAYER.a;
   if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
   if(PLAYER.stop){ a.removeEventListener("timeupdate", PLAYER.stop); PLAYER.stop = null; }
-  const seek = () => { a.currentTime = begin; a.play(); };
-  if(a.src !== url){ a.src = url; a.addEventListener("loadedmetadata", seek, {once:true}); }
-  else seek();
-  if(hiEl){ hiEl.classList.add("playing"); PLAYER.hi = hiEl; }
-  PLAYER.stop = () => {
-    if(a.currentTime >= end){
-      a.pause();
-      if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
-      a.removeEventListener("timeupdate", PLAYER.stop);
-      PLAYER.stop = null;
-    }
+  a.onerror = null;
+  const tryN = (i) => {
+    const [u, b, e] = clips[i];
+    const seek = () => { a.currentTime = b; a.play(); };
+    a.onerror = () => { if(i + 1 < clips.length) tryN(i + 1); };
+    if(a.src !== u){ a.src = u; a.addEventListener("loadedmetadata", () => { PLAYER.dur = isFinite(a.duration) ? a.duration : 0; seek(); }, {once:true}); }
+    else seek();
+    if(hiEl){ hiEl.classList.add("playing"); PLAYER.hi = hiEl; }
+    PLAYER.stop = () => {
+      if(a.currentTime >= e){
+        a.pause();
+        if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
+        a.removeEventListener("timeupdate", PLAYER.stop);
+        PLAYER.stop = null;
+      }
+    };
+    a.addEventListener("timeupdate", PLAYER.stop);
   };
-  a.addEventListener("timeupdate", PLAYER.stop);
+  tryN(0);
 }
 
 async function tRead(m){
@@ -1632,19 +1686,46 @@ async function tRead(m){
     }
     const vm = am && am[SPD()] && am[SPD()].chapters ? am[SPD()] : (am && am.fluent ? am.fluent : null);
     const vmap = vm && vm.chapters && vm.chapters[ch] ? vm.chapters[ch] : null;
-    const chBtn = vmap ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(vmap.a)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
+    const chClips = [];
+    for(const v of [SPD(), "fluent"]){
+      const vm2 = am && am[v] && am[v].chapters && am[v].chapters[ch];
+      if(vm2 && vm2.a && !chClips.some(c => c[0] === vm2.a)) chClips.push([vm2.a, 0, 1e9]);
+    }
     const trNote = ruCh ? ` <span class="note">${esc(t("read_tr_src"))}</span>` : "";
+    const player = chClips.length ? `<div class="player">
+      <button class="pplay" id="pPlay" title="${esc(t("listen"))}">▶</button>
+      <div class="pbar" id="pBar"><div class="pfill" id="pFill"></div></div>
+      <div class="ptime" id="pTime">0:00</div>
+      <div class="pver" id="pVer">${esc(bookName(bk))} ${ch}</div>
+    </div>` : "";
     rF.disabled = !(am && am.fluent); rS.disabled = !(am && am.slower);
     rF.classList.toggle("on", SPD()==="fluent"); rS.classList.toggle("on", SPD()==="slower");
-    rview.innerHTML = `<div class="raudio">${chBtn}${trNote}</div><div class="chapter he${trOn?" trall":""}">` + verses.map((tx,i)=>{
+    rview.innerHTML = `${player}<div class="raudio"><span class="note">${esc(t("read_audio_src"))}</span>${trNote}</div><div class="chapter he${trOn?" trall":""}">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
       const cl = vmap && vmap[String(i+1)] ? vmap[String(i+1)] : null;
-      const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(vmap.a)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
+      const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(clipList(am, ch, i+1, i+1))},this.closest(".verse"))'>▶</button>` : "";
       const tbtn = ruCh && ruCh[i] ? `<button class="pbtn" title="${esc(t("read_tr"))}" onclick='event.stopPropagation();trVerse(this)'>RU</button>` : "";
       const ru1 = ruCh && ruCh[i] ? `<div class="vtr">${esc(ruCh[i])}</div>` : "";
       return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb}${tbtn} ${esc(tx)}${ru1}</div>`;
     }).join("") + `</div>`;
+    if(chClips.length){
+      PLAYER.ui = { vmap, clips: chClips, verses: [...rview.querySelectorAll(".verse")], lastV: null,
+                    fill: document.getElementById("pFill"), time: document.getElementById("pTime") };
+      document.getElementById("pPlay").onclick = () => {
+        const a2 = PLAYER.a;
+        if(a2 && a2.src === chClips[0][0] && !a2.paused){ a2.pause(); return; }
+        if(a2 && a2.src === chClips[0][0] && a2.currentTime > 0.5){ a2.play(); return; }
+        playClip(chClips);
+      };
+      document.getElementById("pBar").onclick = (e) => {
+        const a2 = PLAYER.a;
+        if(!a2 || !a2.src || !PLAYER.dur) return;
+        const r = e.currentTarget.getBoundingClientRect();
+        a2.currentTime = Math.max(0, Math.min(0.999, (e.clientX - r.left) / r.width)) * PLAYER.dur;
+        if(a2.paused) a2.play();
+      };
+    } else PLAYER.ui = null;
   }
   rBook.onclick = (e) => {
     e.stopPropagation();
@@ -1754,8 +1835,8 @@ async function showOne(b, i){
   const cvn = s => s.split(":").map(Number);
   const [c1,v1] = cvn(e.span.start), [c2,v2] = cvn(e.span.end||e.span.start);
   const am = await audioMap(b);
-  const clip = clipFor(am, c1, v1, c2===c1 ? v2 : v1);
-  let sbtn = clip ? ` <span class="cl" onclick='playClip(${JSON.stringify(clip[0])},${clip[1]},${clip[2]})'>▶ ${esc(t("listen"))}</span>` : "";
+  const clip = clipList(am, c1, v1, c2===c1 ? v2 : v1);
+  let sbtn = clip.length ? ` <span class="cl" onclick='playClip(${JSON.stringify(clip)})'>▶ ${esc(t("listen"))}</span>` : "";
   const d = document.createElement("div"); d.className = "detail";
   d.innerHTML = `<h3>${bookName(b)} ${e.span.start}–${e.span.end}</h3>
   <div><span class="tag ${e.outcome}">${dn("out",e.outcome)}</span><span class="tag">${dn("dir",e.direction)}</span>
