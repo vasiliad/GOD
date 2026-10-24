@@ -600,6 +600,10 @@ a:hover { color: var(--acc-bright); }
 .pplay { width: 42px; height: 42px; min-width: 42px; border-radius: 50%; border: none; cursor: pointer;
   background: var(--gold-grad); color: #0d1322; font-size: 15px; display: flex; align-items: center; justify-content: center; }
 .pplay:hover { filter: brightness(1.12); }
+.pstop { width: 34px; height: 34px; min-width: 34px; border-radius: 50%; cursor: pointer;
+  background: none; border: 1px solid var(--line2); color: var(--fg2); font-size: 12px;
+  display: flex; align-items: center; justify-content: center; }
+.pstop:hover { color: var(--acc); border-color: var(--acc); }
 .pbar { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.09); border-radius: 3px; cursor: pointer; }
 .pfill { height: 100%; width: 0%; background: var(--gold-grad); border-radius: 3px; }
 .ptime { font-size: 12px; color: var(--dim); min-width: 86px; text-align: center; font-variant-numeric: tabular-nums; }
@@ -761,7 +765,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24g";
+const APPVER = "2026-10-24h";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -1694,6 +1698,7 @@ async function tRead(m){
     const trNote = ruCh ? ` <span class="note">${esc(t("read_tr_src"))}</span>` : "";
     const player = chClips.length ? `<div class="player">
       <button class="pplay" id="pPlay" title="${esc(t("listen"))}">▶</button>
+      <button class="pstop" id="pStop" title="стоп">⏹</button>
       <div class="pbar" id="pBar"><div class="pfill" id="pFill"></div></div>
       <div class="ptime" id="pTime">0:00</div>
       <div class="pver" id="pVer">${esc(bookName(bk))} ${ch}</div>
@@ -1717,6 +1722,16 @@ async function tRead(m){
         if(a2 && a2.src === chClips[0][0] && !a2.paused){ a2.pause(); return; }
         if(a2 && a2.src === chClips[0][0] && a2.currentTime > 0.5){ a2.play(); return; }
         playClip(chClips);
+      };
+      document.getElementById("pStop").onclick = () => {
+        const a2 = PLAYER.a;
+        if(a2){ a2.pause(); try{ a2.currentTime = 0; }catch(e){} }
+        if(PLAYER.hi){ PLAYER.hi.classList.remove("playing"); PLAYER.hi = null; }
+        if(PLAYER.stop && a2){ a2.removeEventListener("timeupdate", PLAYER.stop); PLAYER.stop = null; }
+        if(PLAYER.ui && PLAYER.ui.fill) PLAYER.ui.fill.style.width = "0%";
+        if(PLAYER.ui && PLAYER.ui.time) PLAYER.ui.time.textContent = "0:00 / " + fmtT(PLAYER.dur);
+        if(PLAYER.ui && PLAYER.ui.verses) PLAYER.ui.verses.forEach(el => el.classList.remove("playing"));
+        if(PLAYER.ui) PLAYER.ui.lastV = null;
       };
       document.getElementById("pBar").onclick = (e) => {
         const a2 = PLAYER.a;
