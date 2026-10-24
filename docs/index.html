@@ -598,6 +598,7 @@ a:hover { color: var(--acc-bright); }
 .pch { border-radius: 14px; width: auto; padding: 3px 14px; font-size: 12px; margin: 0 8px 0 0; }
 .verse.playing, .verse.god.playing { background: rgba(201, 168, 76, 0.22); }
 .spd.on { background: rgba(201, 168, 76, 0.25); color: var(--fg); }
+.vtr { direction: ltr; text-align: right; font-size: 13px; color: var(--fg2); line-height: 1.5; margin-top: 2px; }
 
 @media (max-width: 640px) {
   header { padding: 28px 16px 12px; }
@@ -792,6 +793,7 @@ ru:{
   read_prev:"предыдущая глава", read_next:"следующая глава", read_open:"открыть в чтении",
   listen:"слушать", read_audio_src:"аудио: чтение Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"обычная скорость", read_slow:"медленно (−20%)",
+  read_tr:"перевод (русский)", read_tr_src:"перевод: Синодальный (1876) · общественное достояние",
   eps_sev:"тяжесть {n}", eps_low:"низкое доверие", eps_high:"высокое доверие",
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
@@ -862,6 +864,7 @@ en:{
   read_prev:"previous chapter", read_next:"next chapter", read_open:"open in Reading",
   listen:"listen", read_audio_src:"audio: read by Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"normal speed", read_slow:"slower (−20%)",
+  read_tr:"translation (Russian)", read_tr_src:"translation: Synodal (1876) · public domain",
   eps_sev:"severity {n}", eps_low:"low confidence", eps_high:"high confidence",
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
@@ -932,6 +935,7 @@ he:{
   read_prev:"הפרק הקודם", read_next:"הפרק הבא", read_open:"פתח בקריאה",
   listen:"האזנה", read_audio_src:"אודיו: קריאת Abraham Shmuelof · ebible.org · CC BY-NC-ND 4.0",
   read_fast:"מהירות רגילה", read_slow:"לאט",
+  read_tr:"תרגום (רוסית)", read_tr_src:"תרגום: סינודלי (1876) · נחלת הכלל",
   eps_sev:"חומרה {n}", eps_low:"אמון נמוך", eps_high:"אמון גבוה",
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
@@ -1038,7 +1042,7 @@ function renderAll(){
 /* ---------- данные ---------- */
 const cache = {};
 async function jget(u){
-  if(!cache[u]) cache[u] = await (await fetch(u)).json();
+  if(!cache[u]) cache[u] = await (await fetch(u, {cache:"no-store"})).json();   // no-store: код и данные не разъезжаются по кэшам
   return cache[u];
 }
 const BOOK_URL = b => "data/books/" + b + ".json";
@@ -1543,6 +1547,7 @@ async function tRead(m){
     <button id="rNext" title="${esc(t("read_next"))}">→</button>
     <button id="rF" class="pbtn spd" title="${esc(t("read_fast"))}">⏵</button>
     <button id="rS" class="pbtn spd" title="${esc(t("read_slow"))}">🐢</button>
+    <button id="rTr" class="pbtn spd" title="${esc(t("read_tr"))}">RU</button>
   </div>
   <div id="rview"><div class="note">${t("read_pick")}</div></div>`;
   const cvs = s => s.split(":").map(Number);
@@ -1558,6 +1563,13 @@ async function tRead(m){
     const data = await jget("data/tanakh/" + bk + ".json");
     const verses = data.chapters[ch-1] || [];
     const [eps, am] = await Promise.all([bookDocs(bk), audioMap(bk)]);
+    const trOn = store.get("god_tr", LANG==="ru" ? 1 : 0) === 1;
+    let ruCh = null;
+    if(trOn){
+      try{ ruCh = (await jget("data/tanakh-ru/" + bk + ".json")).chapters[ch-1] || null; }
+      catch(e){ ruCh = null; }
+    }
+    rTr.classList.toggle("on", trOn);
     const inSpan = {};
     for(const e of eps){
       const [c1,v1] = cvs(e.span.start), [c2,v2] = cvs(e.span.end||e.span.start);
@@ -1566,20 +1578,23 @@ async function tRead(m){
     const vm = am && am[SPD()] && am[SPD()].chapters ? am[SPD()] : (am && am.f ? am.f : null);
     const vmap = vm && vm.chapters && vm.chapters[ch] ? vm.chapters[ch] : null;
     const chBtn = vmap ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(vmap.a)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
+    const trNote = ruCh ? ` <span class="note">${esc(t("read_tr_src"))}</span>` : "";
     rF.disabled = !(am && am.f); rS.disabled = !(am && am.s);
     rF.classList.toggle("on", SPD()==="f"); rS.classList.toggle("on", SPD()==="s");
-    rview.innerHTML = `<div class="raudio">${chBtn}</div><div class="chapter he">` + verses.map((tx,i)=>{
+    rview.innerHTML = `<div class="raudio">${chBtn}${trNote}</div><div class="chapter he">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
       const cl = vmap && vmap[String(i+1)] ? vmap[String(i+1)] : null;
       const pb = cl ? `<button class="pbtn" title="${esc(t("listen"))}" onclick='event.stopPropagation();playClip(${JSON.stringify(vmap.a)},${cl[0]},${cl[1]},this.closest(".verse"))'>▶</button>` : "";
-      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}</div>`;
+      const ru1 = ruCh && ruCh[i] ? `<div class="vtr">${esc(ruCh[i])}</div>` : "";
+      return `<div class="verse${ep?" god":""}"${ep?` title="${tip}" onclick='srcDive("${bk}","${ep.span.start}")'`:""}><span class="vn">${i+1}</span>${pb} ${esc(tx)}${ru1}</div>`;
     }).join("") + `</div>`;
   }
   rBook.onchange = () => { fillChapters(); show(); };
   rCh.onchange = show;
   rF.onclick = () => { store.set("god_spd","f"); show(); };
   rS.onclick = () => { store.set("god_spd","s"); show(); };
+  rTr.onclick = () => { store.set("god_tr", store.get("god_tr", 0) === 1 ? 0 : 1); show(); };
   rPrev.onclick = () => {
     if(!rBook.value) return;
     const bi = keys.indexOf(rBook.value);
