@@ -739,13 +739,15 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
 const APPVER = "2026-10-24b";
-fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
-  const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
-  if (v && v !== APPVER && !sessionStorage.getItem("appver")) {
-    sessionStorage.setItem("appver", "1");
-    location.reload();
-  }
-}).catch(() => {});
+if (typeof location !== "undefined") {
+  fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
+    const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
+    if (v && v !== APPVER && !sessionStorage.getItem("appver")) {
+      sessionStorage.setItem("appver", "1");
+      location.reload();
+    }
+  }).catch(() => {});
+}
 /* =====================================================================
    GOD — единый файл страницы. Разделы: данные, вкладки, чат, роутер.
    ===================================================================== */
