@@ -765,7 +765,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24h";
+const APPVER = "2026-10-24i";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -1577,7 +1577,7 @@ function clipList(am, ch, v1, v2){
   return out;
 }
 const PLAYER = { a: null, hi: null, stop: null, ui: null, dur: 0 };
-const fmtT = d => { if(!isFinite(d) || d <= 0) return "–:––"; const t = d|0; return (t/60|0) + ":" + String(t%60).padStart(2,"0"); };
+const fmtT = d => { if(!isFinite(d) || d < 0) return "–:––"; const t = d|0; return (t/60|0) + ":" + String(t%60).padStart(2,"0"); };
 /* перевод у стиха: если показаны все — схлопнуть и оставить только этот; иначе toggle этого */
 function trVerse(btn){
   const v = btn.closest(".verse");
