@@ -741,7 +741,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24c";
+const APPVER = "2026-10-24d";
 if (typeof location !== "undefined") {
   fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -1528,7 +1528,7 @@ async function readIndex(){ if(!RIDX.p) RIDX.p = await jget("data/tanakh/_index.
    У ответов чата аудио есть только при дословном совпадении [HEBREW] с речью
    одного эпизода — рекомбинация не существует ни в одной записи, TTS запрещён. */
 const AMAP = { p: {} };
-const SPD = () => store.get("god_spd","f") === "s" ? "s" : "f";
+const SPD = () => store.get("god_spd","fluent") === "slower" ? "slower" : "fluent";
 async function audioMap(bk){
   if(AMAP.p[bk] === undefined){
     try{ AMAP.p[bk] = await jget("data/audio/" + bk + ".json"); }
@@ -1539,7 +1539,7 @@ async function audioMap(bk){
 function clipFor(am, ch, v1, v2){
   /* → [url, begin, end] для спана; приоритет — выбранная скорость, фолбэк на fluent */
   if(!am) return null;
-  for(const v of [SPD(), "f"]){
+  for(const v of [SPD(), "fluent"]){
     const vm = am[v] && am[v].chapters && am[v].chapters[String(ch)];
     if(vm && vm[String(v1)]){
       const b = vm[String(v1)][0];
@@ -1628,12 +1628,12 @@ async function tRead(m){
       const [c1,v1] = cvs(e.span.start), [c2,v2] = cvs(e.span.end||e.span.start);
       for(let c=c1;c<=c2;c++) for(let v=(c===c1?v1:1); v<=(c===c2?v2:200); v++) inSpan[c+":"+v] = e;
     }
-    const vm = am && am[SPD()] && am[SPD()].chapters ? am[SPD()] : (am && am.f ? am.f : null);
+    const vm = am && am[SPD()] && am[SPD()].chapters ? am[SPD()] : (am && am.fluent ? am.fluent : null);
     const vmap = vm && vm.chapters && vm.chapters[ch] ? vm.chapters[ch] : null;
     const chBtn = vmap ? `<button class="pbtn pch" onclick='playClip(${JSON.stringify(vmap.a)},0,1e9)'>▶ ${esc(t("listen"))}</button> <span class="note">${esc(t("read_audio_src"))}</span>` : "";
     const trNote = ruCh ? ` <span class="note">${esc(t("read_tr_src"))}</span>` : "";
-    rF.disabled = !(am && am.f); rS.disabled = !(am && am.s);
-    rF.classList.toggle("on", SPD()==="f"); rS.classList.toggle("on", SPD()==="s");
+    rF.disabled = !(am && am.fluent); rS.disabled = !(am && am.slower);
+    rF.classList.toggle("on", SPD()==="fluent"); rS.classList.toggle("on", SPD()==="slower");
     rview.innerHTML = `<div class="raudio">${chBtn}${trNote}</div><div class="chapter he${trOn?" trall":""}">` + verses.map((tx,i)=>{
       const ep = inSpan[ch+":"+(i+1)];
       const tip = ep ? `${esc(bookName(bk))} ${esc(ep.span.start)}–${esc(ep.span.end)} · ${esc(dn("trig",ep.trigger))} · ${esc(dn("out",ep.outcome))}` : "";
@@ -1667,8 +1667,8 @@ async function tRead(m){
     const it = e.target.closest(".ddi"); if(!it) return;
     cVal = +it.dataset.c; syncLbl(); rChP.classList.remove("open"); show();
   };
-  rF.onclick = () => { store.set("god_spd","f"); show(); };
-  rS.onclick = () => { store.set("god_spd","s"); show(); };
+  rF.onclick = () => { store.set("god_spd","fluent"); show(); };
+  rS.onclick = () => { store.set("god_spd","slower"); show(); };
   rTr.onclick = () => { store.set("god_tr", store.get("god_tr", 0) === 1 ? 0 : 1); show(); };
   rPrev.onclick = () => {
     if(!bVal) return;
