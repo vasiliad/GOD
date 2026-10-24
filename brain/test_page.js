@@ -141,6 +141,11 @@ const api = new Function(
   const heBooks = ["genesis","Judges","Psalms","Micah","Haggai"];
   const heExpected = ["בראשית","שופטים","תהלים","מיכה","חגי"];
   check("BOOK_NAMES: выборочные HE-имена", heBooks.every((b,i) => BN.he[b] === heExpected[i]));
+
+  // 8) ключи вариантов скорости в КОДЕ совпадают с ключами в ДАННЫХ (регрессия: f/s vs fluent/slower)
+  const audioGen = JSON.parse(fs.readFileSync(__dirname + "/../docs/data/audio/genesis.json", "utf8"));
+  check("аудио: данные содержат ключи fluent/slower", !!audioGen.fluent && !!audioGen.slower);
+  check("аудио: код читает fluent/slower (не f/s)", code.includes("am.fluent") && !/am\.f\b/.test(code) && !/am\.s\b/.test(code));
   console.log(`\n${pass} PASS, ${fail} FAIL`);
   process.exit(fail ? 1 : 0);
 })().catch(e => { console.error("CRASH:", e); process.exit(2); });
