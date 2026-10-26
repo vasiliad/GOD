@@ -44,6 +44,11 @@ MASTER_CORPUS = _ROOT / "output" / "episodes_TANAKH_v2.json"
 ANALYTICS = _ROOT / "docs" / "data" / "analytics.json"
 NIKUD_INDEX = _ROOT / "docs" / "data" / "nikud.json"
 EMBEDDINGS = _ROOT / "docs" / "data" / "embeddings.json"
+EMB_NEM_BIN = _ROOT / "docs" / "data" / "embeddings_nemotron.bin"
+EMB_NEM_META = _ROOT / "docs" / "data" / "embeddings_nemotron.json"
+# Адрес серверного эмбеддера (Nemotron-3-Embed-1B на сервере проекта). Пусто —
+# зеркало работает на браузерном e5-small, как и страница, когда сервер лежит.
+EMBED_URL = os.environ.get("GOD_EMBED_URL", "").strip()
 PROFILE = _ROOT / "docs" / "data" / "god_behavior_profile.json"
 
 # Классы обращения страницы → классы реестра (12 триггеров корпуса).
@@ -391,10 +396,41 @@ _VECTORS = None
 _EMBEDDER = None
 
 
+def load_nemotron_vectors():
+    """Индекс Nemotron: .bin (int8 построчно) + .json (ключи, масштабы).
+
+    Деквантование — ровно как на странице (Float32Array): значение = int8 * scale / 127.
+    """
+    meta = json.load(io.open(EMB_NEM_META, encoding="utf-8"))
+    raw = open(str(EMB_NEM_BIN), "rb").read()
+    n, dim = meta["n"], meta["dim"]
+    if len(raw) != n * dim:
+        raise ValueError("размер индекса Nemotron не совпал: %d против %d" % (len(raw), n * dim))
+    vecs = {}
+    for i, key in enumerate(meta["keys"]):
+        s = meta["scales"][i]
+        off = i * dim
+        v = [_f32((raw[off + j] - 256 if raw[off + j] > 127 else raw[off + j]) * s / 127)
+             for j in range(dim)]
+        vecs[key] = v
+    return vecs
+
+
 def load_vectors():
-    """Индекс эмбеддингов e5-small (int8 + масштаб на строку) → {book|span.start: вектор}."""
+    """Индекс эмбеддингов → {book|span.start: вектор}.
+
+    Сервер настроен — индекс Nemotron (страница берёт тот же). Сервер не настроен
+    или индекс недоступен — браузерный e5-small, как в странице.
+    """
     global _VECTORS
     if _VECTORS is None:
+        if EMBED_URL:
+            try:
+                _VECTORS = load_nemotron_vectors()
+                return _VECTORS
+            except Exception as e:
+                sys.stderr.write("индекс Nemotron недоступен (%s: %s) — беру e5-small\n"
+                                 % (type(e).__name__, e))
         idx = json.load(io.open(EMBEDDINGS, encoding="utf-8"))
         vecs = {}
         for row, meta in zip(idx["rows"], idx["meta"]):
@@ -422,6 +458,29 @@ def _embedder():
     return _EMBEDDER
 
 
+def embed_query_server(text):
+    """Вектор запроса с сервера эмбеддеров (Nemotron-3-Embed-1B).
+
+    Сервер держит ключ NVIDIA; в зеркало ключ не попадает — только адрес.
+    Любая ошибка — None: дальше идёт браузерный запасной путь, как на странице.
+    """
+    if not EMBED_URL:
+        return None
+    try:
+        import urllib.request
+        body = json.dumps({"input": text}).encode("utf-8")
+        req = urllib.request.Request(EMBED_URL.rstrip("/") + "/v1/embeddings", data=body,
+                                     headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            j = json.loads(r.read().decode("utf-8"))
+        v = j["data"][0]["embedding"]
+        return v if isinstance(v, list) else None
+    except Exception as e:
+        sys.stderr.write("сервер эмбеддеров не ответил (%s: %s) — беру e5-small\n"
+                         % (type(e).__name__, e))
+        return None
+
+
 def embed_query(text):
     """Вектор запроса — как в браузере: «query: » + mean pooling + normalize.
 
@@ -430,6 +489,9 @@ def embed_query(text):
     в torch fp32 (cos 0.996), чего хватало, чтобы перетасовать меню — страница давала
     5/14, зеркало 13/14 на одном и том же мозге.
     """
+    qv = embed_query_server(text)
+    if qv:
+        return qv
     if browser_embedder is not None and browser_embedder.available():
         return browser_embedder.query_vector(text)
     tok, mdl, torch = _embedder()

@@ -134,5 +134,24 @@
    "Exodus|3:13",
    "II_Chronicles|18:14"
   ]
- }
+ },
+ "rescue_questions_server": {
+  "зачем ты молчишь?": [
+   "I_Kings|19:9",
+   "Judges|6:11",
+   "Jeremiah|15:11",
+   "Jeremiah|45:1",
+   "Malachi|2:17",
+   "Isaiah|58:1"
+  ],
+  "мне скучно по ночам": [
+   "Jeremiah|31:35",
+   "II_Chronicles|1:1",
+   "Deuteronomy|24:10",
+   "Leviticus|5:14",
+   "Isaiah|35:3",
+   "Isaiah|60:1"
+  ]
+ },
+ "rescue_server_note": "rescue_questions_server — меню «спасательных» вопросов в серверном режиме: запрос эмбеддится Nemotron-3-Embed-1B на сервере проекта (ключ NVIDIA остаётся на сервере), индекс — docs/data/embeddings_nemotron.bin (2048 измерений, int8 построчно). Снято со страницы и с зеркала 2026-10-26; сверяется гейтом, когда задан GOD_EMBED_URL. Без сервера гейт сверяет браузерный путь e5-small (rescue_questions) — это разные пространства, поэтому меню разные."
 }

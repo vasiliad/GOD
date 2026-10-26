@@ -17,6 +17,7 @@ exit code, то есть CI падает.
 """
 import io
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -280,9 +281,28 @@ def run(verbose=True):
     # 15б) «спасательный» путь: вопросы без лексического совпадения, отбор по вектору.
     # Сверяем, только если локальная int8-модель есть (она вне git): без неё зеркало
     # считает вектор в torch fp32, и меню законно другое — гейт это не про ложь.
-    rescue = json.loads((Path(__file__).resolve().parent / "page_menus.json")
-                        .read_text(encoding="utf-8")).get("rescue_questions") or {}
-    if rescue:
+    _pm = json.loads((Path(__file__).resolve().parent / "page_menus.json")
+                      .read_text(encoding="utf-8"))
+    rescue = _pm.get("rescue_questions") or {}
+    rescue_srv = _pm.get("rescue_questions_server") or {}
+    if os.environ.get("GOD_EMBED_URL", "").strip():
+        # СЕРВЕРНЫЙ РЕЖИМ: эмбеддит Nemotron-3-Embed-1B на сервере проекта.
+        # Эталон — меню, снятые с живой страницы именно в этом режиме.
+        if rescue_srv:
+            bad_srv = []
+            for qq, page_keys in rescue_srv.items():
+                trig = answer_scheme.classify(qq)
+                ranked = answer_scheme.rank_episodes(qq, trig, eps2, 18)
+                ctx = answer_scheme.build_context(eps2, nik2, ranked[:18])
+                cand = answer_scheme.spoken_candidates(ctx, 6)
+                mkeys = ["%s|%s" % (c["book"], c["span"]["start"]) for c in cand]
+                if mkeys != page_keys:
+                    bad_srv.append((qq, mkeys, page_keys))
+            chk("меню зеркала (сервер, Nemotron) == меню живой страницы на «спасательных» вопросах (%d)" % len(rescue_srv),
+                not bad_srv, "расхождения: %s" % bad_srv[:2])
+        else:
+            print("SKIP  серверный «спасательный» путь — нет фикстуры rescue_questions_server")
+    elif rescue:
         try:
             import browser_embedder
             have_onnx = browser_embedder.available()

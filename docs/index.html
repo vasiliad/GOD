@@ -782,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-26g";
+const APPVER = "2026-10-26i";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -831,7 +831,7 @@ ru:{
   chat_h2:"Симуляция разговора с Богом",
   chat_note:"Задайте вопрос — симуляция ответит речью Танаха в 5 слоях (древний иврит · огласовка · русский · English · современный иврит) с указанием источника. Мозг — DictaLM 3.0 (12B) на Kaggle; он просыпается сам, когда GPU открывается.",
   chat_note_on:"Мозг на связи — DictaLM 3.0 (12B) на Kaggle отвечает живой речью Танаха.",
-  chat_note_off:"Мозг сейчас спит: ноутбук Kaggle засыпает после ~12 ч работы, авто-heal поднимет его сам. Пока работает корпус — «Эпизоды», «Профиль реакции», «Отчёт».",
+  chat_note_off:"Мозг сейчас спит: на этой неделе исчерпано GPU-время Kaggle (лимит 30 ч) либо сессия закрылась после ~12 ч работы. Авто-heal поднимает мозг сам каждые 6 ч. Пока работает корпус — «Эпизоды», «Профиль реакции», «Отчёт».",
   chat_note_starting:"Мозг поднимается — модель грузится на сервере (минуты).",
   chat_note_check:"Проверяем, на связи ли мозг…",
   chat_note_checkfail:"Связь с мозгом проверить не удалось — возможно, нет доступа к интернету. Корпус работает как обычно.",
@@ -908,6 +908,13 @@ ov_eps:"эпизодов взаимодействия", ov_books:"книг Та�
   dlg_acc_fail:"Живая проверка не прошла ({err}). Числа обновляет скрипт scripts/snapshot_accuracy.py.",
   sim_note:"Это исследовательская симуляция разговора с Богом на основе Танаха — не сам Бог и не религиозный совет. Ответы собирает языковая модель из дословной речи текста; каждый ответ проверяем к стихам.",
   crisis_note:"Если речь о том, чтобы причинить себе вред, — поговорите с живым человеком: бесплатные линии экстренной помощи (международный справочник).",
+  vec_nemotron:"эпизоды нашёл вектор Nemotron-3-Embed-1B на сервере проекта",
+  vec_e5small:"эпизоды нашёл вектор e5-small в браузере (сервер эмбеддеров не отвечает)",
+  vec_lex:"эпизоды нашла лексика — векторный поиск не понадобился",
+  vec_panel_server:"эмбеддинги: Nemotron-3-Embed-1B на сервере проекта — вопросы без общих слов находит вектор",
+  vec_panel_browser:"эмбеддинги: сервер проекта не отвечает — вектор считает браузер (e5-small)",
+  vec_panel_none:"эмбеддинги: недоступны — поиск только по словам",
+  vec_panel_check:"эмбеддинги: проверяем сервер проекта…",
 
   god_h:"Бог",
   msg_user:"Вы"
@@ -922,7 +929,7 @@ en:{
   chat_h2:"A simulation of conversation with God",
   chat_note:"Ask a question — the simulation will answer with Tanakh speech in 5 layers (ancient Hebrew · vocalization · Russian · English · modern Hebrew) with source citation. The brain is DictaLM 3.0 (12B) on Kaggle; it wakes by itself whenever GPU time opens up.",
   chat_note_on:"The brain is online — DictaLM 3.0 (12B) on Kaggle answers with live speech of the Tanakh.",
-  chat_note_off:"The brain is asleep now: the Kaggle notebook sleeps after ~12 h of work, auto-heal will bring it back by itself. Meanwhile the corpus works — «Episodes», «Reaction profile», «Report».",
+  chat_note_off:"The brain is asleep now: this week's Kaggle GPU time (30 h limit) is used up, or the session closed after ~12 h of work. Auto-heal brings the brain back by itself every 6 h. Meanwhile the corpus works — «Episodes», «Reaction profile», «Report».",
   chat_note_starting:"The brain is waking up — the model is loading on the server (minutes).",
   chat_note_check:"Checking whether the brain is online…",
   chat_note_checkfail:"Could not reach the brain to check its status — you may be offline. The corpus works as usual.",
@@ -999,6 +1006,13 @@ ov_eps:"interaction episodes", ov_books:"books of the Tanakh", ov_pun:"punishmen
   dlg_acc_fail:"The live check did not pass ({err}). The figures are refreshed by scripts/snapshot_accuracy.py.",
   sim_note:"This is a research simulation of a conversation with God based on the Tanakh — not God himself, and not religious advice. Answers are composed by a language model from the verbatim text; every answer is checkable against the verses.",
   crisis_note:"If this is about harming yourself, please talk to a real person: free crisis lines (international directory).",
+  vec_nemotron:"episodes were matched by the Nemotron-3-Embed-1B vector on the project server",
+  vec_e5small:"episodes were matched by the e5-small vector in your browser (the embedding server did not answer)",
+  vec_lex:"episodes were matched by word search — the vector search was not needed",
+  vec_panel_server:"embeddings: Nemotron-3-Embed-1B on the project server — the vector finds questions with no shared words",
+  vec_panel_browser:"embeddings: the project server is not answering — the vector is computed in your browser (e5-small)",
+  vec_panel_none:"embeddings: unavailable — search by words only",
+  vec_panel_check:"embeddings: checking the project server…",
 
   god_h:"God",
   msg_user:"You"
@@ -1013,7 +1027,7 @@ he:{
   chat_h2:"הדמיית שיחה עם אלוהים",
   chat_note:"שאלו שאלה — ההדמיה תענה בדיבור התנ״ך ב-5 שכבות (עברית מקראית · ניקוד · רוסית · English · עברית מודרנית) עם ציון מקור. המוח — DictaLM 3.0 (12B) על Kaggle; הוא מתעורר מעצמו כשזמן ה-GPU נפתח.",
   chat_note_on:"המוח מקוון — DictaLM 3.0 (12B) על Kaggle עונה בדיבור חי של התנ״ך.",
-  chat_note_off:"המוח ישן כעת: המחבשת ב-Kaggle נרדמת לאחר כ־12 שעות עבודה, והתיקון האוטומטי יעלה אותו מחדש. בינתיים הקורפוס עובד — «אפיזודות», «פרופיל התגובה», «הדוח».",
+  chat_note_off:"המוח ישן כעת: מעמד ה-GPU של Kaggle לשבוע מוצה (מכסת 30 שעות), או שההפעלה נסגרה אחרי כ־12 שעות עבודה. התיקון האוטומטי מעלה את המוח כל 6 שעות. בינתיים הקורפוס עובד — «אפיזודות», «פרופיל התגובה», «הדוח».",
   chat_note_starting:"המוח עולה — המודל נטען בשרת (דקות).",
   chat_note_check:"בודקים אם המוח מחובר…",
   chat_note_checkfail:"לא הצלחנו לבדוק את מצב המוח — ייתכן שאין חיבור לאינטרנט. הקורפוס עובד כרגיל.",
@@ -1090,6 +1104,13 @@ ov_eps:"אפיזודות אינטראקציה", ov_books:"ספרי התנ״ך", 
   dlg_acc_fail:"הבדיקה החיה לא עברה ({err}). המספרים מתעדכנים ב־scripts/snapshot_accuracy.py.",
   sim_note:"זו היא הדמיית מחקר של שיחה עם אלוהים על בסיס התנ״ך — לא אלוהים עצמו, ולא עצה דתית. התשובות מורכבות על ידי מודל שפה מדיבורו המילולי של הטקסט; כל תשובה ניתנת לאימות מול הפסוקים.",
   crisis_note:"אם מדובר בפגיעה בעצמך, דבר עם אדם אמיתי: קווי חירום חינםיים (מדריך בינלאומי).",
+  vec_nemotron:"האפיזודות נמצאו באמצעות וקטור Nemotron-3-Embed-1B בשרת הפרויקט",
+  vec_e5small:"האפיזודות נמצאו באמצעות וקטור e5-small בדפדפן (שרת ההטמעות לא ענה)",
+  vec_lex:"האפיזודות נמצאו לפי מילים — חיפוש וקטורי לא נדרש",
+  vec_panel_server:"הטמעות: Nemotron-3-Embed-1B בשרת הפרויקט — הווקטור מוצא שאלות ללא מילים משותפות",
+  vec_panel_browser:"הטמעות: שרת הפרויקט אינו מגיב — הווקטור מחושב בדפדפן (e5-small)",
+  vec_panel_none:"הטמעות: אינן זמינות — חיפוש לפי מילים בלבד",
+  vec_panel_check:"הטמעות: בודקים את שרת הפרויקט…",
 
   god_h:"אלוהים",
   msg_user:"אתם"
@@ -1351,9 +1372,25 @@ function queryTokens(q){
   return syn;
 }
 function isProper(w){ return /^[A-ZА-Я]/.test(w) && w.length>=4; }
-/* ---------- векторный retrieval: те же веса e5-small, что считали индекс ---------- */
+/* ---------- векторный retrieval: сервер (Nemotron) + браузерный запасной (e5-small) ----------
+   Вектор нужен там, где лексика молчит: там он — единственный тематический сигнал.
+   Источники, по порядку:
+     1) СЕРВЕР — вектор запроса считает Nemotron-3-Embed-1B (NVIDIA NIM) на своём
+        сервере: ключ NVIDIA там и только там, в страницу не попадает, и модель
+        посетителю качать не нужно. Индекс корпуса — статика рядом с сайтом:
+        data/embeddings_nemotron.bin (int8, 2050×2048) + .json (ключи, масштабы).
+     2) БРАУЗЕР (запасной) — страница сама грузит Xenova/multilingual-e5-small
+        (118 МБ) и считает вектор у себя. Работает, даже когда сервер лежит.
+     3) Ни того, ни другого — остаётся чистая лексика (меню уже собрано).
+   Адрес сервера публикует сторож на сервере (scripts/embed_watchdog.py) в
+   embed.json того же HF-датасета, что и статус мозга. */
+const EMBED_STATUS_URL = "https://huggingface.co/datasets/arabyan/god-brain-status/resolve/main/embed.json";
+let EMBSTAT = null;    // адрес сервера эмбеддингов (null = сервера нет/не отвечает)
+let EMBSTAT_T = 0;
 let VECM = null;   // null = не пытались; false = недоступен (CDN/ошибка) — тогда чистая лексика
-let EMBD = null;   // embeddings.json + деквантованные строки + карта ключей
+let EMBD = null;   // embeddings.json + деквантованные строки + карта ключей (e5-small)
+let EMBN = null;   // Nemotron: .bin + .meta + карта ключей
+let EMBENGINE = "";// чем нашёлся вектор в последнем отборе (для честной заметки)
 async function vectorReady(){
   if(VECM !== null) return VECM;
   try{
@@ -1376,6 +1413,69 @@ async function embIndex(){
     EMBD = { j, map, vecs: new Array(j.rows.length) };
   }catch(e){ EMBD = false; }
   return EMBD;
+}
+/* адрес сервера эмбеддингов: публикует сторож на сервере; кэш 5 минут */
+async function embedStatus(){
+  if(EMBSTAT && Date.now()-EMBSTAT_T < 300000) return EMBSTAT;
+  EMBSTAT_T = Date.now();
+  try{
+    const r = await fetch(EMBED_STATUS_URL, {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const j = await r.json();
+    EMBSTAT = (j && j.ok && j.url) ? j : null;
+  }catch(e){ EMBSTAT = null; }
+  return EMBSTAT;
+}
+/* вектор запроса с сервера (Nemotron). Любая ошибка — не беда: дальше браузерный
+   запасной путь (e5-small), а если и он недоступен — чистая лексика. */
+async function embedQueryServer(q){
+  const st = await embedStatus();
+  if(!st) return null;
+  const ctl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+  const timer = ctl ? setTimeout(()=>ctl.abort(), 12000) : null;
+  try{
+    const opt = {method:"POST", cache:"no-store",
+                 headers:{"Content-Type":"application/json"}, body:JSON.stringify({input:q})};
+    if(ctl) opt.signal = ctl.signal;
+    const r = await fetch(String(st.url).replace(/\\+$/,"")+"/v1/embeddings", opt);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    const j = await r.json();
+    const v = j && j.data && j.data[0] && j.data[0].embedding;
+    return Array.isArray(v) ? v : null;
+  }catch(e){ return null; }
+  finally{ if(timer) clearTimeout(timer); }
+}
+/* индекс Nemotron: .bin (int8 построчно) + .json (ключи, масштабы) */
+async function embIndexNemotron(){
+  if(EMBN !== null) return EMBN;
+  try{
+    const meta = await jget("data/embeddings_nemotron.json");
+    const resp = await fetch("data/embeddings_nemotron.bin", {cache:"no-store"});
+    if(!resp.ok) throw new Error("HTTP "+resp.status);
+    const q = new Int8Array(await resp.arrayBuffer());
+    if(!meta.keys || q.length !== meta.keys.length*meta.dim) throw new Error("размер индекса не совпал");
+    const map = {};
+    for(let i=0;i<meta.keys.length;i++) map[meta.keys[i]] = i;
+    EMBN = { meta, map, q, vecs:new Array(meta.keys.length) };
+  }catch(e){ EMBN = false; }
+  return EMBN;
+}
+function dequantN(idx, i){
+  const d = idx.meta.dim, s = idx.meta.scales[i], off = i*d, out = new Float32Array(d);
+  for(let j=0;j<d;j++) out[j] = idx.q[off+j] * s / 127;   // int8 → float, как на странице для e5
+  return out;
+}
+/* z-нормировка косинусов: сырые cos слипаются в полосу (~0.8) и не различают,
+   z = (cos−среднее)/std ранжирует относительно — полоса уходит */
+function applyVector(cosRows, w){
+  if(cosRows.length > 20){
+    const mean = cosRows.reduce((acc,x)=>acc+x[1],0)/cosRows.length;
+    const std = Math.sqrt(cosRows.reduce((acc,x)=>acc+(x[1]-mean)*(x[1]-mean),0)/cosRows.length) || 1e-9;
+    for(const [entry, cos] of cosRows){
+      entry[0] += w * (cos-mean)/std;
+      entry[3] = cos;                    // для отладки: сырой косинус в хвосте
+    }
+  }
 }
 const QCACHE = {};
 async function embedQuery(q){
@@ -1432,28 +1532,48 @@ async function retrieve(q, k){
      модели. Вектор подключается лишь там, где лексика молчит (перефразировка без
      общего слова), и тогда он — единственный тематический сигнал, вес полный. */
   if(!lexHit){
-    const idx = await embIndex();
-    const qv = idx ? await embedQuery(q) : null;
-    if(qv && idx){
-      const cosRows = [];
-      for(const entry of scored){
-        const ri = idx.map[entry[1]+"|"+entry[2].span.start];
-        if(ri !== undefined){
-          if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
-          cosRows.push([entry, cosv(qv, idx.vecs[ri])]);
+    let applied = false;
+    /* 1) СЕРВЕР: Nemotron-3-Embed-1B. Модель посетителю качать не нужно, ключ
+       NVIDIA остаётся на сервере. Индекс — статический, рядом с сайтом. */
+    const st = await embedStatus();
+    if(st){
+      const qv = await embedQueryServer(q);
+      const idxN = qv ? await embIndexNemotron() : null;
+      if(qv && idxN && qv.length === idxN.meta.dim &&
+         (!st.model || st.model === idxN.meta.model)){
+        const cosRows = [];
+        for(const entry of scored){
+          const ri = idxN.map[entry[1]+"|"+entry[2].span.start];
+          if(ri !== undefined){
+            if(!idxN.vecs[ri]) idxN.vecs[ri] = dequantN(idxN, ri);
+            cosRows.push([entry, cosv(qv, idxN.vecs[ri])]);
+          }
         }
-      }
-      // z-нормировка косинусов: сырые cos e5 слипаются в полосу (~0.8) и не различают,
-      // z = (cos-среднее)/std ранжирует относительно — полоса уходит
-      if(cosRows.length > 20){
-        const mean = cosRows.reduce((acc,x)=>acc+x[1],0)/cosRows.length;
-        const std = Math.sqrt(cosRows.reduce((acc,x)=>acc+(x[1]-mean)*(x[1]-mean),0)/cosRows.length) || 1e-9;
-        for(const [entry, cos] of cosRows){
-          entry[0] += VEC_W * (cos-mean)/std;
-          entry[3] = cos;                    // для отладки: сырой косинус в хвосте
-        }
+        applyVector(cosRows, VEC_W);
+        applied = cosRows.length > 20;
+        EMBENGINE = applied ? "nemotron" : "lex";
       }
     }
+    /* 2) ЗАПАСНОЙ ПУТЬ: сервер лежит или не ответил — вектор считает сам браузер
+       (e5-small, 118 МБ модели). Старый путь, он никуда не делся. */
+    if(!applied){
+      const idx = await embIndex();
+      const qv = idx ? await embedQuery(q) : null;
+      if(qv && idx){
+        const cosRows = [];
+        for(const entry of scored){
+          const ri = idx.map[entry[1]+"|"+entry[2].span.start];
+          if(ri !== undefined){
+            if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
+            cosRows.push([entry, cosv(qv, idx.vecs[ri])]);
+          }
+        }
+        applyVector(cosRows, VEC_W);
+        applied = cosRows.length > 20;
+        EMBENGINE = applied ? "e5small" : "lex";
+      }
+    }
+    if(!applied && !EMBENGINE) EMBENGINE = "lex";
   }
   /* при равных очках — книга и стих: иначе порядок зависит от того, как обошли корпус,
      и страница с зеркалом дают разное меню (а с ним — разный ответ) */
@@ -2061,6 +2181,7 @@ function chatUI(m){
   <div class="modes">
     <span id="brainDot" title="">…</span> <span id="brainState" style="color:var(--acc)">…</span>
   </div>
+  <div class="note" id="vecNote"></div>
   <div class="note">${t(localBrainCfg().endpoint ? "chat_note_local_model" : "chat_note")}</div>
 
   <div class="filters" style="margin-top:12px"><input id="cq" placeholder="${t("input_ph")}"></div>
@@ -2069,7 +2190,8 @@ function chatUI(m){
   /* Один режим: все вопросы идут через мозг (LLM + retrieval + цитаты + 6 слоёв).
      Если мозг спит — автоматический фолбэк на ближайший прецедент корпуса. */
   window.brainSyncInput = () => {};   // заглушка: ввод не блокируется никогда
-  paintBrainNote();                    // сразу, без ожидания сети — заметка не мигает пустотой
+  paintBrainNote();                    // сразу, без ожидания сети — заметка не мигает пустотом
+  embedStatus().then(paintVecNote);    // кто эмбеддит: сервер (Nemotron) или браузер (e5-small)
   const rr = async () => { await brainRefresh(); paintBrainNote(); };
   rr();
   if(window._brainTimer) clearInterval(window._brainTimer);
@@ -2099,7 +2221,8 @@ function chatUI(m){
       wt.remove();
       const cr = crisisNote(q);
       if(cr) log.insertAdjacentHTML("beforeend", cr);
-      log.insertAdjacentHTML("beforeend", html);
+      log.insertAdjacentHTML("beforeend", html + vecNoteHTML());
+      paintVecNote();
     }catch(e){
       wt.remove();
       log.insertAdjacentHTML("beforeend", errHTML(e));
@@ -2112,6 +2235,26 @@ function chatUI(m){
 /* =====================================================================
    ВКЛАДКИ: обзор, книги, эпизоды, профиль, отчёт, о проекте
    ===================================================================== */
+/* честная заметка: чем нашлись эпизоды для последнего вопроса.
+   Три состояния: серверный Nemotron, браузерный e5-small (сервер лежит) или
+   чистая лексика (не сработал ни один вектор). */
+function vecNoteHTML(){
+  const k = EMBENGINE === "nemotron" ? "vec_nemotron"
+          : EMBENGINE === "e5small" ? "vec_e5small"
+          : EMBENGINE === "lex" ? "vec_lex" : "";
+  if(!k) return "";
+  return `<div class="note" style="opacity:.8">${esc(t(k))}</div>`;
+}
+/* панель чата: какая модель эмбеддингов доступна прямо сейчас (до вопроса тоже) */
+function vecPanelHTML(){
+  const k = !EMBSTAT_T ? "vec_panel_check" : (EMBSTAT ? "vec_panel_server" : "vec_panel_browser");
+  return `<div class="note" style="opacity:.8">${esc(t(k))}</div>`;
+}
+function paintVecNote(){
+  const el = document.getElementById("vecNote");
+  if(el) el.textContent = vecPanelHTML().replace(/<[^>]+>/g, "");
+}
+
 /* ---------- погружение: каждое число статистики — дверь в эпизоды ---------- */
 function dive(f){ window._dive = f || {}; CURTAB = "episodes"; renderAll(); }
 function srcDive(b, start){ window._dive = {book:b}; window._diveOpen = start; CURTAB = "episodes"; renderAll(); }
