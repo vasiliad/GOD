@@ -1,4 +1,5 @@
 {
+ "corpus_source": "data/tanakh (корневой, консонантный)",
  "total_verses": 23206,
  "pipeline_lexicon": [
   "אביר יעקב",
@@ -93,9 +94,13 @@
   },
   {
    "name": "יהוה נסי",
-   "count": 0,
-   "books": [],
-   "first_refs": [],
+   "count": 1,
+   "books": [
+    "Exodus"
+   ],
+   "first_refs": [
+    "Exodus 17:15"
+   ],
    "in_pipeline_lexicon": true,
    "ambiguous": false
   },
@@ -116,9 +121,14 @@
   },
   {
    "name": "יהוה צדקנו",
-   "count": 0,
-   "books": [],
-   "first_refs": [],
+   "count": 2,
+   "books": [
+    "Jeremiah"
+   ],
+   "first_refs": [
+    "Jeremiah 23:6",
+    "Jeremiah 33:16"
+   ],
    "in_pipeline_lexicon": true,
    "ambiguous": false
   },
@@ -780,7 +790,7 @@
   },
   {
    "name": "פני יהוה",
-   "count": 254,
+   "count": 259,
    "books": [
     "Daniel",
     "Deuteronomy",
@@ -796,18 +806,18 @@
     "I_Samuel"
    ],
    "first_refs": [
+    "Daniel 9:13",
     "Daniel 9:20",
     "Deuteronomy 1:45",
     "Deuteronomy 4:10",
-    "Deuteronomy 6:25",
-    "Deuteronomy 9:18"
+    "Deuteronomy 6:25"
    ],
    "in_pipeline_lexicon": false,
    "ambiguous": false
   },
   {
    "name": "נאם יהוה",
-   "count": 252,
+   "count": 254,
    "books": [
     "Amos",
     "Ezekiel",
@@ -902,7 +912,7 @@
    "אלהי*": 10,
    "שדי": 9,
    "יהוה": 6,
-   "אלוה": 2
+   "פני יהוה": 2
   },
   "Deuteronomy": {
    "יהוה": 413,
@@ -910,7 +920,7 @@
    "אל (голая форма)": 128,
    "יהוה (с предлогом ב/ל/כ)": 35,
    "אלהים": 29,
-   "פני יהוה": 22
+   "פני יהוה": 25
   },
   "Ecclesiastes": {
    "אל (голая форма)": 28,
@@ -1035,7 +1045,7 @@
   "Jeremiah": {
    "יהוה": 604,
    "אל (голая форма)": 292,
-   "נאם יהוה": 162,
+   "נאם יהוה": 163,
    "אלהי*": 81,
    "יהוה צבאות": 76,
    "דבר יהוה": 62
@@ -1177,7 +1187,7 @@
    "יהוה": 98,
    "יהוה צבאות": 46,
    "אל (голая форма)": 35,
-   "נאם יהוה": 18,
+   "נאם יהוה": 19,
    "דבר יהוה": 13,
    "יהוה (с предлогом ב/ל/כ)": 8
   },

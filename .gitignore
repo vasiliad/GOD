@@ -36,3 +36,7 @@ check_he*.txt
 
 # Agent
 .agent/
+
+# Brain runtime (статус живого мозга; пересоздаётся при старте, в git не нужен)
+brain/brain_local.json
+brain/brain_now.json
