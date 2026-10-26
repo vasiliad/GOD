@@ -29,7 +29,7 @@ jobs:
           node-version: '20'
       - name: "Корпус: счётчики, fill-rate, равенство публикуемой копии"
         run: python scripts/verify_corpus.py
-      - name: "Самопроверки скриптов (12/12)"
+      - name: "Самопроверки скриптов (13/13)"
         run: python scripts/selftest_all.py
       - name: "Паритет: страница ↔ зеркало схемы ответа"
         run: python scripts/page_parity.py

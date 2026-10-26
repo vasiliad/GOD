@@ -28,6 +28,7 @@ SELFTESTS = [
     ("audit_god_names", "--test"),
     ("answer_guard", "--test"),
     ("answer_scheme", "--test"),
+    ("eval_persona", "--test"),
     ("record_dialogues", "--test"),
     ("page_parity", "--test"),
     ("verify_corpus", "--test"),

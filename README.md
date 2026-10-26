@@ -47,6 +47,8 @@
 
 **Замер на живом мозге** (DictaLM 3.0 12B): тематика по золотому эталону 14/14 (расширенный набор), 6/14 (строгое ядро), меню содержит эталон 14/14, сверено с реестром 14/14 (`python scripts/eval_topics.py --pool 18 --action 1 --stage full`). Золотой эталон (`scripts/topic_gold.json`) собран чтением речи Бога в каждом эпизоде, а не по выбору модели.
 
+**А хватит ли промта «отвечай как Яхве»?** Проверено замером (`python scripts/eval_persona.py`, тот же мозг, те же 5 вопросов, та же сверка): персонажный промпт без корпуса — **0 из 5** подтверждённых ответов (в среднем 32 % слов реплики встречаются в корпусе, одна цитата — из книги вне Танаха: «Откровение 20:14»), тот же промпт с контрактом шести секций — **1 из 5**, схема проекта — **5 из 5** при 100 % слов в корпусе. Подробности и разбор научных рекомендаций — [`docs/advisory.md`](docs/advisory.md).
+
 ## Инструменты (`scripts/`)
 
 | Скрипт | Что делает |
@@ -62,18 +64,19 @@
 | `build_reading.py` | Данные читалки: полный текст 39 книг с огласовкой и кантиляцией |
 | `build_audio.py`, `build_ru.py` | Аудио-таймкоды глав и русский перевод (Синодальный 1876) |
 | `verify_corpus.py` | Гейт целостности данных (0 провалов) |
-| `selftest_all.py` | Гейт самотестов (12/12 PASS) |
+| `selftest_all.py` | Гейт самотестов (13/13 PASS) |
 | `test_accuracy.py` | Живой E2E-гейт мозга: 10 вопросов → контракт 6 секций + сверка цитат и источников с корпусом |
 | `answer_scheme.py` | Зеркало логики страницы на Python: отбор кандидатов, форма ответа, блоки промптов |
 | `answer_guard.py` | Сверка ответа с реестром («правило S»): покрытие, цитата, вердикт |
 | `page_parity.py` | Паритет страницы и зеркала: словари, логика, числа, живое меню (47/47) |
 | `eval_topics.py` | Гейт тематики по золотому эталону (14 вопросов): меню, выбор, сверка |
+| `eval_persona.py` | Гейт персоны: сколько даёт промт «ты — Яхве» против схемы (0–1 из 5 против 5 из 5) |
 | `record_dialogues.py` | Запись живых диалогов мозга для витрины «Диалоги» |
 | `bench_retrieval.py` | Слепой бенчмарк retrieval (оценивает человек) |
 | `merge_audit_v2.py` | Аудит покрытия каждой книги |
 | `run_v2_agents.py`, `pilot_v2_prepare.py` | Подготовка батчей и промптов экстракции |
 
-У гейтовых скриптов есть режим `--test`/`--selftest`: `verify_corpus.py`, `selftest_all.py`, `god_chat.py`, `god_profile.py`, `god_behavior.py`, `analytics_v2.py`, `dedup_overlaps.py`, `audit_god_names.py`, `test_accuracy.py`, `answer_guard.py`, `answer_scheme.py`, `record_dialogues.py`, `page_parity.py`. Общие гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (12/12 PASS), `answer_scheme.py --test` (48/48), `page_parity.py --test` (47/47 сверок страницы и зеркала), `node brain/test_page.js` (77/77 PASS), живой E2E `scripts/test_accuracy.py` (10 вопросов: 10/10 секций, 10/10 сверено с реестром, 10/10 источников, 10/10 полных ответов; оценка 100%). Детерминированные гейты гоняет CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — push и pull request, Python 3.11 + Node 20.
+У гейтовых скриптов есть режим `--test`/`--selftest`: `verify_corpus.py`, `selftest_all.py`, `god_chat.py`, `god_profile.py`, `god_behavior.py`, `analytics_v2.py`, `dedup_overlaps.py`, `audit_god_names.py`, `test_accuracy.py`, `answer_guard.py`, `answer_scheme.py`, `eval_persona.py`, `record_dialogues.py`, `page_parity.py`. Общие гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (13/13 PASS), `answer_scheme.py --test` (48/48), `page_parity.py --test` (47/47 сверок страницы и зеркала), `eval_persona.py --test` (11/11), `node brain/test_page.js` (80/80 PASS), живой E2E `scripts/test_accuracy.py` (10 вопросов: 10/10 секций, 10/10 сверено с реестром, 10/10 источников, 10/10 полных ответов; оценка 100%). Детерминированные гейты гоняет CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — push и pull request, Python 3.11 + Node 20.
 
 ## Данные
 
