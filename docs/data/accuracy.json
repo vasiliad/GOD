@@ -1,0 +1,145 @@
+{
+ "generated": "2026-10-26T04:46:23Z",
+ "ok": true,
+ "sections": "10/10",
+ "grounded": "10/10",
+ "sources": "10/10",
+ "full": "10/10",
+ "score": 100.0,
+ "threshold": 60.0,
+ "model": "god-brain",
+ "brain_source": "локальный мозг (--url)",
+ "scheme": "шаг 1 выбор эпизода (temperature 0) → шаг 2 формулировка из одного эпизода → шаг 3 сверка с реестром",
+ "questions": [
+  {
+   "q": "как тебя зовут?",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Exodus",
+    "start": "3:13"
+   }
+  },
+  {
+   "q": "я боюсь умереть",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "II_Kings",
+    "start": "20:1"
+   }
+  },
+  {
+   "q": "почему ты допустил зло в мире?",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Job",
+    "start": "38:1"
+   }
+  },
+  {
+   "q": "сотворение мира",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "genesis",
+    "start": "1:1"
+   }
+  },
+  {
+   "q": "я согрешил и хочу исправиться",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Exodus",
+    "start": "32:30"
+   }
+  },
+  {
+   "q": "спаси меня от беды",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Judges",
+    "start": "10:6"
+   }
+  },
+  {
+   "q": "что такое завет с тобой?",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Jeremiah",
+    "start": "31:31"
+   }
+  },
+  {
+   "q": "благодарю тебя за всё",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Psalms",
+    "start": "46:1"
+   }
+  },
+  {
+   "q": "почему праведники страдают?",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "Job",
+    "start": "38:1"
+   }
+  },
+  {
+   "q": "хочу узнать твою волю",
+   "ok": true,
+   "sections": 6,
+   "grounded": true,
+   "sources": true,
+   "mode": "verified",
+   "ctx_cov": 1.0,
+   "selected": {
+    "book": "II_Samuel",
+    "start": "5:17"
+   }
+  }
+ ]
+}

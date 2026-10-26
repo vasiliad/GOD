@@ -10,13 +10,20 @@
     python scripts/build_embeddings.py            # полный прогон → docs/data/embeddings.json
     python scripts/build_embeddings.py --test     # самопроверка: размерность, норма, семантика
 
-Порядок строк = порядку обхода страницы: book_order → книга → эпизоды файла по порядку.
+Порядок строк = порядку обхода страницы: book_order → книга → эпизоды по порядку.
 Каждая строка несёт (book, span.start, span.end) для сверки на странице.
+
+Источник эпизодов — МАСТЕР output/episodes_TANAKH_v2.json (словарь {книга: [эп]}),
+тот же корпус, что опубликован в docs/data/books/*.json и на странице (2050 эпизодов
+после дедупликации перекрытий). Файлы по книгам (2056) больше не читаются: они содержат
+6 дублирующихся эпизодов, слитых dedup_overlaps.py, и строки для них не нужны.
 """
-import base64, glob, io, json, math, os, sys
+import base64, io, json, math, os, sys
 
 _REPO = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT = os.path.join(_REPO, "docs", "data", "embeddings.json")
+MASTER = os.path.join(_REPO, "output", "episodes_TANAKH_v2.json")
+ANALYTICS = os.path.join(_REPO, "docs", "data", "analytics.json")
 MODEL = "intfloat/multilingual-e5-small"
 DIM = 384
 
@@ -28,15 +35,18 @@ def episode_text(e):
 
 
 def rows_in_order():
-    """[(book, episode)] в том же порядке, что и everyBook() на странице."""
-    a = json.load(io.open(os.path.join(_REPO, "docs", "data", "analytics.json"), encoding="utf-8"))
+    """[(book, episode)] в том же порядке, что и everyBook() на странице:
+    book_order из analytics.json → книга → эпизоды мастер-корпуса по порядку."""
+    a = json.load(io.open(ANALYTICS, encoding="utf-8"))
+    master = json.load(io.open(MASTER, encoding="utf-8"))
+    order = [book for era in a["book_order"].values() for book in era]
+    missing = [b for b in master if b not in order]
+    if missing:
+        raise SystemExit("книги мастера отсутствуют в book_order: " + ", ".join(missing))
     out = []
-    for era in a["book_order"].values():
-        for book in era:
-            p = os.path.join(_REPO, "output", f"episodes_{book}_v2.json")
-            if os.path.exists(p):
-                for e in json.load(io.open(p, encoding="utf-8")):
-                    out.append((book, e))
+    for book in order:
+        for e in master.get(book, []):
+            out.append((book, e))
     return out
 
 
@@ -89,6 +99,16 @@ def main():
 
     rows_src = rows_in_order()
     print("эпизодов в порядке обхода:", len(rows_src))
+    # страница ищет вектор по ключу book|span.start (map-indexed): дубль ключа
+    # сделал бы одну строку недостижимой — проверяем до записи
+    keys = [b + "|" + e["span"]["start"] for b, e in rows_src]
+    if len(set(keys)) != len(keys):
+        seen, dup = set(), []
+        for k in keys:
+            if k in seen:
+                dup.append(k)
+            seen.add(k)
+        raise SystemExit("дубли ключей book|span.start: " + ", ".join(dup[:10]))
     x = encode(model, tok, [episode_text(e) for _, e in rows_src])
     meta = [{"b": b, "s1": e["span"]["start"], "s2": e["span"]["end"]} for b, e in rows_src]
     payload = {"model": MODEL, "dim": DIM, "meta": meta, "rows": quantize_rows(x)}

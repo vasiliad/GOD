@@ -1,0 +1,39 @@
+# Детерминированный офлайн-гейт GOD2.
+# Что защищает: целостность корпуса (2050 эпизодов, fill-rate критических полей,
+# равенство публикуемой копии docs/data/books мастер-корпусу), логику страницы и
+# самопроверки скриптов, а также ПАРИТЕТ страницы и зеркала схемы ответа
+# (scripts/page_parity.py): расхождение означало бы, что пользователь видит одно,
+# а скрипты-гейты считают другое. Живой мозг на Kaggle и сеть здесь не участвуют:
+# спящий инстанс не должен ронять CI, а вот обнуление данных или расхождение
+# корпусов — должно. Любой гейт с ненулевым exit code роняет job.
+
+name: CI (offline gates)
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: "Корпус: счётчики, fill-rate, равенство публикуемой копии"
+        run: python scripts/verify_corpus.py
+      - name: "Самопроверки скриптов (12/12)"
+        run: python scripts/selftest_all.py
+      - name: "Паритет: страница ↔ зеркало схемы ответа"
+        run: python scripts/page_parity.py
+      - name: "Страница: офлайн/онлайн-логика brain.json"
+        run: node brain/test_page.js
+      - name: "Самопроверка верификатора (ловит пустые поля и расхождения корпусов)"
+        run: python scripts/verify_corpus.py --test

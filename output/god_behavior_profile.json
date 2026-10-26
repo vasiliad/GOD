@@ -1,7 +1,7 @@
 {
  "metadata": {
   "version": "behavioral-v1 (episodes v2)",
-  "episodes": 2056,
+  "episodes": 2050,
   "books": [
    "Amos",
    "Daniel",
@@ -50,31 +50,31 @@
    "punishment": 0.241,
    "revelation": 0.178,
    "unclear": 0.12,
-   "blessing": 0.091,
-   "covenant": 0.071,
-   "answer_granted": 0.071,
+   "blessing": 0.092,
+   "covenant": 0.072,
+   "answer_granted": 0.07,
    "silence": 0.067,
    "compliance": 0.067,
-   "rescue": 0.061,
+   "rescue": 0.06,
    "delayed": 0.022,
    "refusal": 0.011
   },
   "direction": {
-   "god_initiated": 0.552,
-   "human_initiated": 0.344,
+   "god_initiated": 0.553,
+   "human_initiated": 0.343,
    "divine_action": 0.104
   },
   "via": {
-   "prophet": 0.411,
-   "direct": 0.371,
-   "unclear": 0.136,
+   "prophet": 0.412,
+   "direct": 0.37,
+   "unclear": 0.137,
    "vision": 0.036,
    "internal": 0.021,
-   "angel": 0.018,
+   "angel": 0.017,
    "dream": 0.007
   },
   "addressee": {
-   "nation": 0.479,
+   "nation": 0.478,
    "individual": 0.372,
    "foreign_individual": 0.043,
    "humanity": 0.041,
@@ -109,18 +109,17 @@
    "typical_quote": "אם יראה איש באנשים האלה הדור הרע הזה את הארץ הטובה אשר נשבעתי לתת לאבתיכם זולתי "
   },
   "covenant_follow_up": {
-   "n": 272,
+   "n": 271,
    "outcome_p": {
-    "covenant": 0.441,
-    "revelation": 0.18,
+    "covenant": 0.443,
+    "revelation": 0.181,
     "blessing": 0.151,
-    "compliance": 0.121,
+    "compliance": 0.122,
     "rescue": 0.044,
     "punishment": 0.026,
     "refusal": 0.011,
     "answer_granted": 0.011,
     "unclear": 0.007,
-    "delayed": 0.004,
     "silence": 0.004
    },
    "severity_mean": 2.53,
@@ -134,13 +133,13 @@
    "typical_quote": "רב לכם שבת בהר הזה פנו וסעו לכם ובאו הר האמרי ואל כל שכניו בערבה בהר ובשפלה ובנג"
   },
   "disobedience": {
-   "n": 352,
+   "n": 350,
    "outcome_p": {
-    "punishment": 0.801,
+    "punishment": 0.803,
     "revelation": 0.077,
     "unclear": 0.04,
     "compliance": 0.026,
-    "refusal": 0.02,
+    "refusal": 0.017,
     "answer_granted": 0.011,
     "silence": 0.009,
     "blessing": 0.009,
@@ -158,20 +157,20 @@
    "typical_quote": "כה אמר יהוה על שלשה פשעי יהודה ועל ארבעה לא אשיבנו על מאסם את תורת יהוה וחקיו לא"
   },
   "distress": {
-   "n": 189,
+   "n": 188,
    "outcome_p": {
-    "silence": 0.243,
-    "rescue": 0.19,
-    "answer_granted": 0.164,
-    "unclear": 0.148,
+    "silence": 0.245,
+    "rescue": 0.191,
+    "answer_granted": 0.16,
+    "unclear": 0.149,
     "delayed": 0.09,
-    "blessing": 0.058,
+    "blessing": 0.059,
     "revelation": 0.053,
     "compliance": 0.032,
     "refusal": 0.011,
     "punishment": 0.011
    },
-   "severity_mean": 2.98,
+   "severity_mean": 2.99,
    "top_emotions": [
     "ужас спутников",
     "бессилие Даниила",
@@ -226,19 +225,19 @@
    "typical_quote": "בא אתה וכל ביתך אל התבה כי אתך ראיתי צדיק לפני בדור הזה"
   },
   "gratitude": {
-   "n": 88,
+   "n": 87,
    "outcome_p": {
-    "unclear": 0.466,
-    "blessing": 0.182,
-    "silence": 0.159,
-    "answer_granted": 0.068,
-    "compliance": 0.045,
-    "rescue": 0.045,
+    "unclear": 0.46,
+    "blessing": 0.184,
+    "silence": 0.161,
+    "answer_granted": 0.069,
+    "compliance": 0.046,
+    "rescue": 0.046,
     "refusal": 0.011,
     "revelation": 0.011,
     "covenant": 0.011
    },
-   "severity_mean": 1.59,
+   "severity_mean": 1.6,
    "top_emotions": [
     "радость от дарованного добра",
     "память о притеснении и вопле к Богу в Египте",
@@ -321,14 +320,14 @@
    "typical_quote": "דניאל עתה יצאתי להשכילך בינה בתחלת תחנוניך יצא דבר ואני באתי להגיד כי חמודות אתה"
   },
   "unprompted": {
-   "n": 692,
+   "n": 691,
    "outcome_p": {
-    "revelation": 0.335,
-    "punishment": 0.257,
+    "revelation": 0.336,
+    "punishment": 0.258,
     "unclear": 0.126,
     "blessing": 0.097,
-    "rescue": 0.068,
-    "compliance": 0.066,
+    "rescue": 0.067,
+    "compliance": 0.067,
     "covenant": 0.025,
     "delayed": 0.01,
     "answer_granted": 0.009,
@@ -368,13 +367,13 @@
  },
  "by_trigger_direction": {
   "unprompted": {
-   "god_initiated": 554,
+   "god_initiated": 553,
    "divine_action": 59,
    "human_initiated": 79
   },
   "disobedience": {
-   "god_initiated": 257,
-   "divine_action": 73,
+   "god_initiated": 256,
+   "divine_action": 72,
    "human_initiated": 22
   },
   "intercession": {
@@ -404,16 +403,16 @@
   },
   "distress": {
    "god_initiated": 23,
-   "human_initiated": 152,
+   "human_initiated": 151,
    "divine_action": 14
   },
   "covenant_follow_up": {
    "god_initiated": 228,
    "divine_action": 21,
-   "human_initiated": 23
+   "human_initiated": 22
   },
   "gratitude": {
-   "human_initiated": 84,
+   "human_initiated": 83,
    "divine_action": 3,
    "god_initiated": 1
   },
@@ -431,13 +430,144 @@
   "revelation": 2.63,
   "punishment": 4.31,
   "unclear": 2.07,
-  "answer_granted": 2.68,
+  "answer_granted": 2.69,
   "silence": 2.88,
   "rescue": 2.82,
   "blessing": 1.63,
   "delayed": 2.91,
-  "refusal": 3.57,
+  "refusal": 3.55,
   "covenant": 2.59,
   "compliance": 2.13
+ },
+ "response_modes": {
+  "complaint": {
+   "mode": "acts_silently",
+   "confidence": 0.62,
+   "distribution": {
+    "acts_silently": 0.62,
+    "speaks_and_acts": 0.37,
+    "silence": 0.01
+   },
+   "total": 115
+  },
+  "covenant_follow_up": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.83,
+   "distribution": {
+    "speaks_and_acts": 0.83,
+    "acts_silently": 0.15,
+    "speaks_only": 0.01,
+    "silence": 0.0
+   },
+   "total": 271
+  },
+  "disobedience": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.75,
+   "distribution": {
+    "speaks_and_acts": 0.75,
+    "acts_silently": 0.24,
+    "speaks_only": 0.01
+   },
+   "total": 350
+  },
+  "distress": {
+   "mode": "acts_silently",
+   "confidence": 0.73,
+   "distribution": {
+    "acts_silently": 0.73,
+    "speaks_and_acts": 0.24,
+    "silence": 0.02,
+    "speaks_only": 0.01
+   },
+   "total": 188
+  },
+  "divine_test": {
+   "mode": "acts_silently",
+   "confidence": 0.55,
+   "distribution": {
+    "acts_silently": 0.55,
+    "speaks_and_acts": 0.45
+   },
+   "total": 11
+  },
+  "faithfulness": {
+   "mode": "acts_silently",
+   "confidence": 0.82,
+   "distribution": {
+    "acts_silently": 0.82,
+    "speaks_and_acts": 0.14,
+    "silence": 0.03,
+    "speaks_only": 0.01
+   },
+   "total": 118
+  },
+  "gratitude": {
+   "mode": "acts_silently",
+   "confidence": 0.77,
+   "distribution": {
+    "acts_silently": 0.77,
+    "silence": 0.13,
+    "speaks_and_acts": 0.1
+   },
+   "total": 87
+  },
+  "inquiry": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.52,
+   "distribution": {
+    "speaks_and_acts": 0.52,
+    "acts_silently": 0.47,
+    "speaks_only": 0.01
+   },
+   "total": 101
+  },
+  "intercession": {
+   "mode": "acts_silently",
+   "confidence": 0.52,
+   "distribution": {
+    "acts_silently": 0.52,
+    "speaks_and_acts": 0.46,
+    "silence": 0.02
+   },
+   "total": 46
+  },
+  "prayer": {
+   "mode": "acts_silently",
+   "confidence": 0.75,
+   "distribution": {
+    "acts_silently": 0.75,
+    "speaks_and_acts": 0.24,
+    "silence": 0.02
+   },
+   "total": 55
+  },
+  "unprompted": {
+   "mode": "speaks_and_acts",
+   "confidence": 0.78,
+   "distribution": {
+    "speaks_and_acts": 0.78,
+    "acts_silently": 0.21,
+    "silence": 0.0,
+    "speaks_only": 0.0
+   },
+   "total": 691
+  },
+  "vow": {
+   "mode": "acts_silently",
+   "confidence": 0.76,
+   "distribution": {
+    "acts_silently": 0.76,
+    "silence": 0.18,
+    "speaks_and_acts": 0.06
+   },
+   "total": 17
+  }
+ },
+ "response_mode_legend": {
+  "speaks_and_acts": "Бог говорит И действует (основной паттерн для непослушания, завета)",
+  "acts_silently": "Бог действует МОЛЧА — без слов, только действие (доминирует для мольбы, молитвы, верности)",
+  "silence": "Бог молчит полностью — ни слова, ни действия",
+  "speaks_only": "Бог только говорит без видимого действия (редчайший паттерн — 0-1%)"
  }
 }

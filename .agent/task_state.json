@@ -1,0 +1,523 @@
+﻿{
+  "project": "GOD2",
+  "version": "3.3-answer-scheme",
+  "updated": "2026-10-26",
+  "notes": "Состояние на 2026-10-26. Поставка: корпус v2 (2 050 эпизодов в 39 книгах), живой мозг llama.cpp + DictaLM 3.0 12B (локальный адрес или Kaggle), сайт docs/ (GitHub Pages), читалка с аудио и переводом, RAG-подход вместо fine-tuning. Схема формирования ответа: отбор кандидатов (лексика, детерминированно, без мозга) → выбор эпизода мозгом (temp 0, блок [ACTION] и строка формы ответа) → формулировка из одного эпизода (temp 0.15) → сверка с реестром («правило S»). Вектор e5-small — только спасатель (когда лексика молчит). Страница — источник истины, scripts/answer_scheme.py — зеркало, scripts/page_parity.py — 47/47 сверок. Замер на живом мозге: тематика 14/14 (расширенный эталон), 6/14 (строгое ядро), меню 14/14, сверено с реестром 14/14; точность 10/10 по всем осям. Подробно: SPEC.md, раздел «Схема формирования ответа».",
+  "tasks": [
+    {
+      "id": "data-001",
+      "name": "Сбор текстов Танаха (Sefaria API)",
+      "status": "done",
+      "deps": [],
+      "workflow": "/agent-data",
+      "files": [
+        "data/tanakh/Genesis.json",
+        "data/tanakh/Exodus.json",
+        "data/tanakh/Leviticus.json",
+        "data/tanakh/Numbers.json",
+        "data/tanakh/Deuteronomy.json",
+        "data/tanakh/_index.json"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/download_tanakh.py. Факт: 39 книг, 929 глав, 23 206 стихов. Источник — Sefaria, версия «Miqra according to the Masorah», CC BY-SA 4.0: атрибуция Sefaria обязательна, текст НЕ в общественном достоянии."
+    },
+    {
+      "id": "data-002",
+      "name": "Сбор текстов Кумранских свитков (DSS)",
+      "status": "cancelled",
+      "deps": [],
+      "workflow": "/agent-data",
+      "files": [
+        "data/dss/_index.json"
+      ],
+      "done": false,
+      "notes": "Не выполнено: открытых лицензированных транскрипций, пригодных для разметки по тому же контракту, нет. data/dss/_index.json = {} (пусто). Слой DSS в поставку не входит."
+    },
+    {
+      "id": "data-003",
+      "name": "Канонический список имён Бога в ВЗ (24 имени)",
+      "status": "done",
+      "deps": [],
+      "workflow": "/agent-data",
+      "files": [
+        "data/god_names.json"
+      ],
+      "done": true,
+      "notes": "JSON со 24 записями (hebrew, transliteration, meaning). Аудит форм в корпусе — scripts/audit_god_names.py (41 форма в регекс-листе; отчёт output/god_names_audit.json). В SPEC v1 был список из 59 имён — он не соответствовал данным."
+    },
+    {
+      "id": "contacts-001",
+      "name": "Реестр контактов (глагол + имя Бога)",
+      "status": "done",
+      "deps": [
+        "data-001",
+        "data-003"
+      ],
+      "workflow": "/agent-contacts",
+      "files": [
+        "output/contacts_registry.json"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/extract_contacts.py. 402 ситуации. Покрывает ТОЛЬКО речевые формулы «глагол+имя»; полные контакты — в эпизодах v2 (output/episodes_TANAKH_v2.json)."
+    },
+    {
+      "id": "registry-001",
+      "name": "Реестр ситуаций взаимодействия",
+      "status": "done",
+      "deps": [
+        "contacts-001"
+      ],
+      "workflow": "/agent-registry",
+      "files": [
+        "output/situations_registry.json",
+        "output/situations.csv"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/build_registry.py. Реестр v1; рабочая единица проекта с 2026-03 — эпизод контракта v2."
+    },
+    {
+      "id": "psych-001",
+      "name": "Психоанализ v3: поведенческое кодирование (6 методик + FBI)",
+      "status": "done",
+      "deps": [
+        "registry-001"
+      ],
+      "workflow": "/agent-psych",
+      "files": [
+        "output/god_profile.json",
+        "output/behavior_patterns.json",
+        "output/situations_coded.json"
+      ],
+      "done": true,
+      "notes": "Скрипты: code_behaviors.py + psych_analysis.py. Профили v1 — ИЛЛЮСТРАТИВНЫ, цитировать как результат запрещено (урок 3 в SPEC.md); рабочий профиль поведения — output/god_behavior_profile.json."
+    },
+    {
+      "id": "linguistics-001",
+      "name": "Лингвистический анализ речи Бога (лексика, синтаксис, формулы)",
+      "status": "done",
+      "deps": [
+        "registry-001"
+      ],
+      "workflow": "/agent-linguistics",
+      "files": [
+        "output/god_vocabulary.json",
+        "output/speech_patterns.json"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/linguistic_analysis.py."
+    },
+    {
+      "id": "psych-002",
+      "name": "Второй прогон кодирования: trigger propagation + god_speech",
+      "status": "done",
+      "deps": [
+        "psych-001"
+      ],
+      "workflow": "/agent-psych",
+      "files": [
+        "output/situations_coded.json"
+      ],
+      "done": true,
+      "notes": "Завершено: 100% заполненность behavior_type (сигнал .agent/signals/psych-002.done)."
+    },
+    {
+      "id": "sentiment-001",
+      "name": "Sentiment Analysis: эмоциональная динамика по книгам и эпохам",
+      "status": "done",
+      "deps": [
+        "psych-001"
+      ],
+      "workflow": "/agent-sentiment",
+      "files": [
+        "output/sentiment_timeline.json",
+        "output/sentiment_by_book.json"
+      ],
+      "done": true,
+      "notes": "VADER + scripts/sentiment_analysis.py."
+    },
+    {
+      "id": "sources-001",
+      "name": "Разбивка речи Бога по источникам (J/E/D/P) и проверка гипотезы",
+      "status": "done",
+      "deps": [
+        "registry-001"
+      ],
+      "workflow": "/agent-sources",
+      "files": [
+        "output/god_profile_by_source.json"
+      ],
+      "done": true,
+      "notes": "YHWH=J, Elohim=E, Deu=D, Lev=P (scripts/source_analysis.py). Файл output/source_hypothesis.json удалён: имя не соответствовало содержанию (урок 5 в SPEC.md) — теперь проверка документарной гипотезы называется честно."
+    },
+    {
+      "id": "network-001",
+      "name": "Сетевой анализ: человек ↔ Бог (ребра = пары «человек — Бог»)",
+      "status": "done",
+      "deps": [
+        "psych-001"
+      ],
+      "workflow": "/agent-network",
+      "files": [
+        "output/god_network.json",
+        "output/god_network.gexf",
+        "output/network_stats.json"
+      ],
+      "done": true,
+      "notes": "NetworkX. Атрибут ребра: behavior_type. Скрипт: scripts/network_analysis.py."
+    },
+    {
+      "id": "events-001",
+      "name": "Event-Driven анализ: цепочки «стимул → реакция»",
+      "status": "done",
+      "deps": [
+        "psych-001"
+      ],
+      "workflow": "/agent-events",
+      "files": [
+        "output/behavioral_loops.json",
+        "output/stimulus_response_matrix.json"
+      ],
+      "done": true,
+      "notes": "Скользящее окно по стихам: стимул → реакция. Скрипт: scripts/event_analysis.py."
+    },
+    {
+      "id": "topics-001",
+      "name": "Topic Modeling: темы книг и профиль тем",
+      "status": "done",
+      "deps": [
+        "data-001"
+      ],
+      "workflow": "/agent-topics",
+      "files": [
+        "output/topics_leviticus.json",
+        "output/topics_deuteronomy.json",
+        "output/topics_job.json",
+        "output/topics_profile.json"
+      ],
+      "done": true,
+      "notes": "LDA (gensim). Скрипт: scripts/topic_modeling.py."
+    },
+    {
+      "id": "linguistics-002",
+      "name": "Концептуальный анализ: лингвистика против социологии (14 критериев)",
+      "status": "done",
+      "deps": [
+        "linguistics-001"
+      ],
+      "workflow": "/agent-linguistics",
+      "files": [
+        "output/concept_analysis.json"
+      ],
+      "done": true,
+      "notes": "Лингвистический против социологического объяснения: 60,7% против 39,3%. Скрипт: scripts/concept_analysis.py."
+    },
+    {
+      "id": "llm-001",
+      "name": "Учитель v1: LM Studio + DictaLM-3.0-24B-Thinking",
+      "status": "done",
+      "deps": [
+        "data-001"
+      ],
+      "workflow": "/agent-llm",
+      "files": [
+        ".agent/signals/lmstudio-ready.done"
+      ],
+      "done": true,
+      "notes": "Этап v1 отработал: модель поднята на localhost:1234 (сигнал .agent/signals/lmstudio-ready.done). В текущем контуре не используется — LM Studio заменён llama.cpp на Kaggle, а датасет учителя забракован (см. llm-002, llm-003)."
+    },
+    {
+      "id": "llm-002",
+      "name": "Генерация reasoning-датасета (DictaLM 3.0 24B)",
+      "status": "done",
+      "deps": [
+        "psych-002",
+        "sentiment-001",
+        "sources-001",
+        "network-001",
+        "events-001",
+        "topics-001",
+        "linguistics-002",
+        "llm-001"
+      ],
+      "workflow": "/agent-llm",
+      "files": [
+        "output/reasoning_dataset.jsonl",
+        "output/reasoning_dataset_clean.jsonl",
+        "output/reasoning_dataset_rejected.jsonl"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/generate_reasoning_dataset.py. 400 строк: 346 принято, 54 отклонено. Датасет забракован проверкой на утечки мысли и инструкций учителя (урок 4 в SPEC.md) — поэтому fine-tuning не запускался."
+    },
+    {
+      "id": "llm-003",
+      "name": "Unsloth LoRA fine-tuning (DictaLM 2.0 Instruct 7B)",
+      "status": "cancelled",
+      "deps": [
+        "llm-001",
+        "llm-002"
+      ],
+      "workflow": "/agent-llm",
+      "files": [
+        "models/god2-lora/adapter_config.json"
+      ],
+      "done": false,
+      "notes": "Не запускалось: после забраковки датасета выбран RAG-подход (гибридный retrieval по корпусу + композиция ответа моделью). Каталог models/ не создан, ученик DictaLM 2.0 7B не использовался."
+    },
+    {
+      "id": "llm-004",
+      "name": "Экспорт god2.gguf и запуск в LM Studio",
+      "status": "cancelled",
+      "deps": [
+        "llm-003"
+      ],
+      "workflow": "/agent-llm",
+      "files": [
+        "models/god2.gguf"
+      ],
+      "done": false,
+      "notes": "Не состоялся вслед за llm-003: финальной дообученной модели нет. Живой режим — DictaLM-3.0-Nemotron-12B-Instruct через llama.cpp на Kaggle (см. brain-001)."
+    },
+    {
+      "id": "corpus-v2-001",
+      "name": "Корпус v2: 2 050 эпизодов в 39 книгах (контракт 17 полей)",
+      "status": "done",
+      "deps": [
+        "data-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "output/episodes_TANAKH_v2.json"
+      ],
+      "done": true,
+      "notes": "Мастер-корпус: 39 книг, 2 050 эпизодов. Публикуемая копия docs/data/books/*.json (39 файлов) равна мастеру поле-в-поле — расхождений 0. Извлечение и разметка: scripts/run_v2_agents.py, scripts/pilot_v2_prepare.py, scripts/merge_audit_v2.py."
+    },
+    {
+      "id": "corpus-v2-002",
+      "name": "Глобальная дедупликация перекрытий (2 056 → 2 050)",
+      "status": "done",
+      "deps": [
+        "corpus-v2-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "output/episodes_TANAKH_v2.json"
+      ],
+      "done": true,
+      "notes": "Скрипт: scripts/dedup_overlaps.py. Файлы по книгам output/episodes_*_v2.json остались преддедупликационными (2 056) — это норма, а не ошибка; в публикуемых данных 2 050."
+    },
+    {
+      "id": "gates-001",
+      "name": "Гейт целостности корпуса (verify_corpus.py)",
+      "status": "done",
+      "deps": [
+        "corpus-v2-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "scripts/verify_corpus.py"
+      ],
+      "done": true,
+      "notes": "0 провалов: счётчики, fill-rate критических полей, равенство публикуемой копии мастеру, покрытие nikud и аудио. Все проверки PASS (2026-10-25)."
+    },
+    {
+      "id": "gates-002",
+      "name": "Гейт самотестов скриптов (selftest_all.py, 12/12 PASS)",
+      "status": "done",
+      "deps": [
+        "gates-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "scripts/selftest_all.py"
+      ],
+      "done": true,
+      "notes": "scripts/selftest_all.py: 12/12 PASS (god_chat, god_profile, god_behavior, analytics_v2, dedup_overlaps, audit_god_names, answer_guard 40/40, answer_scheme 48/48, record_dialogues 62/62, page_parity 47/47, verify_corpus, JS-синтаксис страницы)."
+    },
+    {
+      "id": "analytics-001",
+      "name": "Аналитика v2 и поведенческий профиль корпуса",
+      "status": "done",
+      "deps": [
+        "corpus-v2-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "docs/data/analytics.json",
+        "output/god_behavior_profile.json"
+      ],
+      "done": true,
+      "notes": "Скрипты: scripts/analytics_v2.py, scripts/god_behavior.py, scripts/god_profile.py. В аналитике corpus.episodes = 2050, books = 39."
+    },
+    {
+      "id": "retrieval-001",
+      "name": "Retrieval: лексика как основной сигнал, вектор e5-small — только спасатель",
+      "status": "done",
+      "deps": [
+        "corpus-v2-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "docs/data/embeddings.json",
+        "scripts/build_embeddings.py"
+      ],
+      "done": true,
+      "notes": "Лексика (слова, имя, синонимы, мосты RU/EN/HE, класс обращения, форма ответа) — основной сигнал. Вектор int8 e5-small (2 050 эмбеддингов) подключается только когда лексика молчит: тогда он единственный тематический сигнал. Замер на золотом эталоне: прироста меню не даёт ни один вес (13/14 при 0; 0,05; 0,1; 0,25; 0,5; 1,0). Страница и зеркало совпадают и на обычном пути, и на «спасательном» (2/2 вопроса)."
+    },
+    {
+      "id": "brain-001",
+      "name": "Живой мозг чата: llama.cpp + DictaLM-3.0-Nemotron-12B-Instruct на Kaggle",
+      "status": "done",
+      "deps": [
+        "retrieval-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "brain/kernel.py"
+      ],
+      "done": true,
+      "notes": "brain/kernel.py: сборка GGUF (dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF, Q5_K_M), llama-server, туннель cloudflared, публикация статуса в HF-датасете arabyan/god-brain-status. Живой чат — единственный режим ответа; corpusReply в docs/index.html намеренно не вызывается (решение владельца 2026-10-22: «неправильный ответ хуже никакого»)."
+    },
+    {
+      "id": "gates-003",
+      "name": "Живой E2E-гейт точности мозга (test_accuracy.py)",
+      "status": "done",
+      "deps": [
+        "brain-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "scripts/test_accuracy.py"
+      ],
+      "done": true,
+      "notes": "scripts/test_accuracy.py на живом мозге: 10/10 секций, 10/10 сверено с реестром, 10/10 источников из реестра, 10/10 полных ответов (оценка 100%, порог 60%)."
+    },
+    {
+      "id": "web-001",
+      "name": "Сайт: браузер корпуса, читалка и чат (docs/index.html)",
+      "status": "done",
+      "deps": [
+        "corpus-v2-001",
+        "retrieval-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "docs/index.html"
+      ],
+      "done": true,
+      "notes": "Вкладки: Симуляция, Обзор, Книги, Чтение, Эпизоды, Профиль реакции, Отчёт, О проекте (RU/EN/HE). Node-тесты страницы: brain/test_page.js — 27/27 PASS (было 17/17)."
+    },
+    {
+      "id": "audio-001",
+      "name": "Аудио чтений Танаха: 929 глав в двух вариантах",
+      "status": "done",
+      "deps": [
+        "reading-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "docs/data/audio/Genesis.json",
+        "scripts/build_audio.py"
+      ],
+      "done": true,
+      "notes": "«fluent» — archive.org, item HebBible_AShmuelof (Abraham Shmuelof); «slower» — HF-датасет arabyan/tanakh-audio (mp3 извлечены из slower-EPUB ebible.org дословно). Лицензия обоих — CC BY-NC-ND 4.0: некоммерчески (NC), дословно без нарезки (ND), с атрибуцией (BY). Таймкоды стихов — SMIL (Media Overlays) ebible.org."
+    },
+    {
+      "id": "reading-001",
+      "name": "Читалка Танаха: полный текст с огласовкой и русским переводом",
+      "status": "done",
+      "deps": [
+        "data-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "docs/data/tanakh/Genesis.json",
+        "docs/data/tanakh-ru/Genesis.json"
+      ],
+      "done": true,
+      "notes": "39 книг, 929 глав, 23 206 стихов (Sefaria, CC BY-SA 4.0 — атрибуция обязательна). Русский перевод — Синодальный 1876 (общественное достояние), 877 из 929 глав; в остальных — честные null по отсутствующим в синодальной нумерации стихам. Сборка: scripts/build_reading.py, scripts/build_nikud.py, scripts/build_ru.py."
+    },
+    {
+      "id": "ci-001",
+      "name": "CI: офлайн-гейты на push и pull request",
+      "status": "done",
+      "deps": [
+        "gates-001",
+        "gates-002",
+        "web-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        ".github/workflows/ci.yml"
+      ],
+      "done": true,
+      "notes": "Python 3.11 + Node 20; гоняет verify_corpus.py, selftest_all.py, brain/test_page.js и verify_corpus.py --test. Живой мозг и сеть в CI не участвуют: спящий инстанс не должен ронять сборку."
+    },
+    {
+      "id": "docs-001",
+      "name": "Документация: README, LICENSE, NOTICE, SPEC",
+      "status": "done",
+      "deps": [
+        "ci-001"
+      ],
+      "workflow": "/manual",
+      "files": [
+        "README.md",
+        "LICENSE",
+        "docs/NOTICE.md",
+        "SPEC.md"
+      ],
+      "done": true,
+      "notes": "2026-10-25: документация приведена в соответствие с фактической поставкой — корпус 2 050, живой чат только через мозг, лицензии по активам (код MIT, аннотации CC BY 4.0, аудио CC BY-NC-ND 4.0, Танах Sefaria CC BY-SA 4.0), раздел SPEC «Фактическая поставка (2026-10)»."
+    },
+    {
+      "id": "answer-scheme-001",
+      "name": "Схема формирования ответа: отбор → выбор → формулировка → сверка",
+      "status": "done",
+      "deps": [
+        "registry-001",
+        "brain-001"
+      ],
+      "workflow": "scripts/answer_scheme.py + docs/index.html",
+      "files": [
+        "scripts/answer_scheme.py",
+        "scripts/answer_guard.py",
+        "docs/index.html"
+      ],
+      "done": true,
+      "notes": "ШАГ 1 отбор кандидатов детерминирован (лексика + класс + форма, 18 → 6 с речью Бога); ШАГ 2 выбор эпизода мозгом (temp 0, 16 токенов, ответ S<n>, блок [ACTION] с профилем класса и строка формы ответа); ШАГ 3 формулировка из одного эпизода (temp 0.15, 900 токенов, шесть слоёв); ШАГ 4 сверка с реестром (ctx_cov ≥ 0.80 → verified, цитата → corpus, иначе reject и показ прецедента). Замер на живом мозге: 14/14 тематика (расширенный эталон), 6/14 строгое ядро, 14/14 меню, 14/14 сверено с реестром."
+    },
+    {
+      "id": "answer-scheme-002",
+      "name": "Строгая таблица формы ответа и исключение вопросительных маркеров",
+      "status": "done",
+      "deps": [
+        "answer-scheme-001"
+      ],
+      "workflow": "scripts/answer_scheme.py + scripts/page_parity.py",
+      "files": [
+        "scripts/answer_scheme.py",
+        "docs/index.html",
+        "scripts/page_parity.py"
+      ],
+      "done": true,
+      "notes": "Форма — это род ответа: утешение = blessing/rescue/covenant, объяснение = revelation (Бог называет причину), прощение = answer_granted/covenant/blessing/revelation. Размытая таблица давала промахи: на «почему ты допустил зло» в меню шли ответы Моисею о медлительности, на «дай мне силы» — откровение об идолах. Вопросительные маркеры (почему, зачем, какой, какая, какие, сколько) убраны из тематических токенов: это тип вопроса, а не тема. В блок выбора ушёл полный summary_ru (обрезка на 200 символах рвала фразы)."
+    },
+    {
+      "id": "gates-004",
+      "name": "Гейт паритета страницы и зеркала + гейт тематики по золотому эталону",
+      "status": "done",
+      "deps": [
+        "answer-scheme-001"
+      ],
+      "workflow": "scripts/page_parity.py + scripts/eval_topics.py",
+      "files": [
+        "scripts/page_parity.py",
+        "scripts/page_menus.json",
+        "scripts/topic_gold.json",
+        "scripts/eval_topics.py"
+      ],
+      "done": true,
+      "notes": "page_parity.py сверяет словари, логику токенов, таблицу формы, пороги, порядок сортировки и ЖИВОЕ меню, снятое с браузера (14 вопросов + 2 «спасательных»): 47/47. eval_topics.py — золотой эталон тематики (14 вопросов), эталон собран чтением речи Бога, а не по выбору модели. Найденная паритетом ошибка: в «спасательном» пути зеркала терялся третий элемент тройки — отбор падал с ValueError на вопросах без лексического совпадения (исправлено, закрыто тестом)."
+    }
+  ]
+}

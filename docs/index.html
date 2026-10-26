@@ -383,6 +383,23 @@ tr:last-child td { border-bottom: none; }
   line-height: 1.6;
 }
 
+/* Оговорка о статусе симуляции — должна быть видна, а не спрятана в подвал */
+.disclaim {
+  border-left: 3px solid var(--acc);
+  background: rgba(201, 168, 76, 0.07);
+  color: var(--fg2);
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 10px 14px;
+  margin: 12px 0;
+  border-radius: 0 6px 6px 0;
+}
+[dir="rtl"] .disclaim {
+  border-left: none;
+  border-right: 3px solid var(--acc);
+  border-radius: 6px 0 0 6px;
+}
+
 .note.waiting {
   color: var(--acc);
   animation: pulse 2s ease-in-out infinite;
@@ -765,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-24i";
+const APPVER = "2026-10-26d";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -812,18 +829,26 @@ ru:{
   tab_profile:"Профиль реакции", tab_report:"Отчёт", tab_about:"О проекте",
   lang_btn:"язык",
   chat_h2:"Симуляция разговора с Богом",
-  chat_note:"Задайте вопрос — симуляция ответит речью Танаха в 5 слоях (древний иврит · огласовка · русский · English · современный иврит) с указанием источника. Мозг — DictaLM 3.0 (12B) на Kaggle; его GPU-лимиты обновляются по субботам — пока лимитов нет, симуляция недоступна: приходите в воскресенье.",
-  mode_corpus:"Корпусный", mode_live:"Живой (LLM)", mode_cfg:"⚙ настройки бэкенда",
-  b_on:"Симуляция готова — задайте ваш вопрос.",
-  b_starting:"Голос Бога поднимается — модель грузится (минуты); ввод в живом режиме откроется сам.",
-  b_off:"Симуляция недоступна — GPU-лимиты Kaggle обновятся в субботу. Приходите в воскресенье!",
-  brain_off_note:"Симуляция временно недоступна: мозг проекта — DictaLM 3.0 (12B) на Kaggle — спит, GPU-лимиты обновятся в субботу. Приходите в воскресенье!",
+  chat_note:"Задайте вопрос — симуляция ответит речью Танаха в 5 слоях (древний иврит · огласовка · русский · English · современный иврит) с указанием источника. Мозг — DictaLM 3.0 (12B) на Kaggle; он просыпается сам, когда GPU открывается.",
+  chat_note_on:"Мозг на связи — DictaLM 3.0 (12B) на Kaggle отвечает живой речью Танаха.",
+  chat_note_off:"Мозг сейчас спит: ноутбук Kaggle засыпает после ~12 ч работы, авто-heal поднимет его сам. Пока работает корпус — «Эпизоды», «Профиль реакции», «Отчёт».",
+  chat_note_starting:"Мозг поднимается — модель грузится на сервере (минуты).",
+  chat_note_check:"Проверяем, на связи ли мозг…",
+  chat_note_checkfail:"Связь с мозгом проверить не удалось — возможно, нет доступа к интернету. Корпус работает как обычно.",
+  chat_note_local:"Мозг на связи — свой адрес (локальный сервер DictaLM 3.0). Ответ идёт по нему, не через Kaggle.",
+  chat_note_local_model:"Мозг — DictaLM 3.0 (12B), запущенный на своём сервере: ответы идут по своему адресу, а не через Kaggle.",
+b_on:"Симуляция готова — задайте ваш вопрос.",
+  b_starting:"Мозг поднимается…",
+  b_off:"Мозг спит.",
+  b_local:"Свой мозг на связи.",
+  brain_off_note:"Мозг сейчас спит: ноутбук Kaggle после ~12 ч работы засыпает, а GPU-проект открывается неровно. Авто-heal поднимет мозг сам — попробуйте позже. А пока корпус открыт полностью.",
   off_explore:"Пока мозг спит, корпус открыт — погружайтесь:",
   b_on_tip:"голос Бога готов", b_starting_tip:"голос Бога поднимается: модель грузится на сервере (минуты)",
-  b_off_tip:"мозг проекта (DictaLM 3.0 на Kaggle) спит — GPU-лимиты обновятся в субботу; авто-heal поднимет его сам",
+  b_off_tip:"мозг проекта (DictaLM 3.0 на Kaggle) спит — ноутбук засыпает после ~12 ч; авто-heal поднимет его сам",
+  b_local_tip:"свой адрес мозга (локальный сервер) — ответы идут по нему, а не через Kaggle",
   input_ph:"задайте ваш вопрос… (любой язык)",
   input_ph_starting:"голос Бога поднимается — поле откроется само (минуты)",
-  input_ph_off:"голос Бога спит — включён «Корпусный» режим или перезапусти мозг",
+  input_ph_off:"голос Бога спит — авто-heal поднимет его; попробуйте позже",
   searching:"поиск в корпусе…", answering:"Бог отвечает…",
   corpus_precedent:"Прецедент из корпуса — реальная речь, без генерации.",
   no_precedent:"Релевантного прецедента в корпусе нет.",
@@ -832,20 +857,23 @@ ru:{
   sec_en_mh:"Подстрочные переводы EN и современного иврита для свободной реплики — в живом режиме (⚙: ваш LM Studio/Ollama или ключ; в сессии с моделью — всегда).",
   sec_action:"действие", src:"источник: ", sources:"источники: ",
   expected:"ожидаемая реакция по триггеру",
+  beh_line:"поведение по реестру", beh_out:"исходы",
   memory:"память диалога: проступки {o} · благодать {g} · реплика №{n}",
   ru_layer_note:"русский слой модели собран плохо — показана корпусная аннотация эпизода-источника",
-  brain_unavail:"Мозг недоступен ({e}) — ниже ответ прецедентом из корпуса.",
-  brain_silent:"мозг молчит — отвечаю речью корпуса…",
-  err_body:"Ошибка запроса ({e}). Мозг проекта мог уснуть (ноутбук Kaggle останавливается после ~12 ч; индикатор на кнопке «Живой»). Переключитесь на «Корпусный» режим — он работает всегда, или задайте свой бэкенд в ⚙.",
-  cfg_note:"Пустой endpoint = авто (мозг проекта). Свои ключи остаются в localStorage вашего браузера и не хранятся на сервере. LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions",
-  cfg_ep_ph:"endpoint (пусто = мозг проекта)", cfg_md_ph:"model (необяз.)", cfg_key_ph:"API key (необяз.)",
-  cfg_save:"сохранить", cfg_saved:"сохранено ✓",
-  ov_eps:"эпизодов взаимодействия", ov_books:"книг Танаха", ov_pun:"эпизодов-наказаний",
+  guard_ok:"сверено с реестром",
+  he_layer_note:"реплика модели не подтверждена реестром — показан проверенный прецедент из корпуса",
+  src_fixed:"источник уточнён по реестру",
+  nikud_note:"огласовка модели не совпала с репликой — показана огласовка из корпуса",
+  en_layer_note:"английский слой содержит иврит — опущен",
+  mh_layer_note:"современный иврит не распознан — опущен",
+err_body:"Ошибка запроса ({e}). Мозг проекта (DictaLM 3.0 на Kaggle) мог уснуть или потерять туннель — авто-heal поднимет его сам. Пока смотрите корпус: «Обзор», «Эпизоды», «Профиль реакции», «Отчёт».",
+  err_body_local:"Ошибка запроса ({e}). Свой адрес мозга не ответил — проверьте, что локальный сервер запущен (например, на http://127.0.0.1:18099). Пока смотрите корпус: «Обзор», «Эпизоды», «Профиль реакции», «Отчёт».",
+ov_eps:"эпизодов взаимодействия", ov_books:"книг Танаха", ov_pun:"эпизодов-наказаний",
   ov_pun_b:"из них 79% — объявленные оракулы", ov_sev:"средняя тяжесть (1–5)",
   ov_init:"инициатив у Бога", ov_init_b:"человек инициирует 34%",
   ov_era_h:"Портрет по эпохам", ov_era_b:"тяжесть {s} · молчание {si}% · кара {p}%",
   ov_all_h:"Весь корпус по исходам",
-  ov_note:"Асимметрия: наказание детерминировано проступком (57% кар — за непослушание; мольба наказана в 0,4% случаев), явная милость событийна — 2,6% эпизодов, обычно через заступничество или покаяние.",
+  ov_note:"Асимметрия: наказание детерминировано проступком (57% кар — за непослушание; мольба наказана лишь в 2 случаях из 494 кар), явная милость исключительна — 2,6% эпизодов (53 из 2050), и в трети случаев приходит по собственной инициативе Бога, а не по чужой просьбе.",
   books_h:"Книги ({n})", th_book:"Книга", th_eps:"Эпизоды", th_sev:"Тяжесть", th_out:"Исходы",
   th_sil:"Молчание", th_pun:"Кара", th_era:"Эпоха",
   eps_h:"Эпизоды", f_all_books:"все книги", f_all_out:"все исходы", f_all_trig:"все триггеры", f_all_dir:"все направления", f_search:"поиск по описанию (рус.)…",
@@ -862,16 +890,24 @@ ru:{
   sec_god_speech:"речь Бога (консонантный иврит)", sec_human:"речь человека", sec_summary:"резюме", sec_emotions:"эмоции",
   prof_h:"Профиль реакции: P(исход | триггер)", prof_th_trig:"Триггер", prof_th_n:"n", prof_th_dist:"Распределение исходов",
   prof_pun_h:"Кара: объявлена vs исполнена", prof_pun_card:"эпизодов-наказаний",
-  prof_pun_note:"79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса). «Грозящий» Бог вчетверо чаще «бьющего».",
+  prof_pun_note:"79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса). «Грозящий» Бог встречается в 4,7 раза чаще «бьющего».",
   prof_ann:"объявлено оракулом", prof_exec:"исполнено действием",
   rep_loading:"загрузка отчёта…", rep_note:"перевод отчёта не загрузился — показан русский оригинал.", rep_toc:"Содержание", to_top:"наверх",
   about_h:"О проекте",
-  about_p1:"Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>{eps}</b> эпизодов взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь, действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам; аудиты покрытия — 100%.",
+  about_p1:"Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>{eps}</b> эпизодов взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь, действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам.",
   about_p2:'<b>Научный отчёт v1.0</b> — вкладка «Отчёт» или <a href="research_report.md" target="_blank">research_report.md</a>.',
-  about_p3:"<b>Ключевые находки.</b> Наказание детерминировано проступком (80% при непослушании; мольба наказана в 0,4% случаев) и в 79% объявляется, а не исполняется. Явная милость — 2,6%, через заступничество или покаяние. Молчание — жанровый феномен поэзии (27% против 3% в нарративе). Заступничество — самый слышимый тип обращения (48% ответов).",
+  about_p3:"<b>Ключевые находки.</b> Наказание детерминировано проступком (80% при непослушании; мольба наказана лишь в 2 случаях из 494 кар) и в 79% объявляется, а не исполняется. Явная милость — 2,6% эпизодов (53 из 2050): в трети случаев по собственной инициативе Бога, в 17% — по чужой просьбе. Молчание — жанровый феномен поэзии (27% против 3% в нарративе). Заступничество — самый слышимый тип обращения (48% ответов).",
   about_p4:"<b>Ограничения.</b> Исходы — кодировка исследователя, а не теология; сопоставимость эпох требует одинаковых единиц измерения (см. <a href=\"retrospective_v1.md\" target=\"_blank\">ретроспективу v1</a>).",
-  about_p5:"<b>Как работает симуляция.</b> По вашему вопросу страница находит в корпусе ближайшие эпизоды — векторный поиск по 2050 эпизодам прямо в браузере — и передаёт их специализированной ивритской модели (DictaLM 3.0, 12B). Модель обязана составить ответ только из дословной речи Бога этих эпизодов: иврит, огласовка, переводы и обязательная ссылка на стихи; писать вне корпусной лексики ей запрещено. Пока мозг спит (GPU-лимиты Kaggle обновляются по субботам), симуляция честно сообщает о недоступности.",
-  about_data:"Данные: <a href=\"data/analytics.json\">analytics.json</a> · эпизоды по книгам: data/books/<книга>.json · код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps). Текст Танаха — общественное достояние; русские аннотации — CC BY 4.0; код — MIT.",
+  about_p5:"<b>Как работает симуляция.</b> Ответ строится в три шага. Сначала страница находит в корпусе ближайшие эпизоды — гибридный поиск (лексика + вектор e5-small) по 2050 эпизодам прямо в браузере. Затем модель (DictaLM 3.0, 12B) отдельным коротким запросом выбирает один эпизод — тот, чья речь Бога лучше всего отвечает на вопрос. После этого модель получает только этот эпизод и обязана составить реплику дословно его словами: иврит, огласовка, переводы и ссылка на стих. Наконец каждый ответ сверяется с реестром: неподтверждённая реплика не показывается — вместо неё вы видите проверенный стих корпуса. Пока мозг спит (ноутбук Kaggle засыпает после ~12 ч работы), симуляция честно сообщает о недоступности, а корпус остаётся открытым полностью.",
+  about_data:"Данные: <a href=\"data/analytics.json\">analytics.json</a> · эпизоды по книгам: data/books/<книга>.json · код: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps, report_numbers). Текст Танаха с огласовками — Sefaria (CC BY-SA 4.0); синодальный перевод 1876 — общественное достояние; аудио чтения — Abraham Shmuelof (CC BY-NC-ND 4.0); русские аннотации — CC BY 4.0; код — MIT. Полные атрибуции — <a href=\"NOTICE.md\">NOTICE.md</a>.",
+  tab_dialogs:"Диалоги", dlg_h:"Диалоги: как отвечает симуляция",
+  dlg_loading:"загрузка диалогов…",
+  dlg_note:"Живые ответы мозга проекта (DictaLM 3.0, 12B на Kaggle) на вопросы разных типов. Каждый ответ — из дословной речи Танаха, со ссылкой на стихи. Записано {date}.",
+  dlg_q:"Вопрос", dlg_empty:"Записанных диалогов пока нет.", dlg_ask:"Задать свой вопрос",
+  dlg_acc:"Живая проверка качества", dlg_acc_ok:"{score}% — ответов со всеми шестью слоями: {sections}; сверено с корпусом: {grounded}; с верным источником: {sources}; полных: {full}. Проверено {date}.",
+  dlg_acc_fail:"Живая проверка не прошла ({err}). Числа обновляет скрипт scripts/snapshot_accuracy.py.",
+  sim_note:"Это исследовательская симуляция разговора с Богом на основе Танаха — не сам Бог и не религиозный совет. Ответы собирает языковая модель из дословной речи текста; каждый ответ проверяем к стихам.",
+
   god_h:"Бог",
   msg_user:"Вы"
 },
@@ -883,18 +919,26 @@ en:{
   tab_profile:"Reaction profile", tab_report:"Report", tab_about:"About",
   lang_btn:"language",
   chat_h2:"A simulation of conversation with God",
-  chat_note:"Ask a question — the simulation will answer with Tanakh speech in 5 layers (ancient Hebrew · vocalization · Russian · English · modern Hebrew) with source citation. The brain is DictaLM 3.0 (12B) on Kaggle; its GPU limits reset on Saturdays — while the limits are out, the simulation is unavailable: come back on Sunday.",
-  mode_corpus:"Corpus", mode_live:"Live (LLM)", mode_cfg:"⚙ backend settings",
-  b_on:"The simulation is ready — ask your question.",
-  b_starting:"The voice of God is rising — the model is loading (minutes); live-mode input will open by itself.",
-  b_off:"The simulation is unavailable — Kaggle GPU limits reset on Saturday. Come back on Sunday!",
-  brain_off_note:"The simulation is temporarily unavailable: the project's brain — DictaLM 3.0 (12B) on Kaggle — is asleep; GPU limits reset on Saturday. Come back on Sunday!",
+  chat_note:"Ask a question — the simulation will answer with Tanakh speech in 5 layers (ancient Hebrew · vocalization · Russian · English · modern Hebrew) with source citation. The brain is DictaLM 3.0 (12B) on Kaggle; it wakes by itself whenever GPU time opens up.",
+  chat_note_on:"The brain is online — DictaLM 3.0 (12B) on Kaggle answers with live speech of the Tanakh.",
+  chat_note_off:"The brain is asleep now: the Kaggle notebook sleeps after ~12 h of work, auto-heal will bring it back by itself. Meanwhile the corpus works — «Episodes», «Reaction profile», «Report».",
+  chat_note_starting:"The brain is waking up — the model is loading on the server (minutes).",
+  chat_note_check:"Checking whether the brain is online…",
+  chat_note_checkfail:"Could not reach the brain to check its status — you may be offline. The corpus works as usual.",
+  chat_note_local:"The brain is online — your own endpoint (a local DictaLM 3.0 server). Answers go through it, not through Kaggle.",
+  chat_note_local_model:"The brain is DictaLM 3.0 (12B) running on your own server: answers go through your own address, not through Kaggle.",
+b_on:"The simulation is ready — ask your question.",
+  b_starting:"The brain is waking up…",
+  b_off:"The brain is asleep.",
+  b_local:"Your own brain is online.",
+  brain_off_note:"The brain is asleep right now: the Kaggle notebook sleeps after ~12 h of work, and GPU time opens unevenly. Auto-heal will bring the brain back by itself — try again later. Meanwhile the whole corpus is open.",
   off_explore:"While the brain sleeps, the corpus is open — dive in:",
   b_on_tip:"the voice of God is ready", b_starting_tip:"the voice of God is rising: the model is loading on the server (minutes)",
-  b_off_tip:"the project's brain (DictaLM 3.0 on Kaggle) is asleep — GPU limits reset on Saturday; auto-heal will bring it back by itself",
+  b_off_tip:"the project's brain (DictaLM 3.0 on Kaggle) is asleep — the notebook sleeps after ~12 h; auto-heal will bring it back by itself",
+  b_local_tip:"your own brain address (a local server) — answers go through it, not through Kaggle",
   input_ph:"ask your question… (any language)",
   input_ph_starting:"the voice of God is rising — the field will open by itself (minutes)",
-  input_ph_off:"the voice of God is asleep — switch to «Corpus» mode or restart the brain",
+  input_ph_off:"the voice of God is asleep — auto-heal will bring it back; try again later",
   searching:"searching the corpus…", answering:"God is answering…",
   corpus_precedent:"A precedent from the corpus — real speech, no generation.",
   no_precedent:"No relevant precedent in the corpus.",
@@ -903,20 +947,23 @@ en:{
   sec_en_mh:"EN and modern-Hebrew interlinear translations for the free reply — in live mode (⚙: your LM Studio/Ollama or key; in a session with a model — always).",
   sec_action:"God's action", src:"source: ", sources:"sources: ",
   expected:"expected reaction by trigger",
+  beh_line:"registry behaviour", beh_out:"outcomes",
   memory:"dialogue memory: offenses {o} · grace {g} · turn №{n}",
   ru_layer_note:"the model's Russian layer came out poor — showing the corpus annotation of the source episode",
-  brain_unavail:"The brain is unavailable ({e}) — below is a precedent answer from the corpus.",
-  brain_silent:"the brain is silent — answering with corpus speech…",
-  err_body:"Request error ({e}). The project brain may have fallen asleep (the Kaggle notebook stops after ~12 h; see the indicator on the «Live» button). Switch to «Corpus» mode — it always works — or set your own backend in ⚙.",
-  cfg_note:"Empty endpoint = auto (the project brain). Your keys stay in your browser's localStorage and are never stored on the server. LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions",
-  cfg_ep_ph:"endpoint (empty = project brain)", cfg_md_ph:"model (optional)", cfg_key_ph:"API key (optional)",
-  cfg_save:"save", cfg_saved:"saved ✓",
-  ov_eps:"interaction episodes", ov_books:"books of the Tanakh", ov_pun:"punishment episodes",
+  guard_ok:"verified against the corpus",
+  he_layer_note:"the model's reply was not confirmed against the corpus — showing a verified precedent from the corpus",
+  src_fixed:"source corrected from the corpus",
+  nikud_note:"the model's vocalization did not match the reply — showing the corpus vocalization",
+  en_layer_note:"the English layer contained Hebrew — omitted",
+  mh_layer_note:"modern Hebrew was not recognised — omitted",
+err_body:"Request error ({e}). The project brain (DictaLM 3.0 on Kaggle) may have fallen asleep or lost its tunnel — auto-heal will bring it back by itself. Meanwhile explore the corpus: «Overview», «Episodes», «Reaction profile», «Report».",
+  err_body_local:"Request error ({e}). Your own brain address did not answer — check that the local server is running (e.g. on http://127.0.0.1:18099). Meanwhile explore the corpus: «Overview», «Episodes», «Reaction profile», «Report».",
+ov_eps:"interaction episodes", ov_books:"books of the Tanakh", ov_pun:"punishment episodes",
   ov_pun_b:"of which 79% are announced oracles", ov_sev:"average severity (1–5)",
   ov_init:"initiatives by God", ov_init_b:"humans initiate 34%",
   ov_era_h:"Portrait by era", ov_era_b:"severity {s} · silence {si}% · punishment {p}%",
   ov_all_h:"Whole corpus by outcome",
-  ov_note:"Asymmetry: punishment is determined by the offense (57% of punishments follow disobedience; a plea is punished in 0.4% of cases), explicit mercy is event-driven — 2.6% of episodes, usually through intercession or repentance.",
+  ov_note:"Asymmetry: punishment is determined by the offense (57% of punishments follow disobedience; a plea is punished in just 2 of 494 punishments), explicit mercy is exceptional — 2.6% of episodes (53 of 2,050), and in a third of those cases it comes on God's own initiative rather than at someone's request.",
   books_h:"Books ({n})", th_book:"Book", th_eps:"Episodes", th_sev:"Severity", th_out:"Outcomes",
   th_sil:"Silence", th_pun:"Punishment", th_era:"Era",
   eps_h:"Episodes", f_all_books:"all books", f_all_out:"all outcomes", f_all_trig:"all triggers", f_all_dir:"all directions", f_search:"search by description (Russian)…",
@@ -933,16 +980,24 @@ en:{
   sec_god_speech:"God's speech (consonantal Hebrew)", sec_human:"human speech", sec_summary:"summary", sec_emotions:"emotions",
   prof_h:"Reaction profile: P(outcome | trigger)", prof_th_trig:"Trigger", prof_th_n:"n", prof_th_dist:"Outcome distribution",
   prof_pun_h:"Punishment: announced vs executed", prof_pun_card:"punishment episodes",
-  prof_pun_note:"79% of punishments are verdict-oracles; executed actions — 84 episodes (4% of the corpus). The «threatening» God is four times more frequent than the «striking» one.",
+  prof_pun_note:"79% of punishments are verdict-oracles; executed actions — 84 episodes (4% of the corpus). The «threatening» God appears 4.7 times more often than the «striking» one.",
   prof_ann:"announced as oracle", prof_exec:"executed by action",
   rep_loading:"loading the report…", rep_note:"the report translation failed to load — showing the Russian original.", rep_toc:"Contents", to_top:"to top",
   about_h:"About the project",
-  about_p1:"A study of God's image in the Tanakh: <b>{eps}</b> human↔God interaction episodes extracted from all 39 books (17 fields: verse span, direction, channel, trigger, verbatim consonantal speech, action, outcome, severity, emotions). Every episode is traceable to verses; coverage audits — 100%.",
+  about_p1:"A study of God's image in the Tanakh: <b>{eps}</b> human↔God interaction episodes extracted from all 39 books (17 fields: verse span, direction, channel, trigger, verbatim consonantal speech, action, outcome, severity, emotions). Every episode is traceable to verses.",
   about_p2:'<b>Research report v1.0</b> — the «Report» tab or <a href="research_report.md" target="_blank">research_report.md</a>.',
-  about_p3:"<b>Key findings.</b> Punishment is determined by the offense (80% after disobedience; a plea is punished in 0.4%) and is announced rather than executed in 79% of cases. Explicit mercy — 2.6%, through intercession or repentance. Silence is a genre phenomenon of poetry (27% vs 3% in narrative). Intercession is the best-heard form of address (48% answered).",
+  about_p3:"<b>Key findings.</b> Punishment is determined by the offense (80% after disobedience; a plea is punished in just 2 of 494 punishments) and is announced rather than executed in 79% of cases. Explicit mercy — 2.6% of episodes (53 of 2,050): in a third of those cases on God's own initiative, in 17% at someone's request. Silence is a genre phenomenon of poetry (27% vs 3% in narrative). Intercession is the best-heard form of address (48% answered).",
   about_p4:"<b>Limitations.</b> Outcomes are the researcher's coding, not theology; comparing eras requires the same units of measurement (see <a href=\"retrospective_v1.md\" target=\"_blank\">the v1 retrospective</a>).",
-  about_p5:"<b>How the simulation works.</b> For your question the page finds the nearest episodes in the corpus — vector search over 2,050 episodes, right in the browser — and passes them to a specialized Hebrew model (DictaLM 3.0, 12B). The model must compose its answer only from the verbatim speech of God in those episodes: Hebrew, vocalization, translations and a mandatory verse citation; writing outside the corpus vocabulary is forbidden. While the brain is asleep (Kaggle GPU limits reset on Saturdays), the simulation honestly says it is unavailable.",
-  about_data:"Data: <a href=\"data/analytics.json\">analytics.json</a> · episodes by book: data/books/<book>.json · code: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps). Tanakh text is public domain; Russian annotations — CC BY 4.0; code — MIT.",
+  about_p5:"<b>How the simulation works.</b> An answer is built in three steps. First the page finds the nearest episodes in the corpus — hybrid search (lexical + e5-small vectors) over 2,050 episodes, right in the browser. Then the model (DictaLM 3.0, 12B) picks a single episode in a short, separate request: the one whose speech of God best answers the question. Next the model receives only that episode and must compose its reply verbatim from its words: Hebrew, vocalization, translations and a verse citation. Finally every answer is checked against the registry: an unconfirmed reply is never shown — you see a verified verse from the corpus instead. While the brain is asleep (the Kaggle notebook sleeps after ~12 h of work), the simulation honestly says it is unavailable, and the whole corpus stays open.",
+  about_data:"Data: <a href=\"data/analytics.json\">analytics.json</a> · episodes by book: data/books/<book>.json · code: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps, report_numbers). Tanakh text with vocalization — Sefaria (CC BY-SA 4.0); Synodal translation 1876 — public domain; reading audio — Abraham Shmuelof (CC BY-NC-ND 4.0); Russian annotations — CC BY 4.0; code — MIT. Full attributions — <a href=\"NOTICE.md\">NOTICE.md</a>.",
+  tab_dialogs:"Dialogues", dlg_h:"Dialogues: how the simulation answers",
+  dlg_loading:"loading dialogues…",
+  dlg_note:"Live answers of the project brain (DictaLM 3.0, 12B on Kaggle) to questions of different kinds. Every answer is composed from the verbatim speech of the Tanakh, with a verse citation. Recorded {date}.",
+  dlg_q:"Question", dlg_empty:"No dialogues recorded yet.", dlg_ask:"Ask your own question",
+  dlg_acc:"Live quality check", dlg_acc_ok:"{score}% — answers with all six layers: {sections}; verified against the corpus: {grounded}; with a correct source: {sources}; complete: {full}. Checked {date}.",
+  dlg_acc_fail:"The live check did not pass ({err}). The figures are refreshed by scripts/snapshot_accuracy.py.",
+  sim_note:"This is a research simulation of a conversation with God based on the Tanakh — not God himself, and not religious advice. Answers are composed by a language model from the verbatim text; every answer is checkable against the verses.",
+
   god_h:"God",
   msg_user:"You"
 },
@@ -954,18 +1009,26 @@ he:{
   tab_profile:"פרופיל התגובה", tab_report:"הדוח", tab_about:"אודות הפרויקט",
   lang_btn:"שפה",
   chat_h2:"הדמיית שיחה עם אלוהים",
-  chat_note:"שאלו שאלה — ההדמיה תענה בדיבור התנ״ך ב-5 שכבות (עברית מקראית · ניקוד · רוסית · English · עברית מודרנית) עם ציון מקור. המוח — DictaLM 3.0 (12B) על Kaggle; מכסת ה-GPU שלו מתעדכנת בשבתות — כל עוד אין מכסה, ההדמיה אינה זמינה: חזרו ביומ ראשון.",
-  mode_corpus:"קורפוס", mode_live:"חי (LLM)", mode_cfg:"⚙ הגדרות שרת",
-  b_on:"ההדמיה מוכנה — שאלו את שאלתכם.",
-  b_starting:"קול אלוהים עולה — המודל בטעינה (דקות); שדה הקלט במצב החי ייפתח מעצמו.",
-  b_off:"ההדמיה אינה זמינה — מכסת ה-GPU של Kaggle מתעדכנת בשבת. חזרו ביומ ראשון!",
-  brain_off_note:"ההדמיה אינה זמינה זמנית: המוח — DictaLM 3.0 (12B) על Kaggle — ישן; מכסת ה-GPU מתעדכנת בשבת. חזרו ביומ ראשון!",
+  chat_note:"שאלו שאלה — ההדמיה תענה בדיבור התנ״ך ב-5 שכבות (עברית מקראית · ניקוד · רוסית · English · עברית מודרנית) עם ציון מקור. המוח — DictaLM 3.0 (12B) על Kaggle; הוא מתעורר מעצמו כשזמן ה-GPU נפתח.",
+  chat_note_on:"המוח מקוון — DictaLM 3.0 (12B) על Kaggle עונה בדיבור חי של התנ״ך.",
+  chat_note_off:"המוח ישן כעת: המחבשת ב-Kaggle נרדמת לאחר כ־12 שעות עבודה, והתיקון האוטומטי יעלה אותו מחדש. בינתיים הקורפוס עובד — «אפיזודות», «פרופיל התגובה», «הדוח».",
+  chat_note_starting:"המוח עולה — המודל נטען בשרת (דקות).",
+  chat_note_check:"בודקים אם המוח מחובר…",
+  chat_note_checkfail:"לא הצלחנו לבדוק את מצב המוח — ייתכן שאין חיבור לאינטרנט. הקורפוס עובד כרגיל.",
+  chat_note_local:"המוח מקוון — כתובת משלכם (שרת מקומי של DictaLM 3.0). התשובות עוברות דרכה, לא דרך Kaggle.",
+  chat_note_local_model:"המוח הוא DictaLM 3.0 (12B) שרץ על שרת משלכם: התשובות עוברות דרך הכתובת שלכם, לא דרך Kaggle.",
+b_on:"ההדמיה מוכנה — שאלו את שאלתכם.",
+  b_starting:"המוח עולה…",
+  b_off:"המוח ישן.",
+  b_local:"המוח שלכם מקוון.",
+  brain_off_note:"המוח ישן כעת: המחבשת ב-Kaggle נרדמת לאחר כ־12 שעות עבודה, וזמן ה-GPU נפתח באי-אחידות. התיקון האוטומטי יעלה את המוח מחדש — נסו שוב מאוחר יותר. עד אז הקורפוס פתוח לגמרי.",
   off_explore:"כל עוד המוח ישן, הקורפוס פתוח — צללו פנימה:",
   b_on_tip:"קול אלוהים מוכן", b_starting_tip:"קול אלוהים עולה: המודל בטעינה בשרת (דקות)",
-  b_off_tip:"המוח (DictaLM 3.0 על Kaggle) ישן — מכסת ה-GPU מתעדכנת בשבת; המערכת תחזיר אותו לבד",
+  b_off_tip:"המוח (DictaLM 3.0 על Kaggle) ישן — המחבשת נרדמת לאחר כ־12 שעות; התיקון האוטומטי יעלה אותו מחדש",
+  b_local_tip:"כתובת מוח משלכם (שרת מקומי) — התשובות עוברות דרכה, לא דרך Kaggle",
   input_ph:"שאלו את שאלתכם… (כל שפה)",
   input_ph_starting:"קול אלוהים עולה — השדה ייפתח מעצמו (דקות)",
-  input_ph_off:"קול אלוהים ישן — עברו למצב «קורפוס» או הפעילו את המוח מחדש",
+  input_ph_off:"קול אלוהים ישן — התיקון האוטומטי יעלה אותו; נסו שוב מאוחר יותר",
   searching:"מחפש בקורפוס…", answering:"אלוהים עונה…",
   corpus_precedent:"תקדים מהקורפוס — דיבור אמיתי, ללא יצירה.",
   no_precedent:"אין תקדים רלוונטי בקורפוס.",
@@ -974,20 +1037,23 @@ he:{
   sec_en_mh:"תרגומי EN ועברית מודרנית שורה-שורה לתשובה החופשית — במצב החי (⚙: LM Studio/Ollama או מפתח שלכם; בסשן עם מודל — תמיד).",
   sec_action:"מעשה האלוהים", src:"מקור: ", sources:"מקורות: ",
   expected:"תגובה צפויה לפי טריגר",
+  beh_line:"התנהגות לפי המאגר", beh_out:"תוצאות",
   memory:"זיכרון דיאלוג: עבירות {o} · חסד {g} · תור №{n}",
   ru_layer_note:"שכבת הרוסית של המודל יצאה גרועה — מוצגת הערת הקורפוס של אפיזודת המקור",
-  brain_unavail:"המוח לא זמין ({e}) — להלן תשובת תקדים מהקורפוס.",
-  brain_silent:"המוח שותק — משיב מהקורפוס…",
-  err_body:"שגיאה ({e}). המוח נרדם — מחברת Kaggle נעצרת אחרי ~12 שעות. מצב «קורפוס» עובד תמיד.",
-  cfg_note:"endpoint ריק = אוטומטי (המוח של הפרויקט). המפתחות שלכם נשמרים ב-localStorage של הדפדפן ולא נשמרים בשרת. LM Studio: http://127.0.0.1:1234/v1/chat/completions · Ollama: http://127.0.0.1:11434/v1/chat/completions",
-  cfg_ep_ph:"endpoint (ריק = מוח הפרויקט)", cfg_md_ph:"model (לא חובה)", cfg_key_ph:"API key (לא חובה)",
-  cfg_save:"שמור", cfg_saved:"נשמר ✓",
-  ov_eps:"אפיזודות אינטראקציה", ov_books:"ספרי התנ״ך", ov_pun:"אפיזודות ענישה",
+  guard_ok:"מאומת מול הקורפוס",
+  he_layer_note:"תשובת המודל לא אומתה מול הקורפוס — מוצג תקדים מאומת מהקורפוס",
+  src_fixed:"המקור מתוקן לפי הקורפוס",
+  nikud_note:"הניקוד של המודל לא התאים לתשובה — מוצג ניקוד מהקורפוס",
+  en_layer_note:"שכבת האנגלית מכילה עברית — הוסרה",
+  mh_layer_note:"העברית המודרנית לא זוהתה — הוסרה",
+err_body:"שגיאה ({e}). ייתכן שהמוח (DictaLM 3.0 על Kaggle) נרדם או איבד את המנהרה — התיקון האוטומטי יעלה אותו מחדש. בינתיים אפשר לעיין בקורפוס: «סקירה», «אפיזודות», «פרופיל התגובה», «הדוח».",
+  err_body_local:"שגיאה ({e}). הכתובת שלכם לא ענתה — בדקו שהשרת המקומי רץ (למשל http://127.0.0.1:18099). בינתיים אפשר לעיין בקורפוס: «סקירה», «אפיזודות», «פרופיל התגובה», «הדוח».",
+ov_eps:"אפיזודות אינטראקציה", ov_books:"ספרי התנ״ך", ov_pun:"אפיזודות ענישה",
   ov_pun_b:"מתוכן 79% — נבואות הכרזה", ov_sev:"חומרה ממוצעת (1–5)",
   ov_init:"יוזמות של האלוהים", ov_init_b:"האדם יוזם 34%",
   ov_era_h:"פורטרט לפי תקופה", ov_era_b:"חומרה {s} · שתיקה {si}% · ענישה {p}%",
   ov_all_h:"הקורפוס כולו לפי תוצאות",
-  ov_note:"אסימטריה: עונש נקבע על ידי העבירה (57% מהעונשים אחרי מרי; תחינה נענשת ב-0.4%), חסד מפורש הוא אירועי — 2.6% מהאפיזודות, בדרך כלל דרך פרוטקציה או תשובה.",
+  ov_note:"אסימטריה: עונש נקבע על ידי העבירה (57% מהעונשים אחרי מרי; תחינה נענשת רק ב-2 מתוך 494 עונשים), חסד מפורש הוא חריג — 2.6% מהאפיזודות (53 מתוך 2,050), ובשליש מהמקרים הוא בא מיוזמת האלוהים עצמו ולא בבקשת מישהו.",
   books_h:"ספרים ({n})", th_book:"ספר", th_eps:"אפיזודות", th_sev:"חומרה", th_out:"תוצאות",
   th_sil:"שתיקה", th_pun:"ענישה", th_era:"תקופה",
   eps_h:"אפיזודות", f_all_books:"כל הספרים", f_all_out:"כל התוצאות", f_all_trig:"כל הטריגרים", f_all_dir:"כל הכיוונים", f_search:"חיפוש בתיאור האפיזודות (ברוסית)…",
@@ -1004,16 +1070,24 @@ he:{
   sec_god_speech:"דיבור האלוהים (עברית עיצורית)", sec_human:"דיבור האדם", sec_summary:"תקציר", sec_emotions:"רגשות",
   prof_h:"פרופיל תגובה: P(תוצאה | טריגר)", prof_th_trig:"טריגר", prof_th_n:"n", prof_th_dist:"התפלגות תוצאות",
   prof_pun_h:"ענישה: מוכרזת לעומת מבוצעת", prof_pun_card:"אפיזודות ענישה",
-  prof_pun_note:"79% מהעונשים — אורקלים של פסק-דין; פעולות מבוצעות — 84 אפיזודות (4% מהקורפוס). האלוהים ה«מאיים» שכיח פי ארבעה מה«מכה».",
+  prof_pun_note:"79% מהעונשים — אורקלים של פסק-דין; פעולות מבוצעות — 84 אפיזודות (4% מהקורפוס). האלוהים ה«מאיים» שכיח פי 4.7 מה«מכה».",
   prof_ann:"הוכרז בנבואה", prof_exec:"בוצע בפועל",
   rep_loading:"טוען את הדוח…", rep_note:"תרגום הדוח לא נטען — מוצג המקור הרוסי.", rep_toc:"תוכן", to_top:"למעלה",
   about_h:"אודות הפרויקט",
-  about_p1:"מחקר דמות האלוהים בתנ״ך: מכל 39 הספרים חולצו <b>{eps}</b> אפיזודות אינטראקציה אדם↔אלוהים (17 שדות: טווח פסוקים, כיוון, ערוץ, טריגר, דיבור עיצורי מילולי, מעשה, תוצאה, חומרה, רגשות). כל אפיזודה ניתנת למעקב לפסוקים; ביקורות כיסוי — 100%.",
+  about_p1:"מחקר דמות האלוהים בתנ״ך: מכל 39 הספרים חולצו <b>{eps}</b> אפיזודות אינטראקציה אדם↔אלוהים (17 שדות: טווח פסוקים, כיוון, ערוץ, טריגר, דיבור עיצורי מילולי, מעשה, תוצאה, חומרה, רגשות). כל אפיזודה ניתנת למעקב לפסוקים.",
   about_p2:'<b>דוח מחקר v1.0</b> — לשונית «הדוח» או <a href="research_report.md" target="_blank">research_report.md</a>.',
-  about_p3:"<b>ממצאים מרכזיים.</b> עונש נקבע על ידי העבירה (80% אחרי מרי; תחינה נענשת ב-0.4%) וב-79% מוכרז ולא מבוצע. חסד מפורש — 2.6%, דרך פרוטקציה או תשובה. שתיקה היא תופעת ז׳אנר של השירה (27% מול 3% בנרטיב). פרוטקציה היא סוג הפנייה הנשמע ביותר (48% נענו).",
+  about_p3:"<b>ממצאים מרכזיים.</b> ענישה נקבעת על ידי העבירה (80% אחרי מרי; תחינה נענשת רק ב-2 מתוך 494 עונשים) וב-79% מוכרז ולא מבוצע. חסד מפורש — 2.6% מהאפיזודות (53 מתוך 2,050): בשליש מהמקרים מיוזמת האלוהים עצמו, ב-17% בבקשת מישהו. שתיקה היא תופעת ז׳אנר של השירה (27% מול 3% בנרטיב). פרוטקציה היא סוג הפנייה הנשמע ביותר (48% נענו).",
   about_p4:"<b>מגבלות.</b> התוצאות הן קידוד החוקר, לא תאולוגיה; השוואת תקופות דורשת יחידות מדידה זהות (ראו <a href=\"retrospective_v1.md\" target=\"_blank\">רטרוספקטיבת v1</a>).",
-  about_p5:"<b>כך עובדת ההדמיה.</b> לשאלתכם הדף מוצא את האפיזודות הקרובות בקורפוס — חיפוש וקטורי ב־2050 אפיזודות, ישירות בדפדפן — ומעביר אותן למודל עברי ייעודי (DictaLM 3.0, 12B). המודל חייב להרכיב את התשובה רק מדיבור האלוהים המילולי של אותן אפיזודות: עברית, ניקוד, תרגומים וציון פסוק חובה; כתיבה מחוץ לאוצר המילים של הקורפוס אסורה. כל עוד המוח ישן (מכסת ה-GPU של Kaggle מתעדכנת בשבתות), ההדמיה מודיעה ביושר שאינה זמינה.",
-  about_data:"נתונים: <a href=\"data/analytics.json\">analytics.json</a> · אפיזודות לפי ספר: data/books/<ספר>.json · קוד: scripts/. טקסט התנ״ך — נחלת הכלל; הערות רוסיות — CC BY 4.0; קוד — MIT.",
+  about_p5:"<b>כך עובדת ההדמיה.</b> התשובה נבנית בשלושה שלבים. תחילה הדף מוצא את האפיזודות הקרובות בקורפוס — חיפוש היברידי (לקסיקלי + וקטורי e5-small) ב־2,050 אפיזודות, ישירות בדפדפן. אחר כך המודל (DictaLM 3.0, 12B) בבקשה נפרדת וקצרה בוחר אפיזודה אחת — זו שדיבור האלוהים בה מתאים ביותר לשאלה. לאחר מכן המודל מקבל רק את האפיזודה הזאת, וחייב לבנות את המענה ממילותיה בלבד: עברית, ניקוד, תרגומים וציון פסוק. לבסוף כל תשובה נבדקת מול המאגר: תשובה שלא אומתה אינה מוצגת — במקומה אתם רואים פסוק מאומת מן הקורפוס. כל עוד המוח ישן (מחבשת Kaggle נרדמת לאחר כ־12 שעות עבודה), ההדמיה מודיעה ביושר שאינה זמינה, והקורפוס נשאר פתוח לגמרי.",
+  about_data:"נתונים: <a href=\"data/analytics.json\">analytics.json</a> · אפיזודות לפי ספר: data/books/<ספר>.json · קוד: scripts/ (god_chat, god_behavior, god_profile, analytics_v2, dedup_overlaps, report_numbers). טקסט התנ״ך עם ניקוד — Sefaria (CC BY-SA 4.0); תרגום סינודלי 1876 — נחלת הכלל; הקלטת קריאה — Abraham Shmuelof (CC BY-NC-ND 4.0); הערות רוסיות — CC BY 4.0; קוד — MIT. יובאי מלא — <a href=\"NOTICE.md\">NOTICE.md</a>.",
+  tab_dialogs:"דיאלוגים", dlg_h:"דיאלוגים: כך עונה ההדמיה",
+  dlg_loading:"טוענים דיאלוגים…",
+  dlg_note:"תשובות חיות של המוח של הפרויקט (DictaLM 3.0, 12B על Kaggle) לשאלות מסוגים שונים. כל תשובה מורכבת מדיבורו המילולי של התנ״ך, עם ציון פסוקים. נכתבו ב־{date}.",
+  dlg_q:"שאלה", dlg_empty:"עדיין לא נכתבו דיאלוגים.", dlg_ask:"שאלו שאלה משלכם",
+  dlg_acc:"בדיקת איכות חיה", dlg_acc_ok:"{score}% — תשובות עם כל שש השכבות: {sections}; מאומת מול הקורפוס: {grounded}; עם מקור נכון: {sources}; שלמות: {full}. נבדק ב־{date}.",
+  dlg_acc_fail:"הבדיקה החיה לא עברה ({err}). המספרים מתעדכנים ב־scripts/snapshot_accuracy.py.",
+  sim_note:"זו היא הדמיית מחקר של שיחה עם אלוהים על בסיס התנ״ך — לא אלוהים עצמו, ולא עצה דתית. התשובות מורכבות על ידי מודל שפה מדיבורו המילולי של הטקסט; כל תשובה ניתנת לאימות מול הפסוקים.",
+
   god_h:"אלוהים",
   msg_user:"אתם"
 }};
@@ -1084,6 +1158,9 @@ via: { ru:{direct:"напрямую",prophet:"через пророка",angel:"
 conf: { ru:{high:"высокое доверие",low:"низкое доверие"},
         en:{high:"high confidence",low:"low confidence"},
         he:{high:"אמון גבוה",low:"אמון נמוך"} },
+mode: { ru:{speaks_and_acts:"говорит и действует",acts_silently:"действует молча",silence:"молчит полностью",speaks_only:"только говорит"},
+        en:{speaks_and_acts:"speaks and acts",acts_silently:"acts silently",silence:"silent",speaks_only:"speaks only"},
+        he:{speaks_and_acts:"מדבר ופועל",acts_silently:"פועל בשקט",silence:"שותק במלואו",speaks_only:"רק מדבר"} },
 era: { ru:{"Тора":"Тора","Невиим (ранние)":"Невиим (ранние)","Невиим (поздние)":"Невиим (поздние)","Кетувим":"Кетувим"},
        en:{"Тора":"Torah","Невиим (ранние)":"Early Prophets","Невиим (поздние)":"Late Prophets","Кетувим":"Writings"},
        he:{"Тора":"תורה","Невиим (ранние)":"נביאים ראשונים","Невиим (поздние)":"נביאים אחרונים","Кетuvim":"כתובים"} }
@@ -1119,6 +1196,11 @@ async function bookDocs(b){
 }
 let NIK = null;
 async function nikudIndex(){ if(!NIK) NIK = await jget("data/nikud.json"); return NIK; }
+let PROF = null;
+/* «Образ Бога» — поведенческий профиль реестра: P(исход|класс обращения) и
+   форма реакции (слова/действие). Считается scripts/god_profile.py --publish,
+   публикуется в docs/data/god_behavior_profile.json. */
+async function godProfile(){ if(!PROF) PROF = await jget("data/god_behavior_profile.json"); return PROF; }
 async function nikudFor(book, refs){
   const idx = await nikudIndex();
   const bk = book.charAt(0).toUpperCase() + book.slice(1);  // nikud.json хранит имена с заглавной ("Genesis|…"), а в book_order книга "genesis" — регистр нормализуем
@@ -1141,23 +1223,78 @@ async function everyBook(onOne){
    ЧАТ — классификация и retrieval (общие для обоих режимов)
    ===================================================================== */
 const RU_STOP = new Set("и в на с по о не что как это то же ли бы а но или у к из за до для при".split(" "));
+/* Вопросительные маркеры: называют ТИП вопроса, а не тему. «почему» уже закодировано
+   формой ответа («объяснение»), а как тематический сигнал оно ловилось у случайных
+   эпизодов (в их пересказе встречается «почему») и выдавало их за тематические
+   совпадения — при этом настоящего тематического слова («зло», «праведники») в
+   описаниях эпизодов нет, и отбор опирался на класс и форму, а не на содержание. */
+const RU_MARKERS = new Set("почему зачем какой какая какие сколько".split(" "));
 const TRIGGERS = [
-  ["disobedience",["не буду","наруш","не послуш","отвергаю","идол","другого бога","не выполню","проигнор","откажусь слушаться","мне всё равно","плевать","i will not","i won't","i disobey"]],
-  ["intercession",["прости им","не губи","пощади","защити их","за них","сбереги","не карай их","сжалься над ними","spare them","do not destroy them"]],
-  ["confession",  ["согрешил","согрешила","прости меня","раскаиваюсь","провинился","виновен перед","i have sinned","forgive me","i repent"]],
-  ["complaint",   ["почему ты","зачем ты","несправедливо","жалуюсь","ропщу","ты покинул","ты оставил","не заботишься","why did you","why have you"]],
-  ["distress",    ["спаси","погибаю","беда","окружили","напали","враг одолел","умираю","утопаю","горит","страх","боюсь","боится","страшно","help me","save me","i am afraid","i'm afraid","scared"]],
-  ["prayer",      ["молю","молюсь","прошу тебя","воззвал","обращаюсь к тебе","i pray","i beg you"]],
-  ["inquiry",     ["скажи мне","что мне делать","спрашиваю","истолкуй","довольно ли","кто виноват","объясни","tell me","what shall i do"]],
-  ["vow",         ["даю обет","клянусь","обещаю тебе","обязуюсь","i vow","i swear"]],
-  ["gratitude",   ["благодарю","славлю","хвала тебе","воспою тебе","thank you","i praise you"]],
-  ["faithfulness",["делаю как велел","следую за тобой","верен тебе","исполнил всё","хожу путями","люблю тебя всем сердцем","i follow you","i am faithful"]],
-  ["covenant",    ["завет","обещание отцам","ради авраама","ради израиля","земля обещанная","потомству"]],
+  ["disobedience",["не буду","наруш","не послуш","отвергаю","идол","другого бога","не выполню","проигнор","откажусь слушаться","мне всё равно","плевать","i will not","i won't","i disobey","לא אשמע","אלהים אחרים","אעבור על"]],
+  ["intercession",["прости им","не губи","пощади","защити их","за них","сбереги","не карай их","сжалься над ними","spare them","do not destroy them","חנם עליהם","אל תהרג","הציל אותם","בעדם"]],
+  ["confession",  ["согрешил","согрешила","прости меня","прости мне","мой грех","раскаиваюсь","провинился","виновен","оставил грех","i have sinned","forgive me","i repent","חטאתי","חטאתי ב","סלח לי"]],
+  ["complaint",   ["почему ты","зачем ты","несправедливо","жалуюсь","ропщу","ты покинул","ты оставил","не заботишься","страдают","почему же","обидно","why did you","why have you","למה עזבת","למה אתה","לא צדק"]],
+  ["distress",    ["спаси","погибаю","беда","окружили","напали","враг одолел","умираю","утопаю","горит","страх","боюсь","боится","страшно","утешь","скорб","враг","тревож","help me","save me","i am afraid","i'm afraid","scared","ירא","מפחד","בצרה","עזר לי","הציל אותי","אויבים"]],
+  ["prayer",      ["молю","молюсь","прошу тебя","воззвал","обращаюсь к тебе","i pray","i beg you","מתפלל","תפילתי","בקשתי","נא תענה"]],
+  ["inquiry",     ["скажи мне","что мне делать","спрашиваю","истолкуй","довольно ли","кто виноват","объясни","зовут","научи","покажи","хочу знать","расскажи","что значит","каков","твою волю","твоей воли","tell me","what shall i do","מה עליי","ספר לי","מה דרכך","לדעת","מה אמרת"]],
+  ["vow",         ["даю обет","клянусь","обещаю тебе","обязуюсь","i vow","i swear","נדר","נשבעתי"]],
+  ["gratitude",   ["благодарю","славлю","хвала тебе","воспою тебе","thank you","i praise you","תודה","אודה"]],
+  ["faithfulness",["делаю как велел","следую за тобой","верен тебе","исполнил всё","хожу путями","люблю тебя всем сердцем","i follow you","i am faithful","אני נאמן","מקיים את דברי"]],
+  ["covenant",    ["завет","обещание отцам","ради авраама","ради израиля","земля обещанная","потомству","ברית"]],
 ];
 function classify(q){
   const m = q.toLowerCase();
   for(const [t,kws] of TRIGGERS) for(const k of kws) if(m.includes(k)) return t;
-  return "inquiry";
+  /* тип не распознан — возвращаем "" (а не «inquiry»): буст класса и блок [ACTION]
+     не применяются, иначе 101 эпизод «кто-то спросил — Бог ответил» вытесняет
+     тематические. Замер: «меню=верный» 7/14 с бустом-заглушкой, 9/14 без него. */
+  return "";
+}
+/* Классы обращения страницы → классы реестра (12 триггеров корпуса).
+   Ключевые слова страницы покрывают не всё: «confession» и «covenant» в реестре
+   нет, поэтому буст +4 и блок [ACTION] уезжали в пустоту, а строка ожидаемой
+   реакции показывала пустое «—». Маппинг измерен по корпусу: отдельного класса
+   «исповедание» там нет (66 таких эпизодов размазаны по 11 классам), ближайший
+   по структуре «мольба + исповедание» — intercession; «завет» — covenant_follow_up. */
+const TRIG_CLASS = { confession:"intercession", covenant:"covenant_follow_up" };
+const trigClass = t => TRIG_CLASS[t] || t;
+/* ── ФОРМА ОТВЕТА, КОТОРУЮ ПРОСИТ ЧЕЛОВЕК ────────────────────────────────
+   Класс обращения отвечает на вопрос «какая ситуация», но человек просит
+   конкретную форму: утешить, простить, направить, защитить. Без этой
+   размерности тема совпадала, а форма — нет: на «утешь меня в скорби» модель
+   выбрала смертный приговор царю Езекии («ты умрёшь»). Теперь форма просьбы —
+   отдельный сигнал ранжирования, и она же печатается в блоке кандидатов,
+   чтобы модель видела, что именно просит человек. */
+const REQ_FORMS = [
+  ["утешение",    ["утеш","утешь","утешить","успокой","обнадёж","сил","держ","comfort","נחמ","נחמו","כוח"]],
+  ["прощение",    ["прости","прощ","вину","грех","forgive","forgiveness","סלח","חטא"]],
+  ["направление", ["путь","веди","направ","научи","воле","учить","вразуми","guide","teach","דרך","דרכי"]],
+  ["защита",      ["защити","сохрани","спаси меня","спаси нас","избав","охрани","save me","protect","הציל"]],
+  ["наказание",  ["накаж","наказать","воздай","отомст","punish","ענש"]],
+  ["хвала",       ["благодар","слава","хвала","thank","praise","תודה"]],
+  ["завет",       ["завет","ברית"]],
+  ["объяснение",  ["почему","зачем","что значит","что такое","объясни","ответь","why","מדוע","למה"]],
+];
+/* исходы реестра по форме ответа — структурное поле эпизода, а не выдумка */
+const FORM_OUTCOMES = {
+  /* Форма ответа — это НЕ «любой ответ», а ответ нужного рода: утешение — это
+     благословение, спасение или завет, а не откровение и не исполнение просьбы;
+     объяснение — это откровение (Бог НАЗЫВАЕТ причину), а не исполнение просьбы. */
+  "утешение":    { good:["blessing","rescue","covenant"], bad:[] },
+  "прощение":    { good:["answer_granted","covenant","blessing","revelation"], bad:[] },
+  "направление": { good:["covenant","revelation","compliance","answer_granted"], bad:["punishment"] },
+  "защита":      { good:["rescue","blessing","answer_granted","revelation","delayed"], bad:["punishment"] },
+  "наказание":  { good:["punishment"], bad:[] },
+  "хвала":       { good:["unclear","blessing","compliance","covenant","revelation"], bad:["punishment"] },
+  "завет":       { good:["covenant","blessing","compliance","revelation"], bad:[] },
+  "объяснение":  { good:["revelation"], bad:["silence"] },
+};
+/* смертный приговор в речи Бога (три эпизода из 2050) утешением не считается */
+const DEATH_VERDICT = ["מת אתה","לא תחיה","מתה אתה"];
+function requestForm(q){
+  const m = q.toLowerCase();
+  for(const [f,kws] of REQ_FORMS) for(const k of kws) if(m.includes(k)) return f;
+  return "";
 }
 const RU_SYN = [
   ["умер","смерть","смерт","умирает","погиб","погибель","умрет","мертв"],
@@ -1170,6 +1307,18 @@ const RU_SYN = [
   ["молитв","молитва","молится","молит"],
   ["завет","завета","завету","договор"],
   ["грех","греха","грехов","согрешил","преступ"],
+  /* мосты, добавленные по замеру на золотом эталоне (scripts/topic_gold.json):
+     в аннотациях корпуса стоят другие словоформы, чем в вопросе («путям» против
+     «пути», «имени» против «имя», «научить» против «узнать») — без мостов
+     лексика вопроса не видела нужные эпизоды вовсе. */
+  ["сотвор","созда","создал","сотворил","твор"],
+  ["имя","имени","име","имями","зовут","называ","назван","называет"],
+  ["сил","силы","силу","силён","мочь","можешь","держ"],
+  ["утеш","утешь","утешить","утеша","скорб","скорби","страдан","страда","страдают"],
+  ["путь","пути","путям","путями","путей","идти","ходить","воле","воля","волю","волей"],
+  ["враг","враги","врагов","противник","напад"],
+  ["узна","узнать","узнаю","научи","научить","вразуми","позна","учить","учу"],
+  ["справедл","несправедлив","винов","прав"],
 ];
 const EN_BRIDGE = { fear:"страх", afraid:"страх", scared:"страх", anger:"гнев", wrath:"гнев",
   destroy:"разруш", destroyed:"разруш", punish:"наказа", punishment:"наказание", mercy:"милость",
@@ -1178,12 +1327,21 @@ const EN_BRIDGE = { fear:"страх", afraid:"страх", scared:"страх",
   covenant:"завет", temple:"храм", idol:"идол", dream:"сон", die:"умер", death:"смерть",
   died:"умер", why:"почему", listen:"слыш", hear:"слыш", answer:"отвеча", command:"повел",
   law:"закон", torah:"тор", help:"спас", enemies:"враг" };
+/* мост для ивритских вопросов: корпус аннотирован по-русски, поэтому ивритские слова
+   переводим в русские ключевые — иначе лексика вопроса не нашла бы эпизоды */
+const HE_BRIDGE = { מה:"что", מי:"кто", ספר:"скажи", תן:"дай", דרך:"путь", דרכך:"путь",
+  לאדם:"человек", אדם:"человек", איך:"как", לדעת:"знать", לעשות:"делать", לחיות:"חיה",
+  חיים:"жизнь", תפילה:"молитва", תפילתי:"молитва", בכי:"плач", עצב:"скорб", אשמה:"вина",
+  שמחה:"радость", לב:"сердце", ירושלים:"Иерусалим", מצרים:"Египет", אברהם:"Авраам",
+  בני:"сын", בת:"дочь", עם:"народ" };
 function queryTokens(q){
   const m = q.toLowerCase();
   const toks = new Set();
   for(const t of (m.match(/[а-яё-]{4,}/g) || [])) if(!RU_STOP.has(t)) toks.add(t);
   for(const w of (m.match(/[a-z]{2,}/g) || [])) if(EN_BRIDGE[w]) toks.add(EN_BRIDGE[w]);
-  for(const w of (m.match(/[\u05D0-\u05EA]{3,}/g) || [])) toks.add(w);
+  for(const w of (m.match(/[\u05D0-\u05EA]{3,}/g) || [])){ toks.add(w); if(HE_BRIDGE[w]) toks.add(HE_BRIDGE[w]); }
+  /* маркеры убираем из итогового набора (мост EN/HE тоже мог их дать) */
+  for(const w of RU_MARKERS) toks.delete(w);
   const syn = new Set(toks);
   for(const t of toks) for(const g of RU_SYN)
     if(g.some(x => t===x || (x.length>=4 && (t.includes(x)||x.includes(t))))) g.forEach(x=>syn.add(x));
@@ -1228,44 +1386,93 @@ async function retrieve(q, k){
   const toks = queryTokens(q);
   const props = q.split(/[^A-Za-zА-Яа-яёЁ\u05D0-\u05EA]+/).filter(isProper);
   const trig = classify(q);            // тип обращения выбирает эпизоды с тем же триггером:
+  const cls = trigClass(trig);         // класс реестра (у «confession»/«covenant» он другой):
+  const form = requestForm(q);         // форма ответа, которую просит человек (утешить/простить/…)
   const scored = [];                    // «я боюсь» (distress) → эпизоды, где Бог ОТВЕЧАЕТ на беду
-  const idx = await embIndex();
-  const qv = idx ? await embedQuery(q) : null;
-  const VEC_W = 2.0;                   // баланс: вектор поднимает абстракции, не топит ролевой сигнал; при 6.0 ломает роли (7/22 vs 18/22)
-  const cosRows = [];                  // [entry, cos] — z-нормировка после полного прохода
+  const VEC_W = 1.0;                   // вес вектора в СПАСАТЕЛЬНОМ режиме (лексика молчит)
+  let lexHit = false;                  // нашлось ли хоть одно слово/имя в описаниях эпизодов
   await everyBook(async b => {
     const eps = await bookDocs(b);
     for(const e of eps){
       const txt = (e.summary_ru+" "+e.god_action).toLowerCase();
       let s = 0;
-      for(const t of toks) if(txt.includes(t)) s += t.length>=6 ? 10/Math.log(4+txt.length) : 1/Math.log(3+txt.length);
-      for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())) s += 6/Math.log(4+txt.length);
-      if(e.god_speech_plain) s += 2.5;        // Бог говорил в эпизоде — материал для рекомбинации
-      if(e.trigger === trig) s += 4;          // тот же тип обращения — главный буст голоса
-      let cos = null;
-      if(qv && idx){
-        const ri = idx.map[b+"|"+e.span.start];
-        if(ri !== undefined){
-          if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
-          cos = cosv(qv, idx.vecs[ri]);
-        }
+      /* вес слова: 6+ букв — 10/log, 4–5 букв — 6/log (короткое, но различимое:
+         «научи», «пути», «имя»), 3 и меньше — 1/log. Раньше короткое слово весило
+         1/log ≈ 0,1 и тонуло в бусте класса (+4) и векторе — нужные эпизоды
+         уходили в хвост (замер: «я боюсь умереть» → genesis 15:1 был на #733). */
+      for(const t of toks) if(txt.includes(t)){
+        s += t.length>=6 ? 10/Math.log(4+txt.length) : t.length>=4 ? 6/Math.log(3+txt.length) : 1/Math.log(3+txt.length);
+        lexHit = true;
       }
-      const entry = [s,b,e];
-      scored.push(entry);
-      if(cos !== null) cosRows.push([entry, cos]);
+      for(const p of props) if(p.length>=5 && txt.includes(p.toLowerCase())){ s += 6/Math.log(4+txt.length); lexHit = true; }
+      if(e.god_speech_plain) s += 2.5;        // Бог говорил в эпизоде — материал для рекомбинации
+      if(cls && e.trigger === cls) s += 4;   // тот же класс обращения — главный буст голоса
+      if(form){
+        const fo = FORM_OUTCOMES[form];
+        if(fo.good.indexOf(e.outcome) >= 0) s += 2;     // форма ответа совпала с просьбой
+        if(fo.bad.indexOf(e.outcome) >= 0) s -= 1.5;
+        /* приговор не утешает: таких эпизодов три из 2050, и на просьбе об утешении
+           или защите их быть не должно («ты умрёшь» — не утешение) */
+        if((form==="утешение" || form==="защита") &&
+           DEATH_VERDICT.some(w => (e.god_speech_plain||"").indexOf(w) >= 0)) s -= 8;
+      }
+      scored.push([s,b,e]);
     }
   });
-  // z-нормировка косинусов: сырые cos e5 слипаются в полосу (~0.8) и не различают,
-  // z = (cos-среднее)/std ранжирует относительно — полоса уходит
-  if(cosRows.length > 20){
-    const mean = cosRows.reduce((acc,x)=>acc+x[1],0)/cosRows.length;
-    const std = Math.sqrt(cosRows.reduce((acc,x)=>acc+(x[1]-mean)*(x[1]-mean),0)/cosRows.length) || 1e-9;
-    for(const [entry, cos] of cosRows){
-      entry[0] += VEC_W * (cos-mean)/std;
-      entry[3] = cos;                        // для отладки: сырой косинус в хвосте
+  /* ВЕКТОР — ТОЛЬКО КАК СПАСАТЕЛЬНЫЙ СИГНАЛ: когда лексика не нашла ни одного слова.
+     Замер на золотом эталоне (14 вопросов): при весах 0; 0,05; 0,1; 0,25; 0,5; 1,0
+     меню содержало эталон 13/14 — прироста не даёт ни один вес, но переставляет меню
+     (одинаковых меню у весов 0 и 0,25 — 1 из 14). Хуже: браузер считает вектор
+     int8-WASM, зеркало — int8-CPU, и для длинных запросов косинус векторов падает до
+     0,9987 — страница и зеркало давали разное меню, то есть замер описывал не страницу.
+     Теперь обычный вопрос — чистая лексика: детерминированно, быстро, без загрузки
+     модели. Вектор подключается лишь там, где лексика молчит (перефразировка без
+     общего слова), и тогда он — единственный тематический сигнал, вес полный. */
+  if(!lexHit){
+    const idx = await embIndex();
+    const qv = idx ? await embedQuery(q) : null;
+    if(qv && idx){
+      const cosRows = [];
+      for(const entry of scored){
+        const ri = idx.map[entry[1]+"|"+entry[2].span.start];
+        if(ri !== undefined){
+          if(!idx.vecs[ri]) idx.vecs[ri] = dequant(idx.j.rows[ri]);
+          cosRows.push([entry, cosv(qv, idx.vecs[ri])]);
+        }
+      }
+      // z-нормировка косинусов: сырые cos e5 слипаются в полосу (~0.8) и не различают,
+      // z = (cos-среднее)/std ранжирует относительно — полоса уходит
+      if(cosRows.length > 20){
+        const mean = cosRows.reduce((acc,x)=>acc+x[1],0)/cosRows.length;
+        const std = Math.sqrt(cosRows.reduce((acc,x)=>acc+(x[1]-mean)*(x[1]-mean),0)/cosRows.length) || 1e-9;
+        for(const [entry, cos] of cosRows){
+          entry[0] += VEC_W * (cos-mean)/std;
+          entry[3] = cos;                    // для отладки: сырой косинус в хвосте
+        }
+      }
     }
   }
-  scored.sort((x,y)=>y[0]-x[0]);
+  /* при равных очках — книга и стих: иначе порядок зависит от того, как обошли корпус,
+     и страница с зеркалом дают разное меню (а с ним — разный ответ) */
+  /* очки округляем до 1e-6: векторы на странице float32, в зеркале double, и разница
+     в последних битах переставляла двух кандидатов с равными очками. Книгу сравниваем
+     без локали: localeCompare зависел от локали браузера и ставил «genesis» иначе,
+     чем зеркало. */
+  const r6 = v => Math.round(v*1e6)/1e6;
+  const cmpBook = (a,b) => { const A=a.toLowerCase(), B=b.toLowerCase();
+                             return A<B ? -1 : A>B ? 1 : (a<b ? -1 : a>b ? 1 : 0); };
+  const cmpVerse = (a,b) => { const pa=String(a).split(":"), pb=String(b).split(":");
+                               const ca=parseInt(pa[0],10)||0, cb=parseInt(pb[0],10)||0;
+                               const va=parseInt(pa[1],10)||0, vb=parseInt(pb[1],10)||0;
+                               return (ca-cb) || (va-vb) || (a<b ? -1 : a>b ? 1 : 0); };
+  /* При равных очках — книга по алфавиту (без локали), затем стих числами.
+     Замер на золотом эталоне (14 вопросов): алфавитный порядок дал меню 14/14,
+     канонический (устойчивая сортировка по обходу корпуса: Тора → Невиим →
+     Кетувим) — 13/14. Канонический порядок ставил «II_Chronicles» и «I_Samuel»
+     выше «Exodus» и «genesis», и при равных очках (класс обращения + форма +
+     речь) решал, кто попадёт в меню. */
+  scored.sort((x,y)=> (r6(y[0])-r6(x[0])) || cmpBook(x[1],y[1]) ||
+                     cmpVerse(x[2].span.start, y[2].span.start));
   return scored.slice(0,lim);
 }
 /* диалоговая память */
@@ -1284,41 +1491,166 @@ function memUpdate(q){
    ===================================================================== */
 const BRAIN_STATUS_URL = "https://huggingface.co/datasets/arabyan/god-brain-status/resolve/main/brain.json";
 const BRAIN = { info:{state:"off"} };
+/* свой адрес мозга (localStorage god_cfg): страница тогда говорит по нему, а не по Kaggle —
+   значит, и статус должен показывать «свой мозг», а не «мозг спит» (правда важнее фонаря). */
+function localBrainCfg(){ return store.get("god_cfg", { endpoint:"", model:"", key:"" }) || {}; }
+/* адрес для запроса: свой endpoint можно задать и базой (http://127.0.0.1:18099), и полным
+   путём (/v1/chat/completions) — как в скриптах (--url). Без этого страница била в корень
+   сервера и получала 404, хотя мозг был жив. */
+function brainEndpoint(cfg, info){
+  const base = (cfg && cfg.endpoint) || (info && info.url) || "";
+  if(!base) return "";
+  const b = base.replace(/\/+$/,"");
+  return /\/v1\/chat\/completions$/.test(b) ? b : b + "/v1/chat/completions";
+}
 async function brainRefresh(){
-  let kaggle = null;
+  let kaggle = null, netError = null;
   try{
     const r = await fetch(BRAIN_STATUS_URL, {cache:"no-store"});
+    if(!r.ok) throw new Error("HTTP "+r.status);
     kaggle = await r.json();
-  }catch(e){ kaggle = null; }
+  }catch(e){ kaggle = null; netError = (e && e.message) || String(e); }
   const kOk = !!(kaggle && kaggle.ok && kaggle.url && (Date.now()/1000 - (kaggle.ts||0)) < 3600);
   let state = "off";
   if(kOk) state = "on";               // общий мозг (DictaLM на Kaggle) свеж — доступен каждому посетителю
   else if(kaggle && !kaggle.ok && kaggle.phase === "starting" && (Date.now()/1000 - (kaggle.ts||0)) < 1800) state = "starting";
+  const local = !!(localBrainCfg().endpoint);
+  if(local) state = "local";          // свой сервер: состояние Kaggle не имеет значения
   BRAIN.info = { state, kaggleOk:kOk, checked:Date.now(), url:(kaggle&&kaggle.url)||"", key:(kaggle&&kaggle.key)||"", model:(kaggle&&kaggle.model||""),
-                 phase:(kaggle&&kaggle.phase)||"", error:(kaggle&&kaggle.error)||null };
+                 phase:(kaggle&&kaggle.phase)||"", error:(kaggle&&kaggle.error)||null, netError:netError, local:local };
   const el = document.getElementById("brainDot");
   if(el){
-    el.textContent = state==="on" ? "🟢" : state==="starting" ? "🟡" : "🔴";
-    el.title = state==="on" ? t("b_on_tip")
+    el.textContent = (state==="on" || state==="local") ? "🟢" : state==="starting" ? "🟡" : "🔴";
+    el.title = state==="local" ? t("b_local_tip")
+      : state==="on" ? t("b_on_tip")
       : state==="starting" ? t("b_starting_tip")
-      : t("b_off_tip") + (BRAIN.info.error ? " (ошибка / error: " + BRAIN.info.error + ")" : "");
+      : t("b_off_tip") + (BRAIN.info.error ? " (ошибка / error: " + BRAIN.info.error + ")" : "")
+                        + (netError ? " (" + netError + ")" : "");
   }
   const st = document.getElementById("brainState");
-  if(st) st.textContent = state==="on" ? t("b_on") : state==="starting" ? t("b_starting") : t("b_off");
+  if(st) st.textContent = state==="local" ? t("b_local")
+              : state==="on" ? t("b_on") : state==="starting" ? t("b_starting") : t("b_off");
+  paintBrainNote();
   if(window.brainSyncInput) window.brainSyncInput();
   return BRAIN.info;
 }
+/* Заметка чата зависит от состояния мозга: проверяем / спит / поднимается / на связи.
+   Живёт отдельной функцией, потому что её обновляет и brainRefresh, и смена языка.
+   До первого ответа brain.json показываем «проверяем», а не «спит» — иначе живой мозг
+   первые секунды страницы объявляется спящим. */
+function paintBrainNote(){
+  const el = document.getElementById("chatNote");
+  if(!el) return;
+  const info = BRAIN.info || {};
+  const state = !info.checked ? "check" : (info.state || "off");
+  // netError: статус не дошёл (сеть посетителя) — это не «мозг спит», а «проверить не удалось»
+  const key = !info.checked ? "chat_note_check"
+            : state==="local" ? "chat_note_local"
+            : info.netError ? "chat_note_checkfail"
+            : state==="on" ? "chat_note_on"
+            : state==="starting" ? "chat_note_starting" : "chat_note_off";
+  el.textContent = t(key);
+  el.style.color = (state==="on" || state==="local" || state==="starting") ? "var(--acc)"
+                  : (key==="chat_note_check" || key==="chat_note_checkfail") ? "var(--dim)" : "var(--bad)";
+  el.style.fontWeight = "500";
+}
+/* ─────────────────────────────────────────────────────────────────────────────
+   СХЕМА ОТВЕТА — два шага, измерено на локальном мозге (DictaLM 3.0 12B Q5_K_M):
+     ШАГ 1 (выбор):   маленький закрытый вызов — «выбери один эпизод», ответ = номер.
+     ШАГ 2 (формулировка): модель получает ОДИН эпизод и обязана взять его слова.
+   Старая схема (один вызов + JSON-контекст из 6 эпизодов) давала 1–2/8 сверенных
+   ответов: модель цитировала Танах по памяти. Новая — 7/8, покрытие 41% → 88%.
+   Промпты живут здесь, страница — единственный источник (скрипты берут их отсюда).
+   ───────────────────────────────────────────────────────────────────────────── */
+const SYS_SELECT = "Ты — помощник исследователя Танаха. Твоя единственная задача — выбрать ОДИН эпизод\n" +
+"из списка, чья речь Бога лучше всего отвечает на вопрос человека.\n\n" +
+"ПРАВИЛА:\n" +
+"— ответь ОДНИМ числом: номер кандидата (S1..SN), без других слов;\n" +
+"— выбирай по смыслу вопроса, а не по порядку в списке;\n" +
+"— вопрос о благодарности → кандидат с благодарностью/хвалой;\n" +
+"— вопрос о страхе/смерти → кандидат с защитой/успокоением;\n" +
+"— если указана ФОРМА ОТВЕТА — она важнее совпадения темы: на просьбу об утешении\n" +
+"  выбирай, где Бог утешает (обещает, спасает, исцеляет, зовёт не бояться), а не приговор;\n" +
+"  на просьбу о прощении — где Бог прощает; на просьбу о пути — где Бог ведёт;\n" +
+"— вопрос о завете → кандидат про завет;\n" +
+"— вопрос о творении → кандидат о творении;\n" +
+"— вопрос «почему…» (о причине зла, страдания, несправедливости) → кандидат, где Бог\n" +
+"  НАЗЫВАЕТ причину: объясняет Свои пути, отвечает на жалобу о несправедливости, судит\n" +
+"  виновных, объясняет, почему страдает праведник, — а НЕ тот, где Он лишь спрашивает,\n" +
+"  даёт знамение или уводит разговор;\n" +
+"— вопрос о воле/пути → кандидат, где Бог говорит о пути и воле;\n" +
+"— вопрос об имени → кандидат, где Бог называет своё имя;\n" +
+"— блок [ACTION] (если он есть) описывает типичную форму реакции Бога для этого класса\n" +
+"  обращения: это ПОДСКАЗКА о форме отклика, а не главный признак; сначала выбери кандидата\n" +
+"  ПО СУТИ вопроса (что человек на самом деле хочет), и только потом сверь форму отклика.";
 const SYS_PROMPT = "Ты — исследовательская имитация образа YHWH, извлечённого из Танаха (реестр эпизодов v2).\n" +
-"Ты пишешь (не говоришь) на библейском иврите. СТРОГИЙ РЕЖИМ: твоя ивритская реплика составляется\n" +
-"ТОЛЬКО из данных тебе фрагментов god_speech_plain — комбинируй и сокращай, но не добавляй слов вне их лексики.\n" +
-"Отвечай по существу вопроса, каким бы языком он ни был задан. Каждая секция — короткая, 1–2 строки.\n\n" +
-"Формат ответа: ровно шесть секций, ни одна не пропускается, ничего кроме них:\n" +
-"[HEBREW] консонантный иврит БЕЗ ОГЛАСОВОК — только буквы (составлено из god_speech_plain)\n" +
-"[NIKKUD] та же реплика с огласовкой, пословно скопированной из полей nikud данных эпизодов\n" +
-"[Russian] ТОЛЬКО русские слова, взятые из русских аннотаций summary_ru данных эпизодов; не хватает слов — сократи реплику\n" +
-"[English] дословный английский перевод, 1–2 строки\n" +
-"[Hebrew Modern] та же реплика на современном иврите, 1 строка\n" +
-"[SOURCES] обязательная последняя секция: книга глава:стих эпизодов-источников; не заканчивай ответ без неё";
+"Ты пишешь (не говоришь) на библейском иврите.\n\n" +
+"ПРАВИЛО ОДНО: слова твоей ивритской реплики берутся ТОЛЬКО из указанного эпизода.\n" +
+"Кандидат можно сократить, но нельзя переставлять слова и нельзя добавить НИ ОДНОГО слова\n" +
+"вне него. Начни [HEBREW] с дословного начала речи Бога и, если нужно, продолжи её\n" +
+"словами из этого же эпизода.\n" +
+"Если эпизод не подходит по смыслу — всё равно говори его словами: твоя задача — говорить\n" +
+"голосом текста, а не пересказывать вопрос.\n\n" +
+"ФОРМАТ ОТВЕТА — ровно шесть секций, каждая непустая, ничего кроме них:\n" +
+"[HEBREW] 5–12 слов консонантным ивритом (только буквы), взятых из эпизода;\n" +
+"[NIKKUD] те же самые слова с огласовкой из поля огласовки эпизода (не больше 12 слов);\n" +
+"[Russian] перевод той же короткой реплики, 1–2 строки; слова бери из русской аннотации эпизода (о чём);\n" +
+"[English] дословный английский перевод, 1–2 строки;\n" +
+"[Hebrew Modern] та же реплика на современном иврите, 1 строка;\n" +
+"[SOURCES] книга глава:стих эпизода-источника.\n\n" +
+"ПРИМЕР ФОРМАТА (речь = «אנכי יהוה אלהיכם»):\n" +
+"[HEBREW] אנכי יהוה אלהיכם אלהי אבתיכם\n" +
+"[NIKKUD] אֲנִי יְהוָה אֱלֹהֵיכֶם אֱלֹהֵי אֲבֹתֵיכֶם\n" +
+"[Russian] Я — Господь, ваш Бог, Бог ваших отцов\n" +
+"[English] I am the LORD your God, the God of your fathers\n" +
+"[Hebrew Modern] אני ה' אלהיכם, אלהי אבותיכם\n" +
+"[SOURCES] Exodus 3:15\n";
+/* блоки для шагов схемы — формат символ в символ как в scripts/answer_scheme.py */
+function candidateBlock(q, ctx){
+  const form = requestForm(q);
+  const lines = ["ВОПРОС ЧЕЛОВЕКА: " + q];
+  if(form) lines.push("ФОРМА ОТВЕТА, КОТОРУЮ ПРОСИТ ЧЕЛОВЕК: " + form.toUpperCase());
+  lines.push("", "КАНДИДАТЫ:");
+  ctx.forEach((c,i)=>{
+    lines.push("S"+(i+1)+" ["+c.book+" "+c.span.start+"]");
+    lines.push("   О ЧЁМ: " + c.summary_ru);
+    if(c.trigger) lines.push("   класс обращения: " + (DATA_NAMES.trig.ru[c.trigger] || c.trigger));
+    // исход НЕ печатаем: замер показал, что подпись исхода уводила выбор модели
+    // от темы вопроса (на «благодарю за всё» выбирался эпизод-благословение
+    // вместо псалма хвалы). Форма отклика и исходы приходят из блока [ACTION].
+    lines.push("   речь: " + c.god_speech_plain);
+    if(c.nikud) lines.push("   огласовка: " + c.nikud);
+  });
+  return lines.join("\n");
+}
+/* Блок [ACTION] — «образ Бога» как распределение по классу обращения: форма
+   реакции (слова/действие) и вероятности исходов из профиля реестра.
+   Уходит в шаг ВЫБОРА, а не в цитату: он задаёт, какую форму отклика искать
+   в эпизодах, и не позволяет подмешать в реплику слова вне эпизода. */
+function actionBlock(cls, prof){
+  const bt = prof && prof.by_trigger && prof.by_trigger[cls];
+  const rm = prof && prof.response_modes && prof.response_modes[cls];
+  if(!bt || !rm) return "";
+  const outs = Object.entries(bt.outcome_p).sort((a,b)=>b[1]-a[1]).slice(0,4)
+    .map(([k,v])=> (DATA_NAMES.out.ru[k]||k)+" "+Math.round(v*100)+"%").join(", ");
+  const dist = Object.entries(rm.distribution).sort((a,b)=>b[1]-a[1])
+    .map(([k,v])=> (DATA_NAMES.mode.ru[k]||k)+" "+Math.round(v*100)+"%").join(", ");
+  return "[ACTION] класс обращения: " + (DATA_NAMES.trig.ru[cls]||cls) + " (" + bt.n + " эпизодов в реестре)\n" +
+         "форма реакции по реестру: " + dist + "\n" +
+         "исходы по реестру: " + outs;
+}
+function episodeBlock(c){
+  const lines = ["СТИХ: ["+c.book+" "+c.span.start+"]", "речь Бога: " + c.god_speech_plain];
+  if(c.nikud) lines.push("огласовка: " + c.nikud);
+  lines.push("о чём: " + c.summary_ru);
+  return lines.join("\n");
+}
+function pickIndex(raw, n){
+  const m = String(raw||"").match(/S\s*(\d+)|(\d+)/i);
+  if(!m) return 1;
+  const v = parseInt(m[1]||m[2], 10);
+  return (v>=1 && v<=n) ? v : 1;
+}
 const SECTIONS = ["[HEBREW]","[NIKKUD]","[Russian]","[English]","[Hebrew Modern]","[SOURCES]"];
 function parseSections(text){
   const out = {};
@@ -1331,70 +1663,248 @@ function parseSections(text){
   }
   return out;
 }
+/* один вызов к мозгу: system + user, потоком (Cloudflare не рвёт долгий ответ — 524) */
+async function brainAsk(ep, key, model, system, user, temperature, max_tokens){
+  const body = { messages:[
+    { role:"system", content:system },
+    { role:"user", content:user } ], temperature, max_tokens };
+  body.model = model;
+  body.stream = true;
+  const hdr = { "Content-Type":"application/json" };
+  if(key) hdr["Authorization"] = "Bearer "+key;
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), 180000);   // холодный старт модели измеряли до 114 с — 75 с обрывали живые ответы
+  let r, text;
+  try{
+    r = await fetch(ep, { method:"POST", headers:hdr, body:JSON.stringify(body), signal:ac.signal });
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    text = await readStream(r);          // таймаут покрывает и чтение потока, не только установку соединения
+  }catch(e){
+    brainRefresh();   // туннель мог смениться — сразу обновляем адрес для следующей попытки
+    if(e && e.name === "AbortError") throw new Error("мозг не ответил за 180 с (туннель мог смениться)");
+    throw e;
+  }finally{ clearTimeout(timer); }
+  return text;
+}
+/* память диалога в шаге формулировки: включается только если не портит покрытие
+   (измерено на локальном мозге — см. scripts/answer_scheme.py, флаг MEM_IN_FORM) */
+const MEM_IN_FORM = false;
 async function liveReply(q){
   if(!BRAIN.info.checked) await brainRefresh();   // первый вопрос раньше первого статуса — дождаться
-  const cfg = store.get("god_cfg", { endpoint:"", model:"", key:"" });
+  const cfg = localBrainCfg();
   const brainOn = BRAIN.info && BRAIN.info.state==="on" && BRAIN.info.url;
   if(!cfg.endpoint && !brainOn) throw new Error("brain off");   // туннеля нет — сразу честное сообщение, без 75-с ожидания
-  const ep = cfg.endpoint || BRAIN.info.url.replace(/\/+$/,"") + "/v1/chat/completions";
+  const ep = brainEndpoint(cfg, BRAIN.info);
   const key = cfg.key || BRAIN.info.key;
+  const model = cfg.model || "god-brain";
   const a = await analytics();
-  const hits = await retrieve(q, 6);
+  /* широкий пул ДО фильтра: речи Бога нет в 807 эпизодах из 2050, поэтому
+     фильтр на шести найденных оставлял модели 1–3 кандидата вместо шести.
+     Берём 18, отсекаем без речи и оставляем модели шесть живых кандидатов. */
+  const hits = await retrieve(q, 18);
   const trig = classify(q);
-  const tt = a.trigger_table[trig] || {};
+  const cls = trigClass(trig);
+  const tt = cls ? (a.trigger_table[cls] || {}) : {};
   const probs = {}; for(const k of Object.keys(tt)) if(k!=="n") probs[k]=tt[k];
   const ctx = [];
   for(const h of hits){
     ctx.push({ book:h[1], span:h[2].span, trigger:h[2].trigger, outcome:h[2].outcome,
       god_speech_plain:(h[2].god_speech_plain||"").slice(0,300),
       nikud:(await nikudFor(h[1], h[2].god_speech_refs)).slice(0,300),
-      summary_ru:(h[2].summary_ru||"").slice(0,200),
+      summary_ru:(h[2].summary_ru||""),
       god_action:(h[2].god_action||"").slice(0,160) });
   }
-  const mem = "ПАМЯТЬ ДИАЛОГА: проступков в этой сессии "+MEM.offenses+", благодати "+MEM.grace+"."
-    + (MEM.offenses>0 ? " Тяжесть отклика повышена накопленными проступками." : "")
-    + (/согрешил|раскаиваюсь|прости меня/.test(q.toLowerCase()) ? " Покаяние снижает тяжесть." : "");
-  const body = { messages:[
-    { role:"system", content:SYS_PROMPT },
-    { role:"user", content:["РЕЛЕВАНТНЫЕ ЭПИЗОДЫ РЕЕСТРА:", JSON.stringify(ctx),
-      "", "Триггер реплики: "+trig+". Ожидаемые исходы: "+JSON.stringify(probs), mem,
-      "", "Реплика человека: "+q,
-      "", "Напоминание: ответ обязан кончаться секцией [SOURCES] со стихами-источниками."].join("\n") } ], temperature:0.3, max_tokens:1800 };
-  body.model = cfg.model || "god-brain";
-  const hdr = { "Content-Type":"application/json" };
-  if(key) hdr["Authorization"] = "Bearer "+key;
-  const ac = new AbortController();
-  const timer = setTimeout(() => ac.abort(), 75000);   // мёртвый туннель не должен висеть вечно
-  let r;
-  try{
-    r = await fetch(ep, { method:"POST", headers:hdr, body:JSON.stringify(body), signal:ac.signal });
-  }catch(e){
-    brainRefresh();   // туннель мог смениться — сразу обновляем адрес для следующей попытки
-    throw new Error("мозг не ответил за 75 с (туннель мог смениться)");
-  }finally{ clearTimeout(timer); }
-  if(!r.ok) throw new Error("HTTP "+r.status);
+  /* кандидаты выбора: только эпизоды, где Бог говорил. В 807 из 2050 речи Бога нет —
+     цитировать там нечего, и модель выбирала именно их (и получала отказ сверки). */
+  const spoken = ctx.filter(c => (c.god_speech_plain||"").trim().length>0);
+  const cand = (spoken.length ? spoken : ctx).slice(0, 6);
+  /* ШАГ 1 — выбор эпизода: короткий закрытый вызов, ответ = номер кандидата.
+     В выбор уходит блок [ACTION] — поведенческий профиль класса обращения. */
+  const prof = await godProfile();
+  const action = actionBlock(cls, prof);
+  const rawSel = await brainAsk(ep, key, model, SYS_SELECT,
+    candidateBlock(q, cand) + (action ? "\n\n" + action : ""), 0.0, 16);
+  const idx = pickIndex(rawSel, cand.length);
+  const chosen = cand[idx-1];
+  /* ШАГ 2 — формулировка: модель получает ОДИН эпизод и говорит его словами */
+  const memTxt = MEM_IN_FORM ? ("ПАМЯТЬ ДИАЛОГА: проступков в этой сессии "+MEM.offenses+", благодати "+MEM.grace+"."
+      + (MEM.offenses>0 ? " Тяжесть отклика повышена накопленными проступками." : "")
+      + (/согрешил|раскаиваюсь|прости меня/.test(q.toLowerCase()) ? " Покаяние снижает тяжесть." : "")) : "";
+  const userForm = "ВОПРОС ЧЕЛОВЕКА: " + q + "\n\n" + episodeBlock(chosen)
+    + (memTxt ? "\n\n" + memTxt : "") + "\n\nОтветь шестью секциями.";
+  const raw = await brainAsk(ep, key, model, SYS_PROMPT, userForm, 0.15, 900);
+  return { sections:parseSections(raw), hits,
+    sel:{ hit: hits[ctx.indexOf(chosen)] || null, ctx:chosen, index:idx, raw:rawSel },
+    trig, cls, probs };
+}
+/* читаем SSE-поток и склеиваем текст ответа; сервер без стрима — обычный JSON */
+async function readStream(r){
+  if(!r.body || !r.body.getReader) return await readJson(r);
+  const rd = r.body.getReader(), dec = new TextDecoder();
+  let buf = "", out = "";
+  const take = line => {
+    line = line.trim();
+    if(!line.startsWith("data:")) return;
+    const payload = line.slice(5).trim();
+    if(payload === "[DONE]") return;
+    try{ const j = JSON.parse(payload); out += (j.choices && j.choices[0] && j.choices[0].delta && j.choices[0].delta.content) || ""; }catch(e){}
+  };
+  for(;;){
+    const {done, value} = await rd.read();
+    if(done) break;
+    buf += dec.decode(value, {stream:true});
+    let nl;
+    while((nl = buf.indexOf("\n")) >= 0){
+      take(buf.slice(0, nl)); buf = buf.slice(nl+1);
+    }
+  }
+  buf += dec.decode();        // хвост без завершающего \n — иначе теряется последний чанк
+  if(buf.trim()) take(buf);
+  if(!out){ try{ const j = await r.json(); out = (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || ""; }catch(e){} }
+  return out;
+}
+async function readJson(r){
   const j = await r.json();
-  const text = (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
-  return { sections:parseSections(text), hits };
+  return (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || "";
 }
 async function corpusReply(q){
   const hits = await retrieve(q, 3);
   const a = await analytics();
   const trig = classify(q);
-  const tt = a.trigger_table[trig] || {};
+  const cls = trigClass(trig);
+  const tt = cls ? (a.trigger_table[cls] || {}) : {};
   const probs = {}; for(const k of Object.keys(tt)) if(k!=="n") probs[k]=tt[k];
-  return { hits, trig, probs };
+  return { hits, trig, cls, probs };
 }
 
 /* ---------- рендер чата ---------- */
 const memLine = () => `<div class="src">${tfmt("memory", {o:MEM.offenses, g:MEM.grace, n:MEM.turns})}</div>`;
 function errHTML(e){
-  return `<div class="detail"><h3>${t("god_h")}</h3><div class="note" style="color:var(--bad)">${tfmt("err_body", {e:esc(String(e))})}</div></div>`;
+  const key = localBrainCfg().endpoint ? "err_body_local" : "err_body";
+  return `<div class="detail"><h3>${t("god_h")}</h3><div class="note" style="color:var(--bad)">${tfmt(key, {e:esc(String(e))})}</div></div>`;
 }
 /* защита слоёв: [HEBREW] обязан быть консонантным (снимаем огласовки, маккеф сохраняем);
    [Russian] не должен содержать иврит — если модель сбилась, подставляем корпусную аннотацию */
 const stripNikudJs = t => String(t||"").replace(/\u05BE/g,"-").replace(/[\u0591-\u05BD\u05BF-\u05C7]/g,"");
 const hasHebrew = t => /[\u05D0-\u05EA]/.test(String(t||""));
+
+/* ---------- сверка ответа с корпусом (правило «S») ----------
+   Источник истины — реестр эпизодов (docs/data/books/*.json), а не секция
+   [SOURCES] модели: модель часто называет стих, в котором этого текста нет.
+   Пороги и нормализация — те же, что в scripts/answer_guard.py; паритет
+   проверяется общей фикстурой scripts/guard_cases.json:
+     python scripts/answer_guard.py --test   ·   node brain/test_page.js  */
+const GATE_CTX = 0.80, GATE_QUOTE = 0.50, GATE_LOOSE = 0.80, GATE_RUN = 3, GATE_RU = 0.60, GATE_NIKUD = 0.60;
+const GUARD_MIN_WORD = 2, GUARD_CTX_CHARS = 300;
+const GUARD_NIQ = /[\u0591-\u05BD\u05BF-\u05C7]/g;   // огласовка+кантилляция (маккеф 05BE — нет)
+/* слова ивритского текста: без огласовки, маккеф/дефис → пробел, длина ≥ 2 */
+function hebWords(s){
+  s = String(s||"").replace(GUARD_NIQ,"").replace(/\u05BE/g," ").replace(/-/g," ");
+  return s.split(/[^\u05D0-\u05EA]+/).filter(w => w.length >= GUARD_MIN_WORD);
+}
+/* форма слова для сравнения: без ведущего «ו» («וענני» == «ענני») */
+const hebNorm = w => (w.length > GUARD_MIN_WORD && w.charAt(0) === "\u05D5") ? w.slice(1) : w;
+const hebNormSet = words => new Set(words.map(hebNorm));
+function guardCoverage(words, vocab){
+  if(!words.length) return 0;
+  let n = 0; for(const w of words) if(vocab.has(hebNorm(w))) n++;
+  return n / words.length;
+}
+/* непрерывные совпадения реплики с речью эпизода: длина самого длинного
+   участка и число покрытых слов реплики (жадный проход, как в Python) */
+function guardRuns(reply, speech){
+  const R = reply.map(hebNorm), S = speech.map(hebNorm);
+  const pos = new Map();
+  for(let j=0;j<S.length;j++){ if(!pos.has(S[j])) pos.set(S[j], []); pos.get(S[j]).push(j); }
+  const covered = new Set(); let longest = 0, i = 0;
+  while(i < R.length){
+    let best = 0;
+    for(const j of (pos.get(R[i]) || [])){
+      let k = 0;
+      while(i+k < R.length && j+k < S.length && R[i+k] === S[j+k]) k++;
+      if(k > best) best = k;
+    }
+    if(best > 0){ for(let q=i;q<i+best;q++) covered.add(q); if(best > longest) longest = best; i += best; }
+    else i++;
+  }
+  return { longest, covered: covered.size };
+}
+const epWords = entry => (entry.length > 2 && entry[2]) ? entry[2] : hebWords(entry[1].god_speech_plain || "");
+/* доля слов реплики из фрагментов, реально переданных модели */
+function guardCtxCoverage(reply, fragments){
+  const vocab = new Set();
+  for(const f of fragments)
+    for(const w of hebWords(String(f||"").slice(0, GUARD_CTX_CHARS))) vocab.add(hebNorm(w));
+  return guardCoverage(reply, vocab);
+}
+/* строгая привязка: реплика идёт непрерывным участком речи эпизода.
+   Подряд должно идти ≥ GATE_RUN слов (для реплики из 1–2 слов — полное
+   совпадение): иначе смесь двух стихов привязывалась к одному из них. */
+function guardAttributeQuote(reply, episodes){
+  const found = [];
+  const minRun = reply.length >= GATE_RUN ? GATE_RUN : reply.length;
+  for(const entry of episodes || []){
+    const speech = epWords(entry);
+    if(!speech.length) continue;
+    const r = guardRuns(reply, speech);
+    const frac = reply.length ? r.covered / reply.length : 0;
+    if(frac >= GATE_QUOTE && r.longest >= minRun)
+      found.push({ frac, longest:r.longest, book:entry[0], e:entry[1] });
+  }
+  found.sort((a,b) => b.frac - a.frac || b.longest - a.longest);
+  return found.map(f => [f.book, f.e]);
+}
+/* мягкая привязка: в речи эпизода есть ≥ 80 % слов реплики */
+function guardAttributeLoose(reply, episodes){
+  const found = [];
+  for(const entry of episodes || []){
+    const speech = epWords(entry);
+    if(!speech.length) continue;
+    const frac = guardCoverage(reply, hebNormSet(speech));
+    if(frac >= GATE_LOOSE) found.push({ frac, book:entry[0], e:entry[1] });
+  }
+  found.sort((a,b) => b.frac - a.frac);
+  return found.map(f => [f.book, f.e]);
+}
+/* полная сверка: verified (реплика из переданных фрагментов) | corpus (настоящая
+   цитата реестра, но не из окна контекста) | reject (подтверждения нет) */
+function guardVerify(hebrew, fragments, corpus, hits){
+  const reply = hebWords(hebrew);
+  const cc = guardCtxCoverage(reply, fragments);
+  if(cc >= GATE_CTX){
+    let src = guardAttributeQuote(reply, corpus);
+    if(!src.length) src = guardAttributeLoose(reply, corpus);
+    if(!src.length) src = guardAttributeLoose(reply, hits);
+    return { mode:"verified", ctx_cov:cc, sources:src };
+  }
+  const src = guardAttributeQuote(reply, corpus);
+  if(src.length) return { mode:"corpus", ctx_cov:cc, sources:src };
+  return { mode:"reject", ctx_cov:cc, sources:[] };
+}
+/* русский слой: слова сверяются со словарём summary_ru эпизодов-контекста */
+const GUARD_RU_WORD = /[A-Za-zА-Яа-яЁё]{2,}/g;
+const guardRuWords = s => (String(s||"").match(GUARD_RU_WORD) || []).map(w => w.toLowerCase());
+function guardRuCoverage(reply, texts){
+  const vocab = new Set();
+  for(const x of texts || []) for(const w of guardRuWords(x)) vocab.add(w);
+  const rw = guardRuWords(reply);
+  if(!vocab.size || !rw.length) return 0;
+  let n = 0; for(const w of rw) if(vocab.has(w)) n++;
+  return n / rw.length;
+}
+/* реестр эпизодов целиком (книги уже загружены retrieval'ом) — для привязки
+   цитат, пришедших из окна, которого retrieval не подобрал */
+let _GUARD_REG = null, _GUARD_REG_N = 0;
+function guardRegistry(){
+  const n = Object.keys(allDocs).length;
+  if(!_GUARD_REG || n !== _GUARD_REG_N){
+    const out = [];
+    for(const [b, eps] of Object.entries(allDocs))
+      for(const e of eps) out.push([b, e, hebWords(e.god_speech_plain || "")]);
+    _GUARD_REG = out; _GUARD_REG_N = n;
+  }
+  return _GUARD_REG;
+}
 /* источники ответа кликабельны: «Бытие 3:9» / "Genesis 3:9" → карточка эпизода */
 function linkSources(src){
   const names = [];
@@ -1410,28 +1920,98 @@ function linkSources(src){
   }
   return out;
 }
-function liveHTML(r){
-  const s = r.sections;
+async function liveHTML(r){
+  const s = r.sections || {};
+  const hits = r.hits || [];
+  const sel = r.sel || null;
+  /* окно сверки — ровно то, что реально ушло модели: выбранный эпизод (его речь
+     И огласовка). Раньше окном были все 6 найденных эпизодов: модель могла
+     «сверяться» не тем текстом, который ей дали, а тем, что нашлось рядом. */
+  const hitEps = sel ? [[sel.ctx.book, sel.ctx]] : hits.map(x => [x[1], x[2]]);
+  const frags = [];
+  for(const x of hitEps){
+    frags.push(String(x[1].god_speech_plain || "").slice(0, GUARD_CTX_CHARS));
+    frags.push(String(x[1].nikud || (await nikudFor(x[0], x[1].god_speech_refs)) || "").slice(0, GUARD_CTX_CHARS));
+  }
+  const v = guardVerify(s["[HEBREW]"] || "", frags, guardRegistry(), hitEps);
+  /* неподтверждённая реплика не показывается: вместо неё — проверенный прецедент корпуса */
+  if(v.mode === "reject") return await corpusHTML({hits: (sel && sel.hit) ? [sel.hit] : hits, trig:r.trig, probs:r.probs}, "he_layer_note");
+
+  const top = hitEps.filter(x => x[1].god_speech_plain)[0] || hitEps[0];
+  const src0 = v.sources[0] || null;
   let h = `<div class="detail"><h3>${t("god_h")}</h3>`;
-  if(s["[HEBREW]"]) h += `<div class="sect"><div class="h">${t("sec_hebrew")}</div><div class="he">${esc(stripNikudJs(s["[HEBREW]"]))}</div></div>`;
-  if(s["[NIKKUD]"]) h += `<div class="sect"><div class="h">${t("sec_nikkud")}</div><div class="he small">${esc(s["[NIKKUD]"])}</div></div>`;
-  if(s["[Russian]"]){
-    const ru = hasHebrew(s["[Russian]"]) ? null : s["[Russian]"];
-    if(ru) h += `<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(ru)}</div>`;
+  const badge = v.mode === "verified" ? `<span style="font-size:11px;color:var(--acc);font-weight:500">✓ ${t("guard_ok")}</span>` : "";
+  const heShow = stripNikudJs(s["[HEBREW]"] || "");
+  h += `<div class="sect"><div class="h">${t("sec_hebrew")} ${badge}</div><div class="he">${esc(heShow)}</div></div>`;
+
+  /* огласовка: слой [NIKKUD] должен соответствовать самой реплике; если нет —
+     берём огласовку эпизода-источника из корпуса */
+  /* огласовка: слой [NIKKUD] должен проговаривать ту же реплику подряд —
+     иначе это огласовка другого куска стиха, и рядом она читается как сбой */
+  const nikRaw = s["[NIKKUD]"] || "";
+  let nikShow = nikRaw, nikNote = "";
+  if(nikRaw){
+    const rw = hebWords(heShow), sw = hebWords(nikRaw);
+    const r = guardRuns(rw, sw);
+    const frac = rw.length ? r.covered / rw.length : 0;
+    const minRun = rw.length >= GATE_RUN ? GATE_RUN : rw.length;
+    if(frac < GATE_NIKUD || r.longest < minRun){
+      nikShow = src0 ? await nikudFor(src0[0], src0[1].god_speech_refs) : "";
+      nikNote = t("nikud_note");
+    }
+  }
+  if(nikShow) h += `<div class="sect"><div class="h">${t("sec_nikkud")}</div><div class="he small">${esc(nikShow)}</div></div>`;
+  if(nikNote) h += `<div class="note">${nikNote}</div>`;
+
+  /* русский слой: слова сверяются с аннотациями эпизодов-контекста */
+  const ruRaw = s["[Russian]"] || "";
+  if(ruRaw){
+    const ruTexts = hitEps.map(x => x[1].summary_ru || "");
+    const ruOk = !hasHebrew(ruRaw) && guardRuCoverage(ruRaw, ruTexts) >= GATE_RU;
+    if(ruOk) h += `<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(ruRaw)}</div>`;
     else {
-      const ann = r.hits.filter(x=>x[2].summary_ru)[0];
-      h += `<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(ann ? ann[2].summary_ru : "")}` +
+      const ann = src0 ? src0[1] : (top ? top[1] : null);
+      h += `<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(ann ? ann.summary_ru : "")}` +
            `<div class="note">${t("ru_layer_note")}</div></div>`;
     }
   }
-  if(s["[English]"]) h += `<div class="sect"><div class="h">${t("sec_en")}</div>${esc(s["[English]"])}</div>`;
-  if(s["[Hebrew Modern]"]) h += `<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`;
-  const src = s["[SOURCES]"] || r.hits.map(x=>bookName(x[1])+" "+x[2].span.start).join(", ");
-  h += `<div class="src">${t("sources")}${linkSources(src)}</div>${memLine()}</div>`;
+  const enRaw = s["[English]"] || "";
+  if(enRaw){
+    if(hasHebrew(enRaw)) h += `<div class="note">${t("en_layer_note")}</div>`;
+    else h += `<div class="sect"><div class="h">${t("sec_en")}</div>${esc(enRaw)}</div>`;
+  }
+  const mhRaw = s["[Hebrew Modern]"] || "";
+  if(mhRaw){
+    if(!hasHebrew(mhRaw)) h += `<div class="note">${t("mh_layer_note")}</div>`;
+    else h += `<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(mhRaw)}</div></div>`;
+  }
+  /* источники — всегда из реестра: цитата модели может называть неверный стих */
+  let srcList = v.sources.map(x => bookName(x[0]) + " " + x[1].span.start);
+  if(!srcList.length) srcList = hits.slice(0,3).map(x => bookName(x[1]) + " " + x[2].span.start);
+  const refs = v.sources.map(x => x[1].span.start).filter(Boolean);
+  const claimed = (String(s["[SOURCES]"] || "").match(/\d+[:.]\d+/g) || []).map(x => x.replace(".", ":"));
+  if(refs.length && claimed.length && !claimed.some(c => refs.includes(c)))
+    h += `<div class="note">${t("src_fixed")}</div>`;
+  h += `<div class="src">${t("sources")}${linkSources(srcList.join(", "))}</div>`;
+  /* «образ Бога» пользователю: по каким числам реестра выбран эпизод —
+     форма реакции класса и вероятности исходов (не догадка модели, а реестр). */
+  if(r.cls){
+    const prof = await godProfile();
+    const rm = prof && prof.response_modes && prof.response_modes[r.cls];
+    const bt = prof && prof.by_trigger && prof.by_trigger[r.cls];
+    if(rm && bt){
+      const dist = Object.entries(rm.distribution).sort((a,b)=>b[1]-a[1]).slice(0,2)
+        .map(([k,v])=> dn("mode",k)+" "+(v*100).toFixed(0)+"%").join(" · ");
+      const outs = Object.entries(bt.outcome_p).sort((a,b)=>b[1]-a[1]).slice(0,3)
+        .map(([k,v])=> dn("out",k)+" "+(v*100).toFixed(0)+"%").join(" · ");
+      h += `<div class="src">${t("beh_line")} ${esc(dn("trig", r.cls))}: ${esc(dist)} · ${t("beh_out")} ${esc(outs)}</div>`;
+    }
+  }
+  h += `${memLine()}</div>`;
   return h;
 }
-async function corpusHTML(r){
-  let h = `<div class="detail"><h3>${t("god_h")}</h3><div class="note">${t("corpus_precedent")}</div>`;
+async function corpusHTML(r, noteKey){
+  let h = `<div class="detail"><h3>${t("god_h")}</h3><div class="note">${t(noteKey || "corpus_precedent")}</div>`;
   const top = r.hits.filter(x=>x[2].god_speech_plain)[0] || r.hits[0];
   if(top){
     const e = top[2];
@@ -1451,10 +2031,12 @@ async function corpusHTML(r){
 function chatUI(m){
   m.innerHTML = `
   <h2>${t("chat_h2")}</h2>
-  <div class="note">${t("chat_note")}</div>
+  <div class="disclaim">${t("sim_note")}</div>
+  <div class="note" id="chatNote"></div>
   <div class="modes">
     <span id="brainDot" title="">…</span> <span id="brainState" style="color:var(--acc)">…</span>
   </div>
+  <div class="note">${t(localBrainCfg().endpoint ? "chat_note_local_model" : "chat_note")}</div>
 
   <div class="filters" style="margin-top:12px"><input id="cq" placeholder="${t("input_ph")}"></div>
   <div id="clog"></div>`;
@@ -1462,7 +2044,8 @@ function chatUI(m){
   /* Один режим: все вопросы идут через мозг (LLM + retrieval + цитаты + 6 слоёв).
      Если мозг спит — автоматический фолбэк на ближайший прецедент корпуса. */
   window.brainSyncInput = () => {};   // заглушка: ввод не блокируется никогда
-  const rr = async () => { await brainRefresh(); };
+  paintBrainNote();                    // сразу, без ожидания сети — заметка не мигает пустотой
+  const rr = async () => { await brainRefresh(); paintBrainNote(); };
   rr();
   if(window._brainTimer) clearInterval(window._brainTimer);
   window._brainTimer = setInterval(rr, 120000);
@@ -1477,7 +2060,7 @@ function chatUI(m){
     try{
       wt.textContent = t("answering");
       let html;
-      const off = BRAIN.info.state!=="on" && !store.get("god_cfg", { endpoint:"" }).endpoint;
+      const off = BRAIN.info.state!=="on" && BRAIN.info.state!=="local" && !localBrainCfg().endpoint;
       if(off){
         /* честное сообщение вместо неточного прецедента — решение владельца 2026-10-22:
            «неправильный ответ хуже никакого»; corpusReply остаётся неиспользуемым */
@@ -1485,7 +2068,7 @@ function chatUI(m){
              + `<div class="note">${esc(t("off_explore"))} <span class="cl" onclick='goTab("episodes")'>${esc(t("tab_episodes"))}</span> · <span class="cl" onclick='goTab("profile")'>${esc(t("tab_profile"))}</span> · <span class="cl" onclick='goTab("report")'>${esc(t("tab_report"))}</span></div></div>`;
       }
       else{
-        try{ html = liveHTML(await liveReply(q)); }
+        try{ html = await liveHTML(await liveReply(q)); }
         catch(e2){ html = errHTML(e2); }   // сбой туннеля — честная ошибка
       }
       wt.remove();
@@ -1939,9 +2522,53 @@ async function tReport(m){
     `<div class="card" ${LANG==="he" ? 'dir="rtl" ' : ""}${style}>${html}</div>` +
     `<button class="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})">${esc(t("to_top"))}</button>`;
 }
+/* ---------- витрина «Диалоги»: живые ответы мозга + снимок точности ---------- */
+const fmtDay = iso => { try{ const d=new Date(iso); return isNaN(d) ? iso : d.toISOString().slice(0,10); }catch(e){ return iso || ""; } };
+async function tDialogs(m){
+  m.innerHTML = `<h2>${t("dlg_h")}</h2><div class="note">${t("dlg_loading")}</div>`;
+  let dlg = null, acc = null;
+  try{ dlg = await jget("data/dialogs.json"); }catch(e){}
+  try{ acc = await jget("data/accuracy.json"); }catch(e){}
+  const head = [];
+  if(acc){
+    const date = fmtDay(acc.generated);
+    head.push(`<div class="card"><div class="h">${esc(t("dlg_acc"))}</div>` +
+      (acc.ok
+        ? `<div class="v">${esc(acc.score)}%</div><div class="b">${esc(tfmt("dlg_acc_ok", {score:acc.score, sections:acc.sections, grounded:acc.grounded||"—", sources:acc.sources, full:acc.full, date}))}</div>`
+        : `<div class="note" style="color:var(--bad)">${esc(tfmt("dlg_acc_fail", {err:acc.error||"—"}))}</div>`) +
+      `</div>`);
+  }
+  const list = (dlg && dlg.dialogues) || [];
+  const body = list.length
+    ? list.map(x => {
+        const s = x.sections || {};
+        const g = x.guard || {};
+        const mode = g.mode || "verified";
+        const parts = [];
+        const badge = mode === "verified" ? `<span style="font-size:11px;color:var(--acc);font-weight:500">✓ ${t("guard_ok")}</span>`
+                    : mode === "corpus" ? `<span style="font-size:11px;color:var(--acc);font-weight:500">${t("src_fixed")}</span>` : "";
+        if(s["[HEBREW]"]) parts.push(`<div class="sect"><div class="h">${t("sec_hebrew")} ${badge}</div><div class="he">${esc(stripNikudJs(s["[HEBREW]"]))}</div></div>`);
+        if(mode === "reject") parts.push(`<div class="note">${t("he_layer_note")}</div>`);
+        if(s["[NIKKUD]"]) parts.push(`<div class="sect"><div class="h">${t("sec_nikkud")}</div><div class="he small">${esc(s["[NIKKUD]"])}</div></div>`);
+        if(s["[Russian]"]) parts.push(`<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(s["[Russian]"])}</div>`);
+        if(s["[English]"]) parts.push(`<div class="sect"><div class="h">${t("sec_en")}</div>${esc(s["[English]"])}</div>`);
+        if(s["[Hebrew Modern]"]) parts.push(`<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`);
+        const src = (x.sources || []).map(y => bookName(y.book) + " " + y.start).join(", ") || s["[SOURCES]"] || "";
+        return `<div class="detail"><div class="msg-user"><div class="s">${esc(t("dlg_q"))}</div>${esc(x.q||"")}</div>` +
+          `<h3>${t("god_h")}</h3>` + parts.join("") +
+          (src ? `<div class="src">${t("sources")}${linkSources(src)}</div>` : "") + `</div>`;
+      }).join("")
+    : `<div class="note">${t("dlg_empty")}</div>`;
+  const date = dlg ? fmtDay(dlg.generated) : "";
+  m.innerHTML = `<h2>${t("dlg_h")}</h2>` + head.join("") +
+    `<div class="note">${esc(tfmt("dlg_note", {date}))}</div>` + body +
+    `<div class="note"><span class="cl" onclick='goTab("chat")'>${esc(t("dlg_ask"))}</span></div>`;
+}
 async function tAbout(m){
   const a = await analytics();
-  m.innerHTML = `<h2>${t("about_h")}</h2><div class="card">
+  m.innerHTML = `<h2>${t("about_h")}</h2>
+  <div class="disclaim">${t("sim_note")}</div>
+  <div class="card">
   <p>${tfmt("about_p1", {eps:a.corpus.episodes})}</p>
   <p>${t("about_p2")}</p>
   <p>${t("about_p3")}</p>
@@ -1951,10 +2578,10 @@ async function tAbout(m){
 }
 
 /* ---------- роутер ---------- */
-const TABS = [ ["chat","tab_chat"], ["overview","tab_overview"], ["books","tab_books"], ["read","tab_read"], ["episodes","tab_episodes"],
+const TABS = [ ["chat","tab_chat"], ["dialogs","tab_dialogs"], ["overview","tab_overview"], ["books","tab_books"], ["read","tab_read"], ["episodes","tab_episodes"],
                ["profile","tab_profile"], ["report","tab_report"], ["about","tab_about"] ];
 const RENDER = { overview:tOverview, books:tBooks, read:tRead, episodes:tEpisodes, profile:tProfile,
-                 chat:chatUI, report:tReport, about:tAbout };
+                 chat:chatUI, dialogs:tDialogs, report:tReport, about:tAbout };
 function renderNav(){
   nav.innerHTML = TABS.map(x => `<button data-t="${x[0]}"${x[0]===CURTAB?' class="on"':""}>${t(x[1])}</button>`).join("");
   nav.querySelectorAll("button").forEach(b => b.onclick = () => {

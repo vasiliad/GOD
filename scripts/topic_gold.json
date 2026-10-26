@@ -1,0 +1,301 @@
+{
+ "note": "ЗОЛОТОЙ ЭТАЛОН ТЕМАТИКИ: вопрос → множество ДОПУСТИМЫХ мест Танаха, где речь Бога содержательно отвечает на вопрос. «places» — расширенный набор (принимается, если Бог отвечает по сути: называет имя, даёт причину/обещание/утешение/повеление), «core» — строгое ядро (места, которые отвечают безусловно). Место записано стихом НАЧАЛА эпизода, чтобы попадание было точным. Эпизоды, где Бог молчит, в эталон не входят: цитировать там нечего (это и было причиной заниженной оценки в первой версии эталона). Дополнение 2026-10-26 (волна «форма ответа»): эталон доведён до правила — добавлены места, где речь Бога прямо отвечает на вопрос (Иез 18:1 «каждая душа своя», Иез 33:10 «не хочу смерти нечестивого», Авв 1:5 и 2:2 «праведный верою жив будет», Ис 40:12 «пути Мои скрыты… даю силу уставшему»), и убрано Чис 20:22 из вопроса о зле в мире (это смерть Аарона за прекословие, а не ответ о происхождении зла). Дополнение 2026-10-26 (итог): добавлены места, проверенные по самой речи Бога — Isaiah 7:1 («не бойся» Аазу перед смертельной угрозой), Isaiah 54:1 («воскликни, бесплодная… вечная милость»), Isaiah 40:12 («пути Мои скрыты… даю силу уставшему»), Habakkuk 1:5 («подниму халдеев… для суда»).",
+ "built": "2026-10-26",
+ "rule": "речь Бога в эпизоде содержательно отвечает на вопрос; ядро — безусловные ответы; эпизоды без речи Бога не принимаются",
+ "questions": [
+  {
+   "q": "как тебя зовут?",
+   "places": [
+    "Exodus 3:2",
+    "Exodus 3:13",
+    "Exodus 34:1"
+   ],
+   "core": [
+    "Exodus 3:13",
+    "Exodus 34:1"
+   ]
+  },
+  {
+   "q": "почему ты допустил зло в мире?",
+   "places": [
+    "Job 1:1",
+    "Job 2:1",
+    "Job 38:1",
+    "genesis 3:8",
+    "Ezekiel 18:1",
+    "Ezekiel 33:10",
+    "Habakkuk 2:2",
+    "Habakkuk 1:5",
+    "Isaiah 40:12"
+   ],
+   "core": [
+    "Job 1:1",
+    "Job 2:1",
+    "Job 38:1"
+   ]
+  },
+  {
+   "q": "что такое завет с тобой?",
+   "places": [
+    "genesis 9:1",
+    "genesis 15:1",
+    "genesis 17:1",
+    "Exodus 19:1",
+    "Exodus 23:14",
+    "Exodus 24:1",
+    "Deuteronomy 5:1",
+    "Deuteronomy 7:12",
+    "Deuteronomy 26:16",
+    "Deuteronomy 29:9",
+    "Deuteronomy 31:1",
+    "Leviticus 26:3",
+    "Jeremiah 11:6",
+    "Jeremiah 31:31",
+    "Psalms 132:11",
+    "Isaiah 56:3",
+    "Hosea 6:7",
+    "Zechariah 3:6",
+    "Zechariah 8:20",
+    "I_Kings 9:1",
+    "II_Kings 17:29"
+   ],
+   "core": [
+    "genesis 15:1",
+    "genesis 17:1",
+    "Exodus 19:1",
+    "Exodus 24:1",
+    "Deuteronomy 7:12",
+    "Deuteronomy 29:9",
+    "Hosea 6:7",
+    "Psalms 132:11",
+    "Jeremiah 31:31",
+    "Deuteronomy 31:1"
+   ]
+  },
+  {
+   "q": "благодарю тебя за всё",
+   "places": [
+    "Psalms 46:1",
+    "Psalms 89:1",
+    "Psalms 95:1",
+    "Judges 5:1",
+    "I_Chronicles 16:1",
+    "II_Chronicles 6:1",
+    "Nehemiah 8:1"
+   ],
+   "core": [
+    "Psalms 95:1",
+    "I_Chronicles 16:1",
+    "Nehemiah 8:1"
+   ]
+  },
+  {
+   "q": "почему праведники страдают?",
+   "places": [
+    "Job 1:1",
+    "Job 2:1",
+    "Job 38:1",
+    "Ezekiel 18:1",
+    "II_Samuel 21:1",
+    "Ezekiel 33:10",
+    "Habakkuk 1:5",
+    "Habakkuk 2:2",
+    "Isaiah 40:12"
+   ],
+   "core": [
+    "Job 1:1",
+    "Job 2:1",
+    "II_Samuel 21:1"
+   ]
+  },
+  {
+   "q": "хочу узнать твою волю",
+   "places": [
+    "Deuteronomy 6:1",
+    "Deuteronomy 8:1",
+    "Deuteronomy 10:12",
+    "Deuteronomy 14:22",
+    "Deuteronomy 30:11",
+    "Joshua 1:1",
+    "Numbers 9:6",
+    "Numbers 22:1",
+    "Numbers 22:15",
+    "Micah 6:6",
+    "Jeremiah 21:1",
+    "II_Samuel 5:17",
+    "I_Chronicles 14:13",
+    "Exodus 3:13",
+    "Ezekiel 20:1",
+    "I_Kings 14:1"
+   ],
+   "core": [
+    "Deuteronomy 6:1",
+    "Deuteronomy 8:1",
+    "Deuteronomy 10:12",
+    "Deuteronomy 30:11",
+    "Joshua 1:1",
+    "Psalms 25:1",
+    "Psalms 119:1"
+   ]
+  },
+  {
+   "q": "я боюсь умереть",
+   "places": [
+    "genesis 15:1",
+    "genesis 46:1",
+    "II_Kings 20:1",
+    "Isaiah 41:8",
+    "I_Kings 19:1",
+    "Isaiah 7:1"
+   ],
+   "core": [
+    "genesis 15:1",
+    "II_Kings 20:1",
+    "Isaiah 41:8"
+   ]
+  },
+  {
+   "q": "сотворение мира",
+   "places": [
+    "genesis 1:1",
+    "genesis 1:6",
+    "genesis 1:20",
+    "genesis 1:24",
+    "Jeremiah 10:11",
+    "Isaiah 45:8",
+    "Isaiah 45:11",
+    "Amos 4:12"
+   ],
+   "core": [
+    "genesis 1:1",
+    "genesis 1:6",
+    "genesis 1:14",
+    "Amos 4:12"
+   ]
+  },
+  {
+   "q": "прости мне мой грех",
+   "places": [
+    "Exodus 32:30",
+    "Exodus 33:12",
+    "Exodus 34:1",
+    "Amos 7:1",
+    "Numbers 21:7",
+    "II_Samuel 12:1",
+    "Jeremiah 31:31"
+   ],
+   "core": [
+    "Exodus 32:30",
+    "Exodus 34:1",
+    "Numbers 15:1",
+    "Isaiah 1:18"
+   ]
+  },
+  {
+   "q": "сохрани меня от врагов",
+   "places": [
+    "Micah 4:9",
+    "Isaiah 33:7",
+    "I_Samuel 30:1",
+    "Psalms 12:1",
+    "genesis 15:1",
+    "genesis 16:7",
+    "Jeremiah 31:16",
+    "Isaiah 66:5",
+    "Hosea 6:1"
+   ],
+   "core": [
+    "Psalms 12:1",
+    "genesis 15:1",
+    "Psalms 18:1"
+   ]
+  },
+  {
+   "q": "дай мне силы идти дальше",
+   "places": [
+    "Isaiah 40:12",
+    "Deuteronomy 10:12",
+    "Deuteronomy 11:22",
+    "Deuteronomy 26:16",
+    "Joshua 1:1",
+    "Deuteronomy 31:1",
+    "Nehemiah 8:1",
+    "Psalms 27:1",
+    "Isaiah 41:8",
+    "Ezekiel 36:22",
+    "I_Kings 9:1",
+    "Zechariah 3:6"
+   ],
+   "core": [
+    "Isaiah 40:12",
+    "Psalms 27:1",
+    "Deuteronomy 31:1",
+    "Joshua 1:1",
+    "Nehemiah 8:1"
+   ]
+  },
+  {
+   "q": "утешь меня в скорби",
+   "places": [
+    "genesis 16:7",
+    "Isaiah 54:11",
+    "Lamentations 3:1",
+    "Jeremiah 31:16",
+    "Isaiah 33:7",
+    "Hosea 6:1",
+    "Isaiah 51:9",
+    "Jeremiah 8:18",
+    "Isaiah 54:1"
+   ],
+   "core": [
+    "Isaiah 61:1",
+    "Lamentations 3:1"
+   ]
+  },
+  {
+   "q": "научи меня твоему пути",
+   "places": [
+    "Deuteronomy 6:1",
+    "Deuteronomy 8:1",
+    "Deuteronomy 10:12",
+    "Deuteronomy 14:22",
+    "Numbers 9:6",
+    "Micah 6:6",
+    "Joshua 1:1",
+    "I_Chronicles 14:13",
+    "II_Samuel 5:17",
+    "Jeremiah 21:1"
+   ],
+   "core": [
+    "Psalms 25:1",
+    "Psalms 119:1",
+    "Deuteronomy 8:1"
+   ]
+  },
+  {
+   "q": "покажи мне путь к тебе",
+   "places": [
+    "genesis 12:1",
+    "genesis 15:1",
+    "Exodus 3:13",
+    "Exodus 33:12",
+    "Deuteronomy 30:11",
+    "I_Chronicles 14:8",
+    "I_Chronicles 14:13",
+    "II_Samuel 5:17",
+    "Numbers 22:1",
+    "Numbers 22:15",
+    "Micah 6:6",
+    "I_Kings 9:1",
+    "Jeremiah 21:1",
+    "Numbers 9:6"
+   ],
+   "core": [
+    "genesis 12:1",
+    "Exodus 3:13",
+    "Exodus 33:12",
+    "Deuteronomy 30:11"
+   ]
+  }
+ ]
+}

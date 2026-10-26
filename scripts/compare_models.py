@@ -46,22 +46,13 @@ def parse_sections(text):
 
 def main():
     sys.path.insert(0, os.path.join(_REPO, "scripts"))
-    from bench_retrieval import lexical_scores
+    from bench_retrieval import lexical_scores, load_retrieval_corpus
 
-    a = json.load(io.open(os.path.join(_REPO, "docs", "data", "analytics.json"), encoding="utf-8"))
-    episodes = {}
-    for era in a["book_order"].values():
-        for book in era:
-            p = os.path.join(_REPO, "output", f"episodes_{book}_v2.json")
-            if os.path.exists(p):
-                for e in json.load(io.open(p, encoding="utf-8")):
-                    episodes[f"{book}|{e['span']['start']}"] = dict(e, book=book)
-
-    emb = json.load(io.open(os.path.join(_REPO, "docs", "data", "embeddings.json"), encoding="utf-8"))
-    vecs = {}
-    for i, row in enumerate(emb["rows"]):
-        raw = base64.b64decode(row["q"])
-        vecs[i] = [b * row["s"] / 127 for b in (v - 256 if v > 127 else v for v in raw)]
+    # Эпизоды и эмбеддинги берём СОГЛАСОВАННО по ключу book|span.start:
+    # список ключей раньше строился из 2056 старых файлов по книгам и разъезжался
+    # со строками embeddings.json (пересобраны на 2050 эпизодах мастер-корпуса).
+    episodes, vecs = load_retrieval_corpus()
+    print(f"Корпус: {len(episodes)} эпизодов, эмбеддингов: {len(vecs)}")
 
     from transformers import AutoModel, AutoTokenizer
     import torch
@@ -85,7 +76,7 @@ def main():
             v = v[0]
             qv = (v / v.norm()).tolist()
         cos = lambda a, b: sum(x * y for x, y in zip(a, b))
-        allcos = {k: cos(qv, vecs[i]) for i, k in enumerate(sorted(episodes.keys()))}
+        allcos = {k: cos(qv, vecs[k]) for k in episodes}
         mean = sum(allcos.values()) / len(allcos)
         std = math.sqrt(sum((c - mean) ** 2 for c in allcos.values()) / len(allcos)) or 1e-9
         hyb = {k: lex[k] + 2.0 * (c - mean) / std for k, c in allcos.items()}

@@ -4,6 +4,10 @@ audit_phase.py — Обязательный аудит контракта дан
 ПРАВИЛО: Запускать ОБЯЗАТЕЛЬНО после каждой LLM-фазы до перехода к следующей.
 Если хоть одно критическое поле имеет fill_rate < 95% → sys.exit(1).
 
+Исключение: фазы со статусом "frozen" (закрытые намеренно направления) проверяются
+информационно — они показываются, но не роняют exit code, потому что закрытие было
+решением проекта, а не браком данных.
+
 Использование:
   python scripts/audit_phase.py --phase 4      # после Фазы 4
   python scripts/audit_phase.py --phase all    # полный аудит всех доступных файлов
@@ -63,6 +67,15 @@ PHASE_CONTRACTS = {
         "description": "Датасет для fine-tuning (generate_reasoning_dataset.py)",
         "is_jsonl": True,
         "min_records": 300,
+        # Направление закрыто намеренно: датасет заморожен и отклонён из-за teacher
+        # leakage (модель училась воспроизводить учителя, а не рассуждать сама),
+        # проект перешёл на RAG поверх корпуса эпизодов v2. Проверка остаётся
+        # видимой, но старая схема instruction/output больше не применяется.
+        "status": "frozen",
+        "frozen_note": "teacher leakage — датасет учит воспроизводить учителя, а не рассуждать; fine-tuning закрыт",
+        "actual_fields": ["situation", "think", "voice_hebrew", "voice_russian", "metadata"],
+        "legacy_fields": ["instruction", "output", "metadata"],
+        "superseded_by": _REPO + "/output/episodes_TANAKH_v2.json — корпус эпизодов v2 (2050 эпизодов), источник retrieval для RAG",
         "fields": {
             "instruction": {"threshold": 1.00, "critical": True},
             "output":      {"threshold": 1.00, "critical": True},
@@ -89,8 +102,71 @@ def check_nonempty(value) -> bool:
         return value != 0
     return True
 
+def audit_frozen(phase_key: str, contract: dict) -> bool:
+    """Замороженное направление: показываем честную картину, но НЕ штрафуем за закрытый вектор.
+
+    Датасет fine-tuning отклонён сознательно (teacher leakage), проект перешёл на RAG.
+    Проверка остаётся видимой: замороженный файл не должен молча выглядеть как
+    действующий контракт, но и «ошибка» в нём — не повод ронять гейт.
+    """
+    path = Path(contract["file"])
+    print(f"\n{'='*60}")
+    print(f"[{phase_key.upper()}] {contract['description']}")
+    print(f"Файл: {path}")
+    print(f"{'='*60}")
+    print("  СТАТУС: ЗАМОРОЖЕНО — направление закрыто пивотом к RAG.")
+    print(f"  Причина: {contract.get('frozen_note', '')}")
+    print(f"  Действующий контракт сейчас: {contract.get('superseded_by', '')}")
+
+    if not path.exists():
+        print("  ПРОПУСК: файл не найден (замороженное направление не проверяется).")
+        return True
+
+    records = []
+    try:
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    records.append(json.loads(line))
+    except Exception as e:
+        print(f"  ОШИБКА загрузки: {e}")
+        return True  # замороженный файл: сбой парсинга — информация, а не провал контракта
+
+    total = len(records)
+    real = sorted({k for r in records for k in r.keys()})
+    print(f"  Записей в замороженном файле: {total}")
+    print(f"  Реальная схема файла: {', '.join(real) if real else '(пусто)'}")
+    print(f"  Схема fine-tuning ({', '.join(contract.get('legacy_fields', []))}) НЕ ПРИМЕНЯЕТСЯ — датасет заморожен.")
+
+    print(f"\n  {'Поле':<20} {'Заполнено':>10} {'Fill%':>7}  {'Статус'}")
+    print(f"  {'-'*48}")
+    for field in contract.get("actual_fields", []):
+        filled = sum(1 for r in records if check_nonempty(r.get(field)))
+        pct = (filled / total * 100) if total else 0
+        print(f"  {field:<20} {filled:>10} {pct:>6.1f}%  INFO")
+
+    # Действующий контракт должен существовать на диске — иначе «пивот» останется на словах.
+    live = Path(_REPO + "/output/episodes_TANAKH_v2.json")
+    if live.exists():
+        try:
+            with open(live, encoding="utf-8") as f:
+                data = json.load(f)
+            n = sum(len(v) for v in data.values()) if isinstance(data, dict) else len(data)
+            print(f"\n  Корпус v2 на месте: {live.name}, {n} эпизодов — это и есть рабочий контракт RAG.")
+        except Exception as e:
+            print(f"\n  ⚠️ Корпус v2 не читается: {e}")
+    else:
+        print(f"\n  ⚠️ Корпус v2 не найден: {live}")
+
+    print("\n  ИТОГ ПО ФАЗЕ: информационно — направление закрыто намеренно, контракт не применяется.")
+    return True
+
+
 def audit_file(phase_key: str, contract: dict) -> bool:
     """Аудит одного файла. Возвращает True если всё OK, False при критической ошибке."""
+    if contract.get("status") == "frozen":
+        return audit_frozen(phase_key, contract)
     path = Path(contract["file"])
     print(f"\n{'='*60}")
     print(f"[{phase_key.upper()}] {contract['description']}")
@@ -172,17 +248,23 @@ def main():
         else [args.phase]
 
     all_ok = True
+    frozen = []
     for key in phases_to_check:
         if key not in PHASE_CONTRACTS:
             print(f"Неизвестная фаза: {key}. Доступные: {list(PHASE_CONTRACTS.keys())}")
             sys.exit(1)
         ok = audit_file(key, PHASE_CONTRACTS[key])
+        if PHASE_CONTRACTS[key].get("status") == "frozen":
+            frozen.append(key)
         if not ok:
             all_ok = False
 
     print("\n" + "=" * 60)
     if all_ok:
-        print("ИТОГ: ВСЕ КОНТРАКТЫ ВЫПОЛНЕНЫ. Можно продолжать пайплайн.")
+        if frozen:
+            print(f"ИТОГ: КОНТРАКТЫ ВЫПОЛНЕНЫ; замороженные направления — информационно: {', '.join(frozen)}.")
+        else:
+            print("ИТОГ: ВСЕ КОНТРАКТЫ ВЫПОЛНЕНЫ. Можно продолжать пайплайн.")
         sys.exit(0)
     else:
         print("ИТОГ: КОНТРАКТ НАРУШЕН. Исправьте проблемные поля перед продолжением!")

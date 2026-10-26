@@ -1,0 +1,138 @@
+{
+ "note": "Меню 6 кандидатов, снятые с ЖИВОЙ страницы (http://127.0.0.1:8090) 2026-10-26, схема «шаг 1 выбор → шаг 2 формулировка → шаг 3 сверка». Эталон паритета: зеркало (scripts/answer_scheme.py) должно давать РОВНО эти меню — тогда замер на золотом наборе описывает страницу, а не близкий к ней суррогат. Переснято после волны «строгая форма ответа»: таблица форма↔исход сужена (утешение = blessing/rescue/covenant, объяснение = revelation), вопросительные маркеры («почему», «какой», «сколько»…) убраны из тематических токенов, в блок выбора уходит полный summary_ru (без обрезки на 200 символах), при равных очках книга сравнивается по алфавиту без локали, а стих — числами.",
+ "source": "docs/index.html retrieve() в браузере, вопрос → 18 найденных → фильтр «Бог говорил» → 6 кандидатов",
+ "rescue_note": "rescue_questions — вопросы, по которым лексика молчит, и отбор идёт по вектору (спасательный путь). Меню сняты с живой страницы с загруженной int8-моделью transformers.js; зеркало считает тот же вектор локально (onnxruntime) — на момент снятия совпадение полное (2/2). Сверка выполняется, только если локальная int8-модель есть (.agent/models/multilingual-e5-small/onnx/model_quantized.onnx — вне git), иначе гейт печатает SKIP: в CI модели нет, а запасной путь на torch fp32 даёт другие косинусы.",
+ "measured": "2026-10-26",
+ "rescue_questions": {
+  "зачем ты молчишь?": [
+   "Ezekiel|18:1",
+   "Jeremiah|14:14",
+   "Jeremiah|15:19",
+   "I_Kings|19:9",
+   "Habakkuk|1:5",
+   "Jeremiah|12:5"
+  ],
+  "мне скучно по ночам": [
+   "Isaiah|5:11",
+   "Isaiah|18:4",
+   "Jeremiah|31:35",
+   "Ezekiel|34:11",
+   "Isaiah|26:19",
+   "Ezekiel|34:17"
+  ]
+ },
+ "questions": {
+  "как тебя зовут?": [
+   "I_Chronicles|14:8",
+   "II_Samuel|21:1",
+   "Exodus|3:13",
+   "Numbers|23:27",
+   "Numbers|23:1",
+   "Micah|6:6"
+  ],
+  "почему ты допустил зло в мире?": [
+   "Exodus|4:1",
+   "Ezekiel|18:1",
+   "Habakkuk|1:5",
+   "Habakkuk|2:2",
+   "I_Kings|19:9",
+   "Isaiah|40:12"
+  ],
+  "что такое завет с тобой?": [
+   "Zechariah|3:6",
+   "Jeremiah|31:31",
+   "Deuteronomy|5:1",
+   "genesis|9:1",
+   "Exodus|23:14",
+   "Deuteronomy|26:16"
+  ],
+  "благодарю тебя за всё": [
+   "I_Chronicles|16:1",
+   "II_Chronicles|6:1",
+   "II_Kings|4:42",
+   "Judges|5:1",
+   "Psalms|46:1",
+   "Psalms|89:1"
+  ],
+  "почему праведники страдают?": [
+   "Ezekiel|18:1",
+   "Zechariah|7:8",
+   "Isaiah|58:1",
+   "Ezekiel|33:10",
+   "Jeremiah|12:5",
+   "Jeremiah|45:1"
+  ],
+  "хочу узнать твою волю": [
+   "Numbers|9:6",
+   "I_Kings|14:1",
+   "Ezekiel|20:1",
+   "Numbers|22:15",
+   "II_Samuel|5:17",
+   "Micah|6:6"
+  ],
+  "я боюсь умереть": [
+   "Deuteronomy|18:15",
+   "II_Kings|20:1",
+   "Deuteronomy|5:20",
+   "Judges|6:1",
+   "Haggai|2:1",
+   "Isaiah|7:1"
+  ],
+  "сотворение мира": [
+   "Jeremiah|10:11",
+   "Isaiah|45:8",
+   "II_Kings|1:16",
+   "Exodus|4:21",
+   "genesis|1:1",
+   "genesis|1:20"
+  ],
+  "прости мне мой грех": [
+   "Exodus|33:12",
+   "Exodus|34:1",
+   "Exodus|32:30",
+   "Nehemiah|9:6",
+   "Amos|7:1",
+   "Numbers|21:7"
+  ],
+  "сохрани меня от врагов": [
+   "Micah|4:9",
+   "I_Samuel|30:1",
+   "Jeremiah|31:16",
+   "Isaiah|66:5",
+   "genesis|16:7",
+   "Isaiah|63:7"
+  ],
+  "дай мне силы идти дальше": [
+   "Zechariah|3:6",
+   "Deuteronomy|26:16",
+   "Deuteronomy|11:22",
+   "Deuteronomy|10:12",
+   "Ezekiel|36:22",
+   "Deuteronomy|14:22"
+  ],
+  "утешь меня в скорби": [
+   "genesis|16:7",
+   "Judges|10:6",
+   "Lamentations|3:1",
+   "Isaiah|54:11",
+   "Isaiah|54:1",
+   "Isaiah|33:7"
+  ],
+  "научи меня твоему пути": [
+   "Numbers|9:6",
+   "Numbers|22:15",
+   "Deuteronomy|14:22",
+   "Micah|6:6",
+   "Numbers|36:1",
+   "Deuteronomy|8:1"
+  ],
+  "покажи мне путь к тебе": [
+   "Micah|6:6",
+   "Numbers|22:15",
+   "Numbers|9:6",
+   "Numbers|36:1",
+   "Exodus|3:13",
+   "II_Chronicles|18:14"
+  ]
+ }
+}

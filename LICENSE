@@ -21,6 +21,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ---
-Data note: Russian annotations and episode markup (output/episodes_*.json,
-docs/data/) are additionally licensed under CC BY 4.0. The Tanakh (Masoretic)
-text is in the public domain.
+
+The MIT grant above covers the source code of this repository only
+(`scripts/`, `brain/`, `docs/index.html`, workflow and configuration files).
+The data, audio and third-party assets shipped with the project are NOT
+covered by it: each asset keeps the license of its own source, listed below.
+Full attributions and conditions: `docs/NOTICE.md`.
+
+PER-ASSET LICENSES
+
+| Asset | License | Conditions |
+|---|---|---|
+| Source code (scripts/, brain/, docs/index.html, CI and config files) | MIT | As above. |
+| Russian annotations and episode markup (`summary_ru`, `god_action`, `emotions`, etc. in `output/episodes_*.json`, `docs/data/`) | CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/ | Attribution required: credit the GOD project (vasiliad). |
+| Analytics, behavioral profiles and the embedding index (`docs/data/analytics.json`, `output/god_behavior_profile.json`, `docs/data/embeddings.json`) | CC BY 4.0 | Derived from the annotations; attribution required, same terms as the source. |
+| Audio scripture readings — archive.org item `HebBible_AShmuelof` ("fluent") and Hugging Face dataset `arabyan/tanakh-audio` ("slower") | CC BY-NC-ND 4.0 — https://creativecommons.org/licenses/by-nc-nd/4.0/ | Attribution: Abraham Shmuelof. Non-commercial use only. No derivatives: the recordings are reproduced verbatim, without cutting, splicing or remixing; only chapter timecodes (from the ebible.org SMIL media overlays) are stored alongside them. |
+| Tanakh text with vowel points and cantillation (Sefaria, "Miqra according to the Masorah") | CC BY-SA 4.0 — https://creativecommons.org/licenses/by-sa/4.0/ | Attribution to Sefaria is required. This text is NOT in the public domain. Share-alike applies to adaptations of the text itself. |
+| Synodal translation, 1876 (Russian) | Public domain | The 1876 translation text is in the public domain; no rights are asserted over it. |
+| Brain model: DictaLM-3.0-Nemotron-12B-Instruct (GGUF build `dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF`) | NVIDIA Open Model License — https://www.nvidia.com/en-us/agreements/enterprise-software/nvidia-open-model-license/ | Model weights are redistributed via Hugging Face under the NVIDIA Open Model License; see the model card for the exact terms. |
+| Embedding model: intfloat/multilingual-e5-small | MIT | — |
+| Browser-side inference library: @xenova/transformers (transformers.js) | Apache-2.0 | — |
+
+NOTE ON COMMERCIAL USE
+
+The GOD project is a non-commercial research project. The audio assets are
+used under CC BY-NC-ND 4.0 (non-commercial, no derivatives): the recordings
+are verbatim chapter readings with no editing, and the project does not
+offer them for commercial use. The project as a whole does not impose
+additional restrictions beyond the terms of the individual assets listed
+above.

@@ -8,10 +8,17 @@ god_profile.py
 
 Выход:
     output/god_behavior_profile.json  — машинный профиль (используется god_chat)
+    docs/data/god_behavior_profile.json — тот же профиль для страницы (--publish)
     консольный отчёт                  — человекочитаемый
+
+Фактор действия (response_modes) — четыре паттерна реакции Бога, выведенные из
+реестра: слова × действие. Раньше эти числа были вписаны в публикуемый JSON руками
+и не пересчитывались ни одним скриптом; теперь они считаются здесь и публикуются
+вместе с остальным профилем, поэтому страница и реестр не могут разойтись.
 
 Usage:
     python scripts/god_profile.py
+    python scripts/god_profile.py --publish
     python scripts/god_profile.py --test
     python scripts/god_profile.py --predict "intercession"
 """
@@ -25,17 +32,31 @@ _REPO = str(Path(__file__).resolve().parents[1])  # корень репозит�
 sys.stdout.reconfigure(encoding="utf-8")
 
 BASE = Path(_REPO)
-EPISODES_GLOB = "output/episodes_*_v2.json"
+MASTER = BASE / "output/episodes_TANAKH_v2.json"
 OUT_FILE = BASE / "output/god_behavior_profile.json"
+DATA_FILE = BASE / "docs" / "data" / "god_behavior_profile.json"
+
+# Легенда фактора действия — словарь страницы и отчётов.
+RESPONSE_MODE_LEGEND = {
+    "speaks_and_acts": "Бог говорит И действует (основной паттерн для непослушания, завета)",
+    "acts_silently": "Бог действует МОЛЧА — без слов, только действие (доминирует для мольбы, молитвы, верности)",
+    "silence": "Бог молчит полностью — ни слова, ни действия",
+    "speaks_only": "Бог только говорит без видимого действия (редчайший паттерн — 0-1%)",
+}
 
 
 def load_episodes():
+    """Эпизоды мастер-корпуса output/episodes_TANAKH_v2.json (dict {книга: [эп]}).
+
+    Раньше читались файлы по книгам output/episodes_*_v2.json (2056 эпизодов
+    до дедупликации); мастер содержит те же 2056 после слития 6 перекрытий —
+    статистика считается по нему, чтобы профиль совпадал с корпусом на странице.
+    """
+    master = json.load(open(MASTER, encoding="utf-8"))
     eps = []
-    for fp in sorted(BASE.glob(EPISODES_GLOB)):
-        if fp.name == "episodes_TANAKH_v2.json":
-            continue  # мастер-файл — словарь {книга: [эп]}; книги читаем напрямую
-        book = fp.stem.replace("episodes_", "").replace("_v2", "")
-        for ep in json.load(open(fp, encoding="utf-8")):
+    for book, book_eps in master.items():
+        for ep in book_eps:
+            ep = dict(ep)
             ep["_book"] = book
             eps.append(ep)
     return eps
@@ -43,6 +64,38 @@ def load_episodes():
 
 def dist(counter, total):
     return {k: round(v / total, 3) for k, v in counter.most_common()}
+
+
+def response_modes(eps):
+    """Фактор действия: четыре паттерна реакции Бога по словам × действию.
+
+    speaks_and_acts — есть и слова, и действие; acts_silently — действие без слов;
+    silence — ни слов, ни действия; speaks_only — слова без видимого действия.
+    Режим класса = самый частый паттерн, confidence = его доля.
+    """
+    groups = defaultdict(list)
+    for e in eps:
+        groups[e["trigger"]].append(e)
+    modes = {}
+    for trig, es in sorted(groups.items()):
+        n = len(es)
+        c = Counter()
+        for e in es:
+            speaks = bool((e.get("god_speech_plain") or "").strip())
+            acts = bool((e.get("god_action") or "").strip())
+            if speaks and acts:
+                c["speaks_and_acts"] += 1
+            elif acts:
+                c["acts_silently"] += 1
+            elif speaks:
+                c["speaks_only"] += 1
+            else:
+                c["silence"] += 1
+        dist = {k: round(v / n, 2) for k, v in c.most_common()}
+        mode = max(dist, key=dist.get) if dist else "silence"
+        modes[trig] = {"mode": mode, "confidence": dist.get(mode, 0.0),
+                       "distribution": dist, "total": n}
+    return modes
 
 
 def build_profile(eps):
@@ -64,6 +117,8 @@ def build_profile(eps):
         "by_trigger": {},
         "by_trigger_direction": {},
         "severity_by_outcome": {},
+        "response_modes": {},
+        "response_mode_legend": RESPONSE_MODE_LEGEND,
     }
     # P(outcome | trigger) + сигнатура триггера
     groups = defaultdict(list)
@@ -89,6 +144,8 @@ def build_profile(eps):
     for e in eps:
         so[e["outcome"]].append(e["severity"])
     profile["severity_by_outcome"] = {k: round(sum(v) / len(v), 2) for k, v in so.items()}
+    # фактор действия: форма реакции по классам обращения
+    profile["response_modes"] = response_modes(eps)
     return profile
 
 
@@ -103,12 +160,17 @@ def predict(profile, trigger):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--test", action="store_true")
+    ap.add_argument("--publish", action="store_true",
+                    help="перезаписать docs/data/god_behavior_profile.json (страница читает его)")
     ap.add_argument("--predict", help="предсказать исход для trigger (например: intercession)")
     args = ap.parse_args()
 
     eps = load_episodes()
     profile = build_profile(eps)
     OUT_FILE.write_text(json.dumps(profile, ensure_ascii=False, indent=1), encoding="utf-8")
+    if args.publish:
+        DATA_FILE.write_text(json.dumps(profile, ensure_ascii=False, indent=1), encoding="utf-8")
+        print("опубликовано: %s" % DATA_FILE.relative_to(BASE))
 
     if args.predict:
         p = predict(profile, args.predict)
@@ -123,8 +185,10 @@ def main():
     print("\n=== P(outcome | trigger) — предсказание реакции ===")
     for trig, t in profile["by_trigger"].items():
         top = list(t["outcome_p"].items())[:3]
+        rm = profile["response_modes"][trig]
         print(f"{trig:<22} n={t['n']:>3} sev={t['severity_mean']:<4} " +
-              " ".join(f"{k}:{v:.0%}" for k, v in top))
+              " ".join(f"{k}:{v:.0%}" for k, v in top) +
+              f"   [{rm['mode']} {rm['confidence']:.0%}]")
     print("\nСерьёзность по исходам:", profile["severity_by_outcome"])
 
     if args.test:
@@ -136,6 +200,16 @@ def main():
             assert 1 <= t["severity_mean"] <= 5
         pr = predict(d, "intercession")
         assert pr and 0 <= pr["probabilities"][pr["predicted_outcome"]] <= 1
+        # фактор действия: сумма долей класса ≈ 1, режим — самый частый паттерн
+        for trig, rm in d["response_modes"].items():
+            assert abs(sum(rm["distribution"].values()) - 1.0) < 0.03, f"режимы {trig} не сходятся"
+            assert rm["total"] == d["by_trigger"][trig]["n"], f"режимы {trig}: расхождение n"
+            assert rm["mode"] == max(rm["distribution"], key=rm["distribution"].get), f"режим {trig} не самый частый"
+        assert set(d["response_mode_legend"]) == {"speaks_and_acts", "acts_silently", "silence", "speaks_only"}
+        # опубликованная копия страницы не должна разойтись с мастером
+        if DATA_FILE.exists():
+            pub = json.loads(DATA_FILE.read_text(encoding="utf-8"))
+            assert pub["response_modes"] == d["response_modes"], "docs/data профиль разошёлся с output"
         print("SELFTEST: PASS")
 
 
