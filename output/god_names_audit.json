@@ -1,5 +1,5 @@
 {
- "corpus_source": "data/tanakh (корневой, консонантный)",
+ "corpus_source": "docs/data/tanakh (опубликованная копия, огласовка снята)",
  "total_verses": 23206,
  "pipeline_lexicon": [
   "אביר יעקב",
@@ -25,13 +25,7 @@
   "קדוש ישראל",
   "שר צבא יהוה"
  ],
- "coded_names_counts": {
-  "יהוה": 331,
-  "אלהים": 48,
-  "אדני": 10,
-  "יהוה אלהים": 6,
-  "יהוה צבאות": 1
- },
+ "coded_names_counts": {},
  "names": [
   {
    "name": "יהוה צבאות",

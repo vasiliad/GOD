@@ -53,8 +53,20 @@ def main():
         log("delete пропущен (ядра не было?):", e)
 
     t0 = time.time()
-    subprocess.run([sys.executable, "-m", "kaggle", "kernels", "push", "-p", pushdir],
-                   check=True)
+    proc = subprocess.run([sys.executable, "-m", "kaggle", "kernels", "push", "-p", pushdir],
+                          capture_output=True, text=True)
+    out = ((proc.stdout or "") + (proc.stderr or "")).strip()
+    if out:
+        log("kaggle push:", out[-800:])
+    low = out.lower()
+    if proc.returncode != 0 or "kernel push error" in low:
+        # Частая причина — исчерпана недельная квота Kaggle GPU (30 ч/нед):
+        # сессия не запустится, ждать пульса бессмысленно. Говорим причину сразу.
+        reason = ("КВОТА KAGGLE GPU исчерпана (30 ч/нед) — сессия не запустится"
+                  if "quota" in low else "push не прошёл")
+        log("МОЗГ НЕ ПОДНЯТСЯ:", reason)
+        log("публичный мозг спит до сброса квоты; auto-heal повторит через 6 ч")
+        return 3
     log("запушено; жду мозг (пульс brain.json, до 20 мин)...")
     deadline = t0 + 1200
     while time.time() < deadline:

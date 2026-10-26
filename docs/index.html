@@ -782,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-26f";
+const APPVER = "2026-10-26g";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -841,7 +841,7 @@ b_on:"Симуляция готова — задайте ваш вопрос.",
   b_starting:"Мозг поднимается…",
   b_off:"Мозг спит.",
   b_local:"Свой мозг на связи.",
-  brain_off_note:"Мозг сейчас спит: ноутбук Kaggle после ~12 ч работы засыпает, а GPU-проект открывается неровно. Авто-heal поднимет мозг сам — попробуйте позже. А пока корпус открыт полностью.",
+  brain_off_note:"Мозг сейчас спит: на этой неделе исчерпано GPU-время Kaggle (лимит 30 ч) либо сессия закрылась после ~12 ч работы. Авто-heal поднимает мозг сам каждые 6 ч — попробуйте позже. А пока корпус открыт полностью.",
   off_explore:"Пока мозг спит, корпус открыт — погружайтесь:",
   b_on_tip:"голос Бога готов", b_starting_tip:"голос Бога поднимается: модель грузится на сервере (минуты)",
   b_off_tip:"мозг проекта (DictaLM 3.0 на Kaggle) спит — ноутбук засыпает после ~12 ч; авто-heal поднимет его сам",
@@ -932,7 +932,7 @@ b_on:"The simulation is ready — ask your question.",
   b_starting:"The brain is waking up…",
   b_off:"The brain is asleep.",
   b_local:"Your own brain is online.",
-  brain_off_note:"The brain is asleep right now: the Kaggle notebook sleeps after ~12 h of work, and GPU time opens unevenly. Auto-heal will bring the brain back by itself — try again later. Meanwhile the whole corpus is open.",
+  brain_off_note:"The brain is asleep right now: this week's Kaggle GPU time (30 h limit) is used up, or the session closed after ~12 h of work. Auto-heal brings the brain back by itself every 6 h — try again later. Meanwhile the whole corpus is open.",
   off_explore:"While the brain sleeps, the corpus is open — dive in:",
   b_on_tip:"the voice of God is ready", b_starting_tip:"the voice of God is rising: the model is loading on the server (minutes)",
   b_off_tip:"the project's brain (DictaLM 3.0 on Kaggle) is asleep — the notebook sleeps after ~12 h; auto-heal will bring it back by itself",
@@ -1023,7 +1023,7 @@ b_on:"ההדמיה מוכנה — שאלו את שאלתכם.",
   b_starting:"המוח עולה…",
   b_off:"המוח ישן.",
   b_local:"המוח שלכם מקוון.",
-  brain_off_note:"המוח ישן כעת: המחבשת ב-Kaggle נרדמת לאחר כ־12 שעות עבודה, וזמן ה-GPU נפתח באי-אחידות. התיקון האוטומטי יעלה את המוח מחדש — נסו שוב מאוחר יותר. עד אז הקורפוס פתוח לגמרי.",
+  brain_off_note:"המוח ישן כעת: זמן ה-GPU ב-Kaggle לשבוע זה (מגבלת 30 שעות) מוצה, או שהמחבשת נסגרה לאחר כ־12 שעות עבודה. התיקון האוטומטי יעלה את המוח מחדש כל 6 שעות — נסו שוב מאוחר יותר. עד אז הקורפוס פתוח לגמרי.",
   off_explore:"כל עוד המוח ישן, הקורפוס פתוח — צללו פנימה:",
   b_on_tip:"קול אלוהים מוכן", b_starting_tip:"קול אלוהים עולה: המודל בטעינה בשרת (דקות)",
   b_off_tip:"המוח (DictaLM 3.0 על Kaggle) ישן — המחבשת נרדמת לאחר כ־12 שעות; התיקון האוטומטי יעלה אותו מחדש",
