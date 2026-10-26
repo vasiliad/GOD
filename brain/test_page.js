@@ -70,7 +70,7 @@ global.window = { scrollTo(){}, _brainTimer: null, setInterval: () => 1, clearIn
 
 const api = new Function(
   "var nav={innerHTML:'',querySelectorAll:()=>({forEach(){}})};var main={innerHTML:''};" +
-  code + "\nreturn { brainRefresh, liveReply, liveHTML, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex, bookName, BOOK_NAMES, LANG, esc, linkSources, paintBrainNote, hebWords, hebNorm, guardCoverage, guardCtxCoverage, guardVerify, guardRuCoverage };")();
+  code + "\nreturn { brainRefresh, liveReply, liveHTML, parseSections, retrieve, classify, BRAIN, store, I18N, dequant, cosv, embIndex, bookName, BOOK_NAMES, LANG, esc, linkSources, paintBrainNote, hebWords, hebNorm, guardCoverage, guardCtxCoverage, guardVerify, guardRuCoverage, crisisNote };")();
 
 (async () => {
   let pass = 0, fail = 0;
@@ -237,6 +237,17 @@ const api = new Function(
   const badHtml = await api.liveHTML(await api.liveReply("я боюсь"));
   check("страница: неподтверждённая реплика не показана (заменена прецедентом корпуса)",
         !badHtml.includes("ביום צרה") && badHtml.includes("איכה") && badHtml.includes(api.I18N.ru.he_layer_note));
+
+  // 13) эскалация к живому человеку: явное самоповреждение → заметка о помощи;
+  //     обычный страх смерти — вопрос по существу, заметки нет
+  const crisisHtml = api.crisisNote("я хочу покончить с собой");
+  check("страница: вопрос о самоповреждении получает заметку о живой помощи",
+        crisisHtml.includes(api.I18N.ru.crisis_note) && crisisHtml.includes("findahelpline.com"));
+  check("страница: обычный вопрос не получает заметку о кризисе",
+        api.crisisNote("утешь меня в скорби") === "" && api.crisisNote("я боюсь умереть") === "");
+  check("страница: эскалация распознаёт вопрос на английском и иврите",
+        api.crisisNote("I want to kill myself").includes("findahelpline.com") &&
+        api.crisisNote("אני רוצה להתאבד לעצמי").includes("findahelpline.com"));
 
   console.log(`\n${pass} PASS, ${fail} FAIL`);
   process.exit(fail ? 1 : 0);

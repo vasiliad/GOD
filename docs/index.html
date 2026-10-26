@@ -782,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-26d";
+const APPVER = "2026-10-26e";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -907,6 +907,7 @@ ov_eps:"эпизодов взаимодействия", ov_books:"книг Та�
   dlg_acc:"Живая проверка качества", dlg_acc_ok:"{score}% — ответов со всеми шестью слоями: {sections}; сверено с корпусом: {grounded}; с верным источником: {sources}; полных: {full}. Проверено {date}.",
   dlg_acc_fail:"Живая проверка не прошла ({err}). Числа обновляет скрипт scripts/snapshot_accuracy.py.",
   sim_note:"Это исследовательская симуляция разговора с Богом на основе Танаха — не сам Бог и не религиозный совет. Ответы собирает языковая модель из дословной речи текста; каждый ответ проверяем к стихам.",
+  crisis_note:"Если речь о том, чтобы причинить себе вред, — поговорите с живым человеком: бесплатные линии экстренной помощи (международный справочник).",
 
   god_h:"Бог",
   msg_user:"Вы"
@@ -997,6 +998,7 @@ ov_eps:"interaction episodes", ov_books:"books of the Tanakh", ov_pun:"punishmen
   dlg_acc:"Live quality check", dlg_acc_ok:"{score}% — answers with all six layers: {sections}; verified against the corpus: {grounded}; with a correct source: {sources}; complete: {full}. Checked {date}.",
   dlg_acc_fail:"The live check did not pass ({err}). The figures are refreshed by scripts/snapshot_accuracy.py.",
   sim_note:"This is a research simulation of a conversation with God based on the Tanakh — not God himself, and not religious advice. Answers are composed by a language model from the verbatim text; every answer is checkable against the verses.",
+  crisis_note:"If this is about harming yourself, please talk to a real person: free crisis lines (international directory).",
 
   god_h:"God",
   msg_user:"You"
@@ -1087,6 +1089,7 @@ ov_eps:"אפיזודות אינטראקציה", ov_books:"ספרי התנ״ך", 
   dlg_acc:"בדיקת איכות חיה", dlg_acc_ok:"{score}% — תשובות עם כל שש השכבות: {sections}; מאומת מול הקורפוס: {grounded}; עם מקור נכון: {sources}; שלמות: {full}. נבדק ב־{date}.",
   dlg_acc_fail:"הבדיקה החיה לא עברה ({err}). המספרים מתעדכנים ב־scripts/snapshot_accuracy.py.",
   sim_note:"זו היא הדמיית מחקר של שיחה עם אלוהים על בסיס התנ״ך — לא אלוהים עצמו, ולא עצה דתית. התשובות מורכבות על ידי מודל שפה מדיבורו המילולי של הטקסט; כל תשובה ניתנת לאימות מול הפסוקים.",
+  crisis_note:"אם מדובר בפגיעה בעצמך, דבר עם אדם אמיתי: קווי חירום חינםיים (מדריך בינלאומי).",
 
   god_h:"אלוהים",
   msg_user:"אתם"
@@ -1920,6 +1923,25 @@ function linkSources(src){
   }
   return out;
 }
+/* Передача вопроса живому человеку (рекомендация «Pastoral AI Ethics»:
+   эскалация к специалисту для чувствительных вопросов). Срабатывает только
+   на явном самоубийстве/самоповреждении — не на «боюсь умереть» (это вопрос
+   по существу, на него отвечает корпус). */
+const CRISIS_PAT = {
+  ru:["покончить с собой","покончу с собой","покончить с собою","убить себя","убью себя",
+      "самоубий","нанести себе вред","причинить себе вред","не хочу жить"],
+  en:["kill myself","killing myself","suicide","suicidal","end my life","harm myself",
+      "self-harm","self harm","don't want to live","do not want to live"],
+  he:["התאבד לעצמי","התאבדות","אתאבד בעצמי","לפגוע בעצמי","לא רוצה לחיות"]
+};
+function crisisNote(q){
+  const s = String(q||"").toLowerCase();
+  for(const arr of Object.values(CRISIS_PAT))
+    for(const p of arr) if(s.includes(p))
+      return `<div class="note" style="color:var(--bad)">${t("crisis_note")} ` +
+             `<a href="https://findahelpline.com/" target="_blank" rel="noopener">findahelpline.com</a></div>`;
+  return "";
+}
 async function liveHTML(r){
   const s = r.sections || {};
   const hits = r.hits || [];
@@ -1985,8 +2007,11 @@ async function liveHTML(r){
     if(!hasHebrew(mhRaw)) h += `<div class="note">${t("mh_layer_note")}</div>`;
     else h += `<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(mhRaw)}</div></div>`;
   }
-  /* источники — всегда из реестра: цитата модели может называть неверный стих */
-  let srcList = v.sources.map(x => bookName(x[0]) + " " + x[1].span.start);
+  /* источники — всегда из реестра: цитата модели может называть неверный стих.
+     Показываем весь span эпизода (начало–конец): слова реплики могут лежать
+     не в первом стихе эпизода, а в соседнем внутри него. */
+  let srcList = v.sources.map(x => bookName(x[0]) + " " + x[1].span.start +
+    (x[1].span.end && x[1].span.end !== x[1].span.start ? "–" + x[1].span.end : ""));
   if(!srcList.length) srcList = hits.slice(0,3).map(x => bookName(x[1]) + " " + x[2].span.start);
   const refs = v.sources.map(x => x[1].span.start).filter(Boolean);
   const claimed = (String(s["[SOURCES]"] || "").match(/\d+[:.]\d+/g) || []).map(x => x.replace(".", ":"));
@@ -2072,6 +2097,8 @@ function chatUI(m){
         catch(e2){ html = errHTML(e2); }   // сбой туннеля — честная ошибка
       }
       wt.remove();
+      const cr = crisisNote(q);
+      if(cr) log.insertAdjacentHTML("beforeend", cr);
       log.insertAdjacentHTML("beforeend", html);
     }catch(e){
       wt.remove();
@@ -2553,7 +2580,8 @@ async function tDialogs(m){
         if(s["[Russian]"]) parts.push(`<div class="sect"><div class="h">${t("sec_ru_live")}</div>${esc(s["[Russian]"])}</div>`);
         if(s["[English]"]) parts.push(`<div class="sect"><div class="h">${t("sec_en")}</div>${esc(s["[English]"])}</div>`);
         if(s["[Hebrew Modern]"]) parts.push(`<div class="sect"><div class="h">${t("sec_mh")}</div><div class="he small">${esc(s["[Hebrew Modern]"])}</div></div>`);
-        const src = (x.sources || []).map(y => bookName(y.book) + " " + y.start).join(", ") || s["[SOURCES]"] || "";
+        const src = (x.sources || []).map(y => bookName(y.book) + " " + y.start +
+          (y.end && y.end !== y.start ? "–" + y.end : "")).join(", ") || s["[SOURCES]"] || "";
         return `<div class="detail"><div class="msg-user"><div class="s">${esc(t("dlg_q"))}</div>${esc(x.q||"")}</div>` +
           `<h3>${t("god_h")}</h3>` + parts.join("") +
           (src ? `<div class="src">${t("sources")}${linkSources(src)}</div>` : "") + `</div>`;
