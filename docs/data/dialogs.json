@@ -1,0 +1,898 @@
+{
+ "generated": "2026-10-26T08:42:41Z",
+ "model": "god-brain",
+ "brain_url": "http://127.0.0.1:18099",
+ "brain_source": "локальный мозг (--url)",
+ "brain_model_file": [],
+ "scheme": "шаг 1 выбор эпизода (temperature 0) → шаг 2 формулировка из одного эпизода → шаг 3 сверка с реестром",
+ "dialogues": [
+  {
+   "id": 1,
+   "q": "Я не буду слушать твои слова и пойду за чужими богами.",
+   "q_lang": "ru",
+   "sections": {
+    "[HEBREW]": "כֹּ֖ה אָמַ֣ר יְהֹוָ֑ה כָּ֠כָה אַשְׁחִ֞ית אֶת־גְּא֧וֹן יְהוּדָ֛ה וְאֶת־גְּא֥וֹן יְרוּשָׁלַ֖͏ִם הָרָֽב",
+    "[NIKKUD]": "וַיְהִ֥י דְבַר־יְהֹוָ֖ה אֵלַ֥י לֵאמֹֽר׃  כֹּ֖ה אָמַ֣ר יְהֹוָ֑ה כָּ֠כָה אַשְׁחִ֞ית אֶת־גְּא֧וֹן יְהוּדָ֛ה וְאֶת־גְּא֥וֹן יְרוּשָׁלַ֖͏ִם הָרָֽב",
+    "[Russian]": "Толкование знамения: как испорченный ни на что не годный пояс, так ЯХВЕ погубит гордость Иуды и Иерусалима — народ, прилипший к идолам вместо Бога, отказался слушать.",
+    "[English]": "I am the LORD your God, the God of your fathers",
+    "[Hebrew Modern]": "אני ה' אלהיכם, אלהי אבותיכם",
+    "[SOURCES]": "Jeremiah 13:8"
+   },
+   "model_sections": {
+    "[HEBREW]": "כֹּ֖ה אָמַ֣ר יְהֹוָ֑ה כָּ֠כָה אַשְׁחִ֞ית אֶת־גְּא֧וֹן יְהוּדָ֛ה וְאֶת־גְּא֥וֹן יְרוּשָׁלַ֖͏ִם הָרָֽב",
+    "[NIKKUD]": "וַיְהִ֥י דְבַר־יְהֹוָ֖ה אֵלַ֥י לֵאמֹֽר׃  כֹּ֖ה אָמַ֣ר יְהֹוָ֑ה כָּ֠כָה אַשְׁחִ֞ית אֶת־גְּא֧וֹן יְהוּדָ֛ה וְאֶת־גְּא֥וֹן יְרוּשָׁלַ֖͏ִם הָרָֽב",
+    "[Russian]": "Я — Господь, ваш Бог, Бог ваших отцов",
+    "[English]": "I am the LORD your God, the God of your fathers",
+    "[Hebrew Modern]": "אני ה' אלהיכם, אלהי אבותיכם",
+    "[SOURCES]": "Jeremiah 13:8"
+   },
+   "model_sources": [
+    {
+     "book": "Jeremiah",
+     "start": "13:8",
+     "end": "13:11"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Jeremiah",
+     "start": "13:8",
+     "end": "13:11"
+    },
+    {
+     "book": "II_Chronicles",
+     "start": "20:1",
+     "end": "20:19"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "28:10",
+     "end": "28:11"
+    },
+    {
+     "book": "II_Samuel",
+     "start": "24:1",
+     "end": "24:17"
+    },
+    {
+     "book": "II_Kings",
+     "start": "22:3",
+     "end": "22:20"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "12:14",
+     "end": "12:17"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "22:1",
+     "end": "22:5"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "24:4",
+     "end": "24:10"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "26:1",
+     "end": "26:6"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "27:1",
+     "end": "27:11"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "30:1",
+     "end": "30:3"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "31:23",
+     "end": "31:26"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "32:1",
+     "end": "32:5"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "36:27",
+     "end": "36:32"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "44:1",
+     "end": "44:14"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "44:24",
+     "end": "44:29"
+    },
+    {
+     "book": "Jeremiah",
+     "start": "44:30",
+     "end": "44:30"
+    },
+    {
+     "book": "Amos",
+     "start": "2:4",
+     "end": "2:5"
+    },
+    {
+     "book": "Zechariah",
+     "start": "8:14",
+     "end": "8:17"
+    },
+    {
+     "book": "II_Chronicles",
+     "start": "34:14",
+     "end": "34:28"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Jeremiah",
+      "start": "13:8",
+      "end": "13:11"
+     },
+     {
+      "book": "II_Chronicles",
+      "start": "20:1",
+      "end": "20:19"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "28:10",
+      "end": "28:11"
+     },
+     {
+      "book": "II_Samuel",
+      "start": "24:1",
+      "end": "24:17"
+     },
+     {
+      "book": "II_Kings",
+      "start": "22:3",
+      "end": "22:20"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "12:14",
+      "end": "12:17"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "22:1",
+      "end": "22:5"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "24:4",
+      "end": "24:10"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "26:1",
+      "end": "26:6"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "27:1",
+      "end": "27:11"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "30:1",
+      "end": "30:3"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "31:23",
+      "end": "31:26"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "32:1",
+      "end": "32:5"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "36:27",
+      "end": "36:32"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "44:1",
+      "end": "44:14"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "44:24",
+      "end": "44:29"
+     },
+     {
+      "book": "Jeremiah",
+      "start": "44:30",
+      "end": "44:30"
+     },
+     {
+      "book": "Amos",
+      "start": "2:4",
+      "end": "2:5"
+     },
+     {
+      "book": "Zechariah",
+      "start": "8:14",
+      "end": "8:17"
+     },
+     {
+      "book": "II_Chronicles",
+      "start": "34:14",
+      "end": "34:28"
+     }
+    ]
+   },
+   "trigger": "disobedience",
+   "selected": {
+    "book": "Jeremiah",
+    "start": "13:8",
+    "end": "13:11",
+    "index": 1
+   },
+   "ok": true
+  },
+  {
+   "id": 2,
+   "q": "Spare them, they do not know what they are doing — do not destroy them for one man's sin.",
+   "q_lang": "en",
+   "sections": {
+    "[HEBREW]": "מי אשר חטא לי אמחנו מספרי",
+    "[NIKKUD]": "מִי אֲשֶׁר חָֽטָא־לִ֔י אֶמְחֶ֖נּוּ מִסִּפְרִֽי",
+    "[Russian]": "Заступничество Моисея на пределе: 'прости им, а если нет — сотри меня из книги Твоей'; отказ стирать невинных, ангел вместо присутствия, отложенное воздаяние 'в день посещения' — и удар язвой по народу (действие без слов).",
+    "[English]": "'Whoever has sinned against Me, I will blot out of My book'",
+    "[Hebrew Modern]": "מי שחטא לי, אמחנו מספרי",
+    "[SOURCES]": "Exodus 32:32"
+   },
+   "model_sections": {
+    "[HEBREW]": "מי אשר חטא לי אמחנו מספרי",
+    "[NIKKUD]": "מִי אֲשֶׁר חָֽטָא־לִ֔י אֶמְחֶ֖נּוּ מִסִּפְרִֽי",
+    "[Russian]": "'прости им, а если нет — сотри меня из книги Твоей'",
+    "[English]": "'Whoever has sinned against Me, I will blot out of My book'",
+    "[Hebrew Modern]": "מי שחטא לי, אמחנו מספרי",
+    "[SOURCES]": "Exodus 32:32"
+   },
+   "model_sources": [
+    {
+     "book": "Exodus",
+     "start": "32:30",
+     "end": "32:35"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Exodus",
+     "start": "32:30",
+     "end": "32:35"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Exodus",
+      "start": "32:30",
+      "end": "32:35"
+     }
+    ]
+   },
+   "trigger": "intercession",
+   "selected": {
+    "book": "Exodus",
+    "start": "32:30",
+    "end": "32:35",
+    "index": 1
+   },
+   "ok": true
+  },
+  {
+   "id": 3,
+   "q": "מה עליי לעשות כדי לחיות לפניך?",
+   "q_lang": "he",
+   "sections": {
+    "[HEBREW]": "אלין חיותא רברבתא די אנין ארבע ארבעה מלכין יקומון מן ארעא ויקבלון מלכותא קדישי עליונין ויחסנון מלכותא עד עלמא ועד עלם עלמיא",
+    "[NIKKUD]": "אִלֵּין֙ חֵיוָתָ֣א רַבְרְבָתָ֔א דִּ֥י אִנִּ֖ין אַרְבַּ֑ע אַרְבְּעָ֥ה מַלְכִ֖ין יְקוּמ֥וּן מִן־אַרְעָֽא׃  וִֽיקַבְּלוּן֙ מַלְכוּתָ֔א קַדִּישֵׁ֖י עֶלְיוֹנִ֑ין וְיַחְסְנ֤וּן מַלְכוּתָא֙ עַד־עָ֣לְמָ֔א וְעַ֖ד עָלַ֥ם עָלְמַיָּֽא׃  כֵּן֮ אֲמַר֒ חֵֽיוְתָא֙ רְבִיעָ֣יְתָ֔א מַלְכ֤וּ (רביעיה) [רְבִיעָאָה֙] תֶּה",
+    "[Russian]": "Потрясённый Даниил спрашивает у стоящего истолкователя значение видения; ангел раскрывает судьбу четырёх царств, брань надменного рога со святыми и вечное царство святых Всевышнего.",
+    "[English]": "Daniel, disturbed by the vision, asks for its meaning; the angel explains that four kingdoms will rise, the saints will receive power, and the eternal kingdom of the Most High will endure.",
+    "[Hebrew Modern]": "דניאל, המוטרד מהחזון, שואל על משמעותו; המלאך מסביר כי יקומו ארבעה מלכויות, הקדושים יקבלו מלכות, והמלכות של הקדושים העליונים תהיה נצחית.",
+    "[SOURCES]": "Daniel 7:15"
+   },
+   "model_sections": {
+    "[HEBREW]": "אלין חיותא רברבתא די אנין ארבע ארבעה מלכין יקומון מן ארעא ויקבלון מלכותא קדישי עליונין ויחסנון מלכותא עד עלמא ועד עלם עלמיא",
+    "[NIKKUD]": "אִלֵּין֙ חֵיוָתָ֣א רַבְרְבָתָ֔א דִּ֥י אִנִּ֖ין אַרְבַּ֑ע אַרְבְּעָ֥ה מַלְכִ֖ין יְקוּמ֥וּן מִן־אַרְעָֽא׃  וִֽיקַבְּלוּן֙ מַלְכוּתָ֔א קַדִּישֵׁ֖י עֶלְיוֹנִ֑ין וְיַחְסְנ֤וּן מַלְכוּתָא֙ עַד־עָ֣לְמָ֔א וְעַ֖ד עָלַ֥ם עָלְמַיָּֽא׃  כֵּן֮ אֲמַר֒ חֵֽיוְתָא֙ רְבִיעָ֣יְתָ֔א מַלְכ֤וּ (רביעיה) [רְבִיעָאָה֙] תֶּה",
+    "[Russian]": "Даниил, потрясённый видением, спрашивает о его значении; ангел объясняет, что четыре царства поднимаются, святые получают власть, и царство святых Всевышнего вечное.",
+    "[English]": "Daniel, disturbed by the vision, asks for its meaning; the angel explains that four kingdoms will rise, the saints will receive power, and the eternal kingdom of the Most High will endure.",
+    "[Hebrew Modern]": "דניאל, המוטרד מהחזון, שואל על משמעותו; המלאך מסביר כי יקומו ארבעה מלכויות, הקדושים יקבלו מלכות, והמלכות של הקדושים העליונים תהיה נצחית.",
+    "[SOURCES]": "Daniel 7:15"
+   },
+   "model_sources": [
+    {
+     "book": "Daniel",
+     "start": "7:15",
+     "end": "7:28"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Daniel",
+     "start": "7:15",
+     "end": "7:28"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Daniel",
+      "start": "7:15",
+      "end": "7:28"
+     }
+    ]
+   },
+   "trigger": "inquiry",
+   "selected": {
+    "book": "Daniel",
+    "start": "7:15",
+    "end": "7:28",
+    "index": 5
+   },
+   "ok": true
+  },
+  {
+   "id": 4,
+   "q": "Почему ты покинул меня? Несправедливо, что праведник страдает, а я остался один.",
+   "q_lang": "ru",
+   "sections": {
+    "[HEBREW]": "הלוא זה צום אבחרהו פתח חרצבות רשע התר אגדות מוטה ושלח רצוצים חפשים וכל מוטה תנתקו הלוא פרס לרעב לחמך",
+    "[NIKKUD]": "הֲלֹא זֶה צוֹם אֲבַחְרֶהוּ פִּתַּח חֶרְצֹבוֹת רָשָׁע הִתֵּר אֲגָדוֹת מֻטָּה וְשָׁלַח רְצוּצִים חֲפִשִׁים וְכָל מֻטָּה תְּנַתְּקוּ הֲלֹא פֶּרֶס לָרָעֵב לַחֲמֵךְ",
+    "[Russian]": "Пророку велено кричать в полный голос как трубе и возвестить народу его преступление; постящиеся жалуются: «почему постимся, а Ты не видишь, изнуряем души свои, а не знаешь?» — но их пост для ссоры и побоев; избранный же Иеговой пост — развязать узы неправды, раздать хлеб голодному и не скрыться от родной плоти, тогда свет воссияет и зов будет услышан, Иегова ответит «вот Я», а о субботе обещано наслаждение Иеговой и наследие Иакова, «ибо уста Иеговы сказали».",
+    "[English]": "Is not this the fast that I have chosen: to loose the bands of wickedness, to undo the heavy burdens, and to let the oppressed go free, and that ye break every yoke? Is it such a fast that I have chosen? a day for a man to afflict his soul? Is it to bow down his head as a bulrush, and to spread sackcloth and ashes as a bed? Will ye call this a fast, and an acceptable day to the LORD? Behold, in the day of your fast ye find your desire, and exact all your labors. Behold, ye fast for strife and debate, and to smite with the fist: ye shall fast this day, that your voice may be heard on high. Is it such a fast that I have chosen? a day for a man to afflict his soul? Is it to bow down his head as a bulrush, and to spread sackcloth and ashes as a bed? Will ye call this a fast, and an acceptable day to the LORD? Behold, in the day of your fast ye find your desire, and exact all your labors. Behold, ye fast for strife and debate, and to smite with the fist: ye shall fast this day, that your voice may be heard on high.",
+    "[Hebrew Modern]": "האם לא זה הצום שאבחר: לשחרר את עול העוולה, לשבור עול כבד, ולשלח את הדכאיים חפשים, ולשבור כל עול? האם זהו צום שאבחר: יום שיגע בו אדם את נפשו? האם זהו להתכופף כקנה ולהניח שק ואפר למיטה? האם תקראו לזה צום, ויום מקובל לפני ה'? הנה ביום צוםכם תמצאו את רצונכם, ותעשו את כל עבודתכם. הנה אתם צמים לריב ולקטט, ולהכות באגרוף; צמו היום הזה, למען תשמעו קולכם בשמים. האם זהו צום שאבחר: יום שיגע בו אדם את נפשו? האם זהו להתכופף כקנה ולהניח שק ואפר למיטה? האם תקראו לזה צום, ויום",
+    "[SOURCES]": ""
+   },
+   "model_sections": {
+    "[HEBREW]": "הלוא זה צום אבחרהו פתח חרצבות רשע התר אגדות מוטה ושלח רצוצים חפשים וכל מוטה תנתקו הלוא פרס לרעב לחמך",
+    "[NIKKUD]": "הֲלֹא זֶה צוֹם אֲבַחְרֶהוּ פִּתַּח חֶרְצֹבוֹת רָשָׁע הִתֵּר אֲגָדוֹת מֻטָּה וְשָׁלַח רְצוּצִים חֲפִשִׁים וְכָל מֻטָּה תְּנַתְּקוּ הֲלֹא פֶּרֶס לָרָעֵב לַחֲמֵךְ",
+    "[Russian]": "Пророку велено кричать в полный голос как трубе и возвестить народу его преступление; постящиеся жалуются: «почему постимся, а Ты не видишь, изнуряем души свои, а не знаешь?» — но их пост для ссоры и побоев; избранный же Иеговой пост — развязать узы неправды, раздать хлеб голодному и не скрыться от родной плоти, тогда свет воссияет и зов будет услышан, Иегова ответит «вот Я», а о субботе обещано наслаждение Иеговой и наследие Иакова, «ибо уста Иеговы сказали».",
+    "[English]": "Is not this the fast that I have chosen: to loose the bands of wickedness, to undo the heavy burdens, and to let the oppressed go free, and that ye break every yoke? Is it such a fast that I have chosen? a day for a man to afflict his soul? Is it to bow down his head as a bulrush, and to spread sackcloth and ashes as a bed? Will ye call this a fast, and an acceptable day to the LORD? Behold, in the day of your fast ye find your desire, and exact all your labors. Behold, ye fast for strife and debate, and to smite with the fist: ye shall fast this day, that your voice may be heard on high. Is it such a fast that I have chosen? a day for a man to afflict his soul? Is it to bow down his head as a bulrush, and to spread sackcloth and ashes as a bed? Will ye call this a fast, and an acceptable day to the LORD? Behold, in the day of your fast ye find your desire, and exact all your labors. Behold, ye fast for strife and debate, and to smite with the fist: ye shall fast this day, that your voice may be heard on high.",
+    "[Hebrew Modern]": "האם לא זה הצום שאבחר: לשחרר את עול העוולה, לשבור עול כבד, ולשלח את הדכאיים חפשים, ולשבור כל עול? האם זהו צום שאבחר: יום שיגע בו אדם את נפשו? האם זהו להתכופף כקנה ולהניח שק ואפר למיטה? האם תקראו לזה צום, ויום מקובל לפני ה'? הנה ביום צוםכם תמצאו את רצונכם, ותעשו את כל עבודתכם. הנה אתם צמים לריב ולקטט, ולהכות באגרוף; צמו היום הזה, למען תשמעו קולכם בשמים. האם זהו צום שאבחר: יום שיגע בו אדם את נפשו? האם זהו להתכופף כקנה ולהניח שק ואפר למיטה? האם תקראו לזה צום, ויום",
+    "[SOURCES]": ""
+   },
+   "model_sources": [
+    {
+     "book": "Ezekiel",
+     "start": "18:1",
+     "end": "18:32"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Isaiah",
+     "start": "58:1",
+     "end": "58:14"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Isaiah",
+      "start": "58:1",
+      "end": "58:14"
+     }
+    ]
+   },
+   "trigger": "complaint",
+   "selected": {
+    "book": "Isaiah",
+    "start": "58:1",
+    "end": "58:14",
+    "index": 3
+   },
+   "ok": false
+  },
+  {
+   "id": 5,
+   "q": "Save me from this trouble — I am afraid my enemies will overwhelm me.",
+   "q_lang": "en",
+   "sections": {
+    "[HEBREW]": "הלא ממצרים ומן האמרי ומן בני עמון ומן פלשתים ... וצידונים ועמלק ומעון לחצו אתכם ותצעקו אלי ואושיעה אתכם מידם ... ואתם עזבתם אותי ותעבדו אלהים אחרים לכן לא אוסיף להושיע אתכם ... לכו וזעקו אל האלהים אשר בחרתם בם המה יושיעו לכם בעת צרתכם",
+    "[NIKKUD]": "וַיֹּ֥אמֶר יְהֹוָ֖ה אֶל־בְּנֵ֣י יִשְׂרָאֵ֑ל הֲלֹ֤א מִמִּצְרַ֙יִם֙ וּמִן־הָ֣אֱמֹרִ֔י וּמִן־בְּנֵ֥י עַמּ֖וֹן וּמִן־פְּלִשְׁתִּֽים׃  וְצִידוֹנִ֤ים וַֽעֲמָלֵק֙ וּמָע֔וֹן לָחֲצ֖וּ אֶתְכֶ֑ם וַתִּצְעֲק֣וּ אֵלַ֔י וָאוֹשִׁ֥יעָה אֶתְכֶ֖ם מִיָּדָֽם׃  וְאַתֶּם֙ עֲזַבְתֶּ֣ם אוֹתִ֔י וַתַּעַבְד֖וּ אֱלֹהִ֣ים אֲחֵרִ",
+    "[Russian]": "Ключевой эпизод молчания-отказа с переломом: Бог впервые говорит 'не буду спасать вас — вопите к вашим богам'; Израиль реально исповедуется и снимает чужих богов; и формула сокрушённой души ('ותקצר נפשו בעמל ישראל') открывает внутренний конфликт гнева и сострадания — спасение всё же придёт через Иеффая.",
+    "[English]": "God says: “I will not save you—cry out to your gods”; Israel genuinely repents and removes foreign gods; and the formula of a crushed soul (“ותקצר נפשו בעמל ישראל”) opens an internal conflict of anger and compassion—salvation will come through Jephthah.",
+    "[Hebrew Modern]": "לא אושיע אתכם עוד, לכו וזעקו אל האלהים אשר בחרתם בם – הם יושיעו אתכם בעת צרתכם",
+    "[SOURCES]": "שופטים י 6"
+   },
+   "model_sections": {
+    "[HEBREW]": "הלא ממצרים ומן האמרי ומן בני עמון ומן פלשתים ... וצידונים ועמלק ומעון לחצו אתכם ותצעקו אלי ואושיעה אתכם מידם ... ואתם עזבתם אותי ותעבדו אלהים אחרים לכן לא אוסיף להושיע אתכם ... לכו וזעקו אל האלהים אשר בחרתם בם המה יושיעו לכם בעת צרתכם",
+    "[NIKKUD]": "וַיֹּ֥אמֶר יְהֹוָ֖ה אֶל־בְּנֵ֣י יִשְׂרָאֵ֑ל הֲלֹ֤א מִמִּצְרַ֙יִם֙ וּמִן־הָ֣אֱמֹרִ֔י וּמִן־בְּנֵ֥י עַמּ֖וֹן וּמִן־פְּלִשְׁתִּֽים׃  וְצִידוֹנִ֤ים וַֽעֲמָלֵק֙ וּמָע֔וֹן לָחֲצ֖וּ אֶתְכֶ֑ם וַתִּצְעֲק֣וּ אֵלַ֔י וָאוֹשִׁ֥יעָה אֶתְכֶ֖ם מִיָּדָֽם׃  וְאַתֶּם֙ עֲזַבְתֶּ֣ם אוֹתִ֔י וַתַּעַבְד֖וּ אֱלֹהִ֣ים אֲחֵרִ",
+    "[Russian]": "Бог говорит: «не буду спасать вас — вопите к вашим богам»; Израиль реально исповедуется и снимает чужих богים; и формула сокрушённой души ('ותקצר נפשו בעמל ישראל') открывает внутренний конфликт гнева и сострадания — спасение всё же придёт через Иеффая.",
+    "[English]": "God says: “I will not save you—cry out to your gods”; Israel genuinely repents and removes foreign gods; and the formula of a crushed soul (“ותקצר נפשו בעמל ישראל”) opens an internal conflict of anger and compassion—salvation will come through Jephthah.",
+    "[Hebrew Modern]": "לא אושיע אתכם עוד, לכו וזעקו אל האלהים אשר בחרתם בם – הם יושיעו אתכם בעת צרתכם",
+    "[SOURCES]": "שופטים י 6"
+   },
+   "model_sources": [
+    {
+     "book": "Judges",
+     "start": "10:6",
+     "end": "10:16"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Judges",
+     "start": "10:6",
+     "end": "10:16"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Judges",
+      "start": "10:6",
+      "end": "10:16"
+     }
+    ]
+   },
+   "trigger": "distress",
+   "selected": {
+    "book": "Judges",
+    "start": "10:6",
+    "end": "10:16",
+    "index": 4
+   },
+   "ok": true
+  },
+  {
+   "id": 6,
+   "q": "ספר לי, מה דרכך שלך לאדם?",
+   "q_lang": "he",
+   "sections": {
+    "[HEBREW]": "הגיד לך אדם מה טוב ומה יהוה דורש ממך כי אם עשות משפט ואהבת חסד והצנע לכת עם אלהיך",
+    "[NIKKUD]": "הִגִּ֥יד לְךָ֛ אָדָ֖ם מַה־טּ֑וֹב וּמָֽה־יְהֹוָ֞ה דּוֹרֵ֣שׁ מִמְּךָ֗ כִּ֣י אִם־עֲשׂ֤וֹת מִשְׁפָּט֙ וְאַ֣הֲבַת חֶ֔סֶד וְהַצְנֵ֥עַ לֶ֖כֶת עִם־אֱלֹהֶֽיךָ׃",
+    "[Russian]": "Вопрошание: чем предстану пред Яхве — всесожжениями, тысячами овнов, даже первенцами чрева моего? Ответ: «он сказал тебе, человек, что добро, и чего Яхве требует от тебя: творить справедливость, любить милосердие и смиренно ходить с Богом твоим».",
+    "[English]": "He has told you, O man, what is good, and what the LORD requires of you: to do justice, to love kindness, and to walk humbly with your God.",
+    "[Hebrew Modern]": "הוא אמר לך, אדם, מה טוב ומה ה' דורש ממך: לעשות משפט, לאהוב חסד וללכת בצניעות עם אלוהיך.",
+    "[SOURCES]": "Micah 6:6"
+   },
+   "model_sections": {
+    "[HEBREW]": "הגיד לך אדם מה טוב ומה יהוה דורש ממך כי אם עשות משפט ואהבת חסד והצנע לכת עם אלהיך",
+    "[NIKKUD]": "הִגִּ֥יד לְךָ֛ אָדָ֖ם מַה־טּ֑וֹב וּמָֽה־יְהֹוָ֞ה דּוֹרֵ֣שׁ מִמְּךָ֗ כִּ֣י אִם־עֲשׂ֤וֹת מִשְׁפָּט֙ וְאַ֣הֲבַת חֶ֔סֶד וְהַצְנֵ֥עַ לֶ֖כֶת עִם־אֱלֹהֶֽיךָ׃",
+    "[Russian]": "Он сказал тебе, человек, что добро, и чего Яхве требует от тебя: творить справедливость, любить милосердие и смиренно ходить с Богом твоим.",
+    "[English]": "He has told you, O man, what is good, and what the LORD requires of you: to do justice, to love kindness, and to walk humbly with your God.",
+    "[Hebrew Modern]": "הוא אמר לך, אדם, מה טוב ומה ה' דורש ממך: לעשות משפט, לאהוב חסד וללכת בצניעות עם אלוהיך.",
+    "[SOURCES]": "Micah 6:6"
+   },
+   "model_sources": [
+    {
+     "book": "Micah",
+     "start": "6:6",
+     "end": "6:8"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Micah",
+     "start": "6:6",
+     "end": "6:8"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Micah",
+      "start": "6:6",
+      "end": "6:8"
+     }
+    ]
+   },
+   "trigger": "inquiry",
+   "selected": {
+    "book": "Micah",
+    "start": "6:6",
+    "end": "6:8",
+    "index": 1
+   },
+   "ok": true
+  },
+  {
+   "id": 7,
+   "q": "Молю тебя, услышь мой вопль из глубины.",
+   "q_lang": "ru",
+   "sections": {
+    "[HEBREW]": "יעקב יעקב אנכי האל אלהי אביך אל תירא מרדה מצרימה כי לגוי גדול אשימך שם",
+    "[NIKKUD]": "וַיֹּ֨אמֶר אֱלֹהִ֤ים׀לְיִשְׂרָאֵל֙ בְּמַרְאֹ֣ת הַלַּ֔יְלָה וַיֹּ֖אמֶר יַעֲקֹ֣ב׀יַעֲקֹ֑ב וַיֹּ֖אמֶר הִנֵּֽנִי׃",
+    "[Russian]": "По пути в Египет Иаков приносит в Беэр-Шеве жертвы Богу отца своего Исаака (обращение), и той же ночью Бог отвечает видением-диалогом: «Иаков, Иаков… не бойся сойти в Египет, там Я произведу от тебя великий народ; Я сойду с тобою и Я же выведу тебя». Пограничный кейс направления: жертва прочитана как инициатива человека (human_initiated, outcome=answer_granted), допустима и трактовка god_initiated — словесный диалог открывает Бог.",
+    "[English]": "God says: “Jacob, Jacob… do not be afraid to go down to Egypt, for I will make you into a great nation there. I will go down with you to Egypt, and I will also bring you up again.”",
+    "[Hebrew Modern]": "יעקב, יעקב – אל תפחד לרדת למצרים, כי שם אעשה אותך לגוי גדול; אני ארד עמך ואני גם אוציא אותך משם.",
+    "[SOURCES]": "Genesis 46:1"
+   },
+   "model_sections": {
+    "[HEBREW]": "יעקב יעקב אנכי האל אלהי אביך אל תירא מרדה מצרימה כי לגוי גדול אשימך שם",
+    "[NIKKUD]": "וַיֹּ֨אמֶר אֱלֹהִ֤ים׀לְיִשְׂרָאֵל֙ בְּמַרְאֹ֣ת הַלַּ֔יְלָה וַיֹּ֖אמֶר יַעֲקֹ֣ב׀יַעֲקֹ֑ב וַיֹּ֖אמֶר הִנֵּֽנִי׃",
+    "[Russian]": "Бог говорит: «Иаков, Иаков… не бойся сойти в Египет, там Я произведу от тебя великий народ; Я сойду с тобою и Я же выведу тебя».",
+    "[English]": "God says: “Jacob, Jacob… do not be afraid to go down to Egypt, for I will make you into a great nation there. I will go down with you to Egypt, and I will also bring you up again.”",
+    "[Hebrew Modern]": "יעקב, יעקב – אל תפחד לרדת למצרים, כי שם אעשה אותך לגוי גדול; אני ארד עמך ואני גם אוציא אותך משם.",
+    "[SOURCES]": "Genesis 46:1"
+   },
+   "model_sources": [
+    {
+     "book": "genesis",
+     "start": "46:1",
+     "end": "46:4"
+    }
+   ],
+   "sources": [
+    {
+     "book": "genesis",
+     "start": "46:1",
+     "end": "46:4"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "genesis",
+      "start": "46:1",
+      "end": "46:4"
+     }
+    ]
+   },
+   "trigger": "prayer",
+   "selected": {
+    "book": "genesis",
+    "start": "46:1",
+    "end": "46:4",
+    "index": 1
+   },
+   "ok": true
+  },
+  {
+   "id": 8,
+   "q": "Thank you, I praise you for the rescue you gave me.",
+   "q_lang": "en",
+   "sections": {
+    "[HEBREW]": "אל תגעו במשיחי ובנביאי אל תרעו",
+    "[NIKKUD]": "אַֽל־תִּגְּעוּ֙ בִּמְשִׁיחָ֔י וּבִנְבִיאַ֖י אַל־תָּרֵֽעוּ׃",
+    "[Russian]": "Установка ковчега в шатре: Давид приносит всесожжения и мирные жертвы, благословляет народ именем Яхве и впервые вручает Асафу с братьями псалом благодарения «Славьте Яхве, призывайте имя Его» (16:8-36) с прошением «спаси нас, Бог спасения нашего»; народ отвечает «аминь» и славит Яхве.",
+    "[English]": "Do not touch My Messiah and My prophets; do them no harm.",
+    "[Hebrew Modern]": "אל תיגעו במשיחי ובנביאי, אל תעשו להם רע.",
+    "[SOURCES]": "I_Chronicles 16:1"
+   },
+   "model_sections": {
+    "[HEBREW]": "אל תגעו במשיחי ובנביאי אל תרעו",
+    "[NIKKUD]": "אַֽל־תִּגְּעוּ֙ בִּמְשִׁיחָ֔י וּבִנְבִיאַ֖י אַל־תָּרֵֽעוּ׃",
+    "[Russian]": "Не трогайте Мои Мессию и Мои пророки, не причиняйте им зла.",
+    "[English]": "Do not touch My Messiah and My prophets; do them no harm.",
+    "[Hebrew Modern]": "אל תיגעו במשיחי ובנביאי, אל תעשו להם רע.",
+    "[SOURCES]": "I_Chronicles 16:1"
+   },
+   "model_sources": [
+    {
+     "book": "I_Chronicles",
+     "start": "16:1",
+     "end": "16:36"
+    }
+   ],
+   "sources": [
+    {
+     "book": "I_Chronicles",
+     "start": "16:1",
+     "end": "16:36"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "I_Chronicles",
+      "start": "16:1",
+      "end": "16:36"
+     }
+    ]
+   },
+   "trigger": "gratitude",
+   "selected": {
+    "book": "I_Chronicles",
+    "start": "16:1",
+    "end": "16:36",
+    "index": 2
+   },
+   "ok": true
+  },
+  {
+   "id": 9,
+   "q": "איך אוכל לדעת אם אני מוכרע לפניך?",
+   "q_lang": "he",
+   "sections": {
+    "[HEBREW]": "הנני מודיעם בפעם הזאת אודיעם את ידי ואת גבורתי",
+    "[NIKKUD]": "לָכֵן֙ הִנְנִ֣י מֽוֹדִיעָ֔ם בַּפַּ֣עַם הַזֹּ֔את אוֹדִיעֵ֥ם אֶת־יָדִ֖י וְאֶת־גְּבוּרָתִ֑י",
+    "[Russian]": "Иеремия исповедует Яхве силой и убежищем и обличает ложь идольского наследия отцов; Яхве отвечает, что явит народам Свою руку и могущество.",
+    "[English]": "I will make known to them in this time my hand and my power",
+    "[Hebrew Modern]": "אני אודיע להם עכשיו את ידי ואת כוחי",
+    "[SOURCES]": "Jeremiah 16:19"
+   },
+   "model_sections": {
+    "[HEBREW]": "הנני מודיעם בפעם הזאת אודיעם את ידי ואת גבורתי",
+    "[NIKKUD]": "לָכֵן֙ הִנְנִ֣י מֽוֹדִיעָ֔ם בַּפַּ֣עַם הַזֹּ֔את אוֹדִיעֵ֥ם אֶת־יָדִ֖י וְאֶת־גְּבוּרָתִ֑י",
+    "[Russian]": "Я буду открывать им Мои руки и силу",
+    "[English]": "I will make known to them in this time my hand and my power",
+    "[Hebrew Modern]": "אני אודיע להם עכשיו את ידי ואת כוחי",
+    "[SOURCES]": "Jeremiah 16:19"
+   },
+   "model_sources": [
+    {
+     "book": "Jeremiah",
+     "start": "16:19",
+     "end": "16:21"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Jeremiah",
+     "start": "16:19",
+     "end": "16:21"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Jeremiah",
+      "start": "16:19",
+      "end": "16:21"
+     }
+    ]
+   },
+   "trigger": "inquiry",
+   "selected": {
+    "book": "Jeremiah",
+    "start": "16:19",
+    "end": "16:21",
+    "index": 5
+   },
+   "ok": true
+  },
+  {
+   "id": 10,
+   "q": "Даю обет: посвящу тебе свой дом и всё, что в нём.",
+   "q_lang": "ru",
+   "sections": {
+    "[HEBREW]": "כי תדר נדר ליהוה אלהיך לא תאחר לשלמו",
+    "[NIKKUD]": "כִּֽי־תִדֹּ֥ר נֶ֙דֶר֙ לַיהֹוָ֣ה אֱלֹהֶ֔יךָ לֹ֥א תְאַחֵ֖ר לְשַׁלְּמ֑וֹ",
+    "[Russian]": "Обет ЯХВЕ, Богу твоему, исполняй без промедления — Он непременно взыщет с тебя, и будет на тебе грех; воздержавшийся же от обета безгрешен, а всё, что вышло из уст твоих, соблюдай и исполняй.",
+    "[English]": "If you vow a vow to the LORD your God, you shall not delay to pay it",
+    "[Hebrew Modern]": "אם אתה נודר נדר לה' אלוהיך, אל תאחר לשלמו",
+    "[SOURCES]": "Deuteronomy 23:22"
+   },
+   "model_sections": {
+    "[HEBREW]": "כי תדר נדר ליהוה אלהיך לא תאחר לשלמו",
+    "[NIKKUD]": "כִּֽי־תִדֹּ֥ר נֶ֙דֶר֙ לַיהֹוָ֣ה אֱלֹהֶ֔יךָ לֹ֥א תְאַחֵ֖ר לְשַׁלְּמ֑וֹ",
+    "[Russian]": "Если ты даешь обет Богу, не откладывай его исполнения",
+    "[English]": "If you vow a vow to the LORD your God, you shall not delay to pay it",
+    "[Hebrew Modern]": "אם אתה נודר נדר לה' אלוהיך, אל תאחר לשלמו",
+    "[SOURCES]": "Deuteronomy 23:22"
+   },
+   "model_sources": [
+    {
+     "book": "Deuteronomy",
+     "start": "23:22",
+     "end": "23:24"
+    }
+   ],
+   "sources": [
+    {
+     "book": "Deuteronomy",
+     "start": "23:22",
+     "end": "23:24"
+    },
+    {
+     "book": "Deuteronomy",
+     "start": "5:1",
+     "end": "5:19"
+    },
+    {
+     "book": "Deuteronomy",
+     "start": "14:3",
+     "end": "14:21"
+    },
+    {
+     "book": "Deuteronomy",
+     "start": "15:19",
+     "end": "15:23"
+    },
+    {
+     "book": "Deuteronomy",
+     "start": "16:1",
+     "end": "16:8"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "Deuteronomy",
+      "start": "23:22",
+      "end": "23:24"
+     },
+     {
+      "book": "Deuteronomy",
+      "start": "5:1",
+      "end": "5:19"
+     },
+     {
+      "book": "Deuteronomy",
+      "start": "14:3",
+      "end": "14:21"
+     },
+     {
+      "book": "Deuteronomy",
+      "start": "15:19",
+      "end": "15:23"
+     },
+     {
+      "book": "Deuteronomy",
+      "start": "16:1",
+      "end": "16:8"
+     }
+    ]
+   },
+   "trigger": "vow",
+   "selected": {
+    "book": "Deuteronomy",
+    "start": "23:22",
+    "end": "23:24",
+    "index": 5
+   },
+   "ok": true
+  },
+  {
+   "id": 11,
+   "q": "Tell me what shall I do to live in your way.",
+   "q_lang": "en",
+   "sections": {
+    "[HEBREW]": "עלה חברנה",
+    "[NIKKUD]": "וַיְהִ֣י אַחֲרֵי־כֵ֗ן וַיִּשְׁאַל֩ דָּוִ֨ד בַּיהֹוָ֤ה ׀ לֵאמֹר֙ הַאֶֽעֱלֶ֗ה בְּאַחַת֙ עָרֵ֣י יְהוּדָ֔ה וַיֹּ֧אמֶר יְהֹוָ֛ה אֵלָ֖יו עֲלֵ֑ה וַיֹּ֧אמֶר דָּוִ֛ד אָ֥נָה אֶעֱלֶ֖ה וַיֹּ֥אמֶר חֶבְרֹֽנָה׃",
+    "[Russian]": "Давид вопрошает ЙХВХ: 'идти ли в Иудею? куда?' — 'поднимись в Хеврон'. Помазание над Иудой; посланцы к жителям Иависа-Галаада с благодарностью за погребение Саула и пожеланием 'пусть сделает с вами ЙХВХ хесед и истину'. Начало царствования — с вопроса Богу.",
+    "[English]": "David asks: \"Shall I go up to Judah? Where?\" — \"Go up to Hebron.\" Anointing over Judah; messengers to the inhabitants of Jabesh-Gilead with thanks for burying Saul and a wish \"May the LORD do good and faithfulness to you.\"",
+    "[Hebrew Modern]": "עלה חברונה",
+    "[SOURCES]": "II Samuel 2:1"
+   },
+   "model_sections": {
+    "[HEBREW]": "עלה חברנה",
+    "[NIKKUD]": "וַיְהִ֣י אַחֲרֵי־כֵ֗ן וַיִּשְׁאַל֩ דָּוִ֨ד בַּיהֹוָ֤ה ׀ לֵאמֹר֙ הַאֶֽעֱלֶ֗ה בְּאַחַת֙ עָרֵ֣י יְהוּדָ֔ה וַיֹּ֧אמֶר יְהֹוָ֛ה אֵלָ֖יו עֲלֵ֑ה וַיֹּ֧אמֶר דָּוִ֛ד אָ֥נָה אֶעֱלֶ֖ה וַיֹּ֥אמֶר חֶבְרֹֽנָה׃",
+    "[Russian]": "Давид спрашивает: \"Иду ли я в Иудею? куда?\" — \"поднимись в Хеврон\". Помазание над Иудой; посланцы к жителям Иависа-Галаада с благодарностью за погребение Саула и пожеланием \"пусть сделает с вами יְהֹוָה חֶֽסֶד וֶאֱמֶת\".",
+    "[English]": "David asks: \"Shall I go up to Judah? Where?\" — \"Go up to Hebron.\" Anointing over Judah; messengers to the inhabitants of Jabesh-Gilead with thanks for burying Saul and a wish \"May the LORD do good and faithfulness to you.\"",
+    "[Hebrew Modern]": "עלה חברונה",
+    "[SOURCES]": "II Samuel 2:1"
+   },
+   "model_sources": [
+    {
+     "book": "II_Samuel",
+     "start": "2:1",
+     "end": "2:7"
+    }
+   ],
+   "sources": [
+    {
+     "book": "II_Samuel",
+     "start": "2:1",
+     "end": "2:7"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "II_Samuel",
+      "start": "2:1",
+      "end": "2:7"
+     }
+    ]
+   },
+   "trigger": "inquiry",
+   "selected": {
+    "book": "II_Samuel",
+    "start": "2:1",
+    "end": "2:7",
+    "index": 6
+   },
+   "ok": true
+  },
+  {
+   "id": 12,
+   "q": "Испытай меня, как испытал Авраама, и покажи, верен ли я тебе.",
+   "q_lang": "ru",
+   "sections": {
+    "[HEBREW]": "אברהם אברהם אל תשלח ידך אל הנער",
+    "[NIKKUD]": "אַבְרָהָם אַבְרָהָם אַל תִּשְׁלַח יָדְךָ אֶל הַנַּעַר",
+    "[Russian]": "Акеда: Бог испытывает Авраама повелением вознести Ицхака; ангел YHWH дважды взывает с неба — останавливает жертвоприношение («теперь Я знаю, что ты боишься Бога») и клятвой подтверждает благословение и умножение потомства за послушание. Авраам нарекает место «YHWH усмотрит».",
+    "[English]": "God calls to Abraham: \"Abraham, Abraham, do not lay your hand on the boy.\"",
+    "[Hebrew Modern]": "אברהם, אברהם, אל תשלח ידך אל הנער",
+    "[SOURCES]": "Genesis 22:11"
+   },
+   "model_sections": {
+    "[HEBREW]": "אברהם אברהם אל תשלח ידך אל הנער",
+    "[NIKKUD]": "אַבְרָהָם אַבְרָהָם אַל תִּשְׁלַח יָדְךָ אֶל הַנַּעַר",
+    "[Russian]": "Бог зовет Аврааму: \"Аврам, Аврам, не приноси жертву!\"",
+    "[English]": "God calls to Abraham: \"Abraham, Abraham, do not lay your hand on the boy.\"",
+    "[Hebrew Modern]": "אברהם, אברהם, אל תשלח ידך אל הנער",
+    "[SOURCES]": "Genesis 22:11"
+   },
+   "model_sources": [
+    {
+     "book": "genesis",
+     "start": "22:1",
+     "end": "22:19"
+    }
+   ],
+   "sources": [
+    {
+     "book": "genesis",
+     "start": "22:1",
+     "end": "22:19"
+    },
+    {
+     "book": "Job",
+     "start": "1:1",
+     "end": "1:12"
+    }
+   ],
+   "guard": {
+    "mode": "verified",
+    "ctx_cov": 1.0,
+    "sources": [
+     {
+      "book": "genesis",
+      "start": "22:1",
+      "end": "22:19"
+     },
+     {
+      "book": "Job",
+      "start": "1:1",
+      "end": "1:12"
+     }
+    ]
+   },
+   "trigger": "divine_test",
+   "selected": {
+    "book": "genesis",
+    "start": "22:1",
+    "end": "22:19",
+    "index": 1
+   },
+   "ok": true
+  }
+ ]
+}

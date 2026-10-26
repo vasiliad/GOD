@@ -6,11 +6,14 @@
 
     python scripts/llm_judge.py          # полный прогон → выводит таблицу
 """
-import base64, io, json, math, os, sys, time, urllib.request
+import argparse, base64, io, json, math, os, sys, time, urllib.request
+from pathlib import Path
 
-_REPO = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROOT = Path(__file__).resolve().parents[1]
+_REPO = str(_ROOT)
 sys.path.insert(0, os.path.join(_REPO, "scripts"))
-from bench_retrieval import QUESTIONS, lexical_scores, query_tokens, MODEL as EMB_MODEL
+from bench_retrieval import (QUESTIONS, lexical_scores, query_tokens, MODEL as EMB_MODEL,
+                             load_retrieval_corpus)
 
 BRAIN = json.load(io.open(os.path.join(_REPO, "brain", "brain_snapshot.json"), encoding="utf-8"))
 URL = BRAIN["url"] + "/v1/chat/completions"
@@ -45,24 +48,13 @@ def rate_episode(question, summary, god_speech):
         return None
 
 
-def main():
-    # загрузка данных
-    a = json.load(io.open(os.path.join(_REPO, "docs", "data", "analytics.json"), encoding="utf-8"))
-    episodes, order = {}, []
-    for era in a["book_order"].values():
-        for book in era:
-            p = os.path.join(_REPO, "output", f"episodes_{book}_v2.json")
-            if os.path.exists(p):
-                for e in json.load(io.open(p, encoding="utf-8")):
-                    key = f"{book}|{e['span']['start']}"
-                    episodes[key] = dict(e, book=book)
-                    order.append(key)
+def main(argv=None):
+    ap = argparse.ArgumentParser(
+        description="LLM-as-judge: DictaLM оценивает три retrieval-алгоритма (лексика / z-гибрид / RRF).")
+    ap.parse_args(argv)
 
-    emb = json.load(io.open(os.path.join(_REPO, "docs", "data", "embeddings.json"), encoding="utf-8"))
-    vecs = {}
-    for i, row in enumerate(emb["rows"]):
-        raw = base64.b64decode(row["q"])
-        vecs[i] = [b * row["s"] / 127 for b in (v - 256 if v > 127 else v for v in raw)]
+    # загрузка данных: мастер-корпус + векторы, согласованные по ключу book|span.start
+    episodes, vecs = load_retrieval_corpus()
 
     from transformers import AutoModel, AutoTokenizer
     import torch
@@ -90,7 +82,7 @@ def main():
     for qi, (q, expected) in enumerate(QUESTIONS):
         lex = lexical_scores(q, episodes, expected)
         qv = embed(q)
-        allcos = {k: cos(qv, vecs[i]) for i, k in enumerate(order)}
+        allcos = {k: cos(qv, vecs[k]) for k in episodes}
         mean = sum(allcos.values()) / len(allcos)
         std = math.sqrt(sum((c - mean) ** 2 for c in allcos.values()) / len(allcos)) or 1e-9
         zhyb = {k: lex[k] + 6.0 * (c - mean) / std for k, c in allcos.items()}

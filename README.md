@@ -2,7 +2,7 @@
 
 **Исследование образа Бога в Танахе: все 39 книг, 2 050 эпизодов взаимодействия Человек↔Бог, извлечённых и размеченных по единому контракту.**
 
-🌐 **Интерактивный сайт:** [vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/) — трёхъязычный (RU/EN/עב) браузер корпуса, научный отчёт и чат с имитацией. Корпусный режим отвечает реальной речью эпизода-прецедента (работает всегда); живой режим — рекомбинация на библейском иврите от LLM-мозга проекта (DictaLM-3.0 на бесплатном Kaggle-ноутбуке).
+🌐 **Интерактивный сайт:** [vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/) — трёхъязычный (RU/EN/עב) браузер корпуса, научный отчёт и чат с живым мозгом. Живой чат отвечает **только через мозг** (LLM на бесплатном Kaggle-ноутбуке); когда мозг спит, сайт честно сообщает об этом вместо ответа — решение владельца от 2026-10-22: «неправильный ответ хуже никакого». Корпус доступен на сайте во вкладках «Обзор», «Книги», «Эпизоды», «Профиль реакции» и «Чтение» (полный текст с огласовкой и аудио).
 
 ## Что внутри
 
@@ -18,9 +18,9 @@
 
 | Находка | Число |
 |---|---|
-| Наказание — 24% эпизодов; 57% кар — за непослушание; мольба наказана в 0,4% | 494 эп. |
+| Наказание — 24% эпизодов (494 из 2 050); 57% кар — за непослушание; мольба о помощи наказана в 2 из 494 кар | 0,4% кар |
 | Кара «объявленная» (оракул-приговор) vs «исполненная» (действие) | 79% / 17% |
-| Явная милость (прощение/отмена кары) — событийна, связана с заступничеством или покаянием | 2,6% |
+| Явная милость (прощение/отмена кары) — событийна, связана с заступничеством или покаянием. Считается воспроизводимо: эпизоды, где в описании действия или в резюме есть прощение/пощада («простил», «прощен», «пощад», «помило») | 53 из 2 050 = 2,6% |
 | Молчание — жанровый феномен поэзии: 27% в поэтических книгах vs 3% в нарративе | 9× разрыв |
 | Заступничество за других — самый «слышимый» тип обращения | 48% ответов |
 | Инициатива: Бог 55% · человек 34% · действие без речи 10% | 2 050 эп. |
@@ -29,9 +29,23 @@
 
 ## Архитектура чата
 
-- **Retrieval в браузере**: гибрид лексики + векторного индекса (мультиязычная e5-small, 2056 эмбеддингов, int8) — запрос эмбеддится на стороне посетителя (transformers.js), корпусный режим полностью статичен.
-- **Мозг живого режима**: `brain/` — сервер llama.cpp + DictaLM-3.0-Nemotron-12B (специалист по древнему ивриту) на Kaggle; ответ — рекомбинация фрагментов `god_speech_plain` реального эпизода, 6 слоёв: консонантный иврит → огласовка → русский → English → современный иврит → источники. Тон: «просто говори с Богом».
-- Перезапуск мозга — кнопка в GitHub Actions «Restart GOD brain» (или `brain/restart_brain.bat`).
+- **Retrieval в браузере**: лексика — основной сигнал (слова вопроса, имя, синонимы, мосты RU/EN/HE, класс обращения, форма ответа); векторный индекс (мультиязычная e5-small, 2 050 эмбеддингов, int8) подключается **только как спасатель** — когда лексика не нашла ни одного слова, тогда он единственный тематический сигнал, и запрос эмбеддится на стороне посетителя (transformers.js). Замер на золотом эталоне: прироста меню не даёт ни один вес вектора (13/14 при любом), поэтому обычный вопрос — чистая лексика, детерминированно и без загрузки модели. Отдельного «корпусного режима ответа» нет.
+- **Мозг живого режима**: `brain/` — сервер llama.cpp + DictaLM-3.0-Nemotron-12B-Instruct (специалист по древнему ивриту) на Kaggle; ответ — рекомбинация фрагментов `god_speech_plain` реального эпизода, 6 слоёв: консонантный иврит → огласовка → русский → English → современный иврит → источники. Тон: «просто говори с Богом».
+- Перезапуск мозга — кнопка в GitHub Actions «Restart GOD brain» (или `brain/restart_brain.bat`); авто-подъём — workflow «Auto-heal GOD brain» каждые 6 часов.
+
+
+### Как формируется ответ
+
+Три шага, каждый проверяемый:
+
+1. **Отбор кандидатов (без мозга).** Вопрос → лексика + класс обращения + форма ответа → 18 эпизодов → 6 тех, где Бог говорил (в 807 из 2050 речи Бога нет). Меню снято с живой страницы: эталон в `scripts/page_menus.json`.
+2. **Выбор эпизода (мозг, temperature 0).** Кандидаты + строка «ФОРМА ОТВЕТА, КОТОРУЮ ПРОСИТ ЧЕЛОВЕК» + блок `[ACTION]` (профиль класса: форма реакции и P(исход|класс) из реестра). Ответ — номер кандидата.
+3. **Формулировка (мозг, temperature 0.15).** ОДИН выбранный эпизод → шесть слоёв ответа.
+4. **Сверка с реестром.** Покрытие текста эпизодом ≥ 0.80 → `verified`; дословная цитата → `corpus`; иначе ответ не показывается.
+
+Форма ответа задаёт РОД ответа: утешение — это `blessing`/`rescue`/`covenant`, объяснение — `revelation` (Бог называет причину). Вопросительные слова («почему», «какой», «сколько») — это тип вопроса, а не тема, и в тематические токены не входят.
+
+**Замер на живом мозге** (DictaLM 3.0 12B): тематика по золотому эталону 14/14 (расширенный набор), 6/14 (строгое ядро), меню содержит эталон 14/14, сверено с реестром 14/14 (`python scripts/eval_topics.py --pool 18 --action 1 --stage full`). Золотой эталон (`scripts/topic_gold.json`) собран чтением речи Бога в каждом эпизоде, а не по выбору модели.
 
 ## Инструменты (`scripts/`)
 
@@ -42,38 +56,58 @@
 | `god_profile.py` | Поведенческий профиль корпуса |
 | `analytics_v2.py` | Аналитика по книгам и эпохам |
 | `dedup_overlaps.py` | Глобальная дедупликация (2 056 → 2 050) |
-| `audit_god_names.py` | Аудит имён Бога (26 форм) |
+| `audit_god_names.py` | Аудит форм имён Бога (41 форма в регекс-листе; канонический список — `data/god_names.json`, 24 имени) |
 | `build_nikud.py` | Сборка огласованного слоя `data/nikud.json` из `data/tanakh` |
 | `build_embeddings.py` | Векторный индекс для retrieval |
+| `build_reading.py` | Данные читалки: полный текст 39 книг с огласовкой и кантиляцией |
+| `build_audio.py`, `build_ru.py` | Аудио-таймкоды глав и русский перевод (Синодальный 1876) |
 | `verify_corpus.py` | Гейт целостности данных (0 провалов) |
-| `selftest_all.py` | Гейт самотестов (6/6 PASS) |
+| `selftest_all.py` | Гейт самотестов (12/12 PASS) |
+| `test_accuracy.py` | Живой E2E-гейт мозга: 10 вопросов → контракт 6 секций + сверка цитат и источников с корпусом |
+| `answer_scheme.py` | Зеркало логики страницы на Python: отбор кандидатов, форма ответа, блоки промптов |
+| `answer_guard.py` | Сверка ответа с реестром («правило S»): покрытие, цитата, вердикт |
+| `page_parity.py` | Паритет страницы и зеркала: словари, логика, числа, живое меню (47/47) |
+| `eval_topics.py` | Гейт тематики по золотому эталону (14 вопросов): меню, выбор, сверка |
+| `record_dialogues.py` | Запись живых диалогов мозга для витрины «Диалоги» |
 | `bench_retrieval.py` | Слепой бенчмарк retrieval (оценивает человек) |
 | `merge_audit_v2.py` | Аудит покрытия каждой книги |
 | `run_v2_agents.py`, `pilot_v2_prepare.py` | Подготовка батчей и промптов экстракции |
 
-Каждый скрипт имеет `--test`/`--selftest` режим; гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (6/6), Node-тесты страницы (17/17), живой E2E.
+У гейтовых скриптов есть режим `--test`/`--selftest`: `verify_corpus.py`, `selftest_all.py`, `god_chat.py`, `god_profile.py`, `god_behavior.py`, `analytics_v2.py`, `dedup_overlaps.py`, `audit_god_names.py`, `test_accuracy.py`, `answer_guard.py`, `answer_scheme.py`, `record_dialogues.py`, `page_parity.py`. Общие гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (12/12 PASS), `answer_scheme.py --test` (48/48), `page_parity.py --test` (47/47 сверок страницы и зеркала), `node brain/test_page.js` (77/77 PASS), живой E2E `scripts/test_accuracy.py` (10 вопросов: 10/10 секций, 10/10 сверено с реестром, 10/10 источников, 10/10 полных ответов; оценка 100%). Детерминированные гейты гоняет CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — push и pull request, Python 3.11 + Node 20.
 
 ## Данные
 
-- `output/episodes_TANAKH_v2.json` — мастер-корпус (2 050 эпизодов, без перекрытий)
+- `output/episodes_TANAKH_v2.json` — мастер-корпус (2 050 эпизодов, 39 книг, без перекрытий)
 - `output/god_behavior_profile.json` — P(исход|триггер) по корпусу
 - `docs/data/books/*.json` — эпизоды по книгам (для веб-браузера)
 - `docs/data/nikud.json` — огласованные стихи речи Бога (6 929 ключей)
-- `docs/data/embeddings.json` — векторный индекс эпизодов
-- Танах: масоретский текст (общественное достояние, источник — Sefaria)
+- `docs/data/embeddings.json` — векторный индекс эпизодов (2 050 эмбеддингов)
+- `docs/data/audio/*.json` — аудио-таймкоды глав (929 глав в двух вариантах: «fluent» и «slower»)
+- `docs/data/tanakh/`, `docs/data/tanakh-ru/` — текст Танаха с огласовкой и русский перевод (Синодальный 1876)
+- Танах с огласовкой — Sefaria, «Miqra according to the Masorah», лицензия CC BY-SA 4.0 (атрибуция Sefaria обязательна; это **не** общественное достояние)
 
 ## Лицензии
 
-- Код: MIT
-- Русскоязычные аннотации и разметка эпизодов: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- Текст Танаха: общественное достояние
+| Актив | Лицензия | Условия |
+|---|---|---|
+| Код проекта (`scripts/`, `brain/`, `docs/index.html`, конфиги) | MIT | — |
+| Русскоязычные аннотации и разметка эпизодов (`summary_ru`, `god_action` и т.п.) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | указать автора |
+| Аналитика, профили и эмбеддинги | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | производные от аннотаций, условия те же |
+| Аудио чтения: archive.org `HebBible_AShmuelof` («fluent») и датасет arabyan/tanakh-audio («slower») | [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/) | атрибуция: Abraham Shmuelof; некоммерческое использование; записи дословные, без нарезки и монтажа; таймкоды глав — ebible.org SMIL |
+| Текст Танаха с огласовками | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (Sefaria, «Miqra according to the Masorah») | атрибуция Sefaria обязательна |
+| Синодальный перевод 1876 | общественное достояние | — |
+| Модель мозга DictaLM-3.0-Nemotron-12B-Instruct | NVIDIA Open Model License | см. карточку на Hugging Face |
+| Модель эмбеддингов intfloat/multilingual-e5-small | MIT | — |
+| Библиотека transformers.js (`@xenova/transformers`) | Apache-2.0 | — |
+
+Проект некоммерческий: аудио используется только в некоммерческих целях (NC), записи воспроизводятся дословно и без нарезки (ND), с атрибуцией (BY). Полные атрибуции и условия — в [`docs/NOTICE.md`](docs/NOTICE.md).
 
 ## Методология и честные ограничения
 
-«Исходы» — кодировка исследователя (детерминированные рубрики + LLM-агенты с аудитами покрытия), а не теология; молчание в поэтических книгах — литературный приём жанра. Выводы v1-этапа пересмотрены в [`docs/retrospective_v1.md`](docs/retrospective_v1.md); правила методологии закреплены в [SPEC.md](SPEC.md). Слой DSS (Кумран) не включён: открытых лицензированных транскрипций нет.
+«Исходы» — кодировка исследователя (детерминированные рубрики + LLM-агенты с аудитами покрытия), а не теология; молчание в поэтических книгах — литературный приём жанра. Выводы v1-этапа пересмотрены в [`docs/retrospective_v1.md`](docs/retrospective_v1.md); правила методологии закреплены в [SPEC.md](SPEC.md). Живой чат — RAG (гибридный retrieval по корпусу + композиция ответа моделью), а не дообщение: fine-tuning не запускался. Слой DSS (Кумран) не включён: открытых лицензированных транскрипций нет.
 
 ---
 
-**English.** GOD is a behavioral study of the image of God in the Tanakh: all 39 books, 2,050 human↔God interaction episodes extracted and annotated under a uniform 17-field contract (verse span, verbatim consonantal Hebrew speech, trigger, outcome, severity, emotions). Key findings: punishment is 24% of episodes (79% announced oracles vs 17% executed), explicit mercy is 2.6% and intercession-driven, silence is a genre phenomenon of poetry (27% vs 3%). The trilingual site ([vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/)) carries a corpus browser, the research report (RU/EN/HE) and a chat: the corpus mode answers with a real episode's verbatim speech; the live mode recombines biblical Hebrew through a DictaLM-3.0 brain. Outcomes are the researcher's rubric, not theology — see the [v1 retrospective](docs/retrospective_v1.md).
+**English.** GOD is a behavioral study of the image of God in the Tanakh: all 39 books, 2,050 human↔God interaction episodes extracted and annotated under a uniform 17-field contract (verse span, verbatim consonantal Hebrew speech, trigger, outcome, severity, emotions). Key findings: punishment is 24% of episodes (494 of 2,050; 57% of the punishments follow disobedience, and a plea for help is punished in 2 of 494), explicit mercy is 2.6% (53 of 2,050 — episodes whose action or summary text contains forgiveness or pardon) and intercession-driven, silence is a genre phenomenon of poetry (27% vs 3%). The trilingual site ([vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/)) carries a corpus browser (Overview, Episodes, Reaction profile), the research report (RU/EN/HE) and a chat that answers only through a live brain (DictaLM-3.0 on Kaggle): when the brain is asleep the site says so instead of inventing an answer. Outcomes are the researcher's rubric, not theology — see the [v1 retrospective](docs/retrospective_v1.md).
 
-**עברית.** GOD הוא מחקר התנהגותי של דמות האלוהים בתנ״ך: כל 39 הספרים, 2,050 אפיזודות אינטראקציה אדם↔אלוהים שחולצו וסומנו לפי חוזה אחיד של 17 שדות (טווח פסוקים, דיבור עברי עיצורי מילולי, טריגר, תוצאה, חומרה, רגשות). ממצאים מרכזיים: ענישה — 24% מהאפיזודות (79% אורקלים מוכרזים מול 17% מבוצעים), חסד מפורש — 2.6% וקשור לפרוטקציה, שתיקה היא תופעת ז׳אנר של השירה (27% מול 3%). האתר התלת-לשוני ([vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/)) כולל דפדפן קורפוס, דוח מחקר (RU/EN/HE) וצ׳אט: מצב הקורפוס משיב בדיבור אמיתי של אפיזודה; המצב החי מרכיב עברית מקראית דרך מוח DictaLM-3.0. התוצאות הן סולם החוקר, לא תיאולוגיה — ראו [הרטרוספקטיבה](docs/retrospective_v1.md).
+**עברית.** GOD הוא מחקר התנהגותי של דמות האלוהים בתנ״ך: כל 39 הספרים, 2,050 אפיזודות אינטראקציה אדם↔אלוהים שחולצו וסומנו לפי חוזה אחיד של 17 שדות (טווח פסוקים, דיבור עברי עיצורי מילולי, טריגר, תוצאה, חומרה, רגשות). ממצאים מרכזיים: ענישה — 24% מהאפיזודות (494 מתוך 2,050; 57% מהענישות אחרי חריגה מציות, ותפילה לעזרה נענשת ב־2 מתוך 494), חסד מפורש — 2.6% (53 מתוך 2,050 — אפיזודות שבתיאור הפעולה או בסיכום מופיעה חנינה או סליחה) וקשור לפרוטקציה, שתיקה היא תופעת ז׳אנר של השירה (27% מול 3%). האתר התלת-לשוני ([vasiliad.github.io/GOD](https://vasiliad.github.io/GOD/)) כולל דפדפן קורפוס (סקירה, אפיזודות, פרופיל תגובה), דוח מחקר (RU/EN/HE) וצ׳אט שעונה רק דרך מוח חי (DictaLM-3.0 על Kaggle): כשהמוח ישן, האתר אומר זאת במקום להמציא תשובה. התוצאות הן סולם החוקר, לא תיאולוגיה — ראו [הרטרוספקטיבה](docs/retrospective_v1.md).

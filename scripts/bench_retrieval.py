@@ -13,10 +13,15 @@
 приговор по смыслу выносит только слепой лист.
 """
 import base64, io, json, math, os, random, sys, unicodedata
+from pathlib import Path
 
-_REPO = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_ROOT = Path(__file__).resolve().parents[1]
+_REPO = str(_ROOT)
 # NOTE: --test пишет во временный лист в output/ (самокоррупция аудита 2026-10-21)
 OUT = os.path.join(_REPO, "docs", "bench_retrieval_sheet.md")
+MASTER_CORPUS = _ROOT / "output" / "episodes_TANAKH_v2.json"
+ANALYTICS = _ROOT / "docs" / "data" / "analytics.json"
+EMBEDDINGS = _ROOT / "docs" / "data" / "embeddings.json"
 MODEL = "intfloat/multilingual-e5-small"
 
 QUESTIONS = [
@@ -89,28 +94,59 @@ def lexical_scores(q, episodes, expected=None):
     return out
 
 
+def load_master_episodes():
+    """Корпус эпизодов: {book|span.start: эпизод} из мастер-файла.
+
+    Мастер output/episodes_TANAKH_v2.json — словарь {книга: [эпизоды]}, 2050 эпизодов
+    после дедупликации. Файлы по книгам (2056) больше не читаются: в них 6 дублей,
+    которых нет в эмбеддингах. Ключ book|span.start — тот же, что на странице.
+    """
+    master = json.load(io.open(MASTER_CORPUS, encoding="utf-8"))
+    a = json.load(io.open(ANALYTICS, encoding="utf-8"))
+    books = [b for era in a["book_order"].values() for b in era if b in master]
+    books += [b for b in master if b not in books]
+    episodes = {}
+    for book in books:
+        for e in master[book]:
+            episodes[f"{book}|{e['span']['start']}"] = dict(e, book=book)
+    return episodes
+
+
+def load_embedding_vectors():
+    """(index, vecs): index[book|span.start] = номер строки, vecs[key] = вектор.
+
+    Строки embeddings.json пересобраны на мастер-корпусе, поэтому вектор ищем
+    по КЛЮЧУ (meta.b + "|" + meta.s1), а не по позиции: список ключей раньше
+    строился из 2056 старых файлов по книгам и разъезжался со строками.
+    """
+    emb = json.load(io.open(EMBEDDINGS, encoding="utf-8"))
+    index = {f"{m['b']}|{m['s1']}": i for i, m in enumerate(emb["meta"])}
+    vecs = {}
+    for key, i in index.items():
+        row = emb["rows"][i]
+        raw = base64.b64decode(row["q"])
+        vecs[key] = [b * row["s"] / 127 for b in (v - 256 if v > 127 else v for v in raw)]
+    return index, vecs
+
+
+def load_retrieval_corpus():
+    """(episodes, vecs): эпизоды и векторы, согласованные по ключу book|span.start."""
+    episodes = load_master_episodes()
+    index, vecs = load_embedding_vectors()
+    missing = [k for k in episodes if k not in index]
+    if missing:
+        raise SystemExit("эмбеддинги не покрывают корпус: нет строк для "
+                         f"{len(missing)} эпизодов, напр. {', '.join(missing[:5])}")
+    return episodes, vecs
+
+
 def main():
     selftest = "--test" in sys.argv
     questions = QUESTIONS[:3] if selftest else QUESTIONS
     out_path = os.path.join(_REPO, "output", "bench_test_sheet.md") if selftest else OUT
     qtrig = dict(questions)
 
-    a = json.load(io.open(os.path.join(_REPO, "docs", "data", "analytics.json"), encoding="utf-8"))
-    episodes, order = {}, []
-    for era in a["book_order"].values():
-        for book in era:
-            p = os.path.join(_REPO, "output", f"episodes_{book}_v2.json")
-            if os.path.exists(p):
-                for e in json.load(io.open(p, encoding="utf-8")):
-                    key = f"{book}|{e['span']['start']}"
-                    episodes[key] = dict(e, book=book)
-                    order.append(key)
-
-    emb = json.load(io.open(os.path.join(_REPO, "docs", "data", "embeddings.json"), encoding="utf-8"))
-    vecs = {}
-    for i, row in enumerate(emb["rows"]):
-        raw = base64.b64decode(row["q"])
-        vecs[i] = [b * row["s"] / 127 for b in (v - 256 if v > 127 else v for v in raw)]
+    episodes, vecs = load_retrieval_corpus()
 
     from transformers import AutoModel, AutoTokenizer
     import torch
@@ -139,7 +175,7 @@ def main():
         lex = lexical_scores(q, episodes, expected)
         lex_top = top3(lex)
         qv = embed(q)
-        allcos = {k: cos(qv, vecs[i]) for i, k in enumerate(order)}
+        allcos = {k: cos(qv, vecs[k]) for k in episodes}
         mean = sum(allcos.values()) / len(allcos)
         std = math.sqrt(sum((c - mean) ** 2 for c in allcos.values()) / len(allcos)) or 1e-9
         zhyb = {k: lex[k] + 6.0 * (c - mean) / std for k, c in allcos.items()}
