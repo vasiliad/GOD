@@ -48,6 +48,12 @@ PARA = os.path.join(_ROOT, "scripts", "vector_paraphrases.json")
 PAGE = os.path.join(_ROOT, "docs", "index.html")
 
 TAGS = ["[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]", "[SOURCES]"]
+# Содержательные слои — те пять, которые видит пользователь. [SOURCES] — служебная
+# секция: источник показывается ИЗ РЕЕСТРА (book|span выбранного эпизода), а не из
+# строки модели. Ответ без неё — полный (замер потока 2026-10-27: модель дописала все
+# пять слоёв, но не написала [SOURCES], и хороший ответ заменялся прецедентом).
+CONTENT_TAGS = ["[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]"]
+CONTENT_FULL = len(CONTENT_TAGS)
 
 TRANSIENT = (urllib.error.URLError, TimeoutError, ConnectionError, OSError)
 
@@ -112,6 +118,72 @@ def nikud_for(book, refs, index):
         if t:
             out.append(t)
     return "  ".join(out)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Золотой эталон тематики — куда должен попасть ответ
+# ─────────────────────────────────────────────────────────────────────────────
+_GOLD_MAP = None
+_PARA_BASE = None
+
+
+def _place_key(s):
+    """«Exodus 3:13» → «Exodus|3:13» (ключ корпуса)."""
+    parts = str(s or "").split(" ")
+    if len(parts) < 2:
+        return ""
+    return "%s|%s" % (parts[0], parts[1])
+
+
+def gold_map():
+    """Эталонный вопрос → (ядро, расширенные места) в ключах корпуса."""
+    global _GOLD_MAP
+    if _GOLD_MAP is None:
+        gold = json.load(io.open(GOLD, encoding="utf-8"))
+        _GOLD_MAP = {}
+        for g in gold.get("questions", []):
+            _GOLD_MAP[g["q"]] = (
+                set(_place_key(p) for p in (g.get("core") or [])),
+                set(_place_key(p) for p in (g.get("places") or [])),
+            )
+    return _GOLD_MAP
+
+
+def para_base():
+    """Перефраз → эталонный вопрос, которому он соответствует."""
+    global _PARA_BASE
+    if _PARA_BASE is None:
+        _PARA_BASE = {}
+        try:
+            para = json.load(io.open(PARA, encoding="utf-8"))
+        except Exception:               # noqa: BLE001 — файла может не быть
+            para = {}
+        for g in para.get("questions", []):
+            base = g.get("q")
+            for lst in (g.get("variants") or {}).values():
+                for q in lst:
+                    _PARA_BASE[q] = base
+    return _PARA_BASE
+
+
+def thematic(rec):
+    """Попадание ответа в золотой эталон: ('core'|'places'|None, базовый вопрос).
+
+    Проверяется ЭПИЗОД, из которого взят ответ (book + начало span).
+    """
+    q = rec.get("q", "")
+    gm = gold_map()
+    base = q if q in gm else para_base().get(q)
+    if not base or base not in gm:
+        return None, None
+    core, places = gm[base]
+    start = str(rec.get("span") or "").split("-")[0]
+    key = "%s|%s" % (rec.get("book", ""), start)
+    if key in core:
+        return "core", base
+    if key in places:
+        return "places", base
+    return "miss", base
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -273,6 +345,7 @@ def run_one(item, cfg, episodes, corpus_pairs, nikud_index, books_ru, trace, log
     guard = g["guard"]
     mode = guard["mode"]
     n_sections = len(sections)
+    n_content = sum(1 for t in CONTENT_TAGS if (sections.get(t) or "").strip())
     srcs = g["sources"]
 
     chosen = st["chosen"]
@@ -285,8 +358,21 @@ def run_one(item, cfg, episodes, corpus_pairs, nikud_index, books_ru, trace, log
     else:
         src_label = "%s %s" % (book_ru, span.get("start", "?"))
 
+    problems = []
+    if mode == "reject":
+        problems.append("речи Бога нет")
+    if n_content < CONTENT_FULL:
+        if st.get("degenerate"):
+            problems.append("вырожденный повтор (слоёв %d/%d)" % (n_content, CONTENT_FULL))
+        else:
+            problems.append("слоёв %d/%d" % (n_content, CONTENT_FULL))
+    if not srcs:
+        problems.append("источник вне реестра")
+
     # вердикт: контракт целиком — 6 секций, реплика подтверждена реестром, источник из реестра
-    if mode == "verified":
+    if problems:
+        verdict = "неполный ответ: " + "; ".join(problems)
+    elif mode == "verified":
         verdict = "сверено с реестром"
     elif mode == "corpus":
         verdict = "сверено с реестром (цитата вне окна)"
@@ -295,27 +381,20 @@ def run_one(item, cfg, episodes, corpus_pairs, nikud_index, books_ru, trace, log
     else:
         verdict = mode or "неизвестно"
 
-    problems = []
-    if mode == "reject":
-        problems.append("речи Бога нет")
-    if n_sections != 6:
-        problems.append("секций %d/6" % n_sections)
-    if not srcs:
-        problems.append("источник вне реестра")
-
     ok = not problems
     status = "ok" if ok else "fail"
     rec = {"q": q, "lang": item["lang"], "tag": item["tag"], "status": status,
-           "engine": engine, "mode": mode, "sections": n_sections,
+           "engine": engine, "mode": mode, "sections": n_sections, "content": n_content,
            "source": src_label, "latency_s": round(time.time() - t0, 1),
            "attempts": attempts, "form_attempts": st.get("form_attempts", 1),
+           "form_finish": st.get("form_finish"),
            "note": "; ".join(problems),
            "missing": [t for t in TAGS if t not in sections],
            "span": "%s-%s" % (span.get("start", "?"), span.get("end", "?")),
            "book": chosen.get("book"), "ts": hms()}
     if not ok:
         # сырой ответ провала — чтобы разобрать, не гоняя заново
-        rec["raw"] = (st["raw"] or "")[:900]
+        rec["raw"] = (st["raw"] or "")[:3000]
 
     mark = "✓" if ok else "!"
     log("%s  %s %-38s → %-22s (%s)" % (hms(), mark, q[:38], src_label, verdict),
@@ -496,6 +575,35 @@ def judge(files):
         print("вектор браузерным e5-small: %d" % len(e5))
     print("по языкам: " + " · ".join("%s %d/%d" % (k, v[0], v[1])
                                      for k, v in sorted(by_lang.items())))
+    # тематика: попадание эпизода в золотой эталон (ядро / расширенные места)
+    core_n = place_n = miss_n = 0
+    grp = {"gold": [0, 0], "para": [0, 0]}     # попало / всего по группе
+    missed = {}
+    for r in recs:
+        kind, base = thematic(r)
+        if kind is None:
+            continue
+        if kind == "core":
+            core_n += 1
+        elif kind == "places":
+            place_n += 1
+        else:
+            miss_n += 1
+        g = "gold" if r.get("tag") == "gold" else "para"
+        grp[g][1] += 1
+        if kind != "miss":
+            grp[g][0] += 1
+        else:
+            missed.setdefault(base, 0)
+            missed[base] += 1
+    if grp["gold"][1] or grp["para"][1]:
+        print("тематика: золотой эталон — ядро %d, расширенные места %d, мимо %d (из %d ответов)"
+              % (core_n, place_n, miss_n, core_n + place_n + miss_n))
+        print("  эталонные вопросы: %d/%d попали в эталон · перефразы: %d/%d"
+              % (grp["gold"][0], grp["gold"][1], grp["para"][0], grp["para"][1]))
+        if missed:
+            print("  промах по теме: " + "; ".join("%s (%d)" % (q, n)
+                                                   for q, n in sorted(missed.items())))
     lat = sorted(float(r.get("latency_s", 0)) for r in recs)
     if lat:
         print("время ответа: медиана %.1f с · максимум %.1f с"
@@ -557,8 +665,10 @@ def _mock_urlopen_factory(state):
             m2 = re.search(r"СТИХ:\s*\[([^\]]+)\]", user)
             if m2:
                 verse = m2.group(1).replace("|", " ")
-            answer = ("[HEBREW] %s\n[NIKKUD] \n[Russian] Где ты?\n[English] Where art thou?\n"
-                      "[Hebrew Modern] איפה אתה\n[SOURCES] %s" % (speech, verse))
+            answer = ("[HEBREW] %s\n[NIKKUD] א\n[Russian] Где ты?\n[English] Where art thou?\n"
+                      "[Hebrew Modern] איפה אתה" % (speech,))
+            if not state.get("no_sources"):
+                answer += "\n[SOURCES] %s" % verse
             return _FakeResp(json.dumps({"choices": [{"message": {"content": answer}}]}))
         raise urllib.error.URLError("mock: неожиданный запрос " + str(url))
     return fake
@@ -618,6 +728,16 @@ def selftest():
             and rec["mode"] == "verified" and rec["sections"] == 6 and rec["source"])
         chk("строка потока помечена ✓ и содержит источник",
             any(l.startswith(time.strftime("%H:%M:%S")) and "✓" in l and "→" in l for l in lines))
+
+        # ответ без служебной секции [SOURCES] — полный: источник берётся из реестра
+        state["no_sources"] = True
+        rec_ns = run_one({"q": "как тебя зовут?", "lang": "ru", "tag": "t"}, cfg, episodes,
+                         corpus_pairs, nikud_index, books_ru, trace,
+                         lambda msg, mark="", extra="": lines.append(msg))
+        chk("ответ без [SOURCES] — полный (источник из реестра)", rec_ns["status"] == "ok"
+            and rec_ns["content"] == 5 and rec_ns["source"]
+            and "[SOURCES]" in (rec_ns.get("missing") or []))
+        state["no_sources"] = False
 
         state["forge"] = True
         rec2 = run_one({"q": "как тебя зовут?", "lang": "ru", "tag": "t"}, cfg, episodes,

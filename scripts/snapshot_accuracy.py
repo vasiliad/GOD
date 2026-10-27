@@ -61,9 +61,10 @@ def find_source(sources_text, episodes):
 
 
 def summarize(results):
-    """Счётчики по ответам: полным считаем 6 секций + сверку с реестром + источник из реестра."""
+    """Счётчики по ответам: полным считаем 5 содержательных слоёв + сверку с реестром
+    + источник из реестра. [SOURCES] — служебная секция: источник берётся ИЗ РЕЕСТРА."""
     n = len(results)
-    sections = sum(1 for r in results if r["sections"] == 6)
+    sections = sum(1 for r in results if r["sections"] >= ta.CONTENT_FULL)
     grounded = sum(1 for r in results if r.get("grounded"))
     sources = sum(1 for r in results if r["sources"])
     full = sum(1 for r in results if r["ok"])
@@ -129,7 +130,8 @@ def run_live(out_path, timeout, threshold, do_print, url_override=None, key_over
                               memory=rd.memory_line(q))
             sections = rd.parse_sections(st["raw"])
             chosen = st["chosen"]
-            n_sections = sum(1 for t in rd.SECTIONS if (sections.get(t) or "").strip())
+            n_sections = sum(1 for t in ta.CONTENT_TAGS if (sections.get(t) or "").strip())
+            n_tags = sum(1 for t in rd.SECTIONS if (sections.get(t) or "").strip())
             print("   выбор эпизода: S%d [%s %s] — %s" % (
                 st["index"], chosen["book"], chosen["span"]["start"],
                 (chosen.get("summary_ru") or "")[:48]))
@@ -140,13 +142,14 @@ def run_live(out_path, timeout, threshold, do_print, url_override=None, key_over
             guard = g["guard"]
             grounded = guard["mode"] != "reject"
             src_ok = bool(g["sources"])
-            ok = (n_sections == 6 and grounded and src_ok)
-            results.append({"q": q, "ok": ok, "sections": n_sections, "grounded": grounded,
+            ok = (n_sections >= ta.CONTENT_FULL and grounded and src_ok)
+            results.append({"q": q, "ok": ok, "sections": n_sections, "tags": n_tags,
+                            "grounded": grounded,
                             "sources": src_ok, "mode": guard["mode"], "ctx_cov": guard["ctx_cov"],
                             "selected": {"book": chosen["book"], "start": chosen["span"]["start"]}})
-            print("   секций: %d/6 | сверка: %s (%.0f%%) | источник из реестра: %s | %s"
-                  % (n_sections, guard["mode"], 100 * guard["ctx_cov"], "ДА" if src_ok else "НЕТ",
-                     "OK" if ok else "!!"))
+            print("   слоёв: %d/%d (тегов: %d/6) | сверка: %s (%.0f%%) | источник из реестра: %s | %s"
+                  % (n_sections, ta.CONTENT_FULL, n_tags, guard["mode"], 100 * guard["ctx_cov"],
+                     "ДА" if src_ok else "НЕТ", "OK" if ok else "!!"))
             if do_print:
                 for t in rd.SECTIONS:
                     print("   %-17s %s" % (t, g["sections"].get(t, "")))
@@ -163,8 +166,9 @@ def run_live(out_path, timeout, threshold, do_print, url_override=None, key_over
     line = verdict_line(s, threshold)
     print(line)
     for r in results:
-        print("  %s %-38s %d/6 секций | src: %s" % ("OK" if r["ok"] else "!!", r["q"][:36], r["sections"],
-                                                    "ДА" if r["sources"] else "НЕТ"))
+        print("  %s %-38s %d/%d слоёв | src: %s" % ("OK" if r["ok"] else "!!", r["q"][:36], r["sections"],
+                                                     ta.CONTENT_FULL,
+                                                     "ДА" if r["sources"] else "НЕТ"))
 
     if errors and s["full"] == 0 and len(errors) == len(results):
         # мозг не ответил ни на один вопрос — это «мозг недоступен», а не «мозг неверен»
@@ -215,15 +219,18 @@ def run_selftest():
     chk("выдуманный источник честно не найден", find_source("[SOURCES] Никто", episodes) is False)
     chk("пустая [SOURCES] — источник не найден", find_source("", episodes) is False)
 
-    good = {"q": "как тебя зовут?", "ok": True, "sections": 6, "grounded": True, "sources": True}
+    good = {"q": "как тебя зовут?", "ok": True, "sections": 5, "grounded": True, "sources": True}
     bad = {"q": "я боюсь умереть", "ok": False, "sections": 0, "grounded": False, "sources": False}
     s = summarize([good, bad])
-    chk("сводка считает секции", s["sections"] == 1 and s["sources"] == 1)
+    chk("сводка считает слои", s["sections"] == 1 and s["sources"] == 1)
     chk("сводка считает сверенные с реестром", s["grounded"] == 1)
     chk("сводка считает полные ответы", s["full"] == 1 and abs(s["score"] - 0.5) < 1e-9)
     chk("все ошибки дают score 0", summarize([bad, bad])["score"] == 0.0)
     chk("вердикт PASS при score ≥ порога", "PASS" in verdict_line(summarize([good, good]), 0.6))
     chk("вердикт FAIL при score < порога", "FAIL" in verdict_line(summarize([good, bad]), 0.6))
+    no_src = rd.parse_sections(rd.FIXTURE.replace("[SOURCES]", ""))
+    chk("ответ без [SOURCES] — полный (пять содержательных слоёв)",
+        sum(1 for t in ta.CONTENT_TAGS if (no_src.get(t) or "").strip()) == ta.CONTENT_FULL)
 
     chk("вопросов ровно 10, как в test_accuracy.py", len(QUESTIONS) == 10)
     chk("вопросы совпадают с test_accuracy.py", QUESTIONS == list(ta.QUESTIONS))

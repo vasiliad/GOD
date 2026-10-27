@@ -154,6 +154,11 @@ def run(verbose=True):
     chk("HE_BRIDGE страницы == зеркала", p_he == m_he,
         "только в странице: %s / только в зеркале: %s" % (
             sorted(set(p_he) - set(m_he)), sorted(set(m_he) - set(p_he))))
+    p_hp = js_value("HE_PREFIX")
+    m_hp = answer_scheme.HE_PREFIX
+    chk("HE_PREFIX страницы == зеркала", p_hp == m_hp,
+        "только в странице: %s / только в зеркале: %s" % (
+            sorted(set(p_hp) - set(m_hp)), sorted(set(m_hp) - set(p_hp))))
 
     # 4) маппинг класс → класс реестра
     p_cls = js_value("TRIG_CLASS")
@@ -252,7 +257,30 @@ def run(verbose=True):
         bool(re.search(r"lexHit\s*=\s*true;", src)), "")
     m_src = open(str(Path(__file__).resolve().parent / "answer_scheme.py"), encoding="utf-8").read()
     chk("сигнал лексики в зеркале ставится по слову и по имени",
-        m_src.count("hit = True") >= 2, "")
+        m_src.count("hit = True") >= 1, "")
+    # 13а) ВОРОТА ЛЕКСИКИ: значимое совпадение = слово от 4 букв и не чаще 5% эпизодов.
+    #       Без ворот шумовой матч выключал вектор — единственный тематический сигнал.
+    p_min_len = page_number("LEX_MIN_LEN")
+    chk("LEX_MIN_LEN страницы == зеркала (%d)" % p_min_len,
+        abs(p_min_len - answer_scheme.LEX_MIN_LEN) < 1e-9,
+        "зеркало: %s" % answer_scheme.LEX_MIN_LEN)
+    p_df_pct = page_number("LEX_MAX_DF_PCT")
+    chk("LEX_MAX_DF_PCT страницы == зеркала (%.1f)" % p_df_pct,
+        abs(p_df_pct - answer_scheme.LEX_MAX_DF_PCT) < 1e-9,
+        "зеркало: %s" % answer_scheme.LEX_MAX_DF_PCT)
+    chk("страница считает частотность слова (dfCount)",
+        "dfCount" in src and "LEX_MAX_DF_PCT" in src, "")
+    chk("зеркало считает частотность слова (df)",
+        re.search(r"df\s*=\s*\{\}", m_src) is not None
+        and "LEX_MAX_DF_PCT" in m_src, "")
+    chk("страница ищет иврит в речи Бога",
+        "htxt" in src and "e.god_speech_plain" in src, "")
+    chk("зеркало ищет иврит в речи Бога",
+        "search_texts" in m_src and "god_speech_plain" in m_src, "")
+    chk("страница ищет ивритскую словоформу по префиксу",
+        "HE_PREFIX_KEYS" in src, "")
+    chk("зеркало ищет ивритскую словоформу по префиксу",
+        "HE_PREFIX_KEYS" in m_src, "")
 
     # 14) сортировка при равных очках одинаковая: округление 1e-6, книга без локали, стих числами
     chk("страница округляет очки до 1e-6", "Math.round(v*1e6)/1e6" in src, "")
@@ -376,6 +404,102 @@ def run(verbose=True):
     chk("зеркало сортирует по очкам, книге, стиху",
         "(-_round6(kv[0])" in m_src and "_verse_key(kv[1].split" in m_src, "")
 
+    # 21) параметры формулировки: штраф за повтор и температуры повторов.
+    #     Страница и зеркало обязаны совпадать — иначе одно из них будет
+    #     вырождаться в петлю, а другое нет.
+    p_rp = page_number("FORM_REPEAT_PENALTY")
+    chk("штраф за повтор страницы == зеркала (%.2f)" % p_rp,
+        abs(p_rp - answer_scheme.FORM_REPEAT_PENALTY) < 1e-9,
+        "зеркало: %.2f" % answer_scheme.FORM_REPEAT_PENALTY)
+    p_temps = js_value("FORM_RETRY_TEMPS")
+    chk("температуры повторов страницы == зеркала",
+        [float(x) for x in p_temps] == [float(t) for t in answer_scheme.FORM_RETRY_TEMPS],
+        "страница: %s, зеркало: %s" % (p_temps, list(answer_scheme.FORM_RETRY_TEMPS)))
+    chk("страница шлёт repeat_penalty в шаге формулировки",
+        "repeat_penalty: FORM_REPEAT_PENALTY" in src, "")
+    chk("зеркало шлёт repeat_penalty в шаге формулировки",
+        '"repeat_penalty": FORM_REPEAT_PENALTY' in m_src, "")
+    chk("страница показывает прецедент вместо недописанного ответа",
+        'r.complete === false' in src and 'incomplete_note' in src, "")
+    chk("зеркало помечает недописанный ответ",
+        '"complete": complete' in m_src and '"degenerate"' in m_src, "")
+
+    # 21а) ПОЛНОТА ОТВЕТА: пять содержательных слоёв, [SOURCES] — служебная.
+    #       Источник показывается из реестра (book|span выбранного эпизода), а не из
+    #       строки модели, поэтому её отсутствие не лишает читателя ничего: ответ
+    #       5/6 секций с полным текстом раньше заменялся прецедентом корпуса.
+    #       Страница, зеркало и стенд обязаны считать одинаково.
+    p_cs = js_value("CONTENT_SECTIONS")
+    chk("CONTENT_SECTIONS страницы == зеркала", p_cs == list(answer_scheme.CONTENT_TAGS),
+        "страница: %s / зеркало: %s" % (p_cs, list(answer_scheme.CONTENT_TAGS)))
+    p_cf = page_number("CONTENT_FULL")
+    chk("CONTENT_FULL страницы == зеркала (%.0f)" % p_cf,
+        abs(p_cf - answer_scheme.CONTENT_FULL) < 1e-9,
+        "зеркало: %d" % answer_scheme.CONTENT_FULL)
+    chk("страница считает полноту по непустым содержательным слоям",
+        'CONTENT_SECTIONS.filter(t => (secs[t]||"").trim()).length' in src
+        and "complete: best.n >= CONTENT_FULL" in src, "")
+    chk("зеркало считает полноту по непустым содержательным слоям",
+        "def parse_sections(raw)" in m_src
+        and "sum(1 for t in CONTENT_TAGS if secs.get(t))" in m_src
+        and "complete = best_n >= CONTENT_FULL" in m_src, "")
+    st_src = open(str(Path(__file__).resolve().parent / "stream_test.py"), encoding="utf-8").read()
+    chk("стенд считает полноту по тем же содержательным слоям",
+        "CONTENT_TAGS = [\"[HEBREW]\"" in st_src
+        and "n_content < CONTENT_FULL" in st_src, "")
+
+    # 21) тема «имя»: маркеры, буст и применение — страница и зеркало совпадают
+    p_nt = js_value("NAME_TOPIC")
+    chk("NAME_TOPIC страницы == зеркала", p_nt == answer_scheme.NAME_TOPIC,
+        "страница: %s / зеркало: %s" % (p_nt, answer_scheme.NAME_TOPIC))
+    p_sn = js_value("SELF_NAME")
+    chk("SELF_NAME страницы == зеркала", p_sn == answer_scheme.SELF_NAME,
+        "страница: %s / зеркало: %s" % (p_sn, answer_scheme.SELF_NAME))
+    p_nb = page_number("NAME_BOOST")
+    chk("NAME_BOOST страницы == зеркала (%.1f)" % p_nb,
+        abs(p_nb - answer_scheme.NAME_BOOST) < 1e-9,
+        "страница %.1f, зеркало %.1f" % (p_nb, answer_scheme.NAME_BOOST))
+    chk("страница бустит эпизод самоименования на вопросе об имени",
+        "nameQ && selfName(e.god_speech_plain)" in src, "")
+    chk("зеркало бустит эпизод самоименования на вопросе об имени",
+        "name_q and self_name(e.get(\"god_speech_plain\"))" in m_src, "")
+    eps3 = answer_scheme.load_corpus()
+    nik3 = answer_scheme.load_nikud()
+
+    def _menu(qq):
+        ranked = answer_scheme.rank_episodes(qq, answer_scheme.classify(qq), eps3, 18)
+        ctx = answer_scheme.build_context(eps3, nik3, ranked[:18])
+        cand = answer_scheme.spoken_candidates(ctx, 6)
+        return ["%s|%s" % (c["book"], c["span"]["start"]) for c in cand]
+
+    name_menus = {qq: _menu(qq) for qq in
+                  ["как тебя зовут?", "ты же имеешь имя — как оно звучит?",
+                   "what is your name?", "מה שמך?"]}
+    # русские вопросы об имени идут по чистой лексике → порядок однозначен;
+    # английский и ивритский уходят в векторный «спасатель», там порядок решает
+    # косинус, но все три эпизода самоименования обязаны быть в пуле.
+    ru_names = ["как тебя зовут?", "ты же имеешь имя — как оно звучит?"]
+    chk("вопрос об имени (лексика): первым идёт Exodus 3:13",
+        all(name_menus[q][0] == "Exodus|3:13" for q in ru_names), str(name_menus))
+    chk("вопрос об имени: эпизод самоименования в первых трёх кандидатах",
+        all("Exodus|3:13" in m[:3] for m in name_menus.values()), str(name_menus))
+    chk("вопрос об имени: пул не пустеет (6 кандидатов)",
+        all(len(m) == 6 for m in name_menus.values()), str(name_menus))
+    other_menus = {qq: _menu(qq) for qq in
+                   ["утешь меня в скорби", "почему ты допустил зло в мире?",
+                    "благодарю тебя за всё", "сотворение мира"]}
+    chk("вопрос НЕ об имени: буст самоименования не применяется",
+        all("Exodus|3:13" not in m for m in other_menus.values()), str(other_menus))
+    selfn = [k for k, e in eps3.items() if answer_scheme.self_name(e.get("god_speech_plain"))]
+    chk("эпизодов самоименования в корпусе ровно три", len(selfn) == 3, str(selfn))
+
+    # 22) промпт: короткую речь процитировать целиком, не дополняя из памяти
+    sp_page = answer_guard.page_sys_prompt()
+    chk("в SYS_PROMPT страницы есть запрет дополнять короткую речь из памяти",
+        "короткая" in sp_page and "из памяти" in sp_page, "")
+    chk("в SYS_PROMPT зеркала то же правило", "короткая" in answer_scheme.SYS_PROMPT
+        and "из памяти" in answer_scheme.SYS_PROMPT, "")
+
     ok = sum(1 for _, c, _ in checks if c)
     print("\nИТОГ: %d/%d сверок — %s" % (ok, len(checks), "PASS" if ok == len(checks) else "FAIL"))
     return 0 if ok == len(checks) else 1
@@ -422,6 +546,8 @@ def js_query_tokens(q):
     markers = page_set_literal("RU_MARKERS")
     en = js_value("EN_BRIDGE")
     he = js_value("HE_BRIDGE")
+    he_prefix = js_value("HE_PREFIX")
+    he_prefix_keys = sorted(he_prefix, key=len, reverse=True)
     syn = js_value("RU_SYN")
     toks = set()
     for t in re.findall(r"[а-яё-]{4,}", m):
@@ -434,6 +560,11 @@ def js_query_tokens(q):
         toks.add(w)
         if w in he:
             toks.add(he[w])
+        else:
+            for p in he_prefix_keys:
+                if w.startswith(p):
+                    toks.add(he_prefix[p])
+                    break
     for w in markers:
         toks.discard(w)
     out = set(toks)

@@ -68,11 +68,11 @@
 | `build_audio.py`, `build_ru.py` | Аудио-таймкоды глав и русский перевод (Синодальный 1876) |
 | `verify_corpus.py` | Гейт целостности данных (0 провалов) |
 | `selftest_all.py` | Гейт самотестов (13/13 PASS) |
-| `test_accuracy.py` | Живой E2E-гейт мозга: 10 вопросов → контракт 6 секций + сверка цитат и источников с корпусом |
+| `test_accuracy.py` | Живой E2E-гейт мозга: 10 вопросов → контракт 5 содержательных слоёв + сверка цитат и источников с корпусом |
 | `answer_scheme.py` | Зеркало логики страницы на Python: отбор кандидатов, форма ответа, блоки промптов |
 | `answer_guard.py` | Сверка ответа с реестром («правило S»): покрытие, цитата, вердикт |
-| `page_parity.py` | Паритет страницы и зеркала: словари, логика, числа, живое меню (47/47) |
-| `stream_test.py` | Стенд «потока живых вопросов»: вопросы через реальный путь продукта → автосверка каждого ответа с реестром; живой лог, JSONL-транскрипт, пакетный режим для параллельного прогона, `--judge` для сводки, `--selftest` 11/11 |
+| `page_parity.py` | Паритет страницы и зеркала: словари, логика, числа, живое меню (79/79) |
+| `stream_test.py` | Стенд «потока живых вопросов»: вопросы через реальный путь продукта → автосверка каждого ответа с реестром; живой лог, JSONL-транскрипт, пакетный режим для параллельного прогона, `--judge` для сводки, `--selftest` 12/12 |
 | `eval_topics.py` | Гейт тематики по золотому эталону (14 вопросов): меню, выбор, сверка |
 | `eval_persona.py` | Гейт персоны: сколько даёт промт «ты — Яхве» против схемы (0–1 из 5 против 5 из 5) |
 | `record_dialogues.py` | Запись живых диалогов мозга для витрины «Диалоги» |
@@ -80,7 +80,7 @@
 | `merge_audit_v2.py` | Аудит покрытия каждой книги |
 | `run_v2_agents.py`, `pilot_v2_prepare.py` | Подготовка батчей и промптов экстракции |
 
-У гейтовых скриптов есть режим `--test`/`--selftest`: `verify_corpus.py`, `selftest_all.py`, `god_chat.py`, `god_profile.py`, `god_behavior.py`, `analytics_v2.py`, `dedup_overlaps.py`, `audit_god_names.py`, `test_accuracy.py`, `answer_guard.py`, `answer_scheme.py`, `eval_persona.py`, `record_dialogues.py`, `page_parity.py`, `stream_test.py`. Общие гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (13/13 PASS), `answer_scheme.py --test` (48/48), `page_parity.py --test` (47/47 сверок страницы и зеркала), `eval_persona.py --test` (11/11), `node brain/test_page.js` (80/80 PASS), `stream_test.py --selftest` (11/11 PASS), живой E2E `scripts/test_accuracy.py` (10 вопросов: 10/10 секций, 10/10 сверено с реестром, 10/10 источников, 10/10 полных ответов; оценка 100%). Живой **поток** `scripts/stream_test.py` (86 вопросов через реальный путь продукта, шесть пачек параллельно): 86/86 сверено с реестром, nemotron 19/19 векторных спасений, медиана 29.0 с, стенд 519 с. Детерминированные гейты гоняет CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — push и pull request, Python 3.11 + Node 20.
+У гейтовых скриптов есть режим `--test`/`--selftest`: `verify_corpus.py`, `selftest_all.py`, `god_chat.py`, `god_profile.py`, `god_behavior.py`, `analytics_v2.py`, `dedup_overlaps.py`, `audit_god_names.py`, `test_accuracy.py`, `answer_guard.py`, `answer_scheme.py`, `eval_persona.py`, `record_dialogues.py`, `page_parity.py`, `stream_test.py`, `snapshot_accuracy.py`. Общие гейты качества: `verify_corpus.py` (0 провалов), `selftest_all.py` (13/13 PASS), `answer_scheme.py --test` (53/53), `page_parity.py --test` (79/79 сверок страницы и зеркала; в CI — 78 сверок, «спасательный» путь печатает SKIP: локальной int8-модели в CI нет), `eval_persona.py --test` (11/11), `node brain/test_page.js` (80/80 PASS), `stream_test.py --selftest` (12/12 PASS), `test_accuracy.py --test` (20/20), `snapshot_accuracy.py --test` (15/15), живой E2E `scripts/test_accuracy.py` (10 вопросов: 10/10 слоёв, 10/10 сверено с реестром, 10/10 источников, 10/10 полных ответов; оценка 100%). Живой **поток** `scripts/stream_test.py` (86 вопросов через реальный путь продукта, шесть пачек параллельно): 86/86 сверено с реестром, тематика перефразов 41/70 (было 22/70), nemotron 5/5 векторных спасений, медиана 41.8 с, стенд 650 с. Детерминированные гейты гоняет CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) — push и pull request, Python 3.11 + Node 20.
 
 ## Данные
 

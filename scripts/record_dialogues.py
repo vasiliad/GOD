@@ -56,6 +56,10 @@ PAGE = _ROOT / "docs" / "index.html"
 DEFAULT_OUT = "docs/data/dialogs.json"
 
 SECTIONS = ["[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]", "[SOURCES]"]
+# Содержательные слои — те пять, которые видит пользователь. [SOURCES] — служебная
+# секция: источник берётся ИЗ РЕЕСТРА, а её отсутствие у модели не лишает читателя
+# ничего (замер потока 2026-10-27: ответ с полным текстом заменялся прецедентом).
+CONTENT_SECTIONS = ["[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]"]
 API_MODEL = "god-brain"          # как на странице: cfg.model || "god-brain"
 DEFAULT_TIMEOUT = 180             # холодный старт модели доходил до 114 с
 
@@ -447,8 +451,11 @@ def parse_sources(sources_text, hits, episodes):
 
 
 def dialogue_ok(sections, sources):
-    """ok=true только если все 6 секций непусты и источник хотя бы один."""
-    return all((sections.get(tag) or "").strip() for tag in SECTIONS) and bool(sources)
+    """ok=true только если все 5 содержательных слоёв непусты и источник хотя бы один.
+
+    [SOURCES] — служебная секция: источник берётся ИЗ РЕЕСТРА, а её отсутствие у
+    модели не лишает читателя ничего (замер потока 2026-10-27)."""
+    return all((sections.get(tag) or "").strip() for tag in CONTENT_SECTIONS) and bool(sources)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -532,8 +539,9 @@ def record(plan, out_path, timeout, do_print, hybrid=True, url_override=None, ke
         if error:
             dlg["error"] = error
         dialogues.append(dlg)
-        print("   %d/6 секций | сверка: %s (%.0f%% слов из контекста) | источников: %d | ok=%s | %.1f с"
-              % (sum(1 for t in SECTIONS if (sections.get(t) or "").strip()),
+        print("   %d/%d слоёв | сверка: %s (%.0f%% слов из контекста) | источников: %d | ok=%s | %.1f с"
+              % (sum(1 for t in CONTENT_SECTIONS if (sections.get(t) or "").strip()),
+                 len(CONTENT_SECTIONS),
                  guard["mode"], 100 * guard["ctx_cov"], len(sources),
                  "да" if ok else "нет", time.time() - t0))
         if do_print:

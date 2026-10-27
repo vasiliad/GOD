@@ -118,10 +118,18 @@ def parse_sections(text):
         end = len(rest)
         for t2 in tags:
             j = rest.find(t2)
-            if j >= 0 and j < end:
+            if 0 <= j < end:
                 end = j
         sections[tag] = rest[:end].strip()
     return sections
+
+
+# Содержательные слои — те пять, которые видит пользователь. [SOURCES] — служебная
+# секция: источник берётся ИЗ РЕЕСТРА, а не из строки модели, поэтому её отсутствие
+# не делает ответ неполным (замер потока 2026-10-27: ответ с полным текстом без
+# [SOURCES] заменялся прецедентом корпуса).
+CONTENT_TAGS = ["[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]"]
+CONTENT_FULL = len(CONTENT_TAGS)
 
 
 def nikud_for(book, refs, index):
@@ -162,14 +170,14 @@ def speech_overlap(hebrew, top_ep):
 def summarize(results):
     """Счётчики по ответам.
 
-    Полным считаем ответ, который выполнил контракт целиком: все 6 секций,
-    реплика подтверждена реестром (правило «S») и источник взят ИЗ реестра.
+    Полным считаем ответ, который выполнил контракт целиком: все 5 содержательных
+    слоёв, реплика подтверждена реестром (правило «S») и источник взят ИЗ реестра.
     """
     n = len(results)
-    sections = sum(1 for r in results if r["sections"] == 6)
+    sections = sum(1 for r in results if r["sections"] >= CONTENT_FULL)
     grounded = sum(1 for r in results if r["grounded"])
     sources = sum(1 for r in results if r["sources"])
-    perfect = sum(1 for r in results if r["sections"] == 6 and r["grounded"] and r["sources"])
+    perfect = sum(1 for r in results if r["sections"] >= CONTENT_FULL and r["grounded"] and r["sources"])
     return {"n": n, "sections": sections, "grounded": grounded, "sources": sources,
             "perfect": perfect, "score": (perfect / n) if n else 0.0}
 
@@ -188,13 +196,13 @@ def finalize(results, threshold):
     """Печатает сводку и вердикт; возвращает exit code (0 — PASS, 1 — FAIL)."""
     s = summarize(results)
     print("=== СВОДКА ===")
-    print(f"Все 6 секций: {s['sections']}/{s['n']}")
+    print(f"Все {CONTENT_FULL} содержательных слоёв: {s['sections']}/{s['n']}")
     print(f"Сверено с реестром: {s['grounded']}/{s['n']}")
     print(f"Источник из реестра: {s['sources']}/{s['n']}")
-    print(f"Идеальные ответы (6 секций + сверка + источник): {s['perfect']}/{s['n']}")
+    print(f"Идеальные ответы ({CONTENT_FULL} слоёв + сверка + источник): {s['perfect']}/{s['n']}")
     for r in results:
-        print(f"  {'OK' if r['sections'] == 6 and r['grounded'] and r['sources'] else '!!'} "
-              f"{r['q'][:35]:37s} {r['sections']}/6 секций | сверка: {r.get('mode', '—')} "
+        print(f"  {'OK' if r['sections'] >= CONTENT_FULL and r['grounded'] and r['sources'] else '!!'} "
+              f"{r['q'][:35]:37s} {r['sections']}/{CONTENT_FULL} слоёв | сверка: {r.get('mode', '—')} "
               f"({r.get('ctx_cov', 0)*100:.0f}%)")
     line, passed = format_verdict(s, threshold)
     print(line)
@@ -241,7 +249,8 @@ def run_live(threshold, url_override=None, key_override=None):
             st = two_stage(q, ctx, endpoint, key, timeout=300, model=model)
             sections = parse_sections(st["raw"])
             chosen = st["chosen"]
-            n_sections = len(sections)
+            n_sections = sum(1 for t in CONTENT_TAGS if sections.get(t))
+            n_tags = len(sections)
             hebrew = sections.get("[HEBREW]", "")
             sources = sections.get("[SOURCES]", "")
             russian = sections.get("[Russian]", "")
@@ -255,11 +264,12 @@ def run_live(threshold, url_override=None, key_override=None):
             guard = g["guard"]
             grounded = guard["mode"] != "reject"
             src_ok = bool(g["sources"])
-            ok = (n_sections == 6 and grounded and src_ok)
-            results.append({"q": q, "sections": n_sections, "grounded": grounded,
+            ok = (n_sections >= CONTENT_FULL and grounded and src_ok)
+            results.append({"q": q, "sections": n_sections, "tags": n_tags,
+                            "grounded": grounded,
                             "sources": src_ok, "mode": guard["mode"],
                             "ctx_cov": guard["ctx_cov"], "ok": ok})
-            print(f"  секций: {n_sections}/6 | сверка: {guard['mode']} "
+            print(f"  слоёв: {n_sections}/{CONTENT_FULL} (тегов: {n_tags}/6) | сверка: {guard['mode']} "
                   f"({guard['ctx_cov']*100:.0f}% слов из контекста) | источник из реестра: {'ДА' if src_ok else 'НЕТ'}")
             print(f"  [HEBREW] {hebrew[:60]}…")
             print(f"  [SOURCES] модели: {sources[:50]} → по реестру: "
@@ -348,11 +358,11 @@ def run_selftest():
     chk("выдуманный источник честно помечается", find_source("[SOURCES] Никто", episodes)[0] == "НЕ НАЙДЕН")
     chk("совпадение речи считается по god_speech_plain", speech_overlap("ויאמר יהוה", episodes["Genesis|3:9"]) == "100%")
 
-    good = {"q": "как тебя зовут?", "sections": 6, "grounded": True, "sources": True,
+    good = {"q": "как тебя зовут?", "sections": 5, "grounded": True, "sources": True,
             "mode": "verified", "ctx_cov": 0.93, "ok": True}
     bad = {"q": "я боюсь умереть", "sections": 0, "grounded": False, "sources": False,
            "mode": "ошибка", "ctx_cov": 0.0, "ok": False}
-    ungrounded = {"q": "почему ты допустил зло?", "sections": 6, "grounded": False, "sources": False,
+    ungrounded = {"q": "почему ты допустил зло?", "sections": 5, "grounded": False, "sources": False,
                   "mode": "reject", "ctx_cov": 0.17, "ok": False}
     s = summarize([good, bad])
     chk("сводка считает секции и источники", s["sections"] == 1 and s["sources"] == 1)
@@ -361,6 +371,9 @@ def run_selftest():
     chk("все ошибки (мозг недоступен) дают score 0", summarize([bad, bad])["score"] == 0.0)
     chk("неподтверждённая реплика не попадает в полные", summarize([good, ungrounded])["perfect"] == 1
         and summarize([good, ungrounded])["score"] == 0.5)
+    no_src = parse_sections(FAKE_ANSWER.replace("[SOURCES]", ""))
+    chk("ответ без [SOURCES] — полный (пять содержательных слоёв)",
+        sum(1 for t in CONTENT_TAGS if no_src.get(t)) == CONTENT_FULL)
 
     # правило «S» внутри гейта: та же сверка, что на странице
     ctx = [{"book": "Genesis", "span": {"start": "3:9", "end": "3:15"},

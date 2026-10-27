@@ -37,7 +37,7 @@ jobs:
         run: python scripts/page_parity.py
       - name: "Страница: офлайн/онлайн-логика brain.json"
         run: node brain/test_page.js
-      - name: "Стенд потока живых вопросов: самопроверка (11/11)"
+      - name: "Стенд потока живых вопросов: самопроверка (12/12)"
         run: python scripts/stream_test.py --selftest
       - name: "Самопроверка верификатора (ловит пустые поля и расхождения корпусов)"
         run: python scripts/verify_corpus.py --test
