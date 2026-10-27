@@ -782,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-26j";
+const APPVER = "2026-10-27a";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -1865,8 +1865,20 @@ async function liveReply(q){
       + (/согрешил|раскаиваюсь|прости меня/.test(q.toLowerCase()) ? " Покаяние снижает тяжесть." : "")) : "";
   const userForm = "ВОПРОС ЧЕЛОВЕКА: " + q + "\n\n" + episodeBlock(chosen)
     + (memTxt ? "\n\n" + memTxt : "") + "\n\nОтветь шестью секциями.";
-  const raw = await brainAsk(ep, key, model, SYS_PROMPT, userForm, 0.15, 900);
-  return { sections:parseSections(raw), hits,
+  /* ШАГ 2 — формулировка. Редко (2 ответа из 86 в потоке живых вопросов) модель
+     зацикливается и не дописывает все шесть секций: ответ приходит с 3–4 секциями.
+     Это не галлюцинация, а незаконченный ответ, поэтому на неполный ответ задаём
+     тот же вопрос ещё раз (до трёх попыток) и берём тот, где секций больше.
+     Полный ответ сразу — повторов не тратим. */
+  let best = null;
+  for(let attempt=0; attempt<3; attempt++){
+    const raw = await brainAsk(ep, key, model, SYS_PROMPT, userForm, 0.15, 900);
+    const secs = parseSections(raw);
+    const n = Object.keys(secs).length;
+    if(!best || n > best.n) best = { secs, n };
+    if(n >= 6) break;
+  }
+  return { sections:best.secs, hits,
     sel:{ hit: hits[ctx.indexOf(chosen)] || null, ctx:chosen, index:idx, raw:rawSel },
     trig, cls, probs };
 }

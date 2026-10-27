@@ -73,6 +73,8 @@ SELECT_TEMP = 0.0          # выбор — детерминированный �
 SELECT_MAX_TOKENS = 16
 FORM_TEMP = 0.15           # формулировка — почти детерминированная (измерено)
 FORM_MAX_TOKENS = 900      # хватает на шесть коротких секций
+FORM_ATTEMPTS = 3          # попыток на неполный ответ (страница: три попытки в liveReply)
+SECTION_TAGS = ("[HEBREW]", "[NIKKUD]", "[Russian]", "[English]", "[Hebrew Modern]", "[SOURCES]")
 VEC_W = 1.0                # вес вектора e5-small в СПАСАТЕЛЬНОМ режиме (страница: const VEC_W)
 MEM_IN_FORM = False        # память диалога в шаг формулировки — флаг общий со страницей
 DEFAULT_TIMEOUT = 180
@@ -619,6 +621,11 @@ def pick_index(raw, n):
     return v if 1 <= v <= n else 1
 
 
+def count_sections(raw):
+    """Сколько из шести секций пришло в ответе (как parseSections() страницы)."""
+    return sum(1 for t in SECTION_TAGS if (raw or "").find(t) >= 0)
+
+
 def spoken_candidates(ctx, limit=6):
     """Кандидаты для выбора: только эпизоды, где Бог говорил, не больше limit.
 
@@ -688,8 +695,26 @@ def two_stage(q, ctx, url, key, timeout=DEFAULT_TIMEOUT, model="god-brain", memo
     raw = ask_brain(SYS_PROMPT, user_form, url, key,
                     timeout=timeout, model=model,
                     temperature=FORM_TEMP, max_tokens=FORM_MAX_TOKENS)
+    # Неполный ответ — не галлюцинация, а зацикливание модели (в потоке живых
+    # вопросов: 2 ответа из 86 пришли с 3–4 секциями из шести). На неполный ответ
+    # задаём тот же вопрос ещё раз, до трёх попыток, и берём тот, где секций больше.
+    # Страница делает ровно то же — см. docs/index.html, liveReply.
+    best_raw, best_n = raw, count_sections(raw)
+    form_attempts = 1
+    for _ in range(FORM_ATTEMPTS - 1):
+        if best_n >= 6:
+            break
+        raw_try = ask_brain(SYS_PROMPT, user_form, url, key,
+                            timeout=timeout, model=model,
+                            temperature=FORM_TEMP, max_tokens=FORM_MAX_TOKENS)
+        form_attempts += 1
+        n = count_sections(raw_try)
+        if n > best_n:
+            best_raw, best_n = raw_try, n
+    raw = best_raw
     return {"raw_sel": raw_sel, "index": idx, "chosen": chosen, "raw": raw,
-            "user_form": user_form, "action": act, "cls": cls}
+            "user_form": user_form, "action": act, "cls": cls,
+            "form_attempts": form_attempts}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
