@@ -1,0 +1,496 @@
+{
+ "metadata": {
+  "version": "profile-calibration-v1",
+  "episodes": 2050,
+  "books": 39,
+  "folds": 5,
+  "alpha": 5.0,
+  "min_class_n": 20,
+  "grouping": "по книгам (книга целиком в одном фолде — утечки нет)",
+  "brier_convention": "сумма (p_k − y_k)^2 по исходам, в среднем на пример",
+  "outcomes": [
+   "answer_granted",
+   "blessing",
+   "compliance",
+   "covenant",
+   "delayed",
+   "punishment",
+   "refusal",
+   "rescue",
+   "revelation",
+   "silence",
+   "unclear"
+  ]
+ },
+ "models": {
+  "m1_uniform": {
+   "n": 2050,
+   "brier": 0.90909,
+   "brier_norm": 0.08264,
+   "logloss": 2.3979,
+   "acc": 0.0702,
+   "label": "равномерный априор"
+  },
+  "m2_base_rate": {
+   "n": 2050,
+   "brier": 0.87922,
+   "brier_norm": 0.07993,
+   "logloss": 2.23646,
+   "acc": 0.241,
+   "label": "глобальная частота исходов"
+  },
+  "m3_trigger": {
+   "n": 2050,
+   "brier": 0.74289,
+   "brier_norm": 0.06754,
+   "logloss": 1.77609,
+   "acc": 0.3805,
+   "label": "P(исход|класс обращения)"
+  },
+  "m4_trigger_addressee": {
+   "n": 2050,
+   "brier": 0.74438,
+   "brier_norm": 0.06767,
+   "logloss": 1.80931,
+   "acc": 0.3727,
+   "label": "класс × группа адресата"
+  },
+  "m5_trigger_genre": {
+   "n": 2050,
+   "brier": 0.70822,
+   "brier_norm": 0.06438,
+   "logloss": 1.7075,
+   "acc": 0.402,
+   "label": "класс × жанр"
+  },
+  "m6_trigger_era": {
+   "n": 2050,
+   "brier": 0.70978,
+   "brier_norm": 0.06453,
+   "logloss": 1.73171,
+   "acc": 0.4322,
+   "label": "класс × эпоха"
+  },
+  "m7_trigger_tone": {
+   "n": 2050,
+   "brier": 0.74626,
+   "brier_norm": 0.06784,
+   "logloss": 1.7939,
+   "acc": 0.3834,
+   "label": "класс + признаки тона (без кругового признака)"
+  },
+  "m8_trigger_tone_leak": {
+   "n": 2050,
+   "brier": 0.73426,
+   "brier_norm": 0.06675,
+   "logloss": 1.73344,
+   "acc": 0.4302,
+   "label": "ДИАГНОСТИКА: класс + тон с круговым признаком «нет речи»"
+  }
+ },
+ "per_trigger": {
+  "covenant_follow_up": {
+   "best_model": {
+    "n": 271,
+    "brier": 0.72232,
+    "brier_norm": 0.06567,
+    "logloss": 1.70365,
+    "acc": 0.4465
+   },
+   "base_rate": {
+    "n": 271,
+    "brier": 0.96801,
+    "brier_norm": 0.088,
+    "logloss": 2.59873,
+    "acc": 0.0258
+   }
+  },
+  "inquiry": {
+   "best_model": {
+    "n": 101,
+    "brier": 0.8044,
+    "brier_norm": 0.07313,
+    "logloss": 2.26847,
+    "acc": 0.3267
+   },
+   "base_rate": {
+    "n": 101,
+    "brier": 0.93061,
+    "brier_norm": 0.0846,
+    "logloss": 2.45138,
+    "acc": 0.0792
+   }
+  },
+  "gratitude": {
+   "best_model": {
+    "n": 87,
+    "brier": 0.81798,
+    "brier_norm": 0.07436,
+    "logloss": 2.07595,
+    "acc": 0.2299
+   },
+   "base_rate": {
+    "n": 87,
+    "brier": 0.97017,
+    "brier_norm": 0.0882,
+    "logloss": 2.49088,
+    "acc": 0.0
+   }
+  },
+  "faithfulness": {
+   "best_model": {
+    "n": 118,
+    "brier": 0.85802,
+    "brier_norm": 0.078,
+    "logloss": 2.26712,
+    "acc": 0.2288
+   },
+   "base_rate": {
+    "n": 118,
+    "brier": 0.97912,
+    "brier_norm": 0.08901,
+    "logloss": 2.5843,
+    "acc": 0.0169
+   }
+  },
+  "unprompted": {
+   "best_model": {
+    "n": 691,
+    "brier": 0.76188,
+    "brier_norm": 0.06926,
+    "logloss": 1.72341,
+    "acc": 0.3126
+   },
+   "base_rate": {
+    "n": 691,
+    "brier": 0.8358,
+    "brier_norm": 0.07598,
+    "logloss": 2.01722,
+    "acc": 0.2576
+   }
+  },
+  "prayer": {
+   "best_model": {
+    "n": 55,
+    "brier": 0.76216,
+    "brier_norm": 0.06929,
+    "logloss": 1.93188,
+    "acc": 0.3455
+   },
+   "base_rate": {
+    "n": 55,
+    "brier": 0.99051,
+    "brier_norm": 0.09005,
+    "logloss": 2.71406,
+    "acc": 0.0182
+   }
+  },
+  "distress": {
+   "best_model": {
+    "n": 188,
+    "brier": 0.85773,
+    "brier_norm": 0.07798,
+    "logloss": 2.00043,
+    "acc": 0.1915
+   },
+   "base_rate": {
+    "n": 188,
+    "brier": 0.99904,
+    "brier_norm": 0.09082,
+    "logloss": 2.78527,
+    "acc": 0.0106
+   }
+  },
+  "intercession": {
+   "best_model": {
+    "n": 46,
+    "brier": 0.75292,
+    "brier_norm": 0.06845,
+    "logloss": 2.00298,
+    "acc": 0.4783
+   },
+   "base_rate": {
+    "n": 46,
+    "brier": 0.99878,
+    "brier_norm": 0.0908,
+    "logloss": 2.85848,
+    "acc": 0.0217
+   }
+  },
+  "disobedience": {
+   "best_model": {
+    "n": 350,
+    "brier": 0.3497,
+    "brier_norm": 0.03179,
+    "logloss": 0.89495,
+    "acc": 0.8029
+   },
+   "base_rate": {
+    "n": 350,
+    "brier": 0.71031,
+    "brier_norm": 0.06457,
+    "logloss": 1.63348,
+    "acc": 0.8029
+   }
+  },
+  "complaint": {
+   "best_model": {
+    "n": 115,
+    "brier": 0.7652,
+    "brier_norm": 0.06956,
+    "logloss": 1.81753,
+    "acc": 0.4261
+   },
+   "base_rate": {
+    "n": 115,
+    "brier": 0.90928,
+    "brier_norm": 0.08266,
+    "logloss": 2.33568,
+    "acc": 0.113
+   }
+  }
+ },
+ "folds": [
+  {
+   "fold": 0,
+   "books": [
+    "Ezra",
+    "Haggai",
+    "I_Samuel",
+    "Jeremiah",
+    "Judges",
+    "Proverbs",
+    "Ruth"
+   ],
+   "train_episodes": 1642,
+   "test_episodes": 408,
+   "acc": {
+    "m1_uniform": 0.0613,
+    "m2_base_rate": 0.3088,
+    "m3_trigger": 0.3775,
+    "m4_trigger_addressee": 0.4069,
+    "m5_trigger_genre": 0.3775,
+    "m6_trigger_era": 0.5074,
+    "m7_trigger_tone": 0.3799,
+    "m8_trigger_tone_leak": 0.5025
+   },
+   "brier": {
+    "m1_uniform": 0.90909,
+    "m2_base_rate": 0.84217,
+    "m3_trigger": 0.73068,
+    "m4_trigger_addressee": 0.70665,
+    "m5_trigger_genre": 0.69716,
+    "m6_trigger_era": 0.65159,
+    "m7_trigger_tone": 0.73826,
+    "m8_trigger_tone_leak": 0.69469
+   }
+  },
+  {
+   "fold": 1,
+   "books": [
+    "Amos",
+    "Daniel",
+    "Habakkuk",
+    "II_Kings",
+    "Isaiah",
+    "Joshua",
+    "Zephaniah"
+   ],
+   "train_episodes": 1640,
+   "test_episodes": 410,
+   "acc": {
+    "m1_uniform": 0.066,
+    "m2_base_rate": 0.3264,
+    "m3_trigger": 0.3729,
+    "m4_trigger_addressee": 0.3851,
+    "m5_trigger_genre": 0.3912,
+    "m6_trigger_era": 0.4572,
+    "m7_trigger_tone": 0.3839,
+    "m8_trigger_tone_leak": 0.4303
+   },
+   "brier": {
+    "m1_uniform": 0.90909,
+    "m2_base_rate": 0.84156,
+    "m3_trigger": 0.73146,
+    "m4_trigger_addressee": 0.72246,
+    "m5_trigger_genre": 0.69796,
+    "m6_trigger_era": 0.68594,
+    "m7_trigger_tone": 0.74814,
+    "m8_trigger_tone_leak": 0.73359
+   }
+  },
+  {
+   "fold": 2,
+   "books": [
+    "Ecclesiastes",
+    "Esther",
+    "Exodus",
+    "Hosea",
+    "I_Kings",
+    "Nehemiah",
+    "Psalms"
+   ],
+   "train_episodes": 1640,
+   "test_episodes": 410,
+   "acc": {
+    "m1_uniform": 0.0725,
+    "m2_base_rate": 0.2638,
+    "m3_trigger": 0.3591,
+    "m4_trigger_addressee": 0.351,
+    "m5_trigger_genre": 0.3721,
+    "m6_trigger_era": 0.4243,
+    "m7_trigger_tone": 0.364,
+    "m8_trigger_tone_leak": 0.4357
+   },
+   "brier": {
+    "m1_uniform": 0.90909,
+    "m2_base_rate": 0.87346,
+    "m3_trigger": 0.74086,
+    "m4_trigger_addressee": 0.7395,
+    "m5_trigger_genre": 0.71136,
+    "m6_trigger_era": 0.71067,
+    "m7_trigger_tone": 0.75203,
+    "m8_trigger_tone_leak": 0.72628
+   }
+  },
+  {
+   "fold": 3,
+   "books": [
+    "Ezekiel",
+    "II_Samuel",
+    "Job",
+    "Joel",
+    "Lamentations",
+    "Micah",
+    "Nahum",
+    "Numbers",
+    "Zechariah"
+   ],
+   "train_episodes": 1638,
+   "test_episodes": 412,
+   "acc": {
+    "m1_uniform": 0.0713,
+    "m2_base_rate": 0.2713,
+    "m3_trigger": 0.3713,
+    "m4_trigger_addressee": 0.3695,
+    "m5_trigger_genre": 0.3902,
+    "m6_trigger_era": 0.4287,
+    "m7_trigger_tone": 0.3762,
+    "m8_trigger_tone_leak": 0.4262
+   },
+   "brier": {
+    "m1_uniform": 0.90909,
+    "m2_base_rate": 0.8669,
+    "m3_trigger": 0.74013,
+    "m4_trigger_addressee": 0.73695,
+    "m5_trigger_genre": 0.70809,
+    "m6_trigger_era": 0.70282,
+    "m7_trigger_tone": 0.75643,
+    "m8_trigger_tone_leak": 0.73897
+   }
+  },
+  {
+   "fold": 4,
+   "books": [
+    "Deuteronomy",
+    "II_Chronicles",
+    "I_Chronicles",
+    "Jonah",
+    "Leviticus",
+    "Malachi",
+    "Obadiah",
+    "Song_of_Songs",
+    "genesis"
+   ],
+   "train_episodes": 1640,
+   "test_episodes": 410,
+   "acc": {
+    "m1_uniform": 0.0702,
+    "m2_base_rate": 0.241,
+    "m3_trigger": 0.3805,
+    "m4_trigger_addressee": 0.3727,
+    "m5_trigger_genre": 0.402,
+    "m6_trigger_era": 0.4322,
+    "m7_trigger_tone": 0.3834,
+    "m8_trigger_tone_leak": 0.4302
+   },
+   "brier": {
+    "m1_uniform": 0.90909,
+    "m2_base_rate": 0.87922,
+    "m3_trigger": 0.74289,
+    "m4_trigger_addressee": 0.74438,
+    "m5_trigger_genre": 0.70822,
+    "m6_trigger_era": 0.70978,
+    "m7_trigger_tone": 0.74626,
+    "m8_trigger_tone_leak": 0.73426
+   }
+  }
+ ],
+ "fold_books": [
+  [
+   "Ezra",
+   "Haggai",
+   "I_Samuel",
+   "Jeremiah",
+   "Judges",
+   "Proverbs",
+   "Ruth"
+  ],
+  [
+   "Amos",
+   "Daniel",
+   "Habakkuk",
+   "II_Kings",
+   "Isaiah",
+   "Joshua",
+   "Zephaniah"
+  ],
+  [
+   "Ecclesiastes",
+   "Esther",
+   "Exodus",
+   "Hosea",
+   "I_Kings",
+   "Nehemiah",
+   "Psalms"
+  ],
+  [
+   "Ezekiel",
+   "II_Samuel",
+   "Job",
+   "Joel",
+   "Lamentations",
+   "Micah",
+   "Nahum",
+   "Numbers",
+   "Zechariah"
+  ],
+  [
+   "Deuteronomy",
+   "II_Chronicles",
+   "I_Chronicles",
+   "Jonah",
+   "Leviticus",
+   "Malachi",
+   "Obadiah",
+   "Song_of_Songs",
+   "genesis"
+  ]
+ ],
+ "verdict": {
+  "text": "m3_trigger: Brier 0.74289 (лучше базовой частоты на 15.5%, равномерного на 18.3%), log-loss 1.77609, top-1 0.3805 | m4_trigger_addressee: Brier 0.74438 (лучше базовой частоты на 15.3%, равномерного на 18.1%), log-loss 1.80931, top-1 0.3727 | m5_trigger_genre: Brier 0.70822 (лучше базовой частоты на 19.4%, равномерного на 22.1%), log-loss 1.7075, top-1 0.402 | m6_trigger_era: Brier 0.70978 (лучше базовой частоты на 19.3%, равномерного на 21.9%), log-loss 1.73171, top-1 0.4322 | m7_trigger_tone: Brier 0.74626 (лучше базовой частоты на 15.1%, равномерного на 17.9%), log-loss 1.7939, top-1 0.3834 | m8_trigger_tone_leak: Brier 0.73426 (лучше базовой частоты на 16.5%, равномерного на 19.2%), log-loss 1.73344, top-1 0.4302",
+  "best_model": "m5_trigger_genre",
+  "better_than_base_rate": [
+   "m3_trigger",
+   "m4_trigger_addressee",
+   "m5_trigger_genre",
+   "m6_trigger_era",
+   "m7_trigger_tone",
+   "m8_trigger_tone_leak"
+  ],
+  "tone_gain_pct_vs_trigger": -0.45,
+  "tone_verdict": "тон не добавляет точности сверх класса обращения (Brier хуже или равен: -0.45%)",
+  "leak_gain_pct": 1.61,
+  "leak_note": "круговой признак «нет речи» дал ещё +1.61% Brier — это утечка: исход «молчание» означает отсутствие речи по определению метки, поэтому признак не предсказывает, а перекодирует её"
+ }
+}

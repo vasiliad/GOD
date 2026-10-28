@@ -782,7 +782,7 @@ tr.dive:hover td { background: rgba(201, 168, 76, 0.06); }
 "use strict";
 /* тихое самообновление: если на сервере иная версия страницы — одно обновление за сессию
    (лечит застрявшие в кэше браузера копии; APPVER менять при каждой правке UI) */
-const APPVER = "2026-10-27c";
+const APPVER = "2026-10-28a";
 if (typeof location !== "undefined") {
   const appverCheck = () => fetch(location.pathname, { cache: "no-store" }).then(r => r.text()).then(t => {
     const v = (t.match(/const APPVER = "([^"]+)"/) || [])[1];
@@ -893,6 +893,21 @@ ov_eps:"эпизодов взаимодействия", ov_books:"книг Та�
   prof_pun_h:"Кара: объявлена vs исполнена", prof_pun_card:"эпизодов-наказаний",
   prof_pun_note:"79% наказаний — оракулы-приговоры; исполненных действий — 84 эпизода (4% корпуса). «Грозящий» Бог встречается в 4,7 раза чаще «бьющего».",
   prof_ann:"объявлено оракулом", prof_exec:"исполнено действием",
+  prof_ctx_h:"Профиль по контексту: эпоха, жанр, адресат",
+  prof_ctx_note:"Один класс обращения в разных регистрах корпуса даёт разную реакцию: закон — угрозу и суд, пророчество — откровение и призыв, поэзия — благословение и утешение. Вероятности сглажены (Дирихле, α=5 к базовой частоте): сырые доли на малых выборках дают 0 % и 100 %, сглаженные — честный интервал неопределённости. Ячейка с n < 20 помечена как предварительная.",
+  prof_ctx_marg:"маргинали (без класса обращения)", prof_ctx_cond:"условные таблицы P(исход | класс, контекст)",
+  prof_th_cell:"ячейка", prof_th_sev:"тяжесть", prof_th_speech:"доля речи", prof_th_low:"предварительно",
+  prof_cal_h:"Калибровка: проверяется ли профиль вне выборки",
+  prof_cal_note:"Grouped CV по книгам (5 фолдов): модель учится на эпизодах 4/5 книг и отвечает на пятой — ни одна книга не бывает одновременно в обучении и в проверке. Brier — средняя сумма (p−y)² по исходам (меньше — лучше), top-1 — доля совпадений самой вероятной догадки.",
+  prof_cal_model:"модель", prof_cal_brier:"Brier", prof_cal_acc:"top-1", prof_cal_best:"лучшая:",
+  prof_cal_tone_note:"Тон речи НЕ добавляет точности сверх класса обращения — зато жанр и эпоха добавляют заметно. Диагностическая модель с круговым признаком «речи нет» показала бы ложный выигрыш: исход «молчание» определён отсутствием речи, такой признак перекодирует метку, а не предсказывает её.",
+  prof_tone_h:"Тон речи: измеримая ось",
+  prof_tone_note:"score = плотность лексики гнева минус лексика милости (на 100 слов). Ось проверена независимой оценкой той же модели-мозга на выборке эпизодов (без словаря и без меток): порядок категорий подтверждён — у «гнева» модели score положительный, у «утешения» отрицательный, между ними «смешанный» и «нейтральный». Но точный класс на отдельном эпизоде совпадает слабо: гнев в Танахе чаще выражен содержанием обличения, чем словами гнева, и в ~58 % речей словарь не находит ни того, ни другого. Поэтому ось — измеримая характеристика речи, а не суждение о настроении.",
+  prof_tone_by_out:"тон по исходам", prof_tone_rater:"независимая оценка: {n} эпизодов, модель={model}",
+  tone_badge:"тон: {t}", tone_severe:"резкая речь", tone_consoling:"утешительная речь", tone_neutral:"нейтральная речь", tone_silent:"молчит",
+  tone_score:"score {s}", tone_engine:"метрика: scripts/tone_metrics.py (лексика гнева/милости, консонантный иврит)",
+  prof_dim_era:"эпоха", prof_dim_genre:"жанр", prof_dim_addressee:"адресат",
+  prof_th_out:"исход", prof_th_score:"score",
   rep_loading:"загрузка отчёта…", rep_note:"перевод отчёта не загрузился — показан русский оригинал.", rep_toc:"Содержание", to_top:"наверх",
   about_h:"О проекте",
   about_p1:"Исследование образа Бога в Танахе: из всех 39 книг извлечено <b>{eps}</b> эпизодов взаимодействия Человек↔Бог (17 полей: спан стихов, направление, канал, триггер, дословная консонантная речь, действие, исход, тяжесть, эмоции). Каждый эпизод прослеживается к стихам.",
@@ -992,6 +1007,21 @@ ov_eps:"interaction episodes", ov_books:"books of the Tanakh", ov_pun:"punishmen
   prof_pun_h:"Punishment: announced vs executed", prof_pun_card:"punishment episodes",
   prof_pun_note:"79% of punishments are verdict-oracles; executed actions — 84 episodes (4% of the corpus). The «threatening» God appears 4.7 times more often than the «striking» one.",
   prof_ann:"announced as oracle", prof_exec:"executed by action",
+  prof_ctx_h:"Profile by context: era, genre, addressee",
+  prof_ctx_note:"The same class of address yields a different reaction in different registers of the corpus: law — threat and judgment, prophecy — revelation and summons, poetry — blessing and consolation. Probabilities are smoothed (Dirichlet, α=5 toward the base rate): raw shares on small samples give 0% and 100%, the smoothed ones give an honest uncertainty band. A cell with n < 20 is marked preliminary.",
+  prof_ctx_marg:"marginals (without the address class)", prof_ctx_cond:"conditional tables P(outcome | class, context)",
+  prof_th_cell:"cell", prof_th_sev:"severity", prof_th_speech:"speech share", prof_th_low:"preliminary",
+  prof_cal_h:"Calibration: is the profile valid out of sample?",
+  prof_cal_note:"Grouped CV by books (5 folds): the model learns from episodes of 4/5 of the books and answers on the fifth — no book is ever both in training and in the test. Brier is the mean sum of (p−y)² over outcomes (lower is better), top-1 is the share of episodes where the most probable guess was right.",
+  prof_cal_model:"model", prof_cal_brier:"Brier", prof_cal_acc:"top-1", prof_cal_best:"best:",
+  prof_cal_tone_note:"Speech tone adds NO accuracy beyond the address class — genre and era do. The diagnostic model with the circular «no speech» feature would show a false win: the outcome «silence» is defined by the absence of speech, so that feature re-encodes the label instead of predicting it.",
+  prof_tone_h:"Speech tone: a measurable axis",
+  prof_tone_note:"score = density of anger lexicon minus mercy lexicon (per 100 words). The axis was checked by an independent rating of the same brain model on a sample of episodes (no lexicon, no labels): the order of categories holds — model-«anger» episodes have a positive score, model-«comfort» a negative one, with «mixed» and «neutral» in between. But exact per-episode class agreement is weak: in the Tanakh anger is mostly carried by the content of indictment, not by anger words, and in ~58% of speeches the lexicon finds neither. So the axis is a measurable property of the speech, not a claim about mood.",
+  prof_tone_by_out:"tone by outcome", prof_tone_rater:"independent rating: {n} episodes, model={model}",
+  tone_badge:"tone: {t}", tone_severe:"harsh speech", tone_consoling:"consoling speech", tone_neutral:"neutral speech", tone_silent:"silent",
+  tone_score:"score {s}", tone_engine:"metric: scripts/tone_metrics.py (anger/mercy lexicon, consonantal Hebrew)",
+  prof_dim_era:"era", prof_dim_genre:"genre", prof_dim_addressee:"addressee",
+  prof_th_out:"outcome", prof_th_score:"score",
   rep_loading:"loading the report…", rep_note:"the report translation failed to load — showing the Russian original.", rep_toc:"Contents", to_top:"to top",
   about_h:"About the project",
   about_p1:"A study of God's image in the Tanakh: <b>{eps}</b> human↔God interaction episodes extracted from all 39 books (17 fields: verse span, direction, channel, trigger, verbatim consonantal speech, action, outcome, severity, emotions). Every episode is traceable to verses.",
@@ -1091,6 +1121,21 @@ ov_eps:"אפיזודות אינטראקציה", ov_books:"ספרי התנ״ך", 
   prof_pun_h:"ענישה: מוכרזת לעומת מבוצעת", prof_pun_card:"אפיזודות ענישה",
   prof_pun_note:"79% מהעונשים — אורקלים של פסק-דין; פעולות מבוצעות — 84 אפיזודות (4% מהקורפוס). האלוהים ה«מאיים» שכיח פי 4.7 מה«מכה».",
   prof_ann:"הוכרז בנבואה", prof_exec:"בוצע בפועל",
+  prof_ctx_h:"פרופיל לפי הקשר: תקופה, ז׳אנר, נמען",
+  prof_ctx_note:"אותה מחלת פנייה מניבה תגובה שונה ברובדים שונים של הקורפוס: חוק — איום ומשפט, נבואה — התגלות וקריאה, שירה — ברכה ונחמה. ההסתברויות מוחלקות (דיריכלה, α=5 אל השכיחות הבסיסית): מניות גולמיות במדגמים קטנים נותנות 0% ו-100%, המוחלקות נותנות רצועת אי-ודאות כנה. תא עם n < 20 מסומן כמקדים.",
+  prof_ctx_marg:"שוליים (בלי מחלת הפנייה)", prof_ctx_cond:"טבלאות מותנות P(תוצאה | מחלה, הקשר)",
+  prof_th_cell:"תא", prof_th_sev:"חומרה", prof_th_speech:"נתח דיבור", prof_th_low:"מקדים",
+  prof_cal_h:"כיול: האם הפרופיל תקף מחוץ למדגם?",
+  prof_cal_note:"CV מקובץ לפי ספרים (5 קיפולים): המודל לומד מאפיזודות של 4/5 מהספרים ועונה על החמישי — אף ספר אינו בבת אחת באימון ובבדיקה. Brier — ממוצע סכום (p−y)² על התוצאות (נמוך יותר = טוב יותר), top-1 — שיעור האפיזודות שבהן הניחוש הסביר ביותר צדק.",
+  prof_cal_model:"מודל", prof_cal_brier:"Brier", prof_cal_acc:"top-1", prof_cal_best:"הטובה:",
+  prof_cal_tone_note:"גון הדיבור אינו מוסיף דיוק מעבר למחלת הפנייה — ז׳אנר ותקופה כן. מודל האבחון עם התכונה המעגלית «אין דיבור» היה מראה רווח כוזב: התוצאה «שתיקה» מוגדרת בהיעדר דיבור, והתכונה הזאת מקודדת מחדש את התווית במקום לנבא אותה.",
+  prof_tone_h:"גון הדיבור: ציר מדיד",
+  prof_tone_note:"score = צפיפות אוצר מילות הזעם פחות מילות החסד (ל-100 מילים). הציר נבדק בהערכה בלתי תלויה של אותו מוח-מודל על מדגם אפיזודות (בלי המילון ובלי תוויות): סדר הקטגוריות מאושר — לאפיזודות «זעם» של המודל score חיובי, ל«נחמה» שלילי, וביניהן «מעורב» ו«נייטרלי». אך ההתאמה המדויקת לפי אפיזודה חלשה: בתנ״ך הזעם מבוטא בתוכן התוכחה יותר מאשר במילות זעם, ובכ-58% מהדיבורים המילון אינו מוצא לא זה ולא זה. לכן הציר הוא תכונה מדידה של הדיבור, לא דעה על מצב רוח.",
+  prof_tone_by_out:"גון לפי תוצאה", prof_tone_rater:"הערכה בלתי תלויה: {n} אפיזודות, מודל={model}",
+  tone_badge:"גון: {t}", tone_severe:"דיבור חריף", tone_consoling:"דיבור מנחם", tone_neutral:"דיבור נייטרלי", tone_silent:"שותק",
+  tone_score:"score {s}", tone_engine:"מדד: scripts/tone_metrics.py (אוצר זעם/חסד, עברית עיצובית)",
+  prof_dim_era:"תקופה", prof_dim_genre:"ז׳אנר", prof_dim_addressee:"נמען",
+  prof_th_out:"תוצאה", prof_th_score:"score",
   rep_loading:"טוען את הדוח…", rep_note:"תרגום הדוח לא נטען — מוצג המקור הרוסי.", rep_toc:"תוכן", to_top:"למעלה",
   about_h:"אודות הפרויקט",
   about_p1:"מחקר דמות האלוהים בתנ״ך: מכל 39 הספרים חולצו <b>{eps}</b> אפיזודות אינטראקציה אדם↔אלוהים (17 שדות: טווח פסוקים, כיוון, ערוץ, טריגר, דיבור עיצורי מילולי, מעשה, תוצאה, חומרה, רגשות). כל אפיזודה ניתנת למעקב לפסוקים.",
@@ -1190,7 +1235,13 @@ mode: { ru:{speaks_and_acts:"говорит и действует",acts_silently
         he:{speaks_and_acts:"מדבר ופועל",acts_silently:"פועל בשקט",silence:"שותק במלואו",speaks_only:"רק מדבר"} },
 era: { ru:{"Тора":"Тора","Невиим (ранние)":"Невиим (ранние)","Невиим (поздние)":"Невиим (поздние)","Кетувим":"Кетувим"},
        en:{"Тора":"Torah","Невиим (ранние)":"Early Prophets","Невиим (поздние)":"Late Prophets","Кетувим":"Writings"},
-       he:{"Тора":"תורה","Невиим (ранние)":"נביאים ראשונים","Невиим (поздние)":"נביאים אחרונים","Кетuvim":"כתובים"} }
+       he:{"Тора":"תורה","Невиим (ранние)":"נביאים ראשונים","Невиим (поздние)":"נביאים אחרונים","Кетувим":"כתובים"} },
+genre: { ru:{law:"закон",narrative:"повествование",prophecy:"пророчество",poetry:"поэзия",wisdom:"мудрость"},
+         en:{law:"law",narrative:"narrative",prophecy:"prophecy",poetry:"poetry",wisdom:"wisdom"},
+         he:{law:"חוק",narrative:"סיפור",prophecy:"נבואה",poetry:"שירה",wisdom:"חוכמה"} },
+addr: { ru:{nation:"нация",individual:"индивид",foreign:"иноплеменник",collective:"коллектив",other:"иное"},
+        en:{nation:"nation",individual:"individual",foreign:"foreigner",collective:"collective",other:"other"},
+        he:{nation:"אומה",individual:"יחיד",foreign:"נוכרי",collective:"קבוצה",other:"אחר"} }
 };
 function dn(type, key){
   const d = DATA_NAMES[type];
@@ -1228,6 +1279,11 @@ let PROF = null;
    форма реакции (слова/действие). Считается scripts/god_profile.py --publish,
    публикуется в docs/data/god_behavior_profile.json. */
 async function godProfile(){ if(!PROF) PROF = await jget("data/god_behavior_profile.json"); return PROF; }
+let TONED = null;
+/* Метрики тона по эпизодам (scripts/tone_metrics.py --publish): by_episode[id] =
+   {class, words, chars, score, anger, mercy, comfort, address, self_ref}. Грузится
+   лениво — нужен только бейджу тона под ответом и вкладке профиля. */
+async function toneData(){ if(!TONED) TONED = await jget("data/tone.json"); return TONED; }
 async function nikudFor(book, refs){
   const idx = await nikudIndex();
   const bk = book.charAt(0).toUpperCase() + book.slice(1);  // nikud.json хранит имена с заглавной ("Genesis|…"), а в book_order книга "genesis" — регистр нормализуем
@@ -1872,7 +1928,11 @@ function actionBlock(cls, prof){
   const bt = prof && prof.by_trigger && prof.by_trigger[cls];
   const rm = prof && prof.response_modes && prof.response_modes[cls];
   if(!bt || !rm) return "";
-  const outs = Object.entries(bt.outcome_p).sort((a,b)=>b[1]-a[1]).slice(0,4)
+  /* сглаженные вероятности (Дирихле, α=5): сырые доли на малых классах дают
+     0 % и 100 % и читаются моделью как правило, хотя это шум — зеркало
+     (scripts/answer_scheme.py action_block) делает то же самое */
+  const probs = bt.outcome_p_smooth || bt.outcome_p;
+  const outs = Object.entries(probs).sort((a,b)=>b[1]-a[1]).slice(0,4)
     .map(([k,v])=> (DATA_NAMES.out.ru[k]||k)+" "+Math.round(v*100)+"%").join(", ");
   const dist = Object.entries(rm.distribution).sort((a,b)=>b[1]-a[1])
     .map(([k,v])=> (DATA_NAMES.mode.ru[k]||k)+" "+Math.round(v*100)+"%").join(", ");
@@ -2314,9 +2374,26 @@ async function liveHTML(r){
     if(rm && bt){
       const dist = Object.entries(rm.distribution).sort((a,b)=>b[1]-a[1]).slice(0,2)
         .map(([k,v])=> dn("mode",k)+" "+(v*100).toFixed(0)+"%").join(" · ");
-      const outs = Object.entries(bt.outcome_p).sort((a,b)=>b[1]-a[1]).slice(0,3)
+      /* сглаженные вероятности — как в блоке [ACTION]: сырые доли малых классов шумят */
+      const outs = Object.entries(bt.outcome_p_smooth || bt.outcome_p).sort((a,b)=>b[1]-a[1]).slice(0,3)
         .map(([k,v])=> dn("out",k)+" "+(v*100).toFixed(0)+"%").join(" · ");
       h += `<div class="src">${t("beh_line")} ${esc(dn("trig", r.cls))}: ${esc(dist)} · ${t("beh_out")} ${esc(outs)}</div>`;
+    }
+  }
+  /* тон выбранного эпизода — измеримая ось (лексика гнева/милости), не настроение */
+  {
+    const srcEp = v.sources && v.sources[0] && v.sources[0][1];
+    if(srcEp && srcEp.episode_id){
+      try{
+        const td = await toneData();
+        const tn = td && td.by_episode && td.by_episode[srcEp.episode_id];
+        if(tn && tn.class && tn.class !== "silent"){
+          const sc = (tn.score > 0 ? "+" : "") + Number(tn.score).toFixed(1);
+          h += `<div class="src">${esc(tfmt("tone_badge", {t:t("tone_"+tn.class)}))} · ${esc(tfmt("tone_score", {s:sc}))}</div>`;
+        }else if(tn && tn.class === "silent"){
+          h += `<div class="src">${esc(t("tone_silent"))}</div>`;
+        }
+      }catch(e){}
     }
   }
   h += `${memLine()}</div>`;
@@ -2789,6 +2866,74 @@ async function showOne(b, i){
 }
 async function tProfile(m){
   const a = await analytics();
+  const prof = await godProfile();
+  let cal = null; try{ cal = await jget("data/profile_calibration.json"); }catch(e){}
+  let rat = null; try{ rat = await jget("data/tone_rater.json"); }catch(e){}
+  /* цвета классов тона — свои: классы тона не исходы, палитра OUT к ним не относится */
+  const TONE_COL = {severe:"#e07a6a", consoling:"#7fce9a", neutral:"#565e6e", silent:"#6b7280"};
+  const toneBar = shares => {
+    const items = Object.entries(shares || {}).sort((x,y)=>y[1]-x[1]);
+    return `<div class="bar">${items.map(([k,v])=>`<i style="width:${(v*100).toFixed(1)}%;background:${TONE_COL[k]||"#888"}"></i>`).join("")}</div>` +
+    `<div class="leg">${items.map(([k,v])=>`<span><i style="background:${TONE_COL[k]||"#888"}"></i>${esc(t("tone_"+k))} ${(v*100).toFixed(0)}%</span>`).join("")}</div>`;
+  };
+  const DIMS = [["era","prof_dim_era"],["genre","prof_dim_genre"],["addressee","prof_dim_addressee"]];
+  const cellName = (dim,cell) => esc(dn(dim === "addressee" ? "addr" : dim, cell));
+  /* маргинали: сводка по каждому измерению контекста без класса обращения */
+  let margHTML = "";
+  {
+    let rows = "";
+    for(const [dim,titleKey] of DIMS){
+      const marg = prof && prof.marginals && prof.marginals[dim];
+      if(!marg) continue;
+      for(const [cell,mm] of Object.entries(marg)){
+        rows += `<tr><td><b>${esc(t(titleKey))}:</b> ${cellName(dim,cell)}</td><td>${mm.n}${mm.reliable ? "" : " ⚠"}</td>
+        <td>${bar(mm.outcome_p_smooth,5,{})}</td><td>${Number(mm.severity_mean||0).toFixed(1)}</td><td>${(100*(mm.speech_share||0)).toFixed(0)}%</td></tr>`;
+      }
+    }
+    if(rows) margHTML = `<h3>${t("prof_ctx_marg")}</h3>
+    <div class="tscroll"><table><tr><th>${t("prof_th_cell")}</th><th>${t("prof_th_n")}</th><th style="min-width:320px">${t("prof_th_dist")}</th><th>${t("prof_th_sev")}</th><th>${t("prof_th_speech")}</th></tr>${rows}</table></div>`;
+  }
+  /* условные таблицы: P(исход | класс, контекст) — по одной сворачиваемой на измерение */
+  let condHTML = "";
+  for(const [dim,titleKey] of DIMS){
+    const tbl = prof && prof["by_trigger_" + dim];
+    if(!tbl) continue;
+    let rows = "";
+    for(const [trig,cells] of Object.entries(tbl)){
+      for(const [cell,cc] of Object.entries(cells)){
+        rows += `<tr><td>${esc(dn("trig",trig))}</td><td>${cellName(dim,cell)}${cc.reliable ? "" : ` <span style="opacity:.65">(${esc(t("prof_th_low"))})</span>`}</td><td>${cc.n}</td>
+        <td>${bar(cc.outcome_p_smooth,4,{trig:trig})}</td><td>${Number(cc.severity_mean||0).toFixed(1)}</td></tr>`;
+      }
+    }
+    condHTML += `<details><summary>${esc(t(titleKey))}</summary>
+    <div class="tscroll"><table><tr><th>${t("prof_th_trig")}</th><th>${t("prof_th_cell")}</th><th>${t("prof_th_n")}</th><th style="min-width:300px">${t("prof_th_dist")}</th><th>${t("prof_th_sev")}</th></tr>${rows}</table></div></details>`;
+  }
+  /* калибровка: вневыборочная проверка профиля по книгам */
+  let calHTML = "";
+  if(cal && cal.models){
+    calHTML = `<h2>${t("prof_cal_h")}</h2><div class="note">${t("prof_cal_note")}</div>
+    <div class="tscroll"><table><tr><th>${t("prof_cal_model")}</th><th>${t("prof_cal_brier")}</th><th>${t("prof_cal_acc")}</th></tr>` +
+    Object.entries(cal.models).map(([k,mo])=>`<tr><td>${esc(mo.label||k)}</td><td>${Number(mo.brier||0).toFixed(3)}</td><td>${(100*(mo.acc||0)).toFixed(0)}%</td></tr>`).join("") +
+    `</table></div>`;
+    const vd = cal.verdict || {};
+    const best = vd.best_model && cal.models[vd.best_model];
+    if(best) calHTML += `<div class="note">${t("prof_cal_best")} ${esc(best.label||vd.best_model)}</div>`;
+    if(vd.tone_verdict) calHTML += `<div class="note">${esc(vd.tone_verdict)}</div>`;
+    calHTML += `<div class="note">${t("prof_cal_tone_note")}</div>`;
+  }
+  /* тон: сводка по исходам + числа независимой оценки */
+  let toneHTML = "";
+  const tone = prof && prof.tone;
+  if(tone && tone.aggregates && tone.aggregates.outcome){
+    toneHTML = `<h2>${t("prof_tone_h")}</h2><div class="note">${t("prof_tone_note")}</div>`;
+    if(rat && rat.metadata && rat.metadata.n_rated){
+      toneHTML += `<div class="note">${esc(tfmt("prof_tone_rater", {n:rat.metadata.n_rated, model:String(rat.metadata.model||"").split("/").pop()}))}</div>`;
+    }
+    toneHTML += `<h3>${t("prof_tone_by_out")}</h3><div class="tscroll"><table><tr><th>${t("prof_th_out")}</th><th>${t("prof_th_n")}</th><th>${t("prof_th_score")}</th><th style="min-width:300px"></th></tr>` +
+    Object.entries(tone.aggregates.outcome).map(([k,vv])=>
+      `<tr class="dive" onclick='dive({out:"${k}"})'><td><b>${esc(dn("out",k))}</b></td><td>${vv.n}</td><td>${vv.score_mean > 0 ? "+" : ""}${Number(vv.score_mean||0).toFixed(2)}</td><td>${toneBar(vv.classes)}</td></tr>`).join("") +
+    `</table></div><div class="note">${t("tone_engine")}</div>`;
+  }
   m.innerHTML = `<h2>${t("prof_h")}</h2>
   <div class="tscroll"><table><tr><th>${t("prof_th_trig")}</th><th>${t("prof_th_n")}</th><th style="min-width:360px">${t("prof_th_dist")}</th></tr>
   ${Object.entries(a.trigger_table).map(p=>`<tr class="dive" onclick='dive({trig:"${p[0]}"})'><td><b>${esc(dn("trig",p[0]))}</b></td><td>${p[1].n}</td>
@@ -2797,7 +2942,13 @@ async function tProfile(m){
   <div class="card dive" onclick='dive({out:"punishment"})'><div class="v">${a.punishment_split.total}</div><div class="l">${t("prof_pun_card")}</div>
   <div class="bar"><i style="width:${(a.punishment_split.announced_p*100).toFixed(1)}%;background:#e07a6a"></i><i style="width:${(a.punishment_split.executed_p*100).toFixed(1)}%;background:#b58e5f"></i></div>
   <div class="leg"><span><i style="background:#e07a6a"></i>${esc(t("prof_ann"))} ${(a.punishment_split.announced_p*100).toFixed(0)}%</span><span><i style="background:#b58e5f"></i>${esc(t("prof_exec"))} ${(a.punishment_split.executed_p*100).toFixed(0)}%</span></div>
-  <div class="note">${t("prof_pun_note")}</div></div>`;
+  <div class="note">${t("prof_pun_note")}</div></div>
+  <h2>${t("prof_ctx_h")}</h2>
+  <div class="note">${t("prof_ctx_note")}</div>
+  ${margHTML}
+  ${condHTML ? `<h3>${t("prof_ctx_cond")}</h3>` + condHTML : ""}
+  ${calHTML}
+  ${toneHTML}`;
 }
 function md2html(md, toc){
   const lines = md.split("\n"); const out = []; let inList = false;

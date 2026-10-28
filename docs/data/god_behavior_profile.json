@@ -1,6 +1,6 @@
 {
  "metadata": {
-  "version": "behavioral-v1 (episodes v2)",
+  "version": "behavioral-v2 (episodes v2, условные таблицы + сглаживание)",
   "episodes": 2050,
   "books": [
    "Amos",
@@ -43,7 +43,14 @@
    "Zephaniah",
    "genesis"
   ],
-  "note": "P(outcome|trigger) — предсказание реакции Бога; вероятности по наблюдениям реестра v2"
+  "alpha": 5.0,
+  "reliable_n": 20,
+  "note": "P(outcome|trigger) — предсказание реакции Бога; вероятности по наблюдениям реестра v2. outcome_p — сырые доли, outcome_p_smooth — сглаживание Дирихле (alpha=5.0) к базовой частоте исходов. Условные таблицы by_trigger_era/genre/addressee — P(outcome|класс,контекст) со сжатием к классу при малом n.",
+  "context_legend": {
+   "era": "эпоха корпуса (Тора / Невиим ранние / Невиим поздние / Кетувим)",
+   "genre": "жанр книги (закон / повествование / пророчество / поэзия / мудрость)",
+   "addressee": "кому обращено (нация / индивид / иноплеменник / коллектив)"
+  }
  },
  "overall": {
   "outcome": {
@@ -58,6 +65,19 @@
    "rescue": 0.06,
    "delayed": 0.022,
    "refusal": 0.011
+  },
+  "outcome_smooth": {
+   "answer_granted": 0.0702,
+   "blessing": 0.0917,
+   "compliance": 0.0673,
+   "covenant": 0.0717,
+   "delayed": 0.022,
+   "punishment": 0.241,
+   "refusal": 0.0107,
+   "rescue": 0.0605,
+   "revelation": 0.178,
+   "silence": 0.0673,
+   "unclear": 0.1195
   },
   "direction": {
    "god_initiated": 0.553,
@@ -98,6 +118,19 @@
     "compliance": 0.017,
     "delayed": 0.009
    },
+   "outcome_p_smooth": {
+    "silence": 0.3445,
+    "revelation": 0.1741,
+    "unclear": 0.1716,
+    "punishment": 0.1184,
+    "answer_granted": 0.1113,
+    "blessing": 0.0288,
+    "compliance": 0.0195,
+    "rescue": 0.0192,
+    "delayed": 0.0092,
+    "covenant": 0.003,
+    "refusal": 0.0004
+   },
    "severity_mean": 3.23,
    "top_emotions": [
     "тревога и враждебность жреца",
@@ -106,7 +139,8 @@
     "ропот, приписывающий Богу ненависть",
     "неверие"
    ],
-   "typical_quote": "אם יראה איש באנשים האלה הדור הרע הזה את הארץ הטובה אשר נשבעתי לתת לאבתיכם זולתי "
+   "typical_quote": "אם יראה איש באנשים האלה הדור הרע הזה את הארץ הטובה אשר נשבעתי לתת לאבתיכם זולתי ",
+   "reliable": true
   },
   "covenant_follow_up": {
    "n": 271,
@@ -122,6 +156,19 @@
     "unclear": 0.007,
     "silence": 0.004
    },
+   "outcome_p_smooth": {
+    "covenant": 0.4361,
+    "revelation": 0.1808,
+    "blessing": 0.1502,
+    "compliance": 0.1208,
+    "rescue": 0.0446,
+    "punishment": 0.0297,
+    "answer_granted": 0.0121,
+    "refusal": 0.0111,
+    "unclear": 0.0094,
+    "silence": 0.0048,
+    "delayed": 0.0004
+   },
    "severity_mean": 2.53,
    "top_emotions": [
     "трепет",
@@ -130,7 +177,8 @@
     "страх Божий",
     "любовь к Богу"
    ],
-   "typical_quote": "רב לכם שבת בהר הזה פנו וסעו לכם ובאו הר האמרי ואל כל שכניו בערבה בהר ובשפלה ובנג"
+   "typical_quote": "רב לכם שבת בהר הזה פנו וסעו לכם ובאו הר האמרי ואל כל שכניו בערבה בהר ובשפלה ובנג",
+   "reliable": true
   },
   "disobedience": {
    "n": 350,
@@ -146,6 +194,19 @@
     "delayed": 0.006,
     "rescue": 0.003
    },
+   "outcome_p_smooth": {
+    "punishment": 0.7949,
+    "revelation": 0.0786,
+    "unclear": 0.0411,
+    "compliance": 0.0263,
+    "refusal": 0.0171,
+    "answer_granted": 0.0123,
+    "blessing": 0.0097,
+    "silence": 0.0094,
+    "delayed": 0.0059,
+    "rescue": 0.0037,
+    "covenant": 0.001
+   },
    "severity_mean": 4.2,
    "top_emotions": [
     "гнев за отвержение Торы",
@@ -154,7 +215,8 @@
     "горькое напоминание о благодеяниях",
     "отчаяние бегства в судный день"
    ],
-   "typical_quote": "כה אמר יהוה על שלשה פשעי יהודה ועל ארבעה לא אשיבנו על מאסם את תורת יהוה וחקיו לא"
+   "typical_quote": "כה אמר יהוה על שלשה פשעי יהודה ועל ארבעה לא אשיבנו על מאסם את תורת יהוה וחקיו לא",
+   "reliable": true
   },
   "distress": {
    "n": 188,
@@ -170,6 +232,19 @@
     "refusal": 0.011,
     "punishment": 0.011
    },
+   "outcome_p_smooth": {
+    "silence": 0.2401,
+    "rescue": 0.1881,
+    "answer_granted": 0.1573,
+    "unclear": 0.1482,
+    "delayed": 0.0887,
+    "blessing": 0.0594,
+    "revelation": 0.0564,
+    "compliance": 0.0328,
+    "punishment": 0.0166,
+    "refusal": 0.0106,
+    "covenant": 0.0019
+   },
    "severity_mean": 2.99,
    "top_emotions": [
     "ужас спутников",
@@ -178,7 +253,8 @@
     "самонадеянное непослушание",
     "плач и скорбь"
    ],
-   "typical_quote": "לא תעלו ולא תלחמו כי אינני בקרבכם ולא תנגפו לפני איביכם"
+   "typical_quote": "לא תעלו ולא תלחמו כי אינני בקרבכם ולא תנגפו לפני איביכם",
+   "reliable": true
   },
   "divine_test": {
    "n": 11,
@@ -190,6 +266,19 @@
     "punishment": 0.091,
     "revelation": 0.091
    },
+   "outcome_p_smooth": {
+    "compliance": 0.2085,
+    "unclear": 0.1623,
+    "blessing": 0.1537,
+    "answer_granted": 0.147,
+    "punishment": 0.1378,
+    "revelation": 0.1181,
+    "covenant": 0.0224,
+    "silence": 0.021,
+    "rescue": 0.0189,
+    "delayed": 0.0069,
+    "refusal": 0.0034
+   },
    "severity_mean": 3.09,
    "top_emotions": [
     "испытующая строгость",
@@ -198,7 +287,8 @@
     "таинственность",
     "признание победы Иакова"
    ],
-   "typical_quote": "אברהם | קח נא את בנך את יחידך אשר אהבת את יצחק | אברהם אברהם | אל תשלח ידך אל הנ"
+   "typical_quote": "אברהם | קח נא את בנך את יחידך אשר אהבת את יצחק | אברהם אברהם | אל תשלח ידך אל הנ",
+   "reliable": false
   },
   "faithfulness": {
    "n": 118,
@@ -214,6 +304,19 @@
     "delayed": 0.017,
     "punishment": 0.017
    },
+   "outcome_p_smooth": {
+    "blessing": 0.2883,
+    "compliance": 0.2385,
+    "unclear": 0.1268,
+    "rescue": 0.0919,
+    "covenant": 0.0598,
+    "silence": 0.0596,
+    "answer_granted": 0.0516,
+    "revelation": 0.0398,
+    "punishment": 0.0261,
+    "delayed": 0.0172,
+    "refusal": 0.0004
+   },
    "severity_mean": 1.86,
    "top_emotions": [
     "решимость сохранить чистоту",
@@ -222,7 +325,8 @@
     "непреклонность юношей",
     "благословение Бога царём"
    ],
-   "typical_quote": "בא אתה וכל ביתך אל התבה כי אתך ראיתי צדיק לפני בדור הזה"
+   "typical_quote": "בא אתה וכל ביתך אל התבה כי אתך ראיתי צדיק לפני בדור הזה",
+   "reliable": true
   },
   "gratitude": {
    "n": 87,
@@ -237,6 +341,19 @@
     "revelation": 0.011,
     "covenant": 0.011
    },
+   "outcome_p_smooth": {
+    "unclear": 0.4413,
+    "blessing": 0.1789,
+    "silence": 0.1558,
+    "answer_granted": 0.069,
+    "compliance": 0.0471,
+    "rescue": 0.0468,
+    "revelation": 0.0205,
+    "covenant": 0.0148,
+    "punishment": 0.0131,
+    "refusal": 0.0115,
+    "delayed": 0.0012
+   },
    "severity_mean": 1.6,
    "top_emotions": [
     "радость от дарованного добра",
@@ -245,7 +362,8 @@
     "щедрость по силам — «ככחם נתנו לאוצר המלאכה» (2:69)",
     "ликование — «הריעו תרועה גדולה... בשמחה» (3:12-13)"
    ],
-   "typical_quote": "למה חרה לך ולמה נפלו פניך"
+   "typical_quote": "למה חרה לך ולמה נפלו פניך",
+   "reliable": true
   },
   "inquiry": {
    "n": 101,
@@ -261,6 +379,19 @@
     "silence": 0.02,
     "rescue": 0.01
    },
+   "outcome_p_smooth": {
+    "answer_granted": 0.2958,
+    "unclear": 0.2509,
+    "revelation": 0.131,
+    "punishment": 0.0868,
+    "delayed": 0.0671,
+    "blessing": 0.0609,
+    "compliance": 0.0409,
+    "refusal": 0.0288,
+    "silence": 0.022,
+    "rescue": 0.0123,
+    "covenant": 0.0034
+   },
    "severity_mean": 2.52,
    "top_emotions": [
     "изумление и поклонение царя",
@@ -269,7 +400,8 @@
     "страх царя",
     "тревога Даниила"
    ],
-   "typical_quote": "ברם איתי אלה בשמיא גלא רזין והודע למלכא נבוכדנצר מה די להוא באחרית יומיא"
+   "typical_quote": "ברם איתי אלה בשמיא גלא רזין והודע למלכא נבוכדנצר מה די להוא באחרית יומיא",
+   "reliable": true
   },
   "intercession": {
    "n": 46,
@@ -286,6 +418,19 @@
     "compliance": 0.022,
     "unclear": 0.022
    },
+   "outcome_p_smooth": {
+    "answer_granted": 0.4383,
+    "rescue": 0.104,
+    "silence": 0.085,
+    "refusal": 0.0795,
+    "revelation": 0.0763,
+    "delayed": 0.061,
+    "punishment": 0.0432,
+    "unclear": 0.0313,
+    "blessing": 0.0286,
+    "covenant": 0.0266,
+    "compliance": 0.0262
+   },
    "severity_mean": 2.98,
    "top_emotions": [
     "сострадание к малому Иакову",
@@ -294,7 +439,8 @@
     "милость и раскаяние Бога",
     "слава и благодарность"
    ],
-   "typical_quote": "נחם יהוה על זאת לא תהיה אמר יהוה"
+   "typical_quote": "נחם יהוה על זאת לא תהיה אמר יהוה",
+   "reliable": true
   },
   "prayer": {
    "n": 55,
@@ -309,6 +455,19 @@
     "covenant": 0.018,
     "punishment": 0.018
    },
+   "outcome_p_smooth": {
+    "answer_granted": 0.2892,
+    "silence": 0.2723,
+    "revelation": 0.0982,
+    "rescue": 0.0884,
+    "unclear": 0.0766,
+    "blessing": 0.0576,
+    "delayed": 0.0518,
+    "punishment": 0.0367,
+    "covenant": 0.0226,
+    "compliance": 0.0056,
+    "refusal": 0.0009
+   },
    "severity_mean": 2.25,
    "top_emotions": [
     "умиление (Даниил вмилости у Бога)",
@@ -317,7 +476,8 @@
     "благосклонность",
     "верность (хесед)"
    ],
-   "typical_quote": "דניאל עתה יצאתי להשכילך בינה בתחלת תחנוניך יצא דבר ואני באתי להגיד כי חמודות אתה"
+   "typical_quote": "דניאל עתה יצאתי להשכילך בינה בתחלת תחנוניך יצא דבר ואני באתי להגיד כי חמודות אתה",
+   "reliable": true
   },
   "unprompted": {
    "n": 691,
@@ -334,6 +494,19 @@
     "refusal": 0.004,
     "silence": 0.003
    },
+   "outcome_p_smooth": {
+    "revelation": 0.3346,
+    "punishment": 0.2575,
+    "unclear": 0.1259,
+    "blessing": 0.0969,
+    "compliance": 0.0666,
+    "rescue": 0.0665,
+    "covenant": 0.0249,
+    "delayed": 0.0102,
+    "answer_granted": 0.0091,
+    "refusal": 0.0044,
+    "silence": 0.0034
+   },
    "severity_mean": 2.73,
    "top_emotions": [
     "грозное предостережение",
@@ -342,7 +515,8 @@
     "непреклонность суда",
     "гнев за депортацию целых народов"
    ],
-   "typical_quote": "ויאמר יהוה מציון ישאג ומירושלם יתן קולו ואבלו נאות הרעים ויבש ראש הכרמל"
+   "typical_quote": "ויאמר יהוה מציון ישאג ומירושלם יתן קולו ואבלו נאות הרעים ויבש ראש הכרמל",
+   "reliable": true
   },
   "vow": {
    "n": 17,
@@ -354,6 +528,19 @@
     "compliance": 0.059,
     "rescue": 0.059
    },
+   "outcome_p_smooth": {
+    "unclear": 0.2999,
+    "answer_granted": 0.1978,
+    "delayed": 0.1414,
+    "silence": 0.1062,
+    "compliance": 0.0608,
+    "rescue": 0.0592,
+    "punishment": 0.0548,
+    "revelation": 0.0405,
+    "blessing": 0.0208,
+    "covenant": 0.0163,
+    "refusal": 0.0024
+   },
    "severity_mean": 2.41,
    "top_emotions": [
     "страх Божий",
@@ -362,7 +549,8 @@
     "клятвенная твёрдость в чистоте",
     "страх Божий как мотив праведности"
    ],
-   "typical_quote": "אל תבהל על פיך ולבך אל ימהר להוציא דבר לפני האלהים כי האלהים בשמים ואתה על הארץ "
+   "typical_quote": "אל תבהל על פיך ולבך אל ימהר להוציא דבר לפני האלהים כי האלהים בשמים ואתה על הארץ ",
+   "reliable": false
   }
  },
  "by_trigger_direction": {
@@ -424,6 +612,3910 @@
    "god_initiated": 5,
    "divine_action": 4,
    "human_initiated": 2
+  }
+ },
+ "by_trigger_era": {
+  "complaint": {
+   "Кетувим": {
+    "n": 55,
+    "outcome_p": {
+     "silence": 0.618,
+     "unclear": 0.273,
+     "revelation": 0.073,
+     "compliance": 0.036
+    },
+    "outcome_p_smooth": {
+     "silence": 0.5964,
+     "unclear": 0.2645,
+     "revelation": 0.0812,
+     "compliance": 0.0348,
+     "answer_granted": 0.0094,
+     "punishment": 0.0094,
+     "blessing": 0.0022,
+     "rescue": 0.0014,
+     "delayed": 0.0007
+    },
+    "severity_mean": 3.27,
+    "reliable": true
+   },
+   "Невиим (поздние)": {
+    "n": 32,
+    "outcome_p": {
+     "revelation": 0.375,
+     "answer_granted": 0.25,
+     "silence": 0.188,
+     "unclear": 0.062,
+     "punishment": 0.031,
+     "rescue": 0.031,
+     "delayed": 0.031,
+     "blessing": 0.031
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.3478,
+     "answer_granted": 0.2315,
+     "silence": 0.2103,
+     "unclear": 0.0776,
+     "punishment": 0.0423,
+     "blessing": 0.0306,
+     "rescue": 0.0294,
+     "delayed": 0.0282,
+     "compliance": 0.0024
+    },
+    "severity_mean": 2.94,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 19,
+    "outcome_p": {
+     "punishment": 0.526,
+     "answer_granted": 0.263,
+     "revelation": 0.105,
+     "blessing": 0.053,
+     "silence": 0.053
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.4402,
+     "answer_granted": 0.2319,
+     "revelation": 0.1196,
+     "silence": 0.1159,
+     "blessing": 0.0471,
+     "unclear": 0.0362,
+     "compliance": 0.0036,
+     "rescue": 0.0036,
+     "delayed": 0.0018
+    },
+    "severity_mean": 3.74,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 9,
+    "outcome_p": {
+     "unclear": 0.333,
+     "punishment": 0.222,
+     "revelation": 0.222,
+     "blessing": 0.111,
+     "rescue": 0.111
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.2764,
+     "revelation": 0.205,
+     "punishment": 0.1832,
+     "silence": 0.1273,
+     "blessing": 0.0807,
+     "rescue": 0.0776,
+     "answer_granted": 0.0404,
+     "compliance": 0.0062,
+     "delayed": 0.0031
+    },
+    "severity_mean": 2.89,
+    "reliable": false
+   }
+  },
+  "covenant_follow_up": {
+   "Тора": {
+    "n": 183,
+    "outcome_p": {
+     "covenant": 0.536,
+     "revelation": 0.186,
+     "blessing": 0.109,
+     "compliance": 0.104,
+     "rescue": 0.022,
+     "punishment": 0.016,
+     "refusal": 0.011,
+     "unclear": 0.011,
+     "silence": 0.005
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.5331,
+     "revelation": 0.1857,
+     "blessing": 0.1104,
+     "compliance": 0.1043,
+     "rescue": 0.0225,
+     "punishment": 0.0166,
+     "refusal": 0.0109,
+     "unclear": 0.0108,
+     "silence": 0.0054,
+     "answer_granted": 0.0003
+    },
+    "severity_mean": 2.59,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 40,
+    "outcome_p": {
+     "covenant": 0.325,
+     "compliance": 0.225,
+     "revelation": 0.2,
+     "blessing": 0.075,
+     "answer_granted": 0.05,
+     "rescue": 0.05,
+     "punishment": 0.05,
+     "refusal": 0.025
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.3381,
+     "compliance": 0.2135,
+     "revelation": 0.1979,
+     "blessing": 0.0835,
+     "rescue": 0.0494,
+     "punishment": 0.0473,
+     "answer_granted": 0.0457,
+     "refusal": 0.0235,
+     "unclear": 0.0008,
+     "silence": 0.0004
+    },
+    "severity_mean": 2.67,
+    "reliable": true
+   },
+   "Невиим (поздние)": {
+    "n": 34,
+    "outcome_p": {
+     "blessing": 0.471,
+     "revelation": 0.176,
+     "rescue": 0.147,
+     "covenant": 0.118,
+     "punishment": 0.059,
+     "answer_granted": 0.029
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.4297,
+     "revelation": 0.177,
+     "covenant": 0.1593,
+     "rescue": 0.1339,
+     "punishment": 0.0546,
+     "answer_granted": 0.0271,
+     "compliance": 0.0156,
+     "refusal": 0.0014,
+     "unclear": 0.0009,
+     "silence": 0.0005
+    },
+    "severity_mean": 2.18,
+    "reliable": true
+   },
+   "Кетувим": {
+    "n": 14,
+    "outcome_p": {
+     "compliance": 0.357,
+     "covenant": 0.357,
+     "blessing": 0.143,
+     "revelation": 0.071,
+     "rescue": 0.071
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.3797,
+     "compliance": 0.2952,
+     "blessing": 0.1451,
+     "revelation": 0.1002,
+     "rescue": 0.0643,
+     "punishment": 0.0068,
+     "answer_granted": 0.0029,
+     "refusal": 0.0029,
+     "unclear": 0.0019,
+     "silence": 0.001
+    },
+    "severity_mean": 2.21,
+    "reliable": false
+   }
+  },
+  "disobedience": {
+   "Невиим (поздние)": {
+    "n": 202,
+    "outcome_p": {
+     "punishment": 0.822,
+     "revelation": 0.094,
+     "unclear": 0.025,
+     "refusal": 0.02,
+     "blessing": 0.015,
+     "silence": 0.01,
+     "answer_granted": 0.005,
+     "delayed": 0.005,
+     "rescue": 0.005
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.8213,
+     "revelation": 0.0937,
+     "unclear": 0.0251,
+     "refusal": 0.0197,
+     "blessing": 0.0147,
+     "silence": 0.0099,
+     "answer_granted": 0.0051,
+     "delayed": 0.005,
+     "rescue": 0.0049,
+     "compliance": 0.0006
+    },
+    "severity_mean": 4.22,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 65,
+    "outcome_p": {
+     "punishment": 0.877,
+     "unclear": 0.108,
+     "answer_granted": 0.015
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.8716,
+     "unclear": 0.1029,
+     "answer_granted": 0.0151,
+     "revelation": 0.0055,
+     "compliance": 0.0018,
+     "refusal": 0.0012,
+     "blessing": 0.0006,
+     "silence": 0.0006,
+     "delayed": 0.0004,
+     "rescue": 0.0002
+    },
+    "severity_mean": 4.34,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 44,
+    "outcome_p": {
+     "punishment": 0.727,
+     "revelation": 0.114,
+     "compliance": 0.091,
+     "refusal": 0.045,
+     "answer_granted": 0.023
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.735,
+     "revelation": 0.1099,
+     "compliance": 0.0843,
+     "refusal": 0.0426,
+     "answer_granted": 0.0216,
+     "unclear": 0.0041,
+     "blessing": 0.0009,
+     "silence": 0.0009,
+     "delayed": 0.0006,
+     "rescue": 0.0003
+    },
+    "severity_mean": 4.23,
+    "reliable": true
+   },
+   "Кетувим": {
+    "n": 39,
+    "outcome_p": {
+     "punishment": 0.667,
+     "compliance": 0.128,
+     "revelation": 0.077,
+     "unclear": 0.051,
+     "delayed": 0.026,
+     "answer_granted": 0.026,
+     "silence": 0.026
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.6821,
+     "compliance": 0.1166,
+     "revelation": 0.0769,
+     "unclear": 0.05,
+     "answer_granted": 0.024,
+     "silence": 0.0237,
+     "delayed": 0.0234,
+     "refusal": 0.0019,
+     "blessing": 0.001,
+     "rescue": 0.0003
+    },
+    "severity_mean": 3.87,
+    "reliable": true
+   }
+  },
+  "distress": {
+   "Кетувим": {
+    "n": 90,
+    "outcome_p": {
+     "silence": 0.433,
+     "unclear": 0.167,
+     "answer_granted": 0.156,
+     "rescue": 0.122,
+     "delayed": 0.056,
+     "compliance": 0.044,
+     "revelation": 0.022
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4234,
+     "unclear": 0.1657,
+     "answer_granted": 0.1558,
+     "rescue": 0.1259,
+     "delayed": 0.0574,
+     "compliance": 0.0438,
+     "revelation": 0.0239,
+     "blessing": 0.0031,
+     "punishment": 0.0006,
+     "refusal": 0.0006
+    },
+    "severity_mean": 3.08,
+    "reliable": true
+   },
+   "Невиим (поздние)": {
+    "n": 37,
+    "outcome_p": {
+     "delayed": 0.216,
+     "rescue": 0.189,
+     "blessing": 0.135,
+     "silence": 0.135,
+     "unclear": 0.108,
+     "revelation": 0.081,
+     "punishment": 0.054,
+     "answer_granted": 0.054,
+     "refusal": 0.027
+    },
+    "outcome_p_smooth": {
+     "delayed": 0.2012,
+     "rescue": 0.1895,
+     "silence": 0.1482,
+     "blessing": 0.126,
+     "unclear": 0.113,
+     "revelation": 0.0778,
+     "answer_granted": 0.0666,
+     "punishment": 0.0489,
+     "refusal": 0.0251,
+     "compliance": 0.0038
+    },
+    "severity_mean": 3.11,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 36,
+    "outcome_p": {
+     "rescue": 0.361,
+     "unclear": 0.25,
+     "answer_granted": 0.194,
+     "revelation": 0.111,
+     "delayed": 0.056,
+     "blessing": 0.028
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.3404,
+     "unclear": 0.2377,
+     "answer_granted": 0.1902,
+     "revelation": 0.104,
+     "delayed": 0.0598,
+     "blessing": 0.0315,
+     "silence": 0.0298,
+     "compliance": 0.0039,
+     "punishment": 0.0013,
+     "refusal": 0.0013
+    },
+    "severity_mean": 3.11,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 25,
+    "outcome_p": {
+     "answer_granted": 0.28,
+     "rescue": 0.2,
+     "blessing": 0.2,
+     "silence": 0.08,
+     "delayed": 0.08,
+     "compliance": 0.08,
+     "refusal": 0.04,
+     "revelation": 0.04
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.2599,
+     "rescue": 0.1986,
+     "blessing": 0.1764,
+     "silence": 0.1074,
+     "delayed": 0.0817,
+     "compliance": 0.072,
+     "revelation": 0.0422,
+     "refusal": 0.0351,
+     "unclear": 0.0248,
+     "punishment": 0.0018
+    },
+    "severity_mean": 2.32,
+    "reliable": true
+   }
+  },
+  "divine_test": {
+   "Кетувим": {
+    "n": 4,
+    "outcome_p": {
+     "compliance": 0.5,
+     "unclear": 0.25,
+     "answer_granted": 0.25
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.3737,
+     "answer_granted": 0.2121,
+     "unclear": 0.2121,
+     "blessing": 0.101,
+     "punishment": 0.0505,
+     "revelation": 0.0505
+    },
+    "severity_mean": 3.5,
+    "reliable": false
+   },
+   "Невиим (поздние)": {
+    "n": 3,
+    "outcome_p": {
+     "compliance": 0.333,
+     "unclear": 0.333,
+     "revelation": 0.333
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.2955,
+     "unclear": 0.2386,
+     "revelation": 0.1818,
+     "answer_granted": 0.1136,
+     "blessing": 0.1136,
+     "punishment": 0.0568
+    },
+    "severity_mean": 2.0,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 2,
+    "outcome_p": {
+     "punishment": 0.5,
+     "answer_granted": 0.5
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.2727,
+     "punishment": 0.2078,
+     "compliance": 0.1948,
+     "blessing": 0.1299,
+     "unclear": 0.1299,
+     "revelation": 0.0649
+    },
+    "severity_mean": 4.0,
+    "reliable": false
+   },
+   "Тора": {
+    "n": 2,
+    "outcome_p": {
+     "blessing": 1.0
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.4156,
+     "compliance": 0.1948,
+     "answer_granted": 0.1299,
+     "unclear": 0.1299,
+     "punishment": 0.0649,
+     "revelation": 0.0649
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   }
+  },
+  "faithfulness": {
+   "Кетувим": {
+    "n": 69,
+    "outcome_p": {
+     "blessing": 0.319,
+     "compliance": 0.261,
+     "unclear": 0.174,
+     "silence": 0.072,
+     "rescue": 0.058,
+     "revelation": 0.043,
+     "covenant": 0.043,
+     "answer_granted": 0.029
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.3173,
+     "compliance": 0.2598,
+     "unclear": 0.1708,
+     "silence": 0.0716,
+     "rescue": 0.0604,
+     "covenant": 0.0445,
+     "revelation": 0.0428,
+     "answer_granted": 0.0305,
+     "delayed": 0.0011,
+     "punishment": 0.0011
+    },
+    "severity_mean": 1.64,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 28,
+    "outcome_p": {
+     "blessing": 0.321,
+     "compliance": 0.214,
+     "rescue": 0.179,
+     "answer_granted": 0.107,
+     "covenant": 0.071,
+     "delayed": 0.036,
+     "punishment": 0.036,
+     "unclear": 0.036
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.3177,
+     "compliance": 0.2191,
+     "rescue": 0.1656,
+     "answer_granted": 0.0986,
+     "covenant": 0.0696,
+     "unclear": 0.0496,
+     "delayed": 0.0329,
+     "punishment": 0.0329,
+     "silence": 0.009,
+     "revelation": 0.0051
+    },
+    "severity_mean": 2.36,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 12,
+    "outcome_p": {
+     "compliance": 0.25,
+     "blessing": 0.167,
+     "covenant": 0.167,
+     "unclear": 0.167,
+     "revelation": 0.083,
+     "delayed": 0.083,
+     "rescue": 0.083
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.2488,
+     "blessing": 0.2049,
+     "unclear": 0.155,
+     "covenant": 0.1351,
+     "rescue": 0.0862,
+     "revelation": 0.0688,
+     "delayed": 0.0638,
+     "silence": 0.0174,
+     "answer_granted": 0.015,
+     "punishment": 0.005
+    },
+    "severity_mean": 1.75,
+    "reliable": false
+   },
+   "Невиим (поздние)": {
+    "n": 9,
+    "outcome_p": {
+     "compliance": 0.222,
+     "blessing": 0.222,
+     "silence": 0.222,
+     "answer_granted": 0.111,
+     "punishment": 0.111,
+     "rescue": 0.111
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.2488,
+     "compliance": 0.2306,
+     "silence": 0.164,
+     "rescue": 0.1047,
+     "answer_granted": 0.0896,
+     "punishment": 0.0775,
+     "unclear": 0.0454,
+     "covenant": 0.0212,
+     "revelation": 0.0121,
+     "delayed": 0.0061
+    },
+    "severity_mean": 2.22,
+    "reliable": false
+   }
+  },
+  "gratitude": {
+   "Кетувим": {
+    "n": 55,
+    "outcome_p": {
+     "unclear": 0.527,
+     "blessing": 0.145,
+     "silence": 0.109,
+     "compliance": 0.073,
+     "answer_granted": 0.073,
+     "rescue": 0.055,
+     "revelation": 0.018
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5216,
+     "blessing": 0.1487,
+     "silence": 0.1134,
+     "answer_granted": 0.0724,
+     "compliance": 0.0705,
+     "rescue": 0.0538,
+     "revelation": 0.0176,
+     "covenant": 0.001,
+     "refusal": 0.001
+    },
+    "severity_mean": 1.56,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 15,
+    "outcome_p": {
+     "silence": 0.533,
+     "blessing": 0.2,
+     "unclear": 0.133,
+     "refusal": 0.067,
+     "answer_granted": 0.067
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4402,
+     "unclear": 0.2149,
+     "blessing": 0.196,
+     "answer_granted": 0.0672,
+     "refusal": 0.0529,
+     "compliance": 0.0115,
+     "rescue": 0.0115,
+     "covenant": 0.0029,
+     "revelation": 0.0029
+    },
+    "severity_mean": 1.47,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 9,
+    "outcome_p": {
+     "blessing": 0.444,
+     "unclear": 0.444,
+     "rescue": 0.111
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4499,
+     "blessing": 0.3514,
+     "rescue": 0.0878,
+     "silence": 0.0575,
+     "answer_granted": 0.0246,
+     "compliance": 0.0164,
+     "covenant": 0.0041,
+     "refusal": 0.0041,
+     "revelation": 0.0041
+    },
+    "severity_mean": 2.33,
+    "reliable": false
+   },
+   "Невиим (поздние)": {
+    "n": 8,
+    "outcome_p": {
+     "unclear": 0.625,
+     "blessing": 0.125,
+     "answer_granted": 0.125,
+     "covenant": 0.125
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5615,
+     "blessing": 0.1477,
+     "answer_granted": 0.1034,
+     "covenant": 0.0813,
+     "silence": 0.0619,
+     "compliance": 0.0177,
+     "rescue": 0.0177,
+     "refusal": 0.0044,
+     "revelation": 0.0044
+    },
+    "severity_mean": 1.25,
+    "reliable": false
+   }
+  },
+  "inquiry": {
+   "Кетувим": {
+    "n": 41,
+    "outcome_p": {
+     "unclear": 0.561,
+     "answer_granted": 0.146,
+     "revelation": 0.122,
+     "delayed": 0.073,
+     "blessing": 0.049,
+     "punishment": 0.024,
+     "compliance": 0.024
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.528,
+     "answer_granted": 0.1638,
+     "revelation": 0.1227,
+     "delayed": 0.0728,
+     "blessing": 0.0499,
+     "punishment": 0.0303,
+     "compliance": 0.026,
+     "refusal": 0.0032,
+     "silence": 0.0022,
+     "rescue": 0.0011
+    },
+    "severity_mean": 2.12,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 24,
+    "outcome_p": {
+     "answer_granted": 0.375,
+     "revelation": 0.208,
+     "punishment": 0.125,
+     "unclear": 0.125,
+     "silence": 0.083,
+     "compliance": 0.042,
+     "delayed": 0.042
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3633,
+     "revelation": 0.1946,
+     "unclear": 0.1478,
+     "punishment": 0.1171,
+     "silence": 0.0724,
+     "delayed": 0.0464,
+     "compliance": 0.0413,
+     "blessing": 0.0102,
+     "refusal": 0.0051,
+     "rescue": 0.0017
+    },
+    "severity_mean": 3.12,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 20,
+    "outcome_p": {
+     "answer_granted": 0.35,
+     "blessing": 0.15,
+     "compliance": 0.1,
+     "delayed": 0.1,
+     "punishment": 0.1,
+     "refusal": 0.1,
+     "rescue": 0.05,
+     "revelation": 0.05
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3414,
+     "blessing": 0.1319,
+     "punishment": 0.0958,
+     "delayed": 0.0939,
+     "compliance": 0.0879,
+     "refusal": 0.0859,
+     "revelation": 0.0657,
+     "unclear": 0.0515,
+     "rescue": 0.042,
+     "silence": 0.004
+    },
+    "severity_mean": 2.35,
+    "reliable": true
+   },
+   "Невиим (поздние)": {
+    "n": 16,
+    "outcome_p": {
+     "answer_granted": 0.562,
+     "punishment": 0.125,
+     "revelation": 0.125,
+     "refusal": 0.062,
+     "delayed": 0.062,
+     "blessing": 0.062
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5017,
+     "revelation": 0.1259,
+     "punishment": 0.1141,
+     "delayed": 0.0641,
+     "blessing": 0.0618,
+     "unclear": 0.0613,
+     "refusal": 0.0547,
+     "compliance": 0.0094,
+     "silence": 0.0047,
+     "rescue": 0.0024
+    },
+    "severity_mean": 2.88,
+    "reliable": false
+   }
+  },
+  "intercession": {
+   "Кетувим": {
+    "n": 16,
+    "outcome_p": {
+     "answer_granted": 0.375,
+     "silence": 0.188,
+     "rescue": 0.125,
+     "delayed": 0.062,
+     "covenant": 0.062,
+     "blessing": 0.062,
+     "compliance": 0.062,
+     "unclear": 0.062
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3996,
+     "silence": 0.1636,
+     "rescue": 0.1211,
+     "delayed": 0.0631,
+     "blessing": 0.0528,
+     "compliance": 0.0528,
+     "covenant": 0.0528,
+     "unclear": 0.0528,
+     "refusal": 0.0207,
+     "revelation": 0.0155,
+     "punishment": 0.0052
+    },
+    "severity_mean": 2.56,
+    "reliable": false
+   },
+   "Невиим (поздние)": {
+    "n": 11,
+    "outcome_p": {
+     "answer_granted": 0.545,
+     "refusal": 0.273,
+     "revelation": 0.182
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5245,
+     "refusal": 0.2147,
+     "revelation": 0.1454,
+     "rescue": 0.034,
+     "silence": 0.0272,
+     "delayed": 0.0204,
+     "blessing": 0.0068,
+     "compliance": 0.0068,
+     "covenant": 0.0068,
+     "punishment": 0.0068,
+     "unclear": 0.0068
+    },
+    "severity_mean": 3.36,
+    "reliable": false
+   },
+   "Тора": {
+    "n": 11,
+    "outcome_p": {
+     "answer_granted": 0.727,
+     "refusal": 0.091,
+     "punishment": 0.091,
+     "silence": 0.091
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.6495,
+     "refusal": 0.0897,
+     "silence": 0.0897,
+     "punishment": 0.0693,
+     "rescue": 0.034,
+     "delayed": 0.0204,
+     "revelation": 0.0204,
+     "blessing": 0.0068,
+     "compliance": 0.0068,
+     "covenant": 0.0068,
+     "unclear": 0.0068
+    },
+    "severity_mean": 2.91,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 8,
+    "outcome_p": {
+     "rescue": 0.375,
+     "delayed": 0.25,
+     "answer_granted": 0.25,
+     "revelation": 0.125
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3378,
+     "rescue": 0.2726,
+     "delayed": 0.1789,
+     "revelation": 0.102,
+     "refusal": 0.0334,
+     "silence": 0.0334,
+     "blessing": 0.0084,
+     "compliance": 0.0084,
+     "covenant": 0.0084,
+     "punishment": 0.0084,
+     "unclear": 0.0084
+    },
+    "severity_mean": 3.38,
+    "reliable": false
+   }
+  },
+  "prayer": {
+   "Кетувим": {
+    "n": 34,
+    "outcome_p": {
+     "silence": 0.382,
+     "revelation": 0.118,
+     "unclear": 0.118,
+     "answer_granted": 0.088,
+     "rescue": 0.088,
+     "blessing": 0.088,
+     "delayed": 0.088,
+     "covenant": 0.029
+    },
+    "outcome_p_smooth": {
+     "silence": 0.3706,
+     "answer_granted": 0.1166,
+     "revelation": 0.1142,
+     "unclear": 0.1119,
+     "rescue": 0.0886,
+     "blessing": 0.0839,
+     "delayed": 0.0839,
+     "covenant": 0.028,
+     "punishment": 0.0023
+    },
+    "severity_mean": 2.21,
+    "reliable": true
+   },
+   "Невиим (поздние)": {
+    "n": 9,
+    "outcome_p": {
+     "answer_granted": 0.444,
+     "silence": 0.222,
+     "rescue": 0.111,
+     "punishment": 0.111,
+     "revelation": 0.111
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3961,
+     "silence": 0.2468,
+     "rescue": 0.1039,
+     "revelation": 0.1039,
+     "punishment": 0.0779,
+     "unclear": 0.026,
+     "blessing": 0.0195,
+     "delayed": 0.0195,
+     "covenant": 0.0065
+    },
+    "severity_mean": 2.67,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 7,
+    "outcome_p": {
+     "answer_granted": 0.857,
+     "rescue": 0.143
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.6288,
+     "rescue": 0.1212,
+     "silence": 0.1212,
+     "revelation": 0.0379,
+     "unclear": 0.0303,
+     "blessing": 0.0227,
+     "delayed": 0.0227,
+     "covenant": 0.0076,
+     "punishment": 0.0076
+    },
+    "severity_mean": 2.86,
+    "reliable": false
+   },
+   "Тора": {
+    "n": 5,
+    "outcome_p": {
+     "answer_granted": 0.8,
+     "silence": 0.2
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5545,
+     "silence": 0.2455,
+     "rescue": 0.0455,
+     "revelation": 0.0455,
+     "unclear": 0.0364,
+     "blessing": 0.0273,
+     "delayed": 0.0273,
+     "covenant": 0.0091,
+     "punishment": 0.0091
+    },
+    "severity_mean": 1.0,
+    "reliable": false
+   }
+  },
+  "unprompted": {
+   "Невиим (поздние)": {
+    "n": 431,
+    "outcome_p": {
+     "punishment": 0.383,
+     "revelation": 0.357,
+     "blessing": 0.1,
+     "rescue": 0.067,
+     "compliance": 0.035,
+     "covenant": 0.023,
+     "unclear": 0.014,
+     "delayed": 0.012,
+     "refusal": 0.007,
+     "answer_granted": 0.002
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.3814,
+     "revelation": 0.3571,
+     "blessing": 0.0997,
+     "rescue": 0.0673,
+     "compliance": 0.0352,
+     "covenant": 0.0232,
+     "unclear": 0.0152,
+     "delayed": 0.0116,
+     "refusal": 0.0069,
+     "answer_granted": 0.0024,
+     "silence": 0.0
+    },
+    "severity_mean": 3.08,
+    "reliable": true
+   },
+   "Кетувим": {
+    "n": 110,
+    "outcome_p": {
+     "unclear": 0.664,
+     "revelation": 0.145,
+     "blessing": 0.064,
+     "compliance": 0.036,
+     "delayed": 0.018,
+     "rescue": 0.018,
+     "covenant": 0.018,
+     "answer_granted": 0.018,
+     "punishment": 0.018
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.6403,
+     "revelation": 0.1537,
+     "blessing": 0.0651,
+     "compliance": 0.0377,
+     "punishment": 0.0286,
+     "rescue": 0.0203,
+     "covenant": 0.0185,
+     "delayed": 0.0178,
+     "answer_granted": 0.0178,
+     "refusal": 0.0002,
+     "silence": 0.0001
+    },
+    "severity_mean": 1.99,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 100,
+    "outcome_p": {
+     "revelation": 0.56,
+     "compliance": 0.23,
+     "blessing": 0.12,
+     "silence": 0.02,
+     "unclear": 0.02,
+     "rescue": 0.02,
+     "covenant": 0.01,
+     "answer_granted": 0.01,
+     "punishment": 0.01
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.5493,
+     "compliance": 0.2222,
+     "blessing": 0.1189,
+     "unclear": 0.025,
+     "rescue": 0.0222,
+     "punishment": 0.0218,
+     "silence": 0.0192,
+     "covenant": 0.0107,
+     "answer_granted": 0.0099,
+     "delayed": 0.0005,
+     "refusal": 0.0002
+    },
+    "severity_mean": 1.88,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 50,
+    "outcome_p": {
+     "rescue": 0.26,
+     "punishment": 0.2,
+     "revelation": 0.12,
+     "unclear": 0.12,
+     "blessing": 0.1,
+     "covenant": 0.08,
+     "compliance": 0.08,
+     "answer_granted": 0.04
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.2424,
+     "punishment": 0.2052,
+     "revelation": 0.1396,
+     "unclear": 0.1205,
+     "blessing": 0.0997,
+     "compliance": 0.0788,
+     "covenant": 0.075,
+     "answer_granted": 0.0372,
+     "delayed": 0.0009,
+     "refusal": 0.0004,
+     "silence": 0.0003
+    },
+    "severity_mean": 2.98,
+    "reliable": true
+   }
+  },
+  "vow": {
+   "Кетувим": {
+    "n": 9,
+    "outcome_p": {
+     "unclear": 0.556,
+     "delayed": 0.222,
+     "answer_granted": 0.222
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4832,
+     "answer_granted": 0.2269,
+     "delayed": 0.2059,
+     "silence": 0.042,
+     "compliance": 0.021,
+     "rescue": 0.021
+    },
+    "severity_mean": 2.11,
+    "reliable": false
+   },
+   "Невиим (ранние)": {
+    "n": 4,
+    "outcome_p": {
+     "answer_granted": 0.25,
+     "compliance": 0.25,
+     "rescue": 0.25,
+     "unclear": 0.25
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3072,
+     "answer_granted": 0.2418,
+     "compliance": 0.1438,
+     "rescue": 0.1438,
+     "delayed": 0.098,
+     "silence": 0.0654
+    },
+    "severity_mean": 3.5,
+    "reliable": false
+   },
+   "Тора": {
+    "n": 4,
+    "outcome_p": {
+     "silence": 0.5,
+     "delayed": 0.25,
+     "answer_granted": 0.25
+    },
+    "outcome_p_smooth": {
+     "silence": 0.2876,
+     "answer_granted": 0.2418,
+     "delayed": 0.2092,
+     "unclear": 0.1961,
+     "compliance": 0.0327,
+     "rescue": 0.0327
+    },
+    "severity_mean": 2.0,
+    "reliable": false
+   }
+  }
+ },
+ "by_trigger_genre": {
+  "complaint": {
+   "wisdom": {
+    "n": 36,
+    "outcome_p": {
+     "silence": 0.556,
+     "unclear": 0.306,
+     "revelation": 0.111,
+     "compliance": 0.028
+    },
+    "outcome_p_smooth": {
+     "silence": 0.5313,
+     "unclear": 0.2895,
+     "revelation": 0.1188,
+     "compliance": 0.0265,
+     "answer_granted": 0.0138,
+     "punishment": 0.0138,
+     "blessing": 0.0032,
+     "rescue": 0.0021,
+     "delayed": 0.0011
+    },
+    "severity_mean": 3.22,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 32,
+    "outcome_p": {
+     "revelation": 0.375,
+     "answer_granted": 0.25,
+     "silence": 0.188,
+     "unclear": 0.062,
+     "punishment": 0.031,
+     "rescue": 0.031,
+     "delayed": 0.031,
+     "blessing": 0.031
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.3478,
+     "answer_granted": 0.2315,
+     "silence": 0.2103,
+     "unclear": 0.0776,
+     "punishment": 0.0423,
+     "blessing": 0.0306,
+     "rescue": 0.0294,
+     "delayed": 0.0282,
+     "compliance": 0.0024
+    },
+    "severity_mean": 2.94,
+    "reliable": true
+   },
+   "law": {
+    "n": 17,
+    "outcome_p": {
+     "punishment": 0.588,
+     "answer_granted": 0.235,
+     "revelation": 0.118,
+     "blessing": 0.059
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.4802,
+     "answer_granted": 0.2075,
+     "revelation": 0.1304,
+     "silence": 0.081,
+     "blessing": 0.0514,
+     "unclear": 0.0395,
+     "compliance": 0.004,
+     "rescue": 0.004,
+     "delayed": 0.002
+    },
+    "severity_mean": 4.06,
+    "reliable": false
+   },
+   "narrative": {
+    "n": 16,
+    "outcome_p": {
+     "silence": 0.25,
+     "unclear": 0.25,
+     "punishment": 0.125,
+     "revelation": 0.125,
+     "answer_granted": 0.062,
+     "blessing": 0.062,
+     "rescue": 0.062,
+     "compliance": 0.062
+    },
+    "outcome_p_smooth": {
+     "silence": 0.2754,
+     "unclear": 0.2319,
+     "revelation": 0.1366,
+     "punishment": 0.1222,
+     "answer_granted": 0.0745,
+     "blessing": 0.0538,
+     "compliance": 0.0518,
+     "rescue": 0.0518,
+     "delayed": 0.0021
+    },
+    "severity_mean": 2.69,
+    "reliable": false
+   },
+   "poetry": {
+    "n": 14,
+    "outcome_p": {
+     "silence": 0.786,
+     "unclear": 0.214
+    },
+    "outcome_p_smooth": {
+     "silence": 0.6728,
+     "unclear": 0.2037,
+     "revelation": 0.0458,
+     "answer_granted": 0.0297,
+     "punishment": 0.0297,
+     "blessing": 0.0069,
+     "compliance": 0.0046,
+     "rescue": 0.0046,
+     "delayed": 0.0023
+    },
+    "severity_mean": 3.5,
+    "reliable": false
+   }
+  },
+  "covenant_follow_up": {
+   "law": {
+    "n": 166,
+    "outcome_p": {
+     "covenant": 0.572,
+     "revelation": 0.205,
+     "compliance": 0.084,
+     "blessing": 0.072,
+     "rescue": 0.018,
+     "punishment": 0.018,
+     "refusal": 0.012,
+     "unclear": 0.012,
+     "silence": 0.006
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.5685,
+     "revelation": 0.2041,
+     "compliance": 0.0854,
+     "blessing": 0.0746,
+     "rescue": 0.0188,
+     "punishment": 0.0183,
+     "refusal": 0.012,
+     "unclear": 0.0119,
+     "silence": 0.006,
+     "answer_granted": 0.0003
+    },
+    "severity_mean": 2.71,
+    "reliable": true
+   },
+   "narrative": {
+    "n": 68,
+    "outcome_p": {
+     "compliance": 0.279,
+     "covenant": 0.265,
+     "blessing": 0.191,
+     "revelation": 0.132,
+     "rescue": 0.059,
+     "answer_granted": 0.029,
+     "punishment": 0.029,
+     "refusal": 0.015
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.2769,
+     "compliance": 0.2686,
+     "blessing": 0.1884,
+     "revelation": 0.1357,
+     "rescue": 0.0578,
+     "punishment": 0.0292,
+     "answer_granted": 0.0282,
+     "refusal": 0.0145,
+     "unclear": 0.0005,
+     "silence": 0.0003
+    },
+    "severity_mean": 2.28,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 34,
+    "outcome_p": {
+     "blessing": 0.471,
+     "revelation": 0.176,
+     "rescue": 0.147,
+     "covenant": 0.118,
+     "punishment": 0.059,
+     "answer_granted": 0.029
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.4297,
+     "revelation": 0.177,
+     "covenant": 0.1593,
+     "rescue": 0.1339,
+     "punishment": 0.0546,
+     "answer_granted": 0.0271,
+     "compliance": 0.0156,
+     "refusal": 0.0014,
+     "unclear": 0.0009,
+     "silence": 0.0005
+    },
+    "severity_mean": 2.18,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 3,
+    "outcome_p": {
+     "covenant": 1.0
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.6518,
+     "revelation": 0.113,
+     "blessing": 0.0946,
+     "compliance": 0.0761,
+     "rescue": 0.0277,
+     "punishment": 0.0161,
+     "answer_granted": 0.0069,
+     "refusal": 0.0069,
+     "unclear": 0.0046,
+     "silence": 0.0023
+    },
+    "severity_mean": 2.33,
+    "reliable": false
+   }
+  },
+  "disobedience": {
+   "prophecy": {
+    "n": 202,
+    "outcome_p": {
+     "punishment": 0.822,
+     "revelation": 0.094,
+     "unclear": 0.025,
+     "refusal": 0.02,
+     "blessing": 0.015,
+     "silence": 0.01,
+     "answer_granted": 0.005,
+     "delayed": 0.005,
+     "rescue": 0.005
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.8213,
+     "revelation": 0.0937,
+     "unclear": 0.0251,
+     "refusal": 0.0197,
+     "blessing": 0.0147,
+     "silence": 0.0099,
+     "answer_granted": 0.0051,
+     "delayed": 0.005,
+     "rescue": 0.0049,
+     "compliance": 0.0006
+    },
+    "severity_mean": 4.22,
+    "reliable": true
+   },
+   "narrative": {
+    "n": 109,
+    "outcome_p": {
+     "punishment": 0.826,
+     "unclear": 0.083,
+     "compliance": 0.055,
+     "revelation": 0.018,
+     "delayed": 0.009,
+     "answer_granted": 0.009
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.8247,
+     "unclear": 0.0807,
+     "compliance": 0.0538,
+     "revelation": 0.0209,
+     "answer_granted": 0.0093,
+     "delayed": 0.009,
+     "refusal": 0.0008,
+     "blessing": 0.0004,
+     "silence": 0.0004,
+     "rescue": 0.0001
+    },
+    "severity_mean": 4.2,
+    "reliable": true
+   },
+   "law": {
+    "n": 32,
+    "outcome_p": {
+     "punishment": 0.688,
+     "revelation": 0.156,
+     "compliance": 0.062,
+     "refusal": 0.062,
+     "answer_granted": 0.031
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.7031,
+     "revelation": 0.1456,
+     "compliance": 0.0575,
+     "refusal": 0.0564,
+     "answer_granted": 0.0286,
+     "unclear": 0.0054,
+     "blessing": 0.0012,
+     "silence": 0.0012,
+     "delayed": 0.0008,
+     "rescue": 0.0004
+    },
+    "severity_mean": 4.19,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 6,
+    "outcome_p": {
+     "punishment": 0.5,
+     "answer_granted": 0.167,
+     "revelation": 0.167,
+     "silence": 0.167
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.6377,
+     "revelation": 0.126,
+     "answer_granted": 0.0961,
+     "silence": 0.0948,
+     "unclear": 0.0182,
+     "compliance": 0.0117,
+     "refusal": 0.0078,
+     "blessing": 0.0039,
+     "delayed": 0.0026,
+     "rescue": 0.0013
+    },
+    "severity_mean": 3.83,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 1,
+    "outcome_p": {
+     "compliance": 1.0
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.669,
+     "compliance": 0.1881,
+     "revelation": 0.0643,
+     "unclear": 0.0333,
+     "refusal": 0.0143,
+     "answer_granted": 0.0095,
+     "blessing": 0.0071,
+     "silence": 0.0071,
+     "delayed": 0.0048,
+     "rescue": 0.0024
+    },
+    "severity_mean": 4.0,
+    "reliable": false
+   }
+  },
+  "distress": {
+   "narrative": {
+    "n": 78,
+    "outcome_p": {
+     "rescue": 0.282,
+     "answer_granted": 0.179,
+     "unclear": 0.167,
+     "delayed": 0.103,
+     "revelation": 0.077,
+     "compliance": 0.077,
+     "blessing": 0.077,
+     "silence": 0.038
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.2766,
+     "answer_granted": 0.1783,
+     "unclear": 0.1656,
+     "delayed": 0.1018,
+     "blessing": 0.0758,
+     "revelation": 0.0755,
+     "compliance": 0.0742,
+     "silence": 0.0509,
+     "punishment": 0.0006,
+     "refusal": 0.0006
+    },
+    "severity_mean": 2.77,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 61,
+    "outcome_p": {
+     "silence": 0.574,
+     "unclear": 0.18,
+     "answer_granted": 0.148,
+     "rescue": 0.082,
+     "revelation": 0.016
+    },
+    "outcome_p_smooth": {
+     "silence": 0.5488,
+     "unclear": 0.1779,
+     "answer_granted": 0.1485,
+     "rescue": 0.0903,
+     "revelation": 0.0192,
+     "delayed": 0.0069,
+     "blessing": 0.0044,
+     "compliance": 0.0024,
+     "punishment": 0.0008,
+     "refusal": 0.0008
+    },
+    "severity_mean": 3.15,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 37,
+    "outcome_p": {
+     "delayed": 0.216,
+     "rescue": 0.189,
+     "blessing": 0.135,
+     "silence": 0.135,
+     "unclear": 0.108,
+     "revelation": 0.081,
+     "punishment": 0.054,
+     "answer_granted": 0.054,
+     "refusal": 0.027
+    },
+    "outcome_p_smooth": {
+     "delayed": 0.2012,
+     "rescue": 0.1895,
+     "silence": 0.1482,
+     "blessing": 0.126,
+     "unclear": 0.113,
+     "revelation": 0.0778,
+     "answer_granted": 0.0666,
+     "punishment": 0.0489,
+     "refusal": 0.0251,
+     "compliance": 0.0038
+    },
+    "severity_mean": 3.11,
+    "reliable": true
+   },
+   "law": {
+    "n": 10,
+    "outcome_p": {
+     "answer_granted": 0.5,
+     "rescue": 0.2,
+     "refusal": 0.1,
+     "silence": 0.1,
+     "delayed": 0.1
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3865,
+     "rescue": 0.1972,
+     "silence": 0.1482,
+     "delayed": 0.0968,
+     "refusal": 0.0702,
+     "unclear": 0.0496,
+     "blessing": 0.0195,
+     "revelation": 0.0177,
+     "compliance": 0.0106,
+     "punishment": 0.0035
+    },
+    "severity_mean": 3.3,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 2,
+    "outcome_p": {
+     "silence": 1.0
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4605,
+     "rescue": 0.1368,
+     "answer_granted": 0.114,
+     "unclear": 0.1064,
+     "delayed": 0.0646,
+     "blessing": 0.0418,
+     "revelation": 0.038,
+     "compliance": 0.0228,
+     "punishment": 0.0076,
+     "refusal": 0.0076
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   }
+  },
+  "divine_test": {
+   "narrative": {
+    "n": 5,
+    "outcome_p": {
+     "blessing": 0.4,
+     "unclear": 0.2,
+     "punishment": 0.2,
+     "answer_granted": 0.2
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.2909,
+     "answer_granted": 0.1909,
+     "unclear": 0.1909,
+     "punishment": 0.1455,
+     "compliance": 0.1364,
+     "revelation": 0.0455
+    },
+    "severity_mean": 3.2,
+    "reliable": false
+   },
+   "prophecy": {
+    "n": 3,
+    "outcome_p": {
+     "compliance": 0.333,
+     "unclear": 0.333,
+     "revelation": 0.333
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.2955,
+     "unclear": 0.2386,
+     "revelation": 0.1818,
+     "answer_granted": 0.1136,
+     "blessing": 0.1136,
+     "punishment": 0.0568
+    },
+    "severity_mean": 2.0,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 3,
+    "outcome_p": {
+     "compliance": 0.667,
+     "answer_granted": 0.333
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.4205,
+     "answer_granted": 0.2386,
+     "blessing": 0.1136,
+     "unclear": 0.1136,
+     "punishment": 0.0568,
+     "revelation": 0.0568
+    },
+    "severity_mean": 4.0,
+    "reliable": false
+   }
+  },
+  "faithfulness": {
+   "narrative": {
+    "n": 86,
+    "outcome_p": {
+     "blessing": 0.337,
+     "compliance": 0.291,
+     "rescue": 0.116,
+     "covenant": 0.07,
+     "answer_granted": 0.058,
+     "silence": 0.047,
+     "unclear": 0.035,
+     "delayed": 0.023,
+     "revelation": 0.012,
+     "punishment": 0.012
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.335,
+     "compliance": 0.2882,
+     "rescue": 0.115,
+     "covenant": 0.0692,
+     "answer_granted": 0.0577,
+     "silence": 0.0472,
+     "unclear": 0.04,
+     "delayed": 0.0229,
+     "revelation": 0.0129,
+     "punishment": 0.0119
+    },
+    "severity_mean": 1.9,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 18,
+    "outcome_p": {
+     "unclear": 0.667,
+     "blessing": 0.167,
+     "revelation": 0.111,
+     "silence": 0.056
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5494,
+     "blessing": 0.1949,
+     "revelation": 0.0943,
+     "silence": 0.0564,
+     "compliance": 0.0534,
+     "rescue": 0.0203,
+     "covenant": 0.0129,
+     "answer_granted": 0.0111,
+     "delayed": 0.0037,
+     "punishment": 0.0037
+    },
+    "severity_mean": 1.39,
+    "reliable": false
+   },
+   "prophecy": {
+    "n": 9,
+    "outcome_p": {
+     "compliance": 0.222,
+     "blessing": 0.222,
+     "silence": 0.222,
+     "answer_granted": 0.111,
+     "punishment": 0.111,
+     "rescue": 0.111
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.2488,
+     "compliance": 0.2306,
+     "silence": 0.164,
+     "rescue": 0.1047,
+     "answer_granted": 0.0896,
+     "punishment": 0.0775,
+     "unclear": 0.0454,
+     "covenant": 0.0212,
+     "revelation": 0.0121,
+     "delayed": 0.0061
+    },
+    "severity_mean": 2.22,
+    "reliable": false
+   },
+   "law": {
+    "n": 5,
+    "outcome_p": {
+     "compliance": 0.4,
+     "blessing": 0.2,
+     "revelation": 0.2,
+     "covenant": 0.2
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.3229,
+     "blessing": 0.2483,
+     "covenant": 0.1297,
+     "revelation": 0.1169,
+     "unclear": 0.0636,
+     "rescue": 0.0466,
+     "silence": 0.0297,
+     "answer_granted": 0.0254,
+     "delayed": 0.0085,
+     "punishment": 0.0085
+    },
+    "severity_mean": 2.4,
+    "reliable": false
+   }
+  },
+  "gratitude": {
+   "poetry": {
+    "n": 42,
+    "outcome_p": {
+     "unclear": 0.643,
+     "silence": 0.143,
+     "answer_granted": 0.095,
+     "rescue": 0.071,
+     "blessing": 0.048
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.6234,
+     "silence": 0.1448,
+     "answer_granted": 0.0924,
+     "rescue": 0.0687,
+     "blessing": 0.0621,
+     "compliance": 0.0049,
+     "covenant": 0.0012,
+     "refusal": 0.0012,
+     "revelation": 0.0012
+    },
+    "severity_mean": 1.55,
+    "reliable": true
+   },
+   "narrative": {
+    "n": 33,
+    "outcome_p": {
+     "blessing": 0.333,
+     "silence": 0.242,
+     "unclear": 0.182,
+     "compliance": 0.121,
+     "refusal": 0.03,
+     "answer_granted": 0.03,
+     "revelation": 0.03,
+     "rescue": 0.03
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.3137,
+     "silence": 0.2317,
+     "unclear": 0.2184,
+     "compliance": 0.1113,
+     "answer_granted": 0.0354,
+     "rescue": 0.0324,
+     "refusal": 0.0278,
+     "revelation": 0.0278,
+     "covenant": 0.0015
+    },
+    "severity_mean": 1.7,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 8,
+    "outcome_p": {
+     "unclear": 0.625,
+     "blessing": 0.125,
+     "answer_granted": 0.125,
+     "covenant": 0.125
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5615,
+     "blessing": 0.1477,
+     "answer_granted": 0.1034,
+     "covenant": 0.0813,
+     "silence": 0.0619,
+     "compliance": 0.0177,
+     "rescue": 0.0177,
+     "refusal": 0.0044,
+     "revelation": 0.0044
+    },
+    "severity_mean": 1.25,
+    "reliable": false
+   },
+   "law": {
+    "n": 4,
+    "outcome_p": {
+     "blessing": 0.5,
+     "unclear": 0.5
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4777,
+     "blessing": 0.3244,
+     "silence": 0.0894,
+     "answer_granted": 0.0383,
+     "compliance": 0.0255,
+     "rescue": 0.0255,
+     "covenant": 0.0064,
+     "refusal": 0.0064,
+     "revelation": 0.0064
+    },
+    "severity_mean": 2.0,
+    "reliable": false
+   }
+  },
+  "inquiry": {
+   "narrative": {
+    "n": 43,
+    "outcome_p": {
+     "answer_granted": 0.372,
+     "revelation": 0.233,
+     "punishment": 0.093,
+     "delayed": 0.093,
+     "unclear": 0.093,
+     "compliance": 0.047,
+     "silence": 0.047,
+     "blessing": 0.023
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3653,
+     "revelation": 0.2217,
+     "unclear": 0.1101,
+     "punishment": 0.0916,
+     "delayed": 0.0906,
+     "compliance": 0.0458,
+     "silence": 0.0437,
+     "blessing": 0.027,
+     "refusal": 0.0031,
+     "rescue": 0.001
+    },
+    "severity_mean": 3.02,
+    "reliable": true
+   },
+   "law": {
+    "n": 19,
+    "outcome_p": {
+     "answer_granted": 0.316,
+     "blessing": 0.158,
+     "compliance": 0.105,
+     "delayed": 0.105,
+     "punishment": 0.105,
+     "refusal": 0.105,
+     "rescue": 0.053,
+     "revelation": 0.053
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3139,
+     "blessing": 0.1374,
+     "punishment": 0.0998,
+     "delayed": 0.0978,
+     "compliance": 0.0916,
+     "refusal": 0.0895,
+     "revelation": 0.0685,
+     "unclear": 0.0536,
+     "rescue": 0.0437,
+     "silence": 0.0041
+    },
+    "severity_mean": 2.37,
+    "reliable": false
+   },
+   "prophecy": {
+    "n": 16,
+    "outcome_p": {
+     "answer_granted": 0.562,
+     "punishment": 0.125,
+     "revelation": 0.125,
+     "refusal": 0.062,
+     "delayed": 0.062,
+     "blessing": 0.062
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5017,
+     "revelation": 0.1259,
+     "punishment": 0.1141,
+     "delayed": 0.0641,
+     "blessing": 0.0618,
+     "unclear": 0.0613,
+     "refusal": 0.0547,
+     "compliance": 0.0094,
+     "silence": 0.0047,
+     "rescue": 0.0024
+    },
+    "severity_mean": 2.88,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 15,
+    "outcome_p": {
+     "unclear": 1.0
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.8144,
+     "answer_granted": 0.0767,
+     "revelation": 0.0322,
+     "punishment": 0.0198,
+     "delayed": 0.0173,
+     "blessing": 0.0149,
+     "compliance": 0.0099,
+     "refusal": 0.0074,
+     "silence": 0.005,
+     "rescue": 0.0025
+    },
+    "severity_mean": 1.73,
+    "reliable": false
+   },
+   "poetry": {
+    "n": 8,
+    "outcome_p": {
+     "unclear": 0.875,
+     "blessing": 0.125
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.6375,
+     "answer_granted": 0.1181,
+     "blessing": 0.0998,
+     "revelation": 0.0495,
+     "punishment": 0.0305,
+     "delayed": 0.0267,
+     "compliance": 0.0152,
+     "refusal": 0.0114,
+     "silence": 0.0076,
+     "rescue": 0.0038
+    },
+    "severity_mean": 1.0,
+    "reliable": false
+   }
+  },
+  "intercession": {
+   "narrative": {
+    "n": 23,
+    "outcome_p": {
+     "answer_granted": 0.435,
+     "rescue": 0.217,
+     "delayed": 0.13,
+     "silence": 0.087,
+     "covenant": 0.043,
+     "revelation": 0.043,
+     "compliance": 0.043
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.4425,
+     "rescue": 0.198,
+     "delayed": 0.1188,
+     "silence": 0.087,
+     "revelation": 0.0474,
+     "compliance": 0.0396,
+     "covenant": 0.0396,
+     "refusal": 0.0155,
+     "blessing": 0.0039,
+     "punishment": 0.0039,
+     "unclear": 0.0039
+    },
+    "severity_mean": 2.83,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 11,
+    "outcome_p": {
+     "answer_granted": 0.545,
+     "refusal": 0.273,
+     "revelation": 0.182
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5245,
+     "refusal": 0.2147,
+     "revelation": 0.1454,
+     "rescue": 0.034,
+     "silence": 0.0272,
+     "delayed": 0.0204,
+     "blessing": 0.0068,
+     "compliance": 0.0068,
+     "covenant": 0.0068,
+     "punishment": 0.0068,
+     "unclear": 0.0068
+    },
+    "severity_mean": 3.36,
+    "reliable": false
+   },
+   "law": {
+    "n": 8,
+    "outcome_p": {
+     "answer_granted": 0.75,
+     "refusal": 0.125,
+     "punishment": 0.125
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.6455,
+     "refusal": 0.1104,
+     "punishment": 0.0853,
+     "rescue": 0.0418,
+     "silence": 0.0334,
+     "delayed": 0.0251,
+     "revelation": 0.0251,
+     "blessing": 0.0084,
+     "compliance": 0.0084,
+     "covenant": 0.0084,
+     "unclear": 0.0084
+    },
+    "severity_mean": 3.62,
+    "reliable": false
+   },
+   "poetry": {
+    "n": 3,
+    "outcome_p": {
+     "silence": 0.667,
+     "unclear": 0.333
+    },
+    "outcome_p_smooth": {
+     "silence": 0.3043,
+     "answer_granted": 0.2989,
+     "unclear": 0.1386,
+     "rescue": 0.0679,
+     "refusal": 0.0543,
+     "delayed": 0.0408,
+     "revelation": 0.0408,
+     "blessing": 0.0136,
+     "compliance": 0.0136,
+     "covenant": 0.0136,
+     "punishment": 0.0136
+    },
+    "severity_mean": 1.67,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 1,
+    "outcome_p": {
+     "blessing": 1.0
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3986,
+     "blessing": 0.1848,
+     "rescue": 0.0906,
+     "refusal": 0.0725,
+     "silence": 0.0725,
+     "delayed": 0.0543,
+     "revelation": 0.0543,
+     "compliance": 0.0181,
+     "covenant": 0.0181,
+     "punishment": 0.0181,
+     "unclear": 0.0181
+    },
+    "severity_mean": 1.0,
+    "reliable": false
+   }
+  },
+  "prayer": {
+   "narrative": {
+    "n": 23,
+    "outcome_p": {
+     "answer_granted": 0.478,
+     "revelation": 0.13,
+     "rescue": 0.13,
+     "blessing": 0.13,
+     "delayed": 0.087,
+     "covenant": 0.043
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.4481,
+     "rescue": 0.1234,
+     "revelation": 0.1234,
+     "blessing": 0.1169,
+     "delayed": 0.0812,
+     "silence": 0.0519,
+     "covenant": 0.039,
+     "unclear": 0.013,
+     "punishment": 0.0032
+    },
+    "severity_mean": 2.3,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 21,
+    "outcome_p": {
+     "silence": 0.571,
+     "unclear": 0.19,
+     "answer_granted": 0.095,
+     "rescue": 0.048,
+     "delayed": 0.048,
+     "revelation": 0.048
+    },
+    "outcome_p_smooth": {
+     "silence": 0.5175,
+     "unclear": 0.1678,
+     "answer_granted": 0.1364,
+     "rescue": 0.0559,
+     "revelation": 0.0559,
+     "delayed": 0.049,
+     "blessing": 0.0105,
+     "covenant": 0.0035,
+     "punishment": 0.0035
+    },
+    "severity_mean": 2.1,
+    "reliable": true
+   },
+   "prophecy": {
+    "n": 9,
+    "outcome_p": {
+     "answer_granted": 0.444,
+     "silence": 0.222,
+     "rescue": 0.111,
+     "punishment": 0.111,
+     "revelation": 0.111
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3961,
+     "silence": 0.2468,
+     "rescue": 0.1039,
+     "revelation": 0.1039,
+     "punishment": 0.0779,
+     "unclear": 0.026,
+     "blessing": 0.0195,
+     "delayed": 0.0195,
+     "covenant": 0.0065
+    },
+    "severity_mean": 2.67,
+    "reliable": false
+   },
+   "law": {
+    "n": 1,
+    "outcome_p": {
+     "silence": 1.0
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4091,
+     "answer_granted": 0.2576,
+     "rescue": 0.0758,
+     "revelation": 0.0758,
+     "unclear": 0.0606,
+     "blessing": 0.0455,
+     "delayed": 0.0455,
+     "covenant": 0.0152,
+     "punishment": 0.0152
+    },
+    "severity_mean": 1.0,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 1,
+    "outcome_p": {
+     "silence": 1.0
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4091,
+     "answer_granted": 0.2576,
+     "rescue": 0.0758,
+     "revelation": 0.0758,
+     "unclear": 0.0606,
+     "blessing": 0.0455,
+     "delayed": 0.0455,
+     "covenant": 0.0152,
+     "punishment": 0.0152
+    },
+    "severity_mean": 2.0,
+    "reliable": false
+   }
+  },
+  "unprompted": {
+   "prophecy": {
+    "n": 431,
+    "outcome_p": {
+     "punishment": 0.383,
+     "revelation": 0.357,
+     "blessing": 0.1,
+     "rescue": 0.067,
+     "compliance": 0.035,
+     "covenant": 0.023,
+     "unclear": 0.014,
+     "delayed": 0.012,
+     "refusal": 0.007,
+     "answer_granted": 0.002
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.3814,
+     "revelation": 0.3571,
+     "blessing": 0.0997,
+     "rescue": 0.0673,
+     "compliance": 0.0352,
+     "covenant": 0.0232,
+     "unclear": 0.0152,
+     "delayed": 0.0116,
+     "refusal": 0.0069,
+     "answer_granted": 0.0024,
+     "silence": 0.0
+    },
+    "severity_mean": 3.08,
+    "reliable": true
+   },
+   "narrative": {
+    "n": 89,
+    "outcome_p": {
+     "revelation": 0.213,
+     "rescue": 0.18,
+     "blessing": 0.169,
+     "compliance": 0.146,
+     "punishment": 0.112,
+     "unclear": 0.079,
+     "covenant": 0.056,
+     "silence": 0.022,
+     "answer_granted": 0.022
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.22,
+     "rescue": 0.1738,
+     "blessing": 0.1647,
+     "compliance": 0.1418,
+     "punishment": 0.1201,
+     "unclear": 0.0812,
+     "covenant": 0.0545,
+     "answer_granted": 0.0217,
+     "silence": 0.0214,
+     "delayed": 0.0005,
+     "refusal": 0.0002
+    },
+    "severity_mean": 2.43,
+    "reliable": true
+   },
+   "law": {
+    "n": 76,
+    "outcome_p": {
+     "revelation": 0.645,
+     "compliance": 0.237,
+     "blessing": 0.066,
+     "covenant": 0.013,
+     "answer_granted": 0.013,
+     "punishment": 0.013,
+     "unclear": 0.013
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.6257,
+     "compliance": 0.2263,
+     "blessing": 0.0677,
+     "punishment": 0.0282,
+     "unclear": 0.0201,
+     "covenant": 0.0139,
+     "answer_granted": 0.0129,
+     "rescue": 0.0041,
+     "delayed": 0.0006,
+     "refusal": 0.0003,
+     "silence": 0.0002
+    },
+    "severity_mean": 2.07,
+    "reliable": true
+   },
+   "wisdom": {
+    "n": 68,
+    "outcome_p": {
+     "unclear": 0.809,
+     "revelation": 0.074,
+     "blessing": 0.044,
+     "delayed": 0.029,
+     "answer_granted": 0.029,
+     "punishment": 0.015
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.762,
+     "revelation": 0.0915,
+     "blessing": 0.0477,
+     "punishment": 0.0313,
+     "delayed": 0.0281,
+     "answer_granted": 0.028,
+     "compliance": 0.0046,
+     "rescue": 0.0046,
+     "covenant": 0.0017,
+     "refusal": 0.0003,
+     "silence": 0.0002
+    },
+    "severity_mean": 2.04,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 27,
+    "outcome_p": {
+     "unclear": 0.667,
+     "revelation": 0.185,
+     "punishment": 0.037,
+     "covenant": 0.037,
+     "rescue": 0.037,
+     "blessing": 0.037
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5822,
+     "revelation": 0.2087,
+     "punishment": 0.0715,
+     "blessing": 0.0464,
+     "rescue": 0.0417,
+     "covenant": 0.0351,
+     "compliance": 0.0104,
+     "delayed": 0.0016,
+     "answer_granted": 0.0014,
+     "refusal": 0.0007,
+     "silence": 0.0005
+    },
+    "severity_mean": 1.63,
+    "reliable": true
+   }
+  },
+  "vow": {
+   "narrative": {
+    "n": 9,
+    "outcome_p": {
+     "silence": 0.222,
+     "delayed": 0.222,
+     "unclear": 0.222,
+     "answer_granted": 0.111,
+     "compliance": 0.111,
+     "rescue": 0.111
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.2689,
+     "delayed": 0.2059,
+     "silence": 0.1849,
+     "answer_granted": 0.1555,
+     "compliance": 0.0924,
+     "rescue": 0.0924
+    },
+    "severity_mean": 2.56,
+    "reliable": false
+   },
+   "poetry": {
+    "n": 5,
+    "outcome_p": {
+     "unclear": 0.6,
+     "answer_granted": 0.4
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4765,
+     "answer_granted": 0.3176,
+     "delayed": 0.0882,
+     "silence": 0.0588,
+     "compliance": 0.0294,
+     "rescue": 0.0294
+    },
+    "severity_mean": 1.6,
+    "reliable": false
+   },
+   "wisdom": {
+    "n": 2,
+    "outcome_p": {
+     "unclear": 0.5,
+     "delayed": 0.5
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.395,
+     "delayed": 0.2689,
+     "answer_granted": 0.1681,
+     "silence": 0.084,
+     "compliance": 0.042,
+     "rescue": 0.042
+    },
+    "severity_mean": 3.5,
+    "reliable": false
+   },
+   "law": {
+    "n": 1,
+    "outcome_p": {
+     "answer_granted": 1.0
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3627,
+     "unclear": 0.2941,
+     "delayed": 0.1471,
+     "silence": 0.098,
+     "compliance": 0.049,
+     "rescue": 0.049
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   }
+  }
+ },
+ "by_trigger_addressee": {
+  "complaint": {
+   "individual": {
+    "n": 86,
+    "outcome_p": {
+     "silence": 0.43,
+     "unclear": 0.209,
+     "revelation": 0.186,
+     "punishment": 0.093,
+     "answer_granted": 0.047,
+     "rescue": 0.012,
+     "compliance": 0.012,
+     "delayed": 0.012
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4262,
+     "unclear": 0.2074,
+     "revelation": 0.1854,
+     "punishment": 0.0941,
+     "answer_granted": 0.0502,
+     "compliance": 0.0119,
+     "rescue": 0.0119,
+     "delayed": 0.0115,
+     "blessing": 0.0014
+    },
+    "severity_mean": 3.2,
+    "reliable": true
+   },
+   "nation": {
+    "n": 25,
+    "outcome_p": {
+     "answer_granted": 0.24,
+     "punishment": 0.2,
+     "revelation": 0.16,
+     "silence": 0.16,
+     "blessing": 0.12,
+     "rescue": 0.04,
+     "unclear": 0.04,
+     "compliance": 0.04
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.2188,
+     "silence": 0.1928,
+     "punishment": 0.1855,
+     "revelation": 0.1623,
+     "blessing": 0.1043,
+     "unclear": 0.0623,
+     "compliance": 0.0362,
+     "rescue": 0.0362,
+     "delayed": 0.0014
+    },
+    "severity_mean": 3.36,
+    "reliable": true
+   },
+   "collective": {
+    "n": 3,
+    "outcome_p": {
+     "answer_granted": 1.0
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.4457,
+     "silence": 0.2228,
+     "revelation": 0.1087,
+     "unclear": 0.1087,
+     "punishment": 0.0707,
+     "blessing": 0.0163,
+     "compliance": 0.0109,
+     "rescue": 0.0109,
+     "delayed": 0.0054
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   },
+   "foreign": {
+    "n": 1,
+    "outcome_p": {
+     "unclear": 1.0
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3116,
+     "silence": 0.2971,
+     "revelation": 0.1449,
+     "answer_granted": 0.0942,
+     "punishment": 0.0942,
+     "blessing": 0.0217,
+     "compliance": 0.0145,
+     "rescue": 0.0145,
+     "delayed": 0.0072
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   }
+  },
+  "covenant_follow_up": {
+   "nation": {
+    "n": 196,
+    "outcome_p": {
+     "covenant": 0.5,
+     "revelation": 0.168,
+     "blessing": 0.133,
+     "compliance": 0.077,
+     "rescue": 0.056,
+     "punishment": 0.036,
+     "answer_granted": 0.015,
+     "refusal": 0.01,
+     "silence": 0.005
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.4986,
+     "revelation": 0.1687,
+     "blessing": 0.1331,
+     "compliance": 0.0777,
+     "rescue": 0.0558,
+     "punishment": 0.0355,
+     "answer_granted": 0.0152,
+     "refusal": 0.0102,
+     "silence": 0.0051,
+     "unclear": 0.0002
+    },
+    "severity_mean": 2.6,
+    "reliable": true
+   },
+   "individual": {
+    "n": 69,
+    "outcome_p": {
+     "covenant": 0.319,
+     "compliance": 0.246,
+     "revelation": 0.217,
+     "blessing": 0.174,
+     "unclear": 0.029,
+     "rescue": 0.014
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.3272,
+     "compliance": 0.238,
+     "revelation": 0.2149,
+     "blessing": 0.1724,
+     "unclear": 0.0275,
+     "rescue": 0.0165,
+     "punishment": 0.0017,
+     "answer_granted": 0.0007,
+     "refusal": 0.0007,
+     "silence": 0.0002
+    },
+    "severity_mean": 2.33,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 4,
+    "outcome_p": {
+     "blessing": 0.25,
+     "revelation": 0.25,
+     "refusal": 0.25,
+     "compliance": 0.25
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.246,
+     "revelation": 0.2116,
+     "blessing": 0.1952,
+     "compliance": 0.1788,
+     "refusal": 0.1173,
+     "rescue": 0.0246,
+     "punishment": 0.0144,
+     "answer_granted": 0.0062,
+     "unclear": 0.0041,
+     "silence": 0.0021
+    },
+    "severity_mean": 3.25,
+    "reliable": false
+   },
+   "collective": {
+    "n": 2,
+    "outcome_p": {
+     "blessing": 1.0
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.3938,
+     "covenant": 0.3163,
+     "revelation": 0.1292,
+     "compliance": 0.087,
+     "rescue": 0.0316,
+     "punishment": 0.0185,
+     "answer_granted": 0.0079,
+     "refusal": 0.0079,
+     "unclear": 0.0053,
+     "silence": 0.0026
+    },
+    "severity_mean": 1.5,
+    "reliable": false
+   }
+  },
+  "disobedience": {
+   "nation": {
+    "n": 220,
+    "outcome_p": {
+     "punishment": 0.845,
+     "revelation": 0.05,
+     "unclear": 0.041,
+     "blessing": 0.014,
+     "compliance": 0.014,
+     "refusal": 0.014,
+     "silence": 0.009,
+     "delayed": 0.005,
+     "answer_granted": 0.005,
+     "rescue": 0.005
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.8445,
+     "revelation": 0.0506,
+     "unclear": 0.0409,
+     "compliance": 0.0139,
+     "refusal": 0.0137,
+     "blessing": 0.0135,
+     "silence": 0.0091,
+     "answer_granted": 0.0047,
+     "delayed": 0.0046,
+     "rescue": 0.0045
+    },
+    "severity_mean": 4.2,
+    "reliable": true
+   },
+   "individual": {
+    "n": 104,
+    "outcome_p": {
+     "punishment": 0.74,
+     "revelation": 0.106,
+     "unclear": 0.048,
+     "compliance": 0.038,
+     "answer_granted": 0.029,
+     "refusal": 0.019,
+     "delayed": 0.01,
+     "silence": 0.01
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.7433,
+     "revelation": 0.1045,
+     "unclear": 0.0477,
+     "compliance": 0.0379,
+     "answer_granted": 0.028,
+     "refusal": 0.0191,
+     "silence": 0.0096,
+     "delayed": 0.0094,
+     "blessing": 0.0004,
+     "rescue": 0.0001
+    },
+    "severity_mean": 4.24,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 17,
+    "outcome_p": {
+     "punishment": 0.647,
+     "revelation": 0.176,
+     "compliance": 0.118,
+     "refusal": 0.059
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.6825,
+     "revelation": 0.1539,
+     "compliance": 0.0968,
+     "refusal": 0.0494,
+     "unclear": 0.0091,
+     "answer_granted": 0.0026,
+     "blessing": 0.0019,
+     "silence": 0.0019,
+     "delayed": 0.0013,
+     "rescue": 0.0006
+    },
+    "severity_mean": 3.76,
+    "reliable": false
+   },
+   "collective": {
+    "n": 9,
+    "outcome_p": {
+     "punishment": 0.778,
+     "revelation": 0.222
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.7867,
+     "revelation": 0.1704,
+     "unclear": 0.0143,
+     "compliance": 0.0092,
+     "refusal": 0.0061,
+     "answer_granted": 0.0041,
+     "blessing": 0.0031,
+     "silence": 0.0031,
+     "delayed": 0.002,
+     "rescue": 0.001
+    },
+    "severity_mean": 4.56,
+    "reliable": false
+   }
+  },
+  "distress": {
+   "individual": {
+    "n": 109,
+    "outcome_p": {
+     "silence": 0.303,
+     "answer_granted": 0.183,
+     "unclear": 0.165,
+     "rescue": 0.147,
+     "revelation": 0.083,
+     "delayed": 0.064,
+     "blessing": 0.037,
+     "compliance": 0.018
+    },
+    "outcome_p_smooth": {
+     "silence": 0.3002,
+     "answer_granted": 0.1824,
+     "unclear": 0.1644,
+     "rescue": 0.1487,
+     "revelation": 0.0813,
+     "delayed": 0.0654,
+     "blessing": 0.0377,
+     "compliance": 0.0189,
+     "punishment": 0.0005,
+     "refusal": 0.0005
+    },
+    "severity_mean": 2.83,
+    "reliable": true
+   },
+   "nation": {
+    "n": 67,
+    "outcome_p": {
+     "rescue": 0.254,
+     "silence": 0.164,
+     "answer_granted": 0.149,
+     "unclear": 0.119,
+     "delayed": 0.104,
+     "blessing": 0.075,
+     "compliance": 0.06,
+     "refusal": 0.03,
+     "punishment": 0.03,
+     "revelation": 0.015
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.2494,
+     "silence": 0.1698,
+     "answer_granted": 0.15,
+     "unclear": 0.1215,
+     "delayed": 0.1035,
+     "blessing": 0.0735,
+     "compliance": 0.0578,
+     "punishment": 0.0285,
+     "refusal": 0.0285,
+     "revelation": 0.0176
+    },
+    "severity_mean": 3.3,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 9,
+    "outcome_p": {
+     "rescue": 0.333,
+     "blessing": 0.222,
+     "delayed": 0.222,
+     "unclear": 0.222
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.2827,
+     "unclear": 0.196,
+     "delayed": 0.1752,
+     "blessing": 0.1638,
+     "silence": 0.0874,
+     "answer_granted": 0.057,
+     "revelation": 0.019,
+     "compliance": 0.0114,
+     "punishment": 0.0038,
+     "refusal": 0.0038
+    },
+    "severity_mean": 2.56,
+    "reliable": false
+   },
+   "collective": {
+    "n": 3,
+    "outcome_p": {
+     "silence": 0.667,
+     "delayed": 0.333
+    },
+    "outcome_p_smooth": {
+     "silence": 0.4029,
+     "delayed": 0.1815,
+     "rescue": 0.1197,
+     "answer_granted": 0.0997,
+     "unclear": 0.0931,
+     "blessing": 0.0366,
+     "revelation": 0.0332,
+     "compliance": 0.0199,
+     "punishment": 0.0066,
+     "refusal": 0.0066
+    },
+    "severity_mean": 3.33,
+    "reliable": false
+   }
+  },
+  "divine_test": {
+   "individual": {
+    "n": 10,
+    "outcome_p": {
+     "compliance": 0.3,
+     "blessing": 0.2,
+     "unclear": 0.2,
+     "answer_granted": 0.2,
+     "revelation": 0.1
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.2909,
+     "answer_granted": 0.1939,
+     "blessing": 0.1939,
+     "unclear": 0.1939,
+     "revelation": 0.097,
+     "punishment": 0.0303
+    },
+    "severity_mean": 2.9,
+    "reliable": false
+   },
+   "nation": {
+    "n": 1,
+    "outcome_p": {
+     "punishment": 1.0
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.2424,
+     "compliance": 0.2273,
+     "answer_granted": 0.1515,
+     "blessing": 0.1515,
+     "unclear": 0.1515,
+     "revelation": 0.0758
+    },
+    "severity_mean": 5.0,
+    "reliable": false
+   }
+  },
+  "faithfulness": {
+   "individual": {
+    "n": 71,
+    "outcome_p": {
+     "blessing": 0.296,
+     "compliance": 0.183,
+     "unclear": 0.127,
+     "silence": 0.099,
+     "rescue": 0.085,
+     "answer_granted": 0.07,
+     "covenant": 0.056,
+     "revelation": 0.042,
+     "delayed": 0.028,
+     "punishment": 0.014
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.2958,
+     "compliance": 0.1872,
+     "unclear": 0.1268,
+     "silence": 0.096,
+     "rescue": 0.0851,
+     "answer_granted": 0.0691,
+     "covenant": 0.0565,
+     "revelation": 0.0417,
+     "delayed": 0.0274,
+     "punishment": 0.0143
+    },
+    "severity_mean": 1.85,
+    "reliable": true
+   },
+   "nation": {
+    "n": 43,
+    "outcome_p": {
+     "compliance": 0.349,
+     "blessing": 0.326,
+     "rescue": 0.093,
+     "unclear": 0.093,
+     "covenant": 0.07,
+     "revelation": 0.023,
+     "answer_granted": 0.023,
+     "punishment": 0.023
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.3381,
+     "blessing": 0.3226,
+     "unclear": 0.0966,
+     "rescue": 0.093,
+     "covenant": 0.0687,
+     "answer_granted": 0.0261,
+     "revelation": 0.0244,
+     "punishment": 0.0226,
+     "silence": 0.0062,
+     "delayed": 0.0018
+    },
+    "severity_mean": 1.88,
+    "reliable": true
+   },
+   "collective": {
+    "n": 2,
+    "outcome_p": {
+     "unclear": 1.0
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3765,
+     "blessing": 0.2119,
+     "compliance": 0.1755,
+     "rescue": 0.0666,
+     "covenant": 0.0424,
+     "silence": 0.0424,
+     "answer_granted": 0.0363,
+     "revelation": 0.0242,
+     "delayed": 0.0121,
+     "punishment": 0.0121
+    },
+    "severity_mean": 1.5,
+    "reliable": false
+   },
+   "foreign": {
+    "n": 2,
+    "outcome_p": {
+     "rescue": 0.5,
+     "compliance": 0.5
+    },
+    "outcome_p_smooth": {
+     "compliance": 0.3184,
+     "blessing": 0.2119,
+     "rescue": 0.2094,
+     "unclear": 0.0908,
+     "covenant": 0.0424,
+     "silence": 0.0424,
+     "answer_granted": 0.0363,
+     "revelation": 0.0242,
+     "delayed": 0.0121,
+     "punishment": 0.0121
+    },
+    "severity_mean": 2.5,
+    "reliable": false
+   }
+  },
+  "gratitude": {
+   "nation": {
+    "n": 35,
+    "outcome_p": {
+     "unclear": 0.486,
+     "blessing": 0.2,
+     "compliance": 0.114,
+     "silence": 0.086,
+     "rescue": 0.057,
+     "revelation": 0.029,
+     "covenant": 0.029
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4825,
+     "blessing": 0.198,
+     "compliance": 0.1057,
+     "silence": 0.0951,
+     "rescue": 0.0557,
+     "covenant": 0.0264,
+     "revelation": 0.0264,
+     "answer_granted": 0.0086,
+     "refusal": 0.0014
+    },
+    "severity_mean": 1.69,
+    "reliable": true
+   },
+   "individual": {
+    "n": 34,
+    "outcome_p": {
+     "unclear": 0.353,
+     "silence": 0.235,
+     "answer_granted": 0.176,
+     "blessing": 0.176,
+     "refusal": 0.029,
+     "rescue": 0.029
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3666,
+     "silence": 0.2258,
+     "blessing": 0.1774,
+     "answer_granted": 0.1627,
+     "rescue": 0.0315,
+     "refusal": 0.0271,
+     "compliance": 0.0059,
+     "covenant": 0.0015,
+     "revelation": 0.0015
+    },
+    "severity_mean": 1.59,
+    "reliable": true
+   },
+   "collective": {
+    "n": 16,
+    "outcome_p": {
+     "unclear": 0.688,
+     "blessing": 0.125,
+     "silence": 0.125,
+     "rescue": 0.062
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.6333,
+     "blessing": 0.139,
+     "silence": 0.1336,
+     "rescue": 0.0586,
+     "answer_granted": 0.0164,
+     "compliance": 0.0109,
+     "covenant": 0.0027,
+     "refusal": 0.0027,
+     "revelation": 0.0027
+    },
+    "severity_mean": 1.44,
+    "reliable": false
+   },
+   "foreign": {
+    "n": 2,
+    "outcome_p": {
+     "blessing": 0.5,
+     "silence": 0.5
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3284,
+     "blessing": 0.2742,
+     "silence": 0.2578,
+     "answer_granted": 0.0493,
+     "compliance": 0.0328,
+     "rescue": 0.0328,
+     "covenant": 0.0082,
+     "refusal": 0.0082,
+     "revelation": 0.0082
+    },
+    "severity_mean": 1.5,
+    "reliable": false
+   }
+  },
+  "inquiry": {
+   "individual": {
+    "n": 54,
+    "outcome_p": {
+     "answer_granted": 0.407,
+     "revelation": 0.167,
+     "unclear": 0.148,
+     "punishment": 0.111,
+     "delayed": 0.093,
+     "silence": 0.037,
+     "rescue": 0.019,
+     "compliance": 0.019
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3989,
+     "revelation": 0.1635,
+     "unclear": 0.1574,
+     "punishment": 0.1084,
+     "delayed": 0.0906,
+     "silence": 0.0356,
+     "compliance": 0.0203,
+     "rescue": 0.0178,
+     "blessing": 0.005,
+     "refusal": 0.0025
+    },
+    "severity_mean": 2.76,
+    "reliable": true
+   },
+   "nation": {
+    "n": 17,
+    "outcome_p": {
+     "answer_granted": 0.471,
+     "compliance": 0.118,
+     "delayed": 0.118,
+     "blessing": 0.118,
+     "refusal": 0.059,
+     "revelation": 0.059,
+     "punishment": 0.059
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.4334,
+     "delayed": 0.1067,
+     "blessing": 0.1044,
+     "compliance": 0.0999,
+     "revelation": 0.0747,
+     "punishment": 0.0635,
+     "unclear": 0.0585,
+     "refusal": 0.0522,
+     "silence": 0.0045,
+     "rescue": 0.0023
+    },
+    "severity_mean": 2.59,
+    "reliable": false
+   },
+   "collective": {
+    "n": 15,
+    "outcome_p": {
+     "unclear": 1.0
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.8144,
+     "answer_granted": 0.0767,
+     "revelation": 0.0322,
+     "punishment": 0.0198,
+     "delayed": 0.0173,
+     "blessing": 0.0149,
+     "compliance": 0.0099,
+     "refusal": 0.0074,
+     "silence": 0.005,
+     "rescue": 0.0025
+    },
+    "severity_mean": 1.73,
+    "reliable": false
+   },
+   "foreign": {
+    "n": 15,
+    "outcome_p": {
+     "blessing": 0.267,
+     "revelation": 0.2,
+     "unclear": 0.2,
+     "refusal": 0.133,
+     "punishment": 0.067,
+     "compliance": 0.067,
+     "answer_granted": 0.067
+    },
+    "outcome_p_smooth": {
+     "blessing": 0.2149,
+     "unclear": 0.2144,
+     "revelation": 0.1822,
+     "answer_granted": 0.1267,
+     "refusal": 0.1074,
+     "punishment": 0.0698,
+     "compliance": 0.0599,
+     "delayed": 0.0173,
+     "silence": 0.005,
+     "rescue": 0.0025
+    },
+    "severity_mean": 2.4,
+    "reliable": false
+   }
+  },
+  "intercession": {
+   "individual": {
+    "n": 27,
+    "outcome_p": {
+     "answer_granted": 0.593,
+     "refusal": 0.111,
+     "silence": 0.074,
+     "rescue": 0.074,
+     "revelation": 0.074,
+     "punishment": 0.037,
+     "blessing": 0.037
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.5747,
+     "refusal": 0.1073,
+     "rescue": 0.0795,
+     "silence": 0.0761,
+     "revelation": 0.0727,
+     "blessing": 0.0346,
+     "punishment": 0.0346,
+     "delayed": 0.0102,
+     "compliance": 0.0034,
+     "covenant": 0.0034,
+     "unclear": 0.0034
+    },
+    "severity_mean": 3.07,
+    "reliable": true
+   },
+   "nation": {
+    "n": 18,
+    "outcome_p": {
+     "answer_granted": 0.333,
+     "delayed": 0.167,
+     "rescue": 0.167,
+     "silence": 0.111,
+     "covenant": 0.056,
+     "refusal": 0.056,
+     "compliance": 0.056,
+     "unclear": 0.056
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3648,
+     "rescue": 0.1541,
+     "delayed": 0.1446,
+     "silence": 0.1059,
+     "refusal": 0.0624,
+     "compliance": 0.0482,
+     "covenant": 0.0482,
+     "unclear": 0.0482,
+     "revelation": 0.0142,
+     "blessing": 0.0047,
+     "punishment": 0.0047
+    },
+    "severity_mean": 2.83,
+    "reliable": false
+   },
+   "foreign": {
+    "n": 1,
+    "outcome_p": {
+     "revelation": 1.0
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3986,
+     "revelation": 0.221,
+     "rescue": 0.0906,
+     "refusal": 0.0725,
+     "silence": 0.0725,
+     "delayed": 0.0543,
+     "blessing": 0.0181,
+     "compliance": 0.0181,
+     "covenant": 0.0181,
+     "punishment": 0.0181,
+     "unclear": 0.0181
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   }
+  },
+  "prayer": {
+   "individual": {
+    "n": 32,
+    "outcome_p": {
+     "answer_granted": 0.344,
+     "silence": 0.344,
+     "revelation": 0.094,
+     "blessing": 0.062,
+     "unclear": 0.062,
+     "covenant": 0.031,
+     "punishment": 0.031,
+     "delayed": 0.031
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3391,
+     "silence": 0.3366,
+     "revelation": 0.0934,
+     "unclear": 0.0639,
+     "blessing": 0.0614,
+     "delayed": 0.0344,
+     "covenant": 0.0295,
+     "punishment": 0.0295,
+     "rescue": 0.0123
+    },
+    "severity_mean": 2.16,
+    "reliable": true
+   },
+   "nation": {
+    "n": 21,
+    "outcome_p": {
+     "answer_granted": 0.286,
+     "silence": 0.238,
+     "rescue": 0.143,
+     "delayed": 0.095,
+     "revelation": 0.095,
+     "unclear": 0.095,
+     "blessing": 0.048
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.2902,
+     "silence": 0.2483,
+     "rescue": 0.1329,
+     "revelation": 0.0944,
+     "unclear": 0.0909,
+     "delayed": 0.0874,
+     "blessing": 0.049,
+     "covenant": 0.0035,
+     "punishment": 0.0035
+    },
+    "severity_mean": 2.29,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 2,
+    "outcome_p": {
+     "rescue": 1.0
+    },
+    "outcome_p_smooth": {
+     "rescue": 0.3506,
+     "answer_granted": 0.2208,
+     "silence": 0.2078,
+     "revelation": 0.0649,
+     "unclear": 0.0519,
+     "blessing": 0.039,
+     "delayed": 0.039,
+     "covenant": 0.013,
+     "punishment": 0.013
+    },
+    "severity_mean": 3.5,
+    "reliable": false
+   }
+  },
+  "unprompted": {
+   "nation": {
+    "n": 333,
+    "outcome_p": {
+     "punishment": 0.36,
+     "revelation": 0.336,
+     "blessing": 0.108,
+     "rescue": 0.105,
+     "covenant": 0.027,
+     "compliance": 0.027,
+     "unclear": 0.018,
+     "delayed": 0.012,
+     "refusal": 0.006
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.3588,
+     "revelation": 0.3363,
+     "blessing": 0.1079,
+     "rescue": 0.1045,
+     "compliance": 0.0276,
+     "covenant": 0.027,
+     "unclear": 0.0196,
+     "delayed": 0.012,
+     "refusal": 0.006,
+     "answer_granted": 0.0001,
+     "silence": 0.0
+    },
+    "severity_mean": 2.92,
+    "reliable": true
+   },
+   "individual": {
+    "n": 252,
+    "outcome_p": {
+     "revelation": 0.365,
+     "unclear": 0.175,
+     "compliance": 0.131,
+     "punishment": 0.127,
+     "blessing": 0.095,
+     "rescue": 0.04,
+     "covenant": 0.028,
+     "answer_granted": 0.024,
+     "delayed": 0.008,
+     "silence": 0.004,
+     "refusal": 0.004
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.3645,
+     "unclear": 0.1737,
+     "compliance": 0.1297,
+     "punishment": 0.1295,
+     "blessing": 0.0953,
+     "rescue": 0.0402,
+     "covenant": 0.0277,
+     "answer_granted": 0.0235,
+     "delayed": 0.008,
+     "refusal": 0.004,
+     "silence": 0.0039
+    },
+    "severity_mean": 2.51,
+    "reliable": true
+   },
+   "collective": {
+    "n": 70,
+    "outcome_p": {
+     "unclear": 0.514,
+     "revelation": 0.2,
+     "blessing": 0.1,
+     "punishment": 0.086,
+     "compliance": 0.057,
+     "delayed": 0.014,
+     "silence": 0.014,
+     "covenant": 0.014
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4884,
+     "revelation": 0.209,
+     "blessing": 0.0998,
+     "punishment": 0.0972,
+     "compliance": 0.0578,
+     "covenant": 0.015,
+     "delayed": 0.014,
+     "silence": 0.0135,
+     "rescue": 0.0044,
+     "answer_granted": 0.0006,
+     "refusal": 0.0003
+    },
+    "severity_mean": 2.0,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 36,
+    "outcome_p": {
+     "punishment": 0.556,
+     "revelation": 0.389,
+     "rescue": 0.028,
+     "unclear": 0.028
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.5192,
+     "revelation": 0.3824,
+     "unclear": 0.0397,
+     "rescue": 0.0325,
+     "blessing": 0.0118,
+     "compliance": 0.0081,
+     "covenant": 0.003,
+     "delayed": 0.0012,
+     "answer_granted": 0.0011,
+     "refusal": 0.0005,
+     "silence": 0.0004
+    },
+    "severity_mean": 3.83,
+    "reliable": true
+   }
+  },
+  "vow": {
+   "individual": {
+    "n": 13,
+    "outcome_p": {
+     "unclear": 0.385,
+     "delayed": 0.231,
+     "silence": 0.154,
+     "answer_granted": 0.154,
+     "compliance": 0.077
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3758,
+     "delayed": 0.2157,
+     "answer_granted": 0.1765,
+     "silence": 0.1438,
+     "compliance": 0.0719,
+     "rescue": 0.0163
+    },
+    "severity_mean": 2.38,
+    "reliable": false
+   },
+   "nation": {
+    "n": 3,
+    "outcome_p": {
+     "answer_granted": 0.667,
+     "rescue": 0.333
+    },
+    "outcome_p_smooth": {
+     "answer_granted": 0.3971,
+     "unclear": 0.2206,
+     "rescue": 0.1618,
+     "delayed": 0.1103,
+     "silence": 0.0735,
+     "compliance": 0.0368
+    },
+    "severity_mean": 3.0,
+    "reliable": false
+   },
+   "collective": {
+    "n": 1,
+    "outcome_p": {
+     "unclear": 1.0
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4608,
+     "answer_granted": 0.1961,
+     "delayed": 0.1471,
+     "silence": 0.098,
+     "compliance": 0.049,
+     "rescue": 0.049
+    },
+    "severity_mean": 1.0,
+    "reliable": false
+   }
+  }
+ },
+ "marginals": {
+  "era": {
+   "Невиим (поздние)": {
+    "n": 792,
+    "outcome_p": {
+     "punishment": 0.429,
+     "revelation": 0.253,
+     "blessing": 0.091,
+     "rescue": 0.057,
+     "answer_granted": 0.043,
+     "unclear": 0.029,
+     "compliance": 0.023,
+     "silence": 0.021,
+     "delayed": 0.02,
+     "covenant": 0.019,
+     "refusal": 0.015
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.4281,
+     "revelation": 0.2521,
+     "blessing": 0.0909,
+     "rescue": 0.0568,
+     "answer_granted": 0.0431,
+     "unclear": 0.0296,
+     "compliance": 0.023,
+     "silence": 0.0218,
+     "delayed": 0.0202,
+     "covenant": 0.0193,
+     "refusal": 0.0151
+    },
+    "severity_mean": 3.29,
+    "speech_share": 0.886,
+    "reliable": true
+   },
+   "Кетувим": {
+    "n": 536,
+    "outcome_p": {
+     "unclear": 0.336,
+     "silence": 0.188,
+     "compliance": 0.086,
+     "blessing": 0.084,
+     "answer_granted": 0.076,
+     "revelation": 0.073,
+     "punishment": 0.054,
+     "rescue": 0.049,
+     "delayed": 0.032,
+     "covenant": 0.022
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.3338,
+     "silence": 0.1873,
+     "compliance": 0.0856,
+     "blessing": 0.084,
+     "answer_granted": 0.0764,
+     "revelation": 0.0737,
+     "punishment": 0.0558,
+     "rescue": 0.0486,
+     "delayed": 0.0316,
+     "covenant": 0.0228,
+     "refusal": 0.0001
+    },
+    "severity_mean": 2.41,
+    "speech_share": 0.19,
+    "reliable": true
+   },
+   "Тора": {
+    "n": 440,
+    "outcome_p": {
+     "covenant": 0.23,
+     "revelation": 0.227,
+     "compliance": 0.12,
+     "punishment": 0.111,
+     "blessing": 0.109,
+     "answer_granted": 0.08,
+     "silence": 0.041,
+     "rescue": 0.03,
+     "refusal": 0.02,
+     "unclear": 0.018,
+     "delayed": 0.014
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.2278,
+     "revelation": 0.2267,
+     "compliance": 0.1199,
+     "punishment": 0.1128,
+     "blessing": 0.1089,
+     "answer_granted": 0.0794,
+     "silence": 0.0412,
+     "rescue": 0.0299,
+     "refusal": 0.0203,
+     "unclear": 0.0193,
+     "delayed": 0.0137
+    },
+    "severity_mean": 2.54,
+    "speech_share": 0.755,
+    "reliable": true
+   },
+   "Невиим (ранние)": {
+    "n": 282,
+    "outcome_p": {
+     "punishment": 0.27,
+     "rescue": 0.142,
+     "answer_granted": 0.121,
+     "unclear": 0.121,
+     "revelation": 0.092,
+     "blessing": 0.082,
+     "compliance": 0.074,
+     "covenant": 0.067,
+     "delayed": 0.021,
+     "silence": 0.007,
+     "refusal": 0.004
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.269,
+     "rescue": 0.1404,
+     "unclear": 0.1205,
+     "answer_granted": 0.1197,
+     "revelation": 0.0937,
+     "blessing": 0.0817,
+     "compliance": 0.0743,
+     "covenant": 0.0675,
+     "delayed": 0.0213,
+     "silence": 0.0081,
+     "refusal": 0.0037
+    },
+    "severity_mean": 3.22,
+    "speech_share": 0.379,
+    "reliable": true
+   }
+  },
+  "genre": {
+   "prophecy": {
+    "n": 792,
+    "outcome_p": {
+     "punishment": 0.429,
+     "revelation": 0.253,
+     "blessing": 0.091,
+     "rescue": 0.057,
+     "answer_granted": 0.043,
+     "unclear": 0.029,
+     "compliance": 0.023,
+     "silence": 0.021,
+     "delayed": 0.02,
+     "covenant": 0.019,
+     "refusal": 0.015
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.4281,
+     "revelation": 0.2521,
+     "blessing": 0.0909,
+     "rescue": 0.0568,
+     "answer_granted": 0.0431,
+     "unclear": 0.0296,
+     "compliance": 0.023,
+     "silence": 0.0218,
+     "delayed": 0.0202,
+     "covenant": 0.0193,
+     "refusal": 0.0151
+    },
+    "severity_mean": 3.29,
+    "speech_share": 0.886,
+    "reliable": true
+   },
+   "narrative": {
+    "n": 582,
+    "outcome_p": {
+     "punishment": 0.189,
+     "blessing": 0.139,
+     "compliance": 0.134,
+     "answer_granted": 0.112,
+     "rescue": 0.108,
+     "revelation": 0.093,
+     "unclear": 0.084,
+     "covenant": 0.053,
+     "silence": 0.046,
+     "delayed": 0.038,
+     "refusal": 0.003
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.1894,
+     "blessing": 0.1388,
+     "compliance": 0.1335,
+     "answer_granted": 0.1113,
+     "rescue": 0.1078,
+     "revelation": 0.0935,
+     "unclear": 0.0845,
+     "covenant": 0.0534,
+     "silence": 0.0466,
+     "delayed": 0.0377,
+     "refusal": 0.0035
+    },
+    "severity_mean": 2.74,
+    "speech_share": 0.354,
+    "reliable": true
+   },
+   "law": {
+    "n": 339,
+    "outcome_p": {
+     "covenant": 0.286,
+     "revelation": 0.271,
+     "punishment": 0.115,
+     "compliance": 0.112,
+     "blessing": 0.071,
+     "answer_granted": 0.071,
+     "refusal": 0.024,
+     "rescue": 0.018,
+     "unclear": 0.015,
+     "silence": 0.009,
+     "delayed": 0.009
+    },
+    "outcome_p_smooth": {
+     "covenant": 0.283,
+     "revelation": 0.27,
+     "punishment": 0.1169,
+     "compliance": 0.1114,
+     "blessing": 0.0711,
+     "answer_granted": 0.0708,
+     "refusal": 0.0234,
+     "rescue": 0.0183,
+     "unclear": 0.0163,
+     "silence": 0.0097,
+     "delayed": 0.009
+    },
+    "severity_mean": 2.78,
+    "speech_share": 0.844,
+    "reliable": true
+   },
+   "poetry": {
+    "n": 208,
+    "outcome_p": {
+     "unclear": 0.413,
+     "silence": 0.327,
+     "answer_granted": 0.087,
+     "rescue": 0.048,
+     "revelation": 0.048,
+     "blessing": 0.034,
+     "punishment": 0.019,
+     "covenant": 0.019,
+     "delayed": 0.005
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.4066,
+     "silence": 0.3208,
+     "answer_granted": 0.0862,
+     "revelation": 0.0511,
+     "rescue": 0.0484,
+     "blessing": 0.035,
+     "punishment": 0.0244,
+     "covenant": 0.0205,
+     "delayed": 0.0052,
+     "compliance": 0.0016,
+     "refusal": 0.0003
+    },
+    "severity_mean": 2.26,
+    "speech_share": 0.115,
+    "reliable": true
+   },
+   "wisdom": {
+    "n": 129,
+    "outcome_p": {
+     "unclear": 0.636,
+     "silence": 0.178,
+     "revelation": 0.07,
+     "blessing": 0.031,
+     "compliance": 0.031,
+     "delayed": 0.023,
+     "answer_granted": 0.023,
+     "punishment": 0.008
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.6164,
+     "silence": 0.1742,
+     "revelation": 0.0738,
+     "blessing": 0.0333,
+     "compliance": 0.0324,
+     "answer_granted": 0.025,
+     "delayed": 0.0232,
+     "punishment": 0.0165,
+     "covenant": 0.0027,
+     "rescue": 0.0023,
+     "refusal": 0.0004
+    },
+    "severity_mean": 2.43,
+    "speech_share": 0.194,
+    "reliable": true
+   }
+  },
+  "addressee": {
+   "nation": {
+    "n": 979,
+    "outcome_p": {
+     "punishment": 0.33,
+     "revelation": 0.17,
+     "covenant": 0.114,
+     "blessing": 0.099,
+     "rescue": 0.08,
+     "compliance": 0.055,
+     "unclear": 0.049,
+     "answer_granted": 0.044,
+     "silence": 0.029,
+     "delayed": 0.019,
+     "refusal": 0.011
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.3295,
+     "revelation": 0.1696,
+     "covenant": 0.1142,
+     "blessing": 0.099,
+     "rescue": 0.0796,
+     "compliance": 0.0552,
+     "unclear": 0.0494,
+     "answer_granted": 0.0441,
+     "silence": 0.0288,
+     "delayed": 0.0194,
+     "refusal": 0.0112
+    },
+    "severity_mean": 3.07,
+    "speech_share": 0.741,
+    "reliable": true
+   },
+   "individual": {
+    "n": 861,
+    "outcome_p": {
+     "revelation": 0.187,
+     "punishment": 0.146,
+     "unclear": 0.145,
+     "silence": 0.121,
+     "answer_granted": 0.113,
+     "compliance": 0.087,
+     "blessing": 0.084,
+     "rescue": 0.044,
+     "covenant": 0.039,
+     "delayed": 0.026,
+     "refusal": 0.008
+    },
+    "outcome_p_smooth": {
+     "revelation": 0.1869,
+     "punishment": 0.1469,
+     "unclear": 0.145,
+     "silence": 0.1205,
+     "answer_granted": 0.1124,
+     "compliance": 0.087,
+     "blessing": 0.0837,
+     "rescue": 0.0442,
+     "covenant": 0.0397,
+     "delayed": 0.0255,
+     "refusal": 0.0081
+    },
+    "severity_mean": 2.75,
+    "speech_share": 0.483,
+    "reliable": true
+   },
+   "collective": {
+    "n": 121,
+    "outcome_p": {
+     "unclear": 0.537,
+     "revelation": 0.132,
+     "punishment": 0.107,
+     "blessing": 0.091,
+     "silence": 0.041,
+     "compliance": 0.033,
+     "answer_granted": 0.025,
+     "delayed": 0.017,
+     "rescue": 0.008,
+     "covenant": 0.008
+    },
+    "outcome_p_smooth": {
+     "unclear": 0.5206,
+     "revelation": 0.134,
+     "punishment": 0.1127,
+     "blessing": 0.0909,
+     "silence": 0.0424,
+     "compliance": 0.0344,
+     "answer_granted": 0.0266,
+     "delayed": 0.0167,
+     "covenant": 0.0108,
+     "rescue": 0.0103,
+     "refusal": 0.0004
+    },
+    "severity_mean": 2.12,
+    "speech_share": 0.364,
+    "reliable": true
+   },
+   "foreign": {
+    "n": 89,
+    "outcome_p": {
+     "punishment": 0.36,
+     "revelation": 0.247,
+     "blessing": 0.09,
+     "rescue": 0.079,
+     "unclear": 0.079,
+     "compliance": 0.056,
+     "refusal": 0.045,
+     "delayed": 0.022,
+     "silence": 0.011,
+     "answer_granted": 0.011
+    },
+    "outcome_p_smooth": {
+     "punishment": 0.3532,
+     "revelation": 0.2435,
+     "blessing": 0.09,
+     "unclear": 0.0808,
+     "rescue": 0.0777,
+     "compliance": 0.0568,
+     "refusal": 0.0431,
+     "delayed": 0.0224,
+     "answer_granted": 0.0144,
+     "silence": 0.0142,
+     "covenant": 0.0038
+    },
+    "severity_mean": 3.31,
+    "speech_share": 0.652,
+    "reliable": true
+   }
   }
  },
  "severity_by_outcome": {
@@ -569,5 +4661,398 @@
   "acts_silently": "Бог действует МОЛЧА — без слов, только действие (доминирует для мольбы, молитвы, верности)",
   "silence": "Бог молчит полностью — ни слова, ни действия",
   "speaks_only": "Бог только говорит без видимого действия (редчайший паттерн — 0-1%)"
+ },
+ "tone": {
+  "metadata": {
+   "version": "tone-v1",
+   "episodes": 2050,
+   "with_speech": 1243,
+   "thresholds": {
+    "margin": 1.0,
+    "min_words": 4,
+    "q33": 0.0,
+    "q67": 0.0
+   },
+   "legend": {
+    "severe": "резкая речь (перевес лексики гнева)",
+    "consoling": "утешительная речь (перевес лексики милости)",
+    "neutral": "нейтральная речь",
+    "silent": "Бог не говорит — только действует"
+   },
+   "note": "score = (anger − mercy) на 100 слов; класс — по знаку score с margin 1.0; лексика вычищена по словам корпуса"
+  },
+  "aggregates": {
+   "outcome": {
+    "punishment": {
+     "n": 494,
+     "spoken": 409,
+     "words_mean": 29.4,
+     "anger_rate_mean": 2.02,
+     "mercy_rate_mean": 1.57,
+     "address_rate_mean": 2.55,
+     "self_rate_mean": 0.68,
+     "score_mean": 0.45,
+     "classes": {
+      "neutral": 0.457,
+      "severe": 0.217,
+      "silent": 0.172,
+      "consoling": 0.154
+     }
+    },
+    "revelation": {
+     "n": 365,
+     "spoken": 328,
+     "words_mean": 28.3,
+     "anger_rate_mean": 1.21,
+     "mercy_rate_mean": 1.46,
+     "address_rate_mean": 2.93,
+     "self_rate_mean": 1.08,
+     "score_mean": -0.25,
+     "classes": {
+      "neutral": 0.562,
+      "consoling": 0.181,
+      "severe": 0.156,
+      "silent": 0.101
+     }
+    },
+    "unclear": {
+     "n": 245,
+     "spoken": 24,
+     "words_mean": 22.1,
+     "anger_rate_mean": 0.44,
+     "mercy_rate_mean": 1.02,
+     "address_rate_mean": 4.15,
+     "self_rate_mean": 1.3,
+     "score_mean": -0.58,
+     "classes": {
+      "silent": 0.902,
+      "neutral": 0.073,
+      "consoling": 0.016,
+      "severe": 0.008
+     }
+    },
+    "blessing": {
+     "n": 188,
+     "spoken": 106,
+     "words_mean": 29.3,
+     "anger_rate_mean": 0.88,
+     "mercy_rate_mean": 2.71,
+     "address_rate_mean": 2.53,
+     "self_rate_mean": 0.75,
+     "score_mean": -1.83,
+     "classes": {
+      "silent": 0.436,
+      "neutral": 0.293,
+      "consoling": 0.218,
+      "severe": 0.053
+     }
+    },
+    "covenant": {
+     "n": 147,
+     "spoken": 130,
+     "words_mean": 60.2,
+     "anger_rate_mean": 0.54,
+     "mercy_rate_mean": 1.71,
+     "address_rate_mean": 3.15,
+     "self_rate_mean": 1.07,
+     "score_mean": -1.17,
+     "classes": {
+      "neutral": 0.449,
+      "consoling": 0.34,
+      "silent": 0.116,
+      "severe": 0.095
+     }
+    },
+    "answer_granted": {
+     "n": 144,
+     "spoken": 76,
+     "words_mean": 26.0,
+     "anger_rate_mean": 1.45,
+     "mercy_rate_mean": 1.83,
+     "address_rate_mean": 3.0,
+     "self_rate_mean": 0.98,
+     "score_mean": -0.38,
+     "classes": {
+      "silent": 0.472,
+      "neutral": 0.306,
+      "consoling": 0.139,
+      "severe": 0.083
+     }
+    },
+    "silence": {
+     "n": 138,
+     "spoken": 7,
+     "words_mean": 28.4,
+     "anger_rate_mean": 0.53,
+     "mercy_rate_mean": 0.87,
+     "address_rate_mean": 1.59,
+     "self_rate_mean": 0.0,
+     "score_mean": -0.34,
+     "classes": {
+      "silent": 0.949,
+      "neutral": 0.036,
+      "severe": 0.007,
+      "consoling": 0.007
+     }
+    },
+    "compliance": {
+     "n": 138,
+     "spoken": 82,
+     "words_mean": 19.4,
+     "anger_rate_mean": 1.4,
+     "mercy_rate_mean": 0.63,
+     "address_rate_mean": 4.47,
+     "self_rate_mean": 0.72,
+     "score_mean": 0.77,
+     "classes": {
+      "neutral": 0.428,
+      "silent": 0.406,
+      "severe": 0.123,
+      "consoling": 0.043
+     }
+    },
+    "rescue": {
+     "n": 124,
+     "spoken": 46,
+     "words_mean": 30.0,
+     "anger_rate_mean": 1.02,
+     "mercy_rate_mean": 2.54,
+     "address_rate_mean": 1.59,
+     "self_rate_mean": 1.17,
+     "score_mean": -1.52,
+     "classes": {
+      "silent": 0.629,
+      "neutral": 0.234,
+      "consoling": 0.105,
+      "severe": 0.032
+     }
+    },
+    "delayed": {
+     "n": 45,
+     "spoken": 16,
+     "words_mean": 28.8,
+     "anger_rate_mean": 3.55,
+     "mercy_rate_mean": 0.96,
+     "address_rate_mean": 4.88,
+     "self_rate_mean": 0.72,
+     "score_mean": 2.6,
+     "classes": {
+      "silent": 0.644,
+      "neutral": 0.244,
+      "consoling": 0.067,
+      "severe": 0.044
+     }
+    },
+    "refusal": {
+     "n": 22,
+     "spoken": 19,
+     "words_mean": 25.5,
+     "anger_rate_mean": 2.44,
+     "mercy_rate_mean": 1.46,
+     "address_rate_mean": 6.43,
+     "self_rate_mean": 0.86,
+     "score_mean": 0.98,
+     "classes": {
+      "neutral": 0.5,
+      "consoling": 0.182,
+      "severe": 0.182,
+      "silent": 0.136
+     }
+    }
+   },
+   "trigger": {
+    "unprompted": {
+     "n": 691,
+     "spoken": 540,
+     "words_mean": 25.5,
+     "anger_rate_mean": 1.48,
+     "mercy_rate_mean": 1.61,
+     "address_rate_mean": 2.48,
+     "self_rate_mean": 0.94,
+     "score_mean": -0.13,
+     "classes": {
+      "neutral": 0.475,
+      "silent": 0.219,
+      "consoling": 0.165,
+      "severe": 0.142
+     }
+    },
+    "disobedience": {
+     "n": 350,
+     "spoken": 265,
+     "words_mean": 30.1,
+     "anger_rate_mean": 1.86,
+     "mercy_rate_mean": 1.31,
+     "address_rate_mean": 3.03,
+     "self_rate_mean": 0.64,
+     "score_mean": 0.55,
+     "classes": {
+      "neutral": 0.429,
+      "silent": 0.243,
+      "severe": 0.194,
+      "consoling": 0.134
+     }
+    },
+    "covenant_follow_up": {
+     "n": 271,
+     "spoken": 228,
+     "words_mean": 50.0,
+     "anger_rate_mean": 0.82,
+     "mercy_rate_mean": 1.66,
+     "address_rate_mean": 3.47,
+     "self_rate_mean": 0.95,
+     "score_mean": -0.84,
+     "classes": {
+      "neutral": 0.472,
+      "consoling": 0.244,
+      "silent": 0.159,
+      "severe": 0.125
+     }
+    },
+    "distress": {
+     "n": 188,
+     "spoken": 47,
+     "words_mean": 25.6,
+     "anger_rate_mean": 0.83,
+     "mercy_rate_mean": 3.32,
+     "address_rate_mean": 4.73,
+     "self_rate_mean": 0.77,
+     "score_mean": -2.48,
+     "classes": {
+      "silent": 0.75,
+      "neutral": 0.133,
+      "consoling": 0.101,
+      "severe": 0.016
+     }
+    },
+    "faithfulness": {
+     "n": 118,
+     "spoken": 17,
+     "words_mean": 22.1,
+     "anger_rate_mean": 0.25,
+     "mercy_rate_mean": 1.13,
+     "address_rate_mean": 3.38,
+     "self_rate_mean": 2.44,
+     "score_mean": -0.88,
+     "classes": {
+      "silent": 0.856,
+      "neutral": 0.102,
+      "consoling": 0.034,
+      "severe": 0.008
+     }
+    },
+    "complaint": {
+     "n": 115,
+     "spoken": 43,
+     "words_mean": 32.9,
+     "anger_rate_mean": 2.06,
+     "mercy_rate_mean": 1.17,
+     "address_rate_mean": 3.0,
+     "self_rate_mean": 0.6,
+     "score_mean": 0.88,
+     "classes": {
+      "silent": 0.626,
+      "neutral": 0.209,
+      "consoling": 0.087,
+      "severe": 0.078
+     }
+    },
+    "inquiry": {
+     "n": 101,
+     "spoken": 54,
+     "words_mean": 25.3,
+     "anger_rate_mean": 0.68,
+     "mercy_rate_mean": 1.8,
+     "address_rate_mean": 3.41,
+     "self_rate_mean": 0.92,
+     "score_mean": -1.12,
+     "classes": {
+      "silent": 0.465,
+      "neutral": 0.386,
+      "consoling": 0.119,
+      "severe": 0.03
+     }
+    },
+    "gratitude": {
+     "n": 87,
+     "spoken": 9,
+     "words_mean": 15.7,
+     "anger_rate_mean": 2.84,
+     "mercy_rate_mean": 1.39,
+     "address_rate_mean": 2.44,
+     "self_rate_mean": 1.23,
+     "score_mean": 1.45,
+     "classes": {
+      "silent": 0.897,
+      "neutral": 0.069,
+      "severe": 0.023,
+      "consoling": 0.011
+     }
+    },
+    "prayer": {
+     "n": 55,
+     "spoken": 13,
+     "words_mean": 31.4,
+     "anger_rate_mean": 2.93,
+     "mercy_rate_mean": 2.35,
+     "address_rate_mean": 1.92,
+     "self_rate_mean": 1.63,
+     "score_mean": 0.58,
+     "classes": {
+      "silent": 0.764,
+      "neutral": 0.091,
+      "severe": 0.073,
+      "consoling": 0.073
+     }
+    },
+    "intercession": {
+     "n": 46,
+     "spoken": 21,
+     "words_mean": 25.7,
+     "anger_rate_mean": 2.64,
+     "mercy_rate_mean": 2.06,
+     "address_rate_mean": 3.44,
+     "self_rate_mean": 0.57,
+     "score_mean": 0.58,
+     "classes": {
+      "silent": 0.543,
+      "neutral": 0.217,
+      "consoling": 0.13,
+      "severe": 0.109
+     }
+    },
+    "vow": {
+     "n": 17,
+     "spoken": 1,
+     "words_mean": 62.0,
+     "anger_rate_mean": 1.61,
+     "mercy_rate_mean": 0.0,
+     "address_rate_mean": 1.61,
+     "self_rate_mean": 0.0,
+     "score_mean": 1.61,
+     "classes": {
+      "silent": 0.941,
+      "severe": 0.059
+     }
+    },
+    "divine_test": {
+     "n": 11,
+     "spoken": 5,
+     "words_mean": 33.6,
+     "anger_rate_mean": 1.7,
+     "mercy_rate_mean": 1.38,
+     "address_rate_mean": 2.03,
+     "self_rate_mean": 0.83,
+     "score_mean": 0.32,
+     "classes": {
+      "silent": 0.545,
+      "neutral": 0.182,
+      "severe": 0.182,
+      "consoling": 0.091
+     }
+    }
+   }
+  },
+  "note": "тон — измеримая особенность речи в эпизоде (плотность лексики гнева и милости, длина, обращение), а не характеристика Бога; подробные метрики — docs/data/tone.json"
  }
 }

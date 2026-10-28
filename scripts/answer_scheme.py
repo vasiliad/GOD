@@ -767,12 +767,18 @@ def action_block(cls, prof):
 
     Уходит в шаг выбора: задаёт, какую форму отклика искать в эпизодах,
     и не даёт подмешать в цитату слова вне эпизода.
+
+    Вероятности исходов — сглаженные (outcome_p_smooth, Дирихле alpha=5 к
+    базовой частоте): сырые доли на малых классах дают 0 % и 100 % и читаются
+    моделью как правило, хотя это шум. Ключ outcome_p остаётся в профиле для
+    совместимости, но в блок выбора идёт сглаженная оценка.
     """
     bt = (prof or {}).get("by_trigger", {}).get(cls)
     rm = (prof or {}).get("response_modes", {}).get(cls)
     if not bt or not rm:
         return ""
-    outs = sorted(bt["outcome_p"].items(), key=lambda kv: -kv[1])[:4]
+    probs = bt.get("outcome_p_smooth") or bt["outcome_p"]
+    outs = sorted(probs.items(), key=lambda kv: -kv[1])[:4]
     dist = sorted(rm["distribution"].items(), key=lambda kv: -kv[1])
     outs_txt = ", ".join("%s %d%%" % (OUT_RU.get(k, k), round(v * 100)) for k, v in outs)
     dist_txt = ", ".join("%s %d%%" % (MODE_RU.get(k, k), round(v * 100)) for k, v in dist)

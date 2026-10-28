@@ -1,0 +1,80 @@
+{
+ "metadata": {
+  "prompt_version": "tone-rater-v1",
+  "model": "dicta-il/DictaLM-3.0-Nemotron-12B-Instruct-GGUF",
+  "seed": 20261027,
+  "n_rated": 201,
+  "n_failed": 0,
+  "ts": "2026-10-28T01:03:26"
+ },
+ "compare": {
+  "n": 201,
+  "n_failed": 0,
+  "match_severe_to_anger": {
+   "lexical_severe": 34,
+   "model_anger": 23,
+   "both": 5,
+   "rate": 0.147
+  },
+  "match_consoling_to_comfort": {
+   "lexical_consoling": 49,
+   "model_comfort": 43,
+   "both": 29,
+   "rate": 0.592
+  },
+  "model_tone_counts": {
+   "anger": 23,
+   "comfort": 43,
+   "neutral": 77,
+   "mixed": 58
+  },
+  "lexical_class_counts": {
+   "severe": 34,
+   "consoling": 49,
+   "neutral": 118
+  },
+  "mean_lexical_score_by_model_tone": {
+   "anger": 2.135,
+   "comfort": -2.603,
+   "mixed": 0.574,
+   "neutral": -0.333
+  },
+  "lexical_dead_zone": {
+   "n_score_zero": 116,
+   "share": 0.577,
+   "by_model_tone": {
+    "neutral": 49,
+    "anger": 12,
+    "mixed": 35,
+    "comfort": 20
+   }
+  },
+  "pearson_score_vs_intensity": 0.103,
+  "mean_lexical_score_by_outcome": {
+   "answer_granted": -0.917,
+   "blessing": -3.547,
+   "compliance": 2.768,
+   "covenant": -1.457,
+   "delayed": 3.457,
+   "punishment": 0.39,
+   "refusal": 0.595,
+   "rescue": -3.095,
+   "revelation": -0.489,
+   "silence": -0.336,
+   "unclear": -0.291
+  },
+  "mean_model_intensity_by_outcome": {
+   "answer_granted": 2.818,
+   "blessing": 2.6,
+   "compliance": 2.333,
+   "covenant": 2.316,
+   "delayed": 2.875,
+   "punishment": 3.103,
+   "refusal": 2.625,
+   "rescue": 2.75,
+   "revelation": 2.426,
+   "silence": 3.143,
+   "unclear": 2.25
+  }
+ }
+}

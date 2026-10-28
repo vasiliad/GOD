@@ -500,6 +500,53 @@ def run(verbose=True):
     chk("в SYS_PROMPT зеркала то же правило", "короткая" in answer_scheme.SYS_PROMPT
         and "из памяти" in answer_scheme.SYS_PROMPT, "")
 
+    # 23) ПРОФИЛЬ v2: страница читает условные таблицы, сглаженные вероятности,
+    #     калибровку и тон — всё это обязано существовать в публикуемых данных,
+    #     иначе вкладка «Профиль» рисует пустоту, а гейт этого не видит.
+    prof_pub = json.loads((_ROOT / "docs" / "data" / "god_behavior_profile.json")
+                          .read_text(encoding="utf-8"))
+    for key in ("by_trigger_era", "by_trigger_genre", "by_trigger_addressee", "marginals"):
+        chk("в опубликованном профиле есть %s" % key,
+            bool(prof_pub.get(key)), "ключа нет — вкладка профиля рисует пустоту")
+    for dim in ("era", "genre", "addressee"):
+        marg = prof_pub.get("marginals", {}).get(dim) or {}
+        chk("маргинали %s непусты и сходятся в 1" % dim,
+            bool(marg) and all(abs(sum(m["outcome_p_smooth"].values()) - 1.0) < 0.01
+                               for m in marg.values()), "")
+    bt_all = prof_pub.get("by_trigger") or {}
+    chk("у всех классов профиля есть сглаженные вероятности",
+        bool(bt_all) and all("outcome_p_smooth" in t for t in bt_all.values()),
+        "без outcome_p_smooth страница и зеркало разойдутся в блоке [ACTION]")
+    chk("страница использует сглаженные вероятности в блоке [ACTION]",
+        "outcome_p_smooth" in src, "страница считает по сырым долям")
+    chk("зеркало использует сглаженные вероятности в блоке [ACTION]",
+        "outcome_p_smooth" in m_src, "зеркало считает по сырым долям")
+    cal_pub = json.loads((_ROOT / "docs" / "data" / "profile_calibration.json")
+                         .read_text(encoding="utf-8"))
+    chk("калибровка опубликована и содержит модели и вердикт",
+        bool(cal_pub.get("models")) and bool(cal_pub.get("verdict", {}).get("best_model")),
+        "вкладка профиля рисует пустую калибровку")
+    chk("лучшая модель калибровки существует в таблице моделей",
+        cal_pub.get("verdict", {}).get("best_model") in (cal_pub.get("models") or {}), "")
+    chk("диагностическая модель с круговым признаком не становится «лучшей»",
+        not str(cal_pub.get("verdict", {}).get("best_model", "")).endswith("_leak"),
+        "утечка признана результатом — так нельзя")
+    chk("страница читает калибровку", 'jget("data/profile_calibration.json")' in src, "")
+    tone_pub = json.loads((_ROOT / "docs" / "data" / "tone.json").read_text(encoding="utf-8"))
+    chk("таблица тона по эпизодам опубликована и покрывает корпус",
+        len(tone_pub.get("by_episode") or {}) >= 1900,
+        "бейдж тона останется без данных (в корпусе %d эпизодов без episode_id)"
+        % (tone_pub.get("metadata", {}).get("episodes", 0)
+           - len(tone_pub.get("by_episode") or {})))
+    chk("страница читает тон", 'jget("data/tone.json")' in src, "")
+    rater_pub = json.loads((_ROOT / "docs" / "data" / "tone_rater.json").read_text(encoding="utf-8"))
+    n_rated = (rater_pub.get("metadata") or {}).get("n_rated") or 0
+    cmp_ = rater_pub.get("compare") or {}
+    chk("сводка независимой оценки тона опубликована и непуста",
+        n_rated >= 50 and cmp_.get("n") == n_rated,
+        "n_rated=%s, compare.n=%s" % (n_rated, cmp_.get("n")))
+    chk("страница читает сводку оценки тона", 'jget("data/tone_rater.json")' in src, "")
+
     ok = sum(1 for _, c, _ in checks if c)
     print("\nИТОГ: %d/%d сверок — %s" % (ok, len(checks), "PASS" if ok == len(checks) else "FAIL"))
     return 0 if ok == len(checks) else 1

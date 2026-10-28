@@ -22,6 +22,10 @@ _REPO = str(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 SELFTESTS = [
     ("god_chat", "--selftest"),
     ("god_profile", "--test"),
+    ("corpus_meta", "--test"),
+    ("tone_metrics", "--test"),
+    ("eval_profile", "--test"),
+    ("tone_rater", "--test"),
     ("god_behavior", "--test"),
     ("analytics_v2", "--test"),
     ("dedup_overlaps", "--test"),
