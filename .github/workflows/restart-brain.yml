@@ -17,7 +17,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install kaggle
+      # См. комментарий в auto-heal.yml: kaggle 2.2.x тянет six, но не объявляет его.
+      - run: pip install "kaggle==2.2.4" six
       - name: Restart brain
         env:
           KAGGLE_USERNAME: vasiliadi911

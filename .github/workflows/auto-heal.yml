@@ -16,7 +16,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install kaggle --quiet
+      # kaggle 2.2.x импортирует six, но НЕ объявляет его зависимостью (упаковка upstream).
+      # На чистом раннере Actions six отсутствует → `python -m kaggle` падает с
+      # ModuleNotFoundError: No module named 'six' → auto-heal не может поднять мозг
+      # (красный CI с 2026-11-01). Поэтому six ставим явно, а kaggle пиним на рабочую версию.
+      - run: pip install "kaggle==2.2.4" six --quiet
       - name: Check brain health
         id: check
         run: |
